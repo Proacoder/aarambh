@@ -10,36 +10,540 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Nearby Opportunities</title>
+    <meta
+        name="description"
+        content="Find nearby education, skill and career opportunities in Maharashtra."
+    >
 
-    <!-- Leaflet CSS -->
+    <title>CareerMitra - Maharashtra Opportunities</title>
+
+
+    <!-- =========================
+         LEAFLET CSS
+    ========================== -->
+
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
+    />
+
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
         }
 
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            height: 60px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            z-index: 1000;
+        }
+
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+
+
+        .header-title {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .main {
+            position: relative;
+            height: calc(100vh - 60px);
+        }
+
+
+        /* =========================
+           MAP
+        ========================== */
+
         #map {
-            height: 100vh;
             width: 100%;
+            height: 100%;
+        }
+
+
+        /* =========================
+           FILTER PANEL
+        ========================== */
+
+        .filter-panel {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 999;
+
+            width: 270px;
+
+            background: white;
+            border-radius: 12px;
+
+            padding: 16px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .filter-panel h2 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            color: #172554;
+        }
+
+
+        .filter-panel p {
+            margin: 0 0 15px 0;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+
+        /* =========================
+           SELECT
+        ========================== */
+
+        .filter-group {
+            margin-bottom: 12px;
+        }
+
+
+        .filter-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+        select {
+            width: 100%;
+            padding: 10px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+
+            background: white;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .button {
+            width: 100%;
+
+            border: none;
+            border-radius: 7px;
+
+            padding: 11px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+
+
+        .location-button {
+            background: #0f766e;
+        }
+
+
+        .location-button:hover {
+            background: #115e59;
+        }
+
+
+        /* =========================
+           LEGEND
+        ========================== */
+
+        .legend {
+            margin-top: 15px;
+
+            border-top: 1px solid #e2e8f0;
+
+            padding-top: 12px;
+        }
+
+
+        .legend-title {
+            font-size: 13px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            margin-right: 8px;
+        }
+
+
+        .student {
+            background: #2563eb;
+        }
+
+
+        .college {
+            background: #7c3aed;
+        }
+
+
+        .iti {
+            background: #ea580c;
+        }
+
+
+        .polytechnic {
+            background: #16a34a;
+        }
+
+
+        .skill {
+            background: #0891b2;
+        }
+
+
+        .job {
+            background: #dc2626;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .header {
+                height: 55px;
+                padding: 0 12px;
+            }
+
+
+            .logo {
+                font-size: 18px;
+            }
+
+
+            .header-title {
+                display: none;
+            }
+
+
+            .main {
+                height: calc(100vh - 55px);
+            }
+
+
+            .filter-panel {
+
+                left: 10px;
+                right: 10px;
+
+                top: 10px;
+
+                width: auto;
+
+                padding: 12px;
+            }
+
+
+            .filter-panel h2 {
+                font-size: 16px;
+            }
+
+
+            .filter-panel p {
+                margin-bottom: 8px;
+            }
+
+
+            .legend {
+                display: none;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <div id="map"></div>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <div class="logo">
+            CareerMitra
+        </div>
+
+        <div class="header-title">
+            Career Opportunities in Rural Maharashtra
+        </div>
+
+    </header>
 
 
-    <!-- Leaflet JS -->
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- =========================
+             FILTER PANEL
+        ========================== -->
+
+        <div class="filter-panel">
+
+            <h2>
+                📍 Nearby Opportunities
+            </h2>
+
+            <p>
+                Find education and career opportunities near you.
+            </p>
+
+
+            <!-- District -->
+
+            <div class="filter-group">
+
+                <label for="district">
+                    District
+                </label>
+
+                <select id="district">
+
+                    <option value="all">
+                        All Maharashtra
+                    </option>
+
+                    <option value="Pune">
+                        Pune
+                    </option>
+
+                    <option value="Satara">
+                        Satara
+                    </option>
+
+                    <option value="Nashik">
+                        Nashik
+                    </option>
+
+                    <option value="Kolhapur">
+                        Kolhapur
+                    </option>
+
+                    <option value="Solapur">
+                        Solapur
+                    </option>
+
+                    <option value="Ahmednagar">
+                        Ahmednagar
+                    </option>
+
+                    <option value="Nagpur">
+                        Nagpur
+                    </option>
+
+                    <option value="Nanded">
+                        Nanded
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Opportunity Type -->
+
+            <div class="filter-group">
+
+                <label for="type">
+                    Opportunity Type
+                </label>
+
+                <select id="type">
+
+                    <option value="all">
+                        All Opportunities
+                    </option>
+
+                    <option value="College">
+                        Colleges
+                    </option>
+
+                    <option value="ITI">
+                        ITI
+                    </option>
+
+                    <option value="Polytechnic">
+                        Polytechnic
+                    </option>
+
+                    <option value="Skill Centre">
+                        Skill Centres
+                    </option>
+
+                    <option value="Job">
+                        Jobs / Internships
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Apply -->
+
+            <button
+                class="button"
+                onclick="applyFilters()"
+            >
+                Apply Filters
+            </button>
+
+
+            <!-- Location -->
+
+            <button
+                class="button location-button"
+                onclick="findMyLocation()"
+            >
+                📍 Use My Location
+            </button>
+
+
+            <!-- Legend -->
+
+            <div class="legend">
+
+                <div class="legend-title">
+                    Map Legend
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot student"></span>
+                    Student
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot college"></span>
+                    College
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot iti"></span>
+                    ITI
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot polytechnic"></span>
+                    Polytechnic
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot skill"></span>
+                    Skill Centre
+                </div>
+
+
+                <div class="legend-item">
+                    <span class="legend-dot job"></span>
+                    Job / Internship
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MAP
+        ========================== -->
+
+        <div id="map"></div>
+
+    </main>
+
+
+    <!-- =========================
+         LEAFLET JS
+    ========================== -->
+
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     </script>
@@ -47,59 +551,710 @@
 
     <script>
 
-        // Maharashtra starting position
-        const map = L.map("map").setView(
-            [19.7515, 75.7139],
-            7
+
+        /* =====================================================
+           MAHARASHTRA BOUNDARIES
+        ===================================================== */
+
+        const maharashtraBounds = L.latLngBounds(
+
+            [15.6, 72.5],
+
+            [22.1, 80.9]
+
         );
 
 
-        // OpenStreetMap
+        /* =====================================================
+           CREATE MAP
+        ===================================================== */
+
+        const map = L.map("map", {
+
+            minZoom: 6,
+
+            maxZoom: 16,
+
+            maxBounds: maharashtraBounds,
+
+            maxBoundsViscosity: 1.0
+
+        });
+
+
+        /* =====================================================
+           OPEN STREET MAP
+        ===================================================== */
+
         L.tileLayer(
+
             "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
             {
-                attribution: "&copy; OpenStreetMap contributors"
+
+                attribution:
+                    "&copy; OpenStreetMap contributors",
+
+                maxZoom: 19
+
             }
+
         ).addTo(map);
 
 
-        // Get opportunities from Flask
-        fetch("/api/opportunities")
+        /* =====================================================
+           INITIAL VIEW
+        ===================================================== */
 
-            .then(response => response.json())
-
-            .then(opportunities => {
-
-                opportunities.forEach(place => {
-
-                    const marker = L.marker([
-                        place.latitude,
-                        place.longitude
-                    ]).addTo(map);
+        map.fitBounds(
+            maharashtraBounds
+        );
 
 
-                    marker.bindPopup(`
-                        <strong>${place.name}</strong>
-                        <br>
-                        ${place.type}
-                        <br>
-                        ${place.address}
-                        <br><br>
-                        ${place.description}
-                    `);
+        /* =====================================================
+           MARKER STORAGE
+        ===================================================== */
 
-                });
+        let markers = [];
 
-            })
 
-            .catch(error => {
+        let studentMarker = null;
 
-                console.error(
-                    "Failed to load opportunities:",
-                    error
-                );
+
+        /* =====================================================
+           MARKER COLORS
+        ===================================================== */
+
+        function getMarkerColor(type) {
+
+            switch (type) {
+
+                case "College":
+                    return "#7c3aed";
+
+                case "ITI":
+                    return "#ea580c";
+
+                case "Polytechnic":
+                    return "#16a34a";
+
+                case "Skill Centre":
+                    return "#0891b2";
+
+                case "Job":
+                    return "#dc2626";
+
+                default:
+                    return "#2563eb";
+            }
+
+        }
+
+
+        /* =====================================================
+           CREATE CUSTOM MARKER
+        ===================================================== */
+
+        function createMarker(place) {
+
+            const color =
+                getMarkerColor(place.type);
+
+
+            const icon = L.divIcon({
+
+                className: "",
+
+                html: `
+                    <div style="
+                        width: 18px;
+                        height: 18px;
+                        background: ${color};
+                        border: 3px solid white;
+                        border-radius: 50%;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                    "></div>
+                `,
+
+                iconSize: [18, 18],
+
+                iconAnchor: [9, 9]
 
             });
+
+
+            const marker = L.marker(
+
+                [
+                    place.latitude,
+                    place.longitude
+                ],
+
+                {
+                    icon: icon
+                }
+
+            );
+
+
+            marker.bindPopup(`
+
+                <div style="
+                    min-width: 200px;
+                    font-family: Arial;
+                ">
+
+                    <h3 style="
+                        margin-top: 0;
+                        margin-bottom: 7px;
+                    ">
+                        ${place.name}
+                    </h3>
+
+
+                    <strong>
+                        ${place.type}
+                    </strong>
+
+
+                    <p style="
+                        margin: 7px 0;
+                    ">
+                        📍 ${place.district}
+                    </p>
+
+
+                    <p style="
+                        margin: 7px 0;
+                    ">
+                        ${place.address || ""}
+                    </p>
+
+
+                    <p style="
+                        margin: 7px 0;
+                    ">
+                        ${place.description || ""}
+                    </p>
+
+                </div>
+
+            `);
+
+
+            return marker;
+
+        }
+
+
+        /* =====================================================
+           LOAD OPPORTUNITIES
+        ===================================================== */
+
+        async function loadOpportunities() {
+
+            try {
+
+                const response =
+                    await fetch("/api/opportunities");
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load opportunities"
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                window.allOpportunities = data;
+
+
+                displayOpportunities(data);
+
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to load opportunities."
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DISPLAY OPPORTUNITIES
+        ===================================================== */
+
+        function displayOpportunities(data) {
+
+
+            // Remove previous markers
+
+            markers.forEach(marker => {
+
+                map.removeLayer(marker);
+
+            });
+
+
+            markers = [];
+
+
+            // Add new markers
+
+            data.forEach(place => {
+
+
+                // Ignore invalid coordinates
+
+                if (
+                    !place.latitude ||
+                    !place.longitude
+                ) {
+
+                    return;
+
+                }
+
+
+                const marker =
+                    createMarker(place);
+
+
+                marker.addTo(map);
+
+
+                markers.push(marker);
+
+            });
+
+        }
+
+
+        /* =====================================================
+           FILTER
+        ===================================================== */
+
+        function applyFilters() {
+
+            const district =
+                document.getElementById(
+                    "district"
+                ).value;
+
+
+            const type =
+                document.getElementById(
+                    "type"
+                ).value;
+
+
+            let filtered =
+                window.allOpportunities || [];
+
+
+            // District filter
+
+            if (district !== "all") {
+
+                filtered =
+                    filtered.filter(place =>
+
+                        place.district === district
+
+                    );
+
+            }
+
+
+            // Type filter
+
+            if (type !== "all") {
+
+                filtered =
+                    filtered.filter(place =>
+
+                        place.type === type
+
+                    );
+
+            }
+
+
+            displayOpportunities(
+                filtered
+            );
+
+
+            // Zoom to filtered markers
+
+            if (filtered.length > 0) {
+
+                const locations =
+                    filtered.map(place => [
+
+                        place.latitude,
+                        place.longitude
+
+                    ]);
+
+
+                const bounds =
+                    L.latLngBounds(
+                        locations
+                    );
+
+
+                map.fitBounds(
+                    bounds,
+                    {
+                        padding: [50, 50]
+                    }
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           USER LOCATION
+        ===================================================== */
+
+        function findMyLocation() {
+
+
+            if (!navigator.geolocation) {
+
+                alert(
+                    "Location services are not supported on this device."
+                );
+
+                return;
+
+            }
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+
+                    const latitude =
+                        position.coords.latitude;
+
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    /*
+
+                       Check whether location
+                       is inside Maharashtra.
+
+                    */
+
+                    if (
+
+                        latitude < 15.6 ||
+                        latitude > 22.1 ||
+                        longitude < 72.5 ||
+                        longitude > 80.9
+
+                    ) {
+
+                        alert(
+                            "Your location is outside Maharashtra."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =====================
+                       REMOVE OLD MARKER
+                    ====================== */
+
+                    if (studentMarker) {
+
+                        map.removeLayer(
+                            studentMarker
+                        );
+
+                    }
+
+
+                    /* =====================
+                       STUDENT ICON
+                    ====================== */
+
+                    const studentIcon =
+                        L.divIcon({
+
+                            className: "",
+
+                            html: `
+                                <div style="
+                                    width: 22px;
+                                    height: 22px;
+                                    background: #2563eb;
+                                    border: 4px solid white;
+                                    border-radius: 50%;
+                                    box-shadow:
+                                      0 2px 8px
+                                      rgba(0,0,0,0.35);
+                                "></div>
+                            `,
+
+                            iconSize: [22, 22],
+
+                            iconAnchor: [11, 11]
+
+                        });
+
+
+                    /* =====================
+                       CREATE MARKER
+                    ====================== */
+
+                    studentMarker =
+                        L.marker(
+
+                            [
+                                latitude,
+                                longitude
+                            ],
+
+                            {
+                                icon:
+                                    studentIcon
+                            }
+
+                        )
+                        .addTo(map);
+
+
+                    studentMarker.bindPopup(
+
+                        "<strong>📍 You are here</strong>"
+
+                    );
+
+
+                    /* =====================
+                       CENTER MAP
+                    ====================== */
+
+                    map.setView(
+
+                        [
+                            latitude,
+                            longitude
+                        ],
+
+                        12
+
+                    );
+
+
+                    studentMarker.openPopup();
+
+
+                    /* =====================
+                       SHOW NEARBY
+                    ====================== */
+
+                    showNearby(
+                        latitude,
+                        longitude
+                    );
+
+
+                },
+
+
+                function(error) {
+
+                    alert(
+                        "Unable to access your location."
+                    );
+
+                    console.error(error);
+
+                },
+
+                {
+
+                    enableHighAccuracy: false,
+
+                    timeout: 10000,
+
+                    maximumAge: 300000
+
+                }
+
+            );
+
+        }
+
+
+        /* =====================================================
+           DISTANCE CALCULATION
+        ===================================================== */
+
+        function calculateDistance(
+
+            lat1,
+            lon1,
+            lat2,
+            lon2
+
+        ) {
+
+
+            const R = 6371;
+
+
+            const dLat =
+                (lat2 - lat1) *
+                Math.PI / 180;
+
+
+            const dLon =
+                (lon2 - lon1) *
+                Math.PI / 180;
+
+
+            const a =
+
+                Math.sin(dLat / 2) *
+                Math.sin(dLat / 2)
+
+                +
+
+                Math.cos(
+                    lat1 * Math.PI / 180
+                )
+
+                *
+
+                Math.cos(
+                    lat2 * Math.PI / 180
+                )
+
+                *
+
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
+
+
+            const c =
+                2 * Math.atan2(
+                    Math.sqrt(a),
+                    Math.sqrt(1 - a)
+                );
+
+
+            return R * c;
+
+        }
+
+
+        /* =====================================================
+           SHOW NEARBY OPPORTUNITIES
+        ===================================================== */
+
+        function showNearby(
+
+            latitude,
+            longitude
+
+        ) {
+
+
+            const opportunities =
+                window.allOpportunities || [];
+
+
+            const nearby =
+                opportunities
+
+                    .map(place => {
+
+                        const distance =
+                            calculateDistance(
+
+                                latitude,
+                                longitude,
+
+                                place.latitude,
+                                place.longitude
+
+                            );
+
+
+                        return {
+
+                            ...place,
+
+                            distance:
+                                distance
+
+                        };
+
+                    })
+
+
+                    .filter(place =>
+
+                        place.distance <= 50
+
+                    )
+
+
+                    .sort(
+
+                        (a, b) =>
+                            a.distance -
+                            b.distance
+
+                    );
+
+
+            console.log(
+                "Nearby opportunities:",
+                nearby
+            );
+
+
+            /*
+                You can later display
+                these in a sidebar.
+            */
+
+        }
+
+
+        /* =====================================================
+           LOAD MAP DATA
+        ===================================================== */
+
+        loadOpportunities();
+
 
     </script>
 
