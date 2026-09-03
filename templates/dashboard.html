@@ -1,96 +1,212 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section dashboard fade-in">
-  <div class="container">
+<div class="dashboard-wrapper py-3">
+  <div class="container-fluid px-3">
     
-    <!-- Transition Loading State -->
-    <div id="loading-spinner" class="loading-wrap text-center py-5" aria-live="polite">
-      <div class="thinking-brain-icon mb-3">🧠</div>
-      <h3 class="mb-2">आम्ही तुझ्या उत्तरांचा विचार करत आहोत...</h3>
-      <div class="loading-steps-list text-muted text-small flex-column gap-2 align-center">
-        <span>🎯 तुझ्या strengths शोधत आहोत</span>
-        <span>🏫 योग्य संधी शोधत आहोत</span>
-        <span>💰 scholarships तपासत आहोत</span>
+    <!-- Top Summary Banner -->
+    <div class="card p-3 mb-3 slide-up flex-between align-center flex-wrap gap-2" style="border-left: 4px solid var(--gold);">
+      <div>
+        <span class="badge badge-gold mb-1">🎯 YOUR AI CAREER DASHBOARD</span>
+        <h2 class="mb-0" id="dash-user-title" style="font-size:1.4rem;">Student Navigator Dashboard</h2>
+        <p class="text-muted text-small mb-0" id="dash-user-subtitle">Personalized career matches, regional insights, and live AI guidance</p>
       </div>
-      <div class="loading-bar-wrap mt-4">
-        <div class="loading-bar-inner"></div>
+      <div class="flex gap-2 align-center">
+        <span class="badge badge-paper" id="dash-auth-mode">👤 Mode: Guest</span>
+        <a href="/onboarding" class="btn btn-secondary btn-sm">✏️ Edit Profile</a>
       </div>
     </div>
 
-    <!-- Main Dashboard Content -->
-    <div id="dashboard-content" class="hidden">
-      <!-- Profile Header Summary Card -->
-      <div class="card profile-summary-card mb-4 slide-up">
-        <div class="flex-between flex-wrap gap-3">
-          <div>
-            <span class="badge badge-gold mb-1">🎯 YOUR CAREER PROFILE</span>
-            <h1 class="page-title mb-1" id="dash-user-name">Your Top Matches</h1>
-            <p class="text-muted text-small" id="dash-user-district">Based on your profile and assessment responses.</p>
-          </div>
-          <div class="flex align-center gap-2">
-            <a href="/career-aunty" class="btn btn-gold ripple flex align-center gap-1">
-              <span>👩‍🏫</span> <span>Ask Mitra Tai</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top Career Matches -->
-      <div class="section-header flex-between mb-3">
-        <h2>🥇 Top Career Matches</h2>
-      </div>
+    <!-- 3-Column Grid Layout -->
+    <div class="dashboard-3col-grid">
       
-      <div id="career-matches" class="grid-3 animate-on-scroll">
-        <!-- Populated dynamically -->
-      </div>
+      <!-- ==================== LEFT COLUMN: TOOLS & MATCHES ==================== -->
+      <div class="dash-col dash-col-left">
+        <div class="card p-3 mb-3">
+          <div class="tools-tab-buttons flex gap-1 mb-3 pb-2" style="overflow-x:auto; border-bottom:1px solid var(--border);">
+            <button class="btn btn-secondary btn-sm tool-tab-btn active" data-tab="matches">🥇 Matches</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="kharcha">💰 Kharcha</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="docs">📋 Docs</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="exams">📅 Exams</button>
+          </div>
 
-      <div class="warli-border-wrap my-5" aria-hidden="true">
-        <div class="warli-border-pattern"></div>
-      </div>
+          <!-- Tab Content 1: Career Matches -->
+          <div id="tab-content-matches" class="tool-tab-content">
+            <h4 class="mb-2">Recommended Career Paths</h4>
+            <div id="left-career-matches" class="flex-column gap-2">
+              <div class="text-center p-3 text-muted text-small">Loading matches...</div>
+            </div>
+            
+            <h4 class="mt-4 mb-2">Nearby Recommended Colleges</h4>
+            <div id="left-college-list" class="flex-column gap-2" style="max-height:350px; overflow-y:auto;">
+              <div class="text-center p-3 text-muted text-small">Loading colleges...</div>
+            </div>
+          </div>
 
-      <!-- Institutions Near You -->
-      <div class="section-header flex-between align-end mb-3">
-        <div>
-          <h2 data-i18n="nearby_colleges">Institutions near you</h2>
-          <p class="text-muted text-small">Colleges and polytechnics matched to your mobility radius.</p>
+          <!-- Tab Content 2: Kharcha Calculator Embed -->
+          <div id="tab-content-kharcha" class="tool-tab-content hidden">
+            <h4 class="mb-2">💰 Kharcha Calculator</h4>
+            <p class="text-small text-muted mb-3">Estimate total annual & monthly out-of-pocket expenses.</p>
+            <div class="form-group mb-2">
+              <label class="text-small">Target College</label>
+              <select id="left-cost-college" class="form-select text-small"></select>
+            </div>
+            <div class="form-group mb-2">
+              <label class="text-small">Accommodation</label>
+              <select id="left-cost-accom" class="form-select text-small">
+                <option value="govtHostel">🏛️ Government Hostel</option>
+                <option value="privateHostel">🏢 Private Hostel</option>
+                <option value="pgRoom">🏠 Paying Guest (PG)</option>
+              </select>
+            </div>
+            <button id="left-calc-btn" class="btn btn-primary btn-sm ripple style-100 mt-2 mb-3" style="width:100%">Calculate Expense</button>
+            
+            <div id="left-cost-result" class="hidden p-3" style="background:var(--bg-card); border-radius:10px; border:1px solid var(--border);">
+              <div class="flex-between mb-1">
+                <span class="text-small">Net Annual:</span>
+                <strong id="left-net-annual" style="color:var(--primary);">₹0</strong>
+              </div>
+              <div class="flex-between mb-2">
+                <span class="text-small">Monthly Cost:</span>
+                <strong id="left-net-monthly">₹0</strong>
+              </div>
+              <div class="text-small text-muted" id="left-income-impact"></div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: Document Checklist Embed -->
+          <div id="tab-content-docs" class="tool-tab-content hidden">
+            <h4 class="mb-2">📋 Document Checklist</h4>
+            <div id="left-doc-progress" class="mb-2 text-small text-muted">0 / 0 Ready</div>
+            <div id="left-doc-checklist" class="flex-column gap-2" style="max-height:400px; overflow-y:auto;"></div>
+          </div>
+
+          <!-- Tab Content 4: Exam Calendar Embed -->
+          <div id="tab-content-exams" class="tool-tab-content hidden">
+            <h4 class="mb-2">📅 Upcoming Exams & Deadlines</h4>
+            <div id="left-exam-list" class="flex-column gap-2" style="max-height:400px; overflow-y:auto;"></div>
+          </div>
+
         </div>
       </div>
 
-      <div class="map-container card slide-up animate-on-scroll mb-4">
-        <div id="map" style="height: 380px; border-radius: 12px; z-index: 1;"></div>
+      <!-- ==================== CENTER COLUMN: DHARMIK'S DARK MAP ==================== -->
+      <div class="dash-col dash-col-center">
+        <div class="card p-3 mb-3 map-card-container">
+          <div class="flex-between align-center mb-2 flex-wrap gap-2">
+            <div>
+              <h3 class="mb-0 flex align-center gap-2">🗺️ <span>Maharashtra Regional Hub Map</span></h3>
+              <p class="text-muted text-small mb-0">Explore job sectors, colleges, and distance from your district</p>
+            </div>
+            
+            <!-- Sector Filter Chips -->
+            <div class="sector-chips flex gap-1 flex-wrap" id="map-sector-chips">
+              <button class="chip on" data-sector="all">All</button>
+              <button class="chip" data-sector="tech">💻 Tech</button>
+              <button class="chip" data-sector="manufacturing">⚙️ Mfg</button>
+              <button class="chip" data-sector="education">🎓 Edu</button>
+              <button class="chip" data-sector="tourism">🏔️ Tourism</button>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="map-search-bar mb-2">
+            <input type="text" id="mapSearch" class="form-input text-small" placeholder="🔍 Search city or district (e.g. Pune, Nashik, Latur)...">
+          </div>
+
+          <!-- Leaflet Map Container -->
+          <div id="dark-map" style="height: 520px; border-radius: 12px; z-index: 1; background: #0f172a;"></div>
+
+          <!-- Map Footer Stats -->
+          <div class="map-stats-footer flex-between mt-2 pt-2 text-small text-muted" style="border-top:1px solid var(--border);">
+            <span>📍 Active Region: Maharashtra</span>
+            <span id="map-pin-count">Loading regional markers...</span>
+          </div>
+        </div>
       </div>
 
-      <div id="college-cards" class="grid-2 mt-4 animate-on-scroll">
-        <!-- Populated dynamically -->
+      <!-- ==================== RIGHT COLUMN: MITRA TAI AI COMPANION ==================== -->
+      <div class="dash-col dash-col-right">
+        <div class="card p-3 tai-companion-card" style="display:flex; flex-direction:column; height: 100%; min-height: 600px;">
+          
+          <!-- Header -->
+          <div class="tai-header flex align-center gap-3 pb-3 mb-3" style="border-bottom: 1px solid var(--border);">
+            <div class="tai-avatar" style="font-size:2.2rem; width:50px; height:50px; border-radius:50%; background:rgba(217, 164, 65, 0.2); display:flex; align-center; justify-content:center;">👩‍🏫</div>
+            <div>
+              <h3 class="mb-0" style="font-size:1.15rem; font-weight:700;">Mitra Tai (मित्र ताई)</h3>
+              <span class="badge badge-gold text-small" style="font-size:0.7rem;">⚡ Gemini AI Career Mentor</span>
+            </div>
+          </div>
+
+          <!-- Prompt Quick Action Chips -->
+          <div class="quick-prompts flex gap-1 mb-3" style="overflow-x:auto; padding-bottom:4px;">
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्यासाठी कोणता मार्ग सर्वोत्तम आहे? (Explain my best path)">💡 Best Path</button>
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्या बजेटमध्ये वसतिगृह खर्च कसा असेल? (Hostel budget info)">🏠 Hostel Cost</button>
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="मला कोणत्या शिष्यवृत्ती मिळतील? (Scholarships info)">🎓 Scholarships</button>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div id="tai-messages" class="flex-column gap-3 mb-3 p-2" style="flex:1; overflow-y:auto; max-height:420px; background:var(--bg-card); border-radius:12px; border:1px solid var(--border);">
+            <div class="message tai-msg flex align-start gap-2">
+              <span style="font-size:1.4rem;">👩‍🏫</span>
+              <div class="msg-bubble p-2 text-small" style="background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); color:#333;">
+                नमस्कार! मी मित्र ताई आहे. तुझा करिअर प्लॅन मी तयार केला आहे. नकाशावरील महाविद्यालये किंवा डावीकडील टूल्स तपासा आणि मला काहीही विचारा!
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Form -->
+          <form id="tai-chat-form" class="flex gap-2 pt-2" style="border-top:1px solid var(--border);">
+            <input type="text" id="tai-input" class="form-input text-small" placeholder="Ask Mitra Tai (मराठी/English)..." required style="flex:1;">
+            <button type="submit" class="btn btn-primary btn-sm flex-center px-3" style="border-radius:8px;">
+              <span>🚀</span>
+            </button>
+          </form>
+
+        </div>
       </div>
 
-      <div class="warli-border-wrap my-5" aria-hidden="true">
-        <div class="warli-border-pattern"></div>
-      </div>
-
-      <!-- Scholarships & Financial Aid -->
-      <div class="section-header mb-3">
-        <h2>🎉 Scholarships You Should Explore</h2>
-        <p class="text-muted text-small" data-i18n="eligible_schemes">Scholarships you may qualify for based on verified criteria.</p>
-      </div>
-
-      <div id="scheme-cards" class="grid-2 animate-on-scroll mb-5">
-        <!-- Populated dynamically -->
-      </div>
     </div>
-
-  </div>
-</section>
-
-<div class="sticky-cta hidden no-print" id="sticky-cta">
-  <div class="container flex-between align-center flex-wrap gap-2">
-    <span style="font-weight: 600; color: var(--text);">Ready to view your full step-by-step career path?</span>
-    <a href="/dashboard" id="sticky-cta-btn" class="btn btn-primary ripple" data-i18n="gen_career_plan">Generate My Career Plan</a>
   </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<!-- Custom CSS for 3-Column Dashboard & Map -->
+<style>
+.dashboard-3col-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 340px;
+  gap: 1rem;
+}
+@media (max-width: 1200px) {
+  .dashboard-3col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chip.on {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.cm-popup .leaflet-popup-content-wrapper {
+  background: #1e293b;
+  color: #f8fafc;
+  border-radius: 10px;
+}
+.cm-popup .leaflet-popup-tip {
+  background: #1e293b;
+}
+</style>
+
 <script src="/static/js/dashboard.js"></script>
 {% endblock %}

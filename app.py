@@ -23,7 +23,34 @@ NODE_API_URL = "http://localhost:3000/api"
 # ---------------------------------------------------------------------------
 @app.route("/")
 def landing():
-    return render_template("index.html")
+    return render_template("login.html")
+
+@app.route("/login")
+def login_page():
+    return render_template("login.html")
+
+@app.route("/api/login", methods=["POST"])
+def api_login():
+    data = request.get_json(force=True) or {}
+    mode = data.get("mode", "guest")
+    email = data.get("email")
+
+    if mode == "google":
+        session["user"] = {
+            "id": f"google_{uuid.uuid4().hex[:8]}",
+            "email": email or "student@gmail.com",
+            "mode": "google"
+        }
+        session["guest_mode"] = False
+    else:
+        session["user"] = {
+            "id": f"guest_{uuid.uuid4().hex[:8]}",
+            "email": None,
+            "mode": "guest"
+        }
+        session["guest_mode"] = True
+
+    return jsonify({"ok": True, "user": session["user"]})
 
 @app.route("/onboarding")
 def onboarding():
