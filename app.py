@@ -162,6 +162,30 @@ def all_colleges_page():
 def career_aunty_page():
     return render_template("career_aunty.html")
 
+@app.route("/career-dna")
+def career_dna_page():
+    return render_template("career_dna.html")
+
+@app.route("/careerverse")
+def careerverse_page():
+    return render_template("careerverse.html")
+
+@app.route("/parent-mode")
+def parent_mode_page():
+    return render_template("parent_mode.html")
+
+@app.route("/resume-builder")
+def resume_builder_page():
+    return render_template("resume_builder.html")
+
+@app.route("/skill-quest")
+def skill_quest_page():
+    return render_template("skill_quest.html")
+
+@app.route("/kiosk")
+def kiosk_page():
+    return render_template("kiosk.html")
+
 # ---------------------------------------------------------------------------
 # API routes (JSON responses for frontend JS)
 # ---------------------------------------------------------------------------
