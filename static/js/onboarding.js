@@ -79,4 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', handleOnboardingSubmit);
   }
+
+  document.addEventListener('cm-lang-changed', () => {
+    if (window.CareerMitra) {
+      CareerMitra.applyTranslations();
+    }
+  });
 });

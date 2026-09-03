@@ -53,24 +53,24 @@
   const starField = new THREE.Points(starGeo, starMat);
   scene.add(starField);
 
-  // 2. Career Nodes Data
+  // 2. Career Nodes Data (Bilingual)
   const careerNodesData = [
     // Tech & Engineering (Blue/Cyan)
-    { id: 'c1', name: 'Software Developer', domain: 'tech', cluster: 'Tech & Engineering', color: 0x38bdf8, pos: [-35, 15, -10], salary: '₹4.5 - 9.0 LPA', edu: 'B.E. / BCA / Polytechnic Diploma', desc: 'Build web applications, cloud systems, and AI models for Maharashtra startups.' },
-    { id: 'c2', name: 'Embedded IoT Engineer', domain: 'tech', cluster: 'Tech & Engineering', color: 0x38bdf8, pos: [-25, 25, 10], salary: '₹4.0 - 7.5 LPA', edu: 'Diploma in Electronics / E&TC', desc: 'Design microcontrollers and smart hardware for automotive & manufacturing plants.' },
-    { id: 'c3', name: 'Mechanical CAD Designer', domain: 'tech', cluster: 'Tech & Engineering', color: 0x38bdf8, pos: [-40, 5, 20], salary: '₹3.2 - 5.5 LPA', edu: 'Diploma in Mechanical / ITI Draughtsman', desc: 'Draft 3D parts and precision assemblies for Pune & Chakan industrial clusters.' },
+    { id: 'c1', name: 'Software Developer', nameMr: 'सॉफ्टवेअर डेव्हलपर', domain: 'tech', cluster: 'Tech & Engineering', clusterMr: 'तंत्रज्ञान व अभियांत्रिकी', color: 0x38bdf8, pos: [-35, 15, -10], salary: '₹4.5 - 9.0 LPA', edu: 'B.E. / BCA / Polytechnic Diploma', eduMr: 'बी.ई. / बीसीए / पॉलिटेक्निक डिप्लोमा', desc: 'Build web applications, cloud systems, and AI models for Maharashtra startups.', descMr: 'वेब ॲप्लिकेशन्स, क्लाउड सिस्टीम आणि सॉफ्टवेअर तयार करा.' },
+    { id: 'c2', name: 'Embedded IoT Engineer', nameMr: 'इंबेडेड आयओटी इंजिनिअर', domain: 'tech', cluster: 'Tech & Engineering', clusterMr: 'तंत्रज्ञान व अभियांत्रिकी', color: 0x38bdf8, pos: [-25, 25, 10], salary: '₹4.0 - 7.5 LPA', edu: 'Diploma in Electronics / E&TC', eduMr: 'इलेक्ट्रॉनिक्स / ई अँड टीसी डिप्लोमा', desc: 'Design microcontrollers and smart hardware for automotive & manufacturing plants.', descMr: 'मायक्रो-कंट्रोलर आणि स्मार्ट इलेक्ट्रॉनिक्स डिझाईन करा.' },
+    { id: 'c3', name: 'Mechanical CAD Designer', nameMr: 'मॅकेनिकल कॅड डिझायनर', domain: 'tech', cluster: 'Tech & Engineering', clusterMr: 'तंत्रज्ञान व अभियांत्रिकी', color: 0x38bdf8, pos: [-40, 5, 20], salary: '₹3.2 - 5.5 LPA', edu: 'Diploma in Mechanical / ITI Draughtsman', eduMr: 'मॅकेनिकल डिप्लोमा / आयटीआय ड्राफ्ट्समन', desc: 'Draft 3D parts and precision assemblies for Pune & Chakan industrial clusters.', descMr: '३डी भाग आणि औद्योगिक डिझाईन्स तयार करा.' },
 
     // Agri-Tech (Emerald Green)
-    { id: 'c4', name: 'Precision Farming Specialist', domain: 'agri', cluster: 'Agri-Tech & Biotech', color: 0x34d399, pos: [30, 20, -15], salary: '₹3.6 - 6.5 LPA', edu: 'B.Sc. Agriculture / Agri-Diploma', desc: 'Deploy automated drip irrigation, drone soil sensing, and climate telemetry.' },
-    { id: 'c5', name: 'Solar Agripump Technician', domain: 'agri', cluster: 'Agri-Tech & Biotech', color: 0x34d399, pos: [40, 8, 15], salary: '₹2.8 - 4.8 LPA', edu: 'ITI Electrician / Solar Tech Cert', desc: 'Install and service PM-KUSUM solar pumps and solar microgrids across villages.' },
+    { id: 'c4', name: 'Precision Farming Specialist', nameMr: 'स्मार्ट कृषी तंत्रज्ञान तज्ज्ञ', domain: 'agri', cluster: 'Agri-Tech & Biotech', clusterMr: 'कृषी व जैवतंत्रज्ञान', color: 0x34d399, pos: [30, 20, -15], salary: '₹3.6 - 6.5 LPA', edu: 'B.Sc. Agriculture / Agri-Diploma', eduMr: 'बी.एससी. कृषी / कृषी डिप्लोमा', desc: 'Deploy automated drip irrigation, drone soil sensing, and climate telemetry.', descMr: 'ठिबक सिंचन, ड्रोन माती चाचणी आणि आधुनिक शेती तंत्रज्ञान वापरा.' },
+    { id: 'c5', name: 'Solar Agripump Technician', nameMr: 'सोलर पंप व सौर ऊर्जा तंत्रज्ञ', domain: 'agri', cluster: 'Agri-Tech & Biotech', clusterMr: 'कृषी व जैवतंत्रज्ञान', color: 0x34d399, pos: [40, 8, 15], salary: '₹2.8 - 4.8 LPA', edu: 'ITI Electrician / Solar Tech Cert', eduMr: 'आयटीआय इलेक्ट्रिशियन / सोलर प्रमाणपत्र', desc: 'Install and service PM-KUSUM solar pumps and solar microgrids across villages.', descMr: 'गावागावात सोलर पंप व सौर ऊर्जा प्रकल्प बसवा व दुरुस्त करा.' },
 
     // Healthcare (Coral/Red)
-    { id: 'c6', name: 'Medical Lab Technologist (DMLT)', domain: 'health', cluster: 'Healthcare & Paramedical', color: 0xf87171, pos: [15, -20, 20], salary: '₹2.5 - 4.5 LPA', edu: 'DMLT / B.Sc. Medical Lab', desc: 'Run clinical pathology, blood diagnostics, and microbiology tests in hospitals.' },
-    { id: 'c7', name: 'Community Health Nurse (GNM)', domain: 'health', cluster: 'Healthcare & Paramedical', color: 0xf87171, pos: [28, -15, -20], salary: '₹3.0 - 5.0 LPA', edu: 'GNM / B.Sc. Nursing (Govt College)', desc: 'Deliver healthcare, maternal care, and immunization programs in rural health centers.' },
+    { id: 'c6', name: 'Medical Lab Technologist (DMLT)', nameMr: 'मेडिकल लॅब तंत्रज्ञ (DMLT)', domain: 'health', cluster: 'Healthcare & Paramedical', clusterMr: 'आरोग्य व पॅरामेडिकल', color: 0xf87171, pos: [15, -20, 20], salary: '₹2.5 - 4.5 LPA', edu: 'DMLT / B.Sc. Medical Lab', eduMr: 'डीएमएलटी / बी.एससी. मेडिकल लॅब', desc: 'Run clinical pathology, blood diagnostics, and microbiology tests in hospitals.', descMr: 'रुग्णालयात रक्ताच्या चाचण्या आणि निदान चाचण्या करा.' },
+    { id: 7, name: 'Community Health Nurse (GNM)', nameMr: 'समुदाय आरोग्य परिचारिका (GNM)', domain: 'health', cluster: 'Healthcare & Paramedical', clusterMr: 'आरोग्य व पॅरामेडिकल', color: 0xf87171, pos: [28, -15, -20], salary: '₹3.0 - 5.0 LPA', edu: 'GNM / B.Sc. Nursing (Govt College)', eduMr: 'जीएनएम / बी.एससी. नर्सिंग', desc: 'Deliver healthcare, maternal care, and immunization programs in rural health centers.', descMr: 'प्राथमिक आरोग्य केंद्रात रुग्णसेवा आणि आरोग्य मोहीम राबवा.' },
 
     // Public Service (Gold/Amber)
-    { id: 'c8', name: 'MPSC Administrative Officer', domain: 'govt', cluster: 'Public Service & Law', color: 0xfbbf24, pos: [-15, -25, -15], salary: '₹6.0 - 12.0 LPA + Perks', edu: 'Any Graduate Degree (BA/B.Sc/B.E.)', desc: 'Serve in Maharashtra State civil services (Tehsildar, BDO, Dy Collector).' },
-    { id: 'c9', name: 'Talathi & Revenue Inspector', domain: 'govt', cluster: 'Public Service & Law', color: 0xfbbf24, pos: [-5, -18, 25], salary: '₹3.5 - 6.0 LPA', edu: 'Graduation + MS-CIT Computer Cert', desc: 'Administer land records (7/12 extracts), agricultural crop surveys, and village revenue.' }
+    { id: 'c8', name: 'MPSC Administrative Officer', nameMr: 'एमपीएससी प्रशासकीय अधिकारी', domain: 'govt', cluster: 'Public Service & Law', clusterMr: 'प्रशासकीय व सरकारी सेवा', color: 0xfbbf24, pos: [-15, -25, -15], salary: '₹6.0 - 12.0 LPA + Perks', edu: 'Any Graduate Degree (BA/B.Sc/B.E.)', eduMr: 'कोणतीही पदवी (बी.ए. / बी.एससी. / बी.ई.)', desc: 'Serve in Maharashtra State civil services (Tehsildar, BDO, Dy Collector).', descMr: 'तहसीलदार, गट विकास अधिकारी किंवा उपजिल्हाधिकारी म्हणून सेवा करा.' },
+    { id: 'c9', name: 'Talathi & Revenue Inspector', nameMr: 'तलाठी व महसूल निरीक्षक', domain: 'govt', cluster: 'Public Service & Law', clusterMr: 'प्रशासकीय व सरकारी सेवा', color: 0xfbbf24, pos: [-5, -18, 25], salary: '₹3.5 - 6.0 LPA', edu: 'Graduation + MS-CIT Computer Cert', eduMr: 'पदवीधर + MS-CIT संगणक प्रमाणपत्र', desc: 'Administer land records (7/12 extracts), agricultural crop surveys, and village revenue.', descMr: '७/१२ उतारे, पिकांचे पंचनामे आणि महसूल नोंदी सांभाळा.' }
   ];
 
   const clickableMeshes = [];
@@ -201,12 +201,14 @@
     const flyout = document.getElementById('careerverse-flyout');
     if (!flyout) return;
 
-    document.getElementById('flyout-cluster').textContent = data.cluster;
-    document.getElementById('flyout-title').textContent = data.name;
-    document.getElementById('flyout-desc').textContent = data.desc;
+    const lang = (window.CareerMitra && window.CareerMitra.lang) || localStorage.getItem('cm-lang') || 'en';
+
+    document.getElementById('flyout-cluster').textContent = (lang === 'mr' && data.clusterMr) ? data.clusterMr : data.cluster;
+    document.getElementById('flyout-title').textContent = (lang === 'mr' && data.nameMr) ? data.nameMr : data.name;
+    document.getElementById('flyout-desc').textContent = (lang === 'mr' && data.descMr) ? data.descMr : data.desc;
     document.getElementById('flyout-salary').textContent = data.salary;
-    document.getElementById('flyout-education').textContent = data.edu;
-    document.getElementById('flyout-mitra-link').href = `/career-aunty?prompt=${encodeURIComponent('मला ' + data.name + ' या करिअरबद्दल सांगा')}`;
+    document.getElementById('flyout-education').textContent = (lang === 'mr' && data.eduMr) ? data.eduMr : data.edu;
+    document.getElementById('flyout-mitra-link').href = `/career-aunty?prompt=${encodeURIComponent('मला ' + (data.nameMr || data.name) + ' या करिअरबद्दल सांगा')}`;
 
     flyout.classList.remove('hidden');
   }

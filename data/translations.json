@@ -133,7 +133,14 @@
     "continue_journey": "Continue My Journey",
     "best_match_badge": "🥇 BEST MATCH",
     "strong_match_badge": "🥈 STRONG MATCH",
-    "good_match_badge": "🥉 GOOD MATCH"
+    "good_match_badge": "🥉 GOOD MATCH",
+    "nav_compare": "⚖️ Compare",
+    "compare_badge": "Career & Side-Income Comparison",
+    "compare_title": "Compare Career Paths & Side Income 💰",
+    "compare_subtitle": "Compare duration, salaries, job security, and earn-while-you-learn side income opportunities side-by-side.",
+    "select_careers_to_compare": "Select Careers to Compare (Choose up to 3):",
+    "side_income_heading": "Earn While You Study: Micro-Gig Guide 🚀",
+    "side_income_subheading": "Practical skills and part-time tasks you can do right in your district or online to support your family while pursuing these careers."
   },
   "hi": {
     "app_name": "करियरमित्र",
@@ -269,7 +276,14 @@
     "continue_journey": "अपनी यात्रा जारी रखें",
     "best_match_badge": "🥇 सर्वश्रेष्ठ मिलान",
     "strong_match_badge": "🥈 मजबूत मिलान",
-    "good_match_badge": "🥉 अच्छा मिलान"
+    "good_match_badge": "🥉 अच्छा मिलान",
+    "nav_compare": "⚖️ तुलना",
+    "compare_badge": "करियर और साइड इनकम तुलना",
+    "compare_title": "करियर पथ और साइड इनकम की तुलना 💰",
+    "compare_subtitle": "अवधि, वेतन, नौकरी की सुरक्षा और पढ़ाई के साथ कमाई के अवसर एक साथ देखें।",
+    "select_careers_to_compare": "तुलना के लिए करियर चुनें (अधिकतम 3):",
+    "side_income_heading": "पढ़ाई के साथ कमाई: माइक्रो-गिग गाइड 🚀",
+    "side_income_subheading": "इन करियर की पढ़ाई के दौरान अपने परिवार की मदद के लिए अपने जिले में या ऑनलाइन किए जा सकने वाले कार्य।"
   },
   "mr": {
     "app_name": "करियरमित्र",
@@ -405,6 +419,13 @@
     "continue_journey": "माझा प्रवास सुरू ठेवा",
     "best_match_badge": "🥇 सर्वोत्कृष्ट जुळणी",
     "strong_match_badge": "🥈 उत्तम जुळणी",
-    "good_match_badge": "🥉 चांगली जुळणी"
+    "good_match_badge": "🥉 चांगली जुळणी",
+    "nav_compare": "⚖️ तुलना",
+    "compare_badge": "करिअर व साइड कमाई तुलना",
+    "compare_title": "करिअर मार्ग व साइड कमाई तुलना 💰",
+    "compare_subtitle": "कालावधी, पगार, नोकरीची संधी आणि शिकताना कमाईच्या संधी समोरासमोर तपासा.",
+    "select_careers_to_compare": "तुलना करण्यासाठी करिअर निवडा (३ पर्यंत निवडा):",
+    "side_income_heading": "शिक्षणासोबत कमाई: सूक्ष्म व्यवसाय मार्गदर्शक 🚀",
+    "side_income_subheading": "या करिअरचा अभ्यास करताना कुटुंबाला हातभार लावण्यासाठी तुमच्या जिल्ह्यात किंवा ऑनलाइन करता येतील अशी कामे."
   }
 }

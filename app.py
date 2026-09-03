@@ -242,9 +242,10 @@ def resume_builder_page():
 def skill_quest_page():
     return render_template("skill_quest.html")
 
-@app.route("/kiosk")
-def kiosk_page():
-    return render_template("kiosk.html")
+@app.route("/career-compare")
+@app.route("/compare")
+def career_compare_page():
+    return render_template("career_compare.html")
 
 # ---------------------------------------------------------------------------
 # API routes (JSON responses for frontend JS)
@@ -271,6 +272,192 @@ def api_questions():
     except Exception:
         pass
     return jsonify(FALLBACK_QUESTIONS)
+
+@app.route("/api/careers/compare")
+def api_careers_compare():
+    careers_data = [
+        {
+            "id": "elec_tech",
+            "nameEn": "Electrical & Solar Technician",
+            "nameMr": "इलेक्ट्रिकल व सौर ऊर्जा तंत्रज्ञ",
+            "icon": "⚡",
+            "category": "Technical / Vocational",
+            "duration": "1 - 2 Years (ITI / Diploma)",
+            "startingSalary": "₹15,000 - ₹25,000 / mo",
+            "growthRate": "High (92%)",
+            "minQualification": "10th Pass",
+            "difficulty": "Moderate",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "Home Appliance Repairing",
+                    "titleMr": "घरगुती उपकरणे दुरुस्ती",
+                    "estEarning": "₹4,000 - ₹10,000 / mo",
+                    "hours": "5-8 hrs/week",
+                    "descEn": "Fix ceiling fans, wiring, switches & home pumps for local households on weekends.",
+                    "descMr": "आठवड्याच्या शेवटी स्थानिक घरांमधील पंखे, वायरिंग आणि पंप दुरुस्त करा."
+                },
+                {
+                    "titleEn": "Solar Rooftop Installation Helper",
+                    "titleMr": "सोलर रूफटॉप बसवणी सहाय्यक",
+                    "estEarning": "₹6,000 - ₹12,000 / mo",
+                    "hours": "8-12 hrs/week",
+                    "descEn": "Assist local solar vendors with rooftop panel assembly and inverter wiring.",
+                    "descMr": "स्थानिक सोलर विक्रेत्यांना पॅनेल आणि इन्व्हर्टर बसवण्यात मदत करा."
+                }
+            ]
+        },
+        {
+            "id": "software_dev",
+            "nameEn": "Computer Software & Web Developer",
+            "nameMr": "संगणक सॉफ्टवेअर व वेब डेव्हलपर",
+            "icon": "💻",
+            "category": "IT & Computer Science",
+            "duration": "3 - 4 Years (B.Sc CS / BCA / B.Tech)",
+            "startingSalary": "₹25,000 - ₹50,000 / mo",
+            "growthRate": "Extremely High (98%)",
+            "minQualification": "12th Pass (Science/Commerce)",
+            "difficulty": "High",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "Freelance Website Design for Local Shops",
+                    "titleMr": "स्थानिक दुकानांसाठी फ्रिलान्स वेब डिझाईन",
+                    "estEarning": "₹8,000 - ₹20,000 / mo",
+                    "hours": "10-15 hrs/week",
+                    "descEn": "Create simple portfolio websites and Google Maps listings for local businesses.",
+                    "descMr": "स्थानिक व्यवसायांसाठी सोप्या वेबसाईट आणि गूगल मॅप्स लिस्टींग तयार करा."
+                },
+                {
+                    "titleEn": "Online Form Filing & Data Kiosk",
+                    "titleMr": "ऑनलाइन फॉर्म भरणे व डेटा केंद्र",
+                    "estEarning": "₹5,000 - ₹12,000 / mo",
+                    "hours": "6-10 hrs/week",
+                    "descEn": "Help village students fill out exam and scholarship application forms online.",
+                    "descMr": "ग्रामीण विद्यार्थ्यांना परीक्षा व शिष्यवृत्ती फॉर्म भरण्यास मदत करा."
+                }
+            ]
+        },
+        {
+            "id": "agri_tech",
+            "nameEn": "Agriculture & Agri-Tech Specialist",
+            "nameMr": "कृषी तंत्रज्ञान व सेंद्रिय शेती तज्ज्ञ",
+            "icon": "🌾",
+            "category": "Agriculture & Rural Tech",
+            "duration": "2 - 4 Years (Diploma / B.Sc Agri)",
+            "startingSalary": "₹18,000 - ₹35,000 / mo",
+            "growthRate": "High (89%)",
+            "minQualification": "10th / 12th Pass",
+            "difficulty": "Moderate",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "Soil & Water Testing Agent",
+                    "titleMr": "माती व पाणी परीक्षण प्रतिनिधी",
+                    "estEarning": "₹6,000 - ₹15,000 / mo",
+                    "hours": "6-10 hrs/week",
+                    "descEn": "Collect soil samples from farmers and provide mini-nutrient analysis reports.",
+                    "descMr": "शेतकऱ्यांकडून मातीचे नमुने गोळा करून खत सल्ला अहवाल द्या."
+                },
+                {
+                    "titleEn": "Organic Fertilizer & Bio-Input Retail",
+                    "titleMr": "सेंद्रिय खते व जैविक औषध विक्री",
+                    "estEarning": "₹5,000 - ₹12,000 / mo",
+                    "hours": "4-8 hrs/week",
+                    "descEn": "Supply bio-pesticides and vermicompost to local farmers on commission.",
+                    "descMr": "स्थानिक शेतकऱ्यांना सेंद्रिय खते आणि वर्मीकंपोस्ट पुरवून कमिशन मिळवा."
+                }
+            ]
+        },
+        {
+            "id": "healthcare_nurse",
+            "nameEn": "Healthcare Assistant & Paramedic",
+            "nameMr": "आरोग्य सहाय्यक व पॅरामेडिक",
+            "icon": "🩺",
+            "category": "Healthcare & Life Sciences",
+            "duration": "2 - 3 Years (GNM / DMLT / B.Sc Nursing)",
+            "startingSalary": "₹16,000 - ₹30,000 / mo",
+            "growthRate": "High (94%)",
+            "minQualification": "12th Science",
+            "difficulty": "Moderate-High",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "Home Care Nursing Assistant",
+                    "titleMr": "होम केअर रुग्ण सहाय्यक",
+                    "estEarning": "₹6,000 - ₹14,000 / mo",
+                    "hours": "8-12 hrs/week",
+                    "descEn": "Assist elderly citizens at home with medication and blood pressure/sugar checks.",
+                    "descMr": "घरातील ज्येष्ठांना औषधे देणे आणि बीपी/शुगर तपासण्यात मदत करा."
+                },
+                {
+                    "titleEn": "Lab Pathology Sample Collection",
+                    "titleMr": "पॅथॉलॉजी लॅब नमुना संकलन",
+                    "estEarning": "₹5,000 - ₹12,000 / mo",
+                    "hours": "5-8 hrs/week",
+                    "descEn": "Collect morning blood samples for diagnostic centers in your taluka.",
+                    "descMr": "तालुक्यातील लॅबसाठी सकाळी रक्ताचे नमुने गोळा करा."
+                }
+            ]
+        },
+        {
+            "id": "mpsc_gov",
+            "nameEn": "MPSC Civil Servant & Administration",
+            "nameMr": "एमपीएससी व प्रशासकीय अधिकारी",
+            "icon": "🏛️",
+            "category": "Public Service & Governance",
+            "duration": "2 - 3 Years (Graduation + Prep)",
+            "startingSalary": "₹30,000 - ₹60,000 / mo",
+            "growthRate": "Very High (95%)",
+            "minQualification": "Any Graduate",
+            "difficulty": "High",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "School Student Home Tutor",
+                    "titleMr": "शालेय विद्यार्थ्यांसाठी होम ट्युशन",
+                    "estEarning": "₹4,000 - ₹12,000 / mo",
+                    "hours": "6-10 hrs/week",
+                    "descEn": "Teach 5th to 10th-grade students Social Studies, Math & Science in evening batches.",
+                    "descMr": "इयत्ता ५ वी ते १० वी च्या विद्यार्थ्यांना संध्याकाळी क्लास किंवा ट्युशन घ्या."
+                },
+                {
+                    "titleEn": "Govt Welfare Scheme Facilitator",
+                    "titleMr": "शासकीय योजना अर्ज सहाय्यक",
+                    "estEarning": "₹5,000 - ₹14,000 / mo",
+                    "hours": "5-9 hrs/week",
+                    "descEn": "Help local villagers apply for housing, pension, and agricultural subsidy schemes.",
+                    "descMr": "ग्रामस्थांना घरकुल, मानधन आणि शेती योजनेचे अर्ज भरण्यास मदत करा."
+                }
+            ]
+        },
+        {
+            "id": "graphic_design",
+            "nameEn": "Digital Graphic Designer & Media",
+            "nameMr": "डिजिटल ग्राफिक्स डिझायनर व मीडिया",
+            "icon": "🎨",
+            "category": "Creative & Digital Media",
+            "duration": "1 - 3 Years (Diploma / B.Voc)",
+            "startingSalary": "₹20,000 - ₹40,000 / mo",
+            "growthRate": "High (90%)",
+            "minQualification": "10th / 12th Pass",
+            "difficulty": "Moderate",
+            "sideIncomeGigs": [
+                {
+                    "titleEn": "Festival & Event Banner Design",
+                    "titleMr": "सण व सोहळे बॅनर डिझाईन",
+                    "estEarning": "₹6,000 - ₹18,000 / mo",
+                    "hours": "8-12 hrs/week",
+                    "descEn": "Design social media posters, birthday banners & flex prints for local shops and political leaders.",
+                    "descMr": "स्थानिक दुकाने व नेत्यांसाठी सोशल मीडिया पोस्टर्स आणि फ्लेक्स डिझाईन करा."
+                },
+                {
+                    "titleEn": "YouTube & Instagram Reel Editing",
+                    "titleMr": "युट्यूब व इंस्टाग्राम रील्स एडिटिंग",
+                    "estEarning": "₹5,000 - ₹15,000 / mo",
+                    "hours": "6-10 hrs/week",
+                    "descEn": "Edit short videos and promotional reels for regional content creators.",
+                    "descMr": "स्थानिक युट्युबर्स आणि दुकानांसाठी छोटे व्हिडिओ एडिट करा."
+                }
+            ]
+        }
+    ]
+    return jsonify(careers_data)
 
 @app.route("/api/profile", methods=["POST"])
 def api_save_profile():

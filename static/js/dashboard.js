@@ -32,6 +32,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupKharchaEmbed();
   setupDocsEmbed();
   setupExamsEmbed();
+
+  document.addEventListener('cm-lang-changed', () => {
+    if (window.CareerMitra) {
+      CareerMitra.applyTranslations();
+    }
+    if (dashboardData) {
+      renderLeftMatches(dashboardData.matches || []);
+      renderLeftColleges(dashboardData.colleges || []);
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------

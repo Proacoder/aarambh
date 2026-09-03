@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section compare-section fade-in">
+  <div class="container">
+    
+    <!-- Page Header -->
+    <div class="compare-header card text-center mb-4 slide-up">
+      <div class="header-badge flex align-center gap-1 justify-center mb-2" style="display: inline-flex; background: rgba(217,164,65,0.15); padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; color: var(--earth-brown);">
+        <span>⚖️</span> <span data-i18n="compare_badge">Career & Side-Income Comparison</span>
+      </div>
+      <h1 class="page-title mb-2" data-i18n="compare_title">Compare Career Paths & Side Income 💰</h1>
+      <p class="page-subtitle mb-3 text-muted" data-i18n="compare_subtitle">
+        Compare duration, salaries, job security, and earn-while-you-learn side income opportunities side-by-side.
+      </p>
+    </div>
+
+    <!-- Career Selection Bar -->
+    <div class="card p-4 mb-4 slide-up stagger-1">
+      <h3 class="card-title mb-3" style="font-size: 1.1rem; color: var(--earth-brown);" data-i18n="select_careers_to_compare">
+        Select Careers to Compare (Choose up to 3):
+      </h3>
+      <div id="career-selector-grid" class="flex flex-wrap gap-2">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </div>
+
+    <!-- Side-by-Side Comparison Matrix -->
+    <div id="comparison-matrix-container" class="slide-up stagger-2">
+      <!-- Dynamic Comparison Table and Cards rendered here -->
+    </div>
+
+    <!-- Side Income Opportunities Deep Dive Section -->
+    <div class="card p-4 mt-5 slide-up stagger-3" style="background: linear-gradient(135deg, rgba(217,164,65,0.08) 0%, rgba(79,122,69,0.08) 100%); border: 1px solid var(--gold-light);">
+      <div class="flex align-center gap-3 mb-3">
+        <div style="font-size: 2rem; background: var(--bg-card); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow);">
+          💡
+        </div>
+        <div>
+          <h2 class="h3 mb-1" style="color: var(--earth-brown);" data-i18n="side_income_heading">
+            Earn While You Study: Micro-Gig Guide 🚀
+          </h2>
+          <p class="text-small text-muted" data-i18n="side_income_subheading">
+            Practical skills and part-time tasks you can do right in your district or online to support your family while pursuing these careers.
+          </p>
+        </div>
+      </div>
+
+      <div id="side-income-cards-grid" class="grid-3 gap-3 mt-3">
+        <!-- Dynamic Side Income Gigs rendered here -->
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/career_compare.js"></script>
+{% endblock %}
