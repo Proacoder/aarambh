@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section dashboard fade-in">
+  <div class="container">
+    <div id="loading-spinner" class="loading-wrap" aria-live="polite">
+      <div class="loading-spinner"></div>
+      <p data-i18n="loading">Loading…</p>
+    </div>
+
+    <div id="dashboard-content" class="hidden">
+      <h1 class="page-title" data-i18n="dashboard_title">Your top career matches</h1>
+      <p class="page-subtitle" data-i18n="dashboard_sub">Based on your profile and assessment.</p>
+
+      <div id="career-matches" class="grid-3 animate-on-scroll">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div class="warli-divider" aria-hidden="true"></div>
+
+      <h2 class="section-title" data-i18n="nearby_colleges">Institutions near you</h2>
+      <div class="map-container card slide-up animate-on-scroll">
+        <div id="map" style="height: 100%; border-radius: 12px; z-index: 1;"></div>
+      </div>
+
+      <div id="college-cards" class="grid-2 mt-4 animate-on-scroll">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div class="warli-divider" aria-hidden="true"></div>
+
+      <h2 class="section-title" data-i18n="eligible_schemes">Scholarships you may qualify for</h2>
+      <div id="scheme-cards" class="grid-2 animate-on-scroll mb-4">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-cta hidden no-print" id="sticky-cta">
+  <div class="container flex-between align-center">
+    <span style="font-weight: 600; color: var(--text);">Ready to take the next step?</span>
+    <a href="/dashboard" id="sticky-cta-btn" class="btn btn-primary ripple" data-i18n="gen_career_plan">Generate My Career Plan</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

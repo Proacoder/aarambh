@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section roadmap fade-in">
+  <div class="container">
+    <div id="loading-state" class="loading-wrap">
+      <div class="loading-spinner"></div>
+      <p data-i18n="generating">Building your roadmap…</p>
+    </div>
+
+    <div id="roadmap-content" class="hidden">
+      <div class="flex-between align-start mb-4">
+        <div>
+          <h1 class="page-title" data-i18n="roadmap_title">Your career roadmap</h1>
+          <p class="page-subtitle" id="roadmap-subtitle">A step-by-step guide to your future.</p>
+          <p class="text-muted" id="roadmap-career-desc"></p>
+        </div>
+        <div class="action-buttons flex no-print" style="gap: 1rem;">
+          <button id="btn-download-pdf" class="btn btn-primary ripple" data-i18n="download_pdf">Download as PDF</button>
+          <a href="/onboarding" id="btn-start-over" class="btn btn-secondary" data-i18n="start_over">Start Over</a>
+        </div>
+      </div>
+
+      <div class="roadmap-section card animate-on-scroll stagger-1">
+        <h2 data-i18n="immediate_steps">Immediate steps</h2>
+        <div id="immediate-steps" class="roadmap-step-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="roadmap-section card animate-on-scroll stagger-2 mt-4">
+        <h2 data-i18n="later_steps">Later steps</h2>
+        <div id="later-steps" class="roadmap-step-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="roadmap-section card animate-on-scroll stagger-3 mt-4">
+        <h2 data-i18n="scholarship_steps">Scholarship steps</h2>
+        <div id="scholarship-steps" class="roadmap-step-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="roadmap-section card animate-on-scroll stagger-4 mt-4">
+        <h2 data-i18n="nearby_colleges_roadmap">Nearby colleges for this career</h2>
+        <ul id="nearby-colleges-list" class="roadmap-step-container">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+
+      <div class="roadmap-section card animate-on-scroll stagger-1 mt-4">
+        <h2 data-i18n="long_term">Long-term outlook</h2>
+        <div id="long-term" class="roadmap-step-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- PDF Hidden Content Area (Cloned structure, optimized for print) -->
+      <div id="pdf-content" class="pdf-content"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/roadmap.js"></script>
+{% endblock %}

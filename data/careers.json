@@ -1,0 +1,192 @@
+[
+  {
+    "id": "software_developer",
+    "vector": {"technical": 1.0, "academic": 0.7, "vocational": 0.2, "business": 0.3, "healthcare": 0, "publicService": 0.1, "creative": 0.3, "agriculture": 0},
+    "minQualification": "10th",
+    "icon": "code",
+    "name": {"en": "Software Developer", "hi": "सॉफ्टवेयर डेवलपर", "mr": "सॉफ्टवेअर डेव्हलपर"},
+    "description": {
+      "en": "Builds apps, websites and software that people use every day.",
+      "hi": "ऐप, वेबसाइट और सॉफ्टवेयर बनाता है जिसे लोग रोज इस्तेमाल करते हैं।",
+      "mr": "लोक रोज वापरतात ती अॅप, वेबसाइट आणि सॉफ्टवेअर बनवतो."
+    },
+    "pathway": [
+      {"en": "Class 10 – pick Science with Maths", "hi": "कक्षा 10 – गणित सहित विज्ञान चुनें", "mr": "इयत्ता 10 – गणितासह विज्ञान निवडा"},
+      {"en": "Class 12 or Diploma in Computer Engineering", "hi": "कक्षा 12 या कंप्यूटर इंजीनियरिंग डिप्लोमा", "mr": "इयत्ता 12 किंवा कॉम्प्युटर इंजिनिअरिंग डिप्लोमा"},
+      {"en": "B.E./B.Tech or Diploma + degree bridge course", "hi": "बी.ई./बी.टेक या डिप्लोमा + डिग्री ब्रिज कोर्स", "mr": "बी.ई./बी.टेक किंवा डिप्लोमा + डिग्री ब्रिज कोर्स"},
+      {"en": "Learn Python/Java + build small projects", "hi": "पायथन/जावा सीखें + छोटे प्रोजेक्ट बनाएं", "mr": "पायथन/जावा शिका + छोटे प्रकल्प बनवा"},
+      {"en": "Internship at a software company or startup", "hi": "सॉफ्टवेयर कंपनी या स्टार्टअप में इंटर्नशिप", "mr": "सॉफ्टवेअर कंपनीत किंवा स्टार्टअपमध्ये इंटर्नशिप"},
+      {"en": "Junior Developer role, then grow with experience", "hi": "जूनियर डेवलपर पद, फिर अनुभव से वृद्धि", "mr": "जुनियर डेव्हलपर पद, नंतर अनुभवाने वाढ"}
+    ]
+  },
+  {
+    "id": "teacher",
+    "vector": {"technical": 0.1, "academic": 0.7, "vocational": 0.1, "business": 0.1, "healthcare": 0.1, "publicService": 0.8, "creative": 0.4, "agriculture": 0},
+    "minQualification": "10th",
+    "icon": "book",
+    "name": {"en": "Teacher", "hi": "शिक्षक", "mr": "शिक्षक"},
+    "description": {
+      "en": "Educates the next generation in schools — a respected, stable government or private role.",
+      "hi": "स्कूलों में अगली पीढ़ी को पढ़ाता है — एक सम्मानित, स्थिर पद।",
+      "mr": "शाळेत नवीन पिढीला शिकवतो — एक आदराची, स्थिर नोकरी."
+    },
+    "pathway": [
+      {"en": "Class 10 – any stream", "hi": "कक्षा 10 – कोई भी स्ट्रीम", "mr": "इयत्ता 10 – कोणताही शाखा"},
+      {"en": "Class 12 + D.El.Ed or B.A./B.Sc.", "hi": "कक्षा 12 + डी.एल.एड. या बी.ए./बी.एससी", "mr": "इयत्ता 12 + डी.एल.एड. किंवा बी.ए./बी.एससी"},
+      {"en": "B.Ed. degree (2 years)", "hi": "बी.एड. डिग्री (2 वर्ष)", "mr": "बी.एड. पदवी (2 वर्षे)"},
+      {"en": "Clear TET/CTET teacher eligibility test", "hi": "टीईटी/सीटीईटी पात्रता परीक्षा पास करें", "mr": "टीईटी/सीटीईटी पात्रता परीक्षा उत्तीर्ण व्हा"},
+      {"en": "Apply to Zilla Parishad or private schools", "hi": "जिला परिषद या निजी स्कूलों में आवेदन करें", "mr": "जिल्हा परिषद किंवा खाजगी शाळेत अर्ज करा"}
+    ]
+  },
+  {
+    "id": "nurse",
+    "vector": {"technical": 0.1, "academic": 0.5, "vocational": 0.3, "business": 0, "healthcare": 1.0, "publicService": 0.5, "creative": 0, "agriculture": 0},
+    "minQualification": "10th",
+    "icon": "heart",
+    "name": {"en": "Nurse / Healthcare Worker", "hi": "नर्स / स्वास्थ्य कर्मी", "mr": "नर्स / आरोग्य सेवक"},
+    "description": {
+      "en": "Cares for patients in hospitals, clinics and rural health centres.",
+      "hi": "अस्पताल, क्लिनिक और ग्रामीण स्वास्थ्य केंद्रों में मरीजों की देखभाल करता है।",
+      "mr": "रुग्णालये, दवाखाने आणि ग्रामीण आरोग्य केंद्रांमध्ये रुग्णांची काळजी घेतो."
+    },
+    "pathway": [
+      {"en": "Class 12 with Science (Biology)", "hi": "कक्षा 12 विज्ञान (जीव विज्ञान) से", "mr": "इयत्ता 12 विज्ञान (जीवशास्त्र) सह"},
+      {"en": "GNM Diploma or B.Sc. Nursing entrance exam", "hi": "जीएनएम डिप्लोमा या बी.एससी नर्सिंग प्रवेश परीक्षा", "mr": "जीएनएम डिप्लोमा किंवा बी.एससी नर्सिंग प्रवेश परीक्षा"},
+      {"en": "3–4 year Nursing course + clinical training", "hi": "3–4 वर्ष नर्सिंग कोर्स + क्लिनिकल ट्रेनिंग", "mr": "3–4 वर्ष नर्सिंग कोर्स + क्लिनिकल प्रशिक्षण"},
+      {"en": "Register with Maharashtra Nursing Council", "hi": "महाराष्ट्र नर्सिंग काउंसिल में पंजीकरण", "mr": "महाराष्ट्र नर्सिंग कौन्सिलमध्ये नोंदणी"},
+      {"en": "Work at a PHC, hospital, or apply for govt nursing posts", "hi": "पीएचसी, अस्पताल में काम या सरकारी पद हेतु आवेदन", "mr": "पीएचसी, रुग्णालयात काम किंवा सरकारी पदासाठी अर्ज"}
+    ]
+  },
+  {
+    "id": "agriculture_officer",
+    "vector": {"technical": 0.2, "academic": 0.4, "vocational": 0.3, "business": 0.2, "healthcare": 0, "publicService": 0.5, "creative": 0, "agriculture": 1.0},
+    "minQualification": "10th",
+    "icon": "leaf",
+    "name": {"en": "Agriculture Officer / Agri-Technician", "hi": "कृषि अधिकारी / कृषि तकनीशियन", "mr": "कृषी अधिकारी / कृषी तंत्रज्ञ"},
+    "description": {
+      "en": "Advises farmers on crops, soil and schemes, or works in agri-research and extension.",
+      "hi": "किसानों को फसल, मिट्टी और योजनाओं पर सलाह देता है।",
+      "mr": "शेतकऱ्यांना पिके, माती आणि योजनांबद्दल सल्ला देतो."
+    },
+    "pathway": [
+      {"en": "Class 12 with Science or Agriculture stream", "hi": "कक्षा 12 विज्ञान या कृषि स्ट्रीम से", "mr": "इयत्ता 12 विज्ञान किंवा कृषी शाखेत"},
+      {"en": "Diploma in Agriculture or B.Sc. Agri", "hi": "कृषि में डिप्लोमा या बी.एससी कृषि", "mr": "कृषी पदविका किंवा बी.एससी अॅग्री"},
+      {"en": "Practical training at Krishi Vigyan Kendra", "hi": "कृषि विज्ञान केंद्र में व्यावहारिक प्रशिक्षण", "mr": "कृषी विज्ञान केंद्रात प्रात्यक्षिक प्रशिक्षण"},
+      {"en": "Apply for MPSC Agriculture posts or agri-companies", "hi": "MPSC कृषि पद या कृषि कंपनियों में आवेदन", "mr": "MPSC कृषी पद किंवा कृषी कंपन्यांमध्ये अर्ज"}
+    ]
+  },
+  {
+    "id": "polytechnic_engineer",
+    "vector": {"technical": 0.7, "academic": 0.3, "vocational": 0.9, "business": 0.1, "healthcare": 0, "publicService": 0.2, "creative": 0.1, "agriculture": 0},
+    "minQualification": "10th",
+    "icon": "wrench",
+    "name": {"en": "Polytechnic / Diploma Engineer", "hi": "पॉलिटेक्निक / डिप्लोमा इंजीनियर", "mr": "पॉलिटेक्निक / डिप्लोमा इंजिनिअर"},
+    "description": {
+      "en": "Hands-on technical role in mechanical, civil or electrical fields, without needing a full degree.",
+      "hi": "मैकेनिक, सिविल या इलेक्ट्रिकल में व्यावहारिक तकनीकी काम।",
+      "mr": "पूर्ण पदवीशिवाय यांत्रिकी, सिव्हिल किंवा इलेक्ट्रिकल क्षेत्रात प्रत्यक्ष काम."
+    },
+    "pathway": [
+      {"en": "Class 10 pass with decent Maths/Science marks", "hi": "गणित/विज्ञान में ठीक अंकों के साथ कक्षा 10 पास", "mr": "गणित/विज्ञानात बरे गुण घेऊन इयत्ता 10 उत्तीर्ण"},
+      {"en": "3-year Diploma (Polytechnic) entrance via CET", "hi": "CET के जरिए 3-वर्षीय डिप्लोमा प्रवेश", "mr": "CET द्वारे 3-वर्षाचा डिप्लोमा प्रवेश"},
+      {"en": "Choose Mechanical, Civil, Electrical or Computer branch", "hi": "मैकेनिकल, सिविल, इलेक्ट्रिकल या कंप्यूटर शाखा चुनें", "mr": "मेकॅनिकल, सिव्हिल, इलेक्ट्रिकल किंवा कॉम्प्युटर शाखा निवडा"},
+      {"en": "6-month industry internship (built into diploma)", "hi": "6-माह का उद्योग इंटर्नशिप", "mr": "6-महिन्याचे उद्योग इंटर्नशिप"},
+      {"en": "Job as Junior/Site Engineer, or bridge to B.E. via lateral entry", "hi": "जूनियर/साइट इंजीनियर की नौकरी, या लेटरल एंट्री से बी.ई.", "mr": "जुनियर/साइट इंजिनिअर नोकरी, किंवा लॅटरल एंट्रीने बी.ई."}
+    ]
+  },
+  {
+    "id": "government_services",
+    "vector": {"technical": 0.1, "academic": 0.5, "vocational": 0.2, "business": 0.1, "healthcare": 0, "publicService": 1.0, "creative": 0, "agriculture": 0.1},
+    "minQualification": "10th",
+    "icon": "shield",
+    "name": {"en": "Government Services", "hi": "सरकारी सेवा", "mr": "शासकीय सेवा"},
+    "description": {
+      "en": "Stable roles in police, forest, revenue, clerical or defence services via competitive exams.",
+      "hi": "पुलिस, वन, राजस्व, लिपिकीय या रक्षा सेवाओं में स्थिर पद।",
+      "mr": "पोलीस, वन, महसूल, लिपिक किंवा संरक्षण दलातील स्थिर नोकरी."
+    },
+    "pathway": [
+      {"en": "Class 12 (any stream) or Graduation depending on post", "hi": "कक्षा 12 (कोई भी स्ट्रीम) या स्नातक", "mr": "इयत्ता 12 (कोणतीही शाखा) किंवा पदवी"},
+      {"en": "Prepare for MPSC / Talathi / Police Bharti exams", "hi": "MPSC / तलाठी / पुलिस भर्ती परीक्षा की तैयारी", "mr": "MPSC / तलाठी / पोलीस भरती परीक्षेची तयारी"},
+      {"en": "Physical fitness prep (for police/defence posts)", "hi": "शारीरिक तंदुरुस्ती की तैयारी", "mr": "शारीरिक क्षमता ची तयारी"},
+      {"en": "Sit for written exam + interview + document verification", "hi": "लिखित परीक्षा + साक्षात्कार + दस्तावेज सत्यापन", "mr": "लेखी परीक्षा + मुलाखत + कागदपत्र पडताळणी"},
+      {"en": "Posting and permanent government job", "hi": "पदस्थापना और स्थायी सरकारी नौकरी", "mr": "नियुक्ती आणि कायम शासकीय नोकरी"}
+    ]
+  },
+  {
+    "id": "banking_finance",
+    "vector": {"technical": 0.2, "academic": 0.6, "vocational": 0.1, "business": 0.9, "healthcare": 0, "publicService": 0.3, "creative": 0.1, "agriculture": 0},
+    "minQualification": "12th",
+    "icon": "coins",
+    "name": {"en": "Banking & Finance", "hi": "बैंकिंग और वित्त", "mr": "बँकिंग आणि वित्त"},
+    "description": {
+      "en": "Roles in banks, cooperative societies, and financial institutions, from clerk to officer.",
+      "hi": "बैंकों, सहकारी संस्थाओं में क्लर्क से लेकर अधिकारी तक की भूमिकाओं।",
+      "mr": "बँका, सहकारी संस्था आणि वित्तीय संस्थेतील क्लर्क ते अधिकारी पदे."
+    },
+    "pathway": [
+      {"en": "Class 12 with Commerce (preferred)", "hi": "कक्षा 12 वाणिज्य से (प्राथमिकता)", "mr": "इयत्ता 12 वाणिज्यासह (प्राधान्य)"},
+      {"en": "B.Com / BBA graduation", "hi": "बी.कॉम / बीबीए स्नातक", "mr": "बी.कॉम / बीबीए पदवी"},
+      {"en": "Prepare for IBPS / SBI clerk & PO exams", "hi": "IBPS / SBI क्लर्क और PO परीक्षा की तैयारी", "mr": "IBPS / SBI क्लर्क आणि PO परीक्षेची तयारी"},
+      {"en": "Or apply to District Cooperative Banks locally", "hi": "या स्थानीय जिला सहकारी बैंक में आवेदन", "mr": "किंवा स्थानिक जिल्हा मध्यवर्ती बँकेत अर्ज"},
+      {"en": "Clerk → Probationary Officer with experience", "hi": "अनुभव के साथ क्लर्क → प्रोबेशनरी ऑफिसर", "mr": "अनुभवाने क्लर्क → प्रोबेशनरी ऑफिसर"}
+    ]
+  },
+  {
+    "id": "skilled_trades",
+    "vector": {"technical": 0.4, "academic": 0.1, "vocational": 1.0, "business": 0.2, "healthcare": 0, "publicService": 0.1, "creative": 0.1, "agriculture": 0.1},
+    "minQualification": "10th",
+    "icon": "hammer",
+    "name": {"en": "Skilled Trade (Electrician / Fitter / Welder)", "hi": "कुशल ट्रेड (इलेक्ट्रीशियन / फिटर / वेल्डर)", "mr": "कुशल तंत्र (इलेक्ट्रिशियन / फिटर / वेल्डर)"},
+    "description": {
+      "en": "Fast route to a paying job via ITI training — high demand in factories, construction and self-employment.",
+      "hi": "ITI प्रशिक्षण से जल्द नौकरी — फैक्टरी, निर्माण में ऊंची मांग।",
+      "mr": "ITI प्रशिक्षणातून जल्द नोकरी — कारखाने, बांधकाम आणि स्वतःच्या व्यवसायात मोठी मागणी."
+    },
+    "pathway": [
+      {"en": "Class 10 pass (or even 8th for some trades)", "hi": "कक्षा 10 पास (कुछ ट्रेड के लिए 8वीं भी पर्याप्त)", "mr": "इयत्ता 10 उत्तीर्ण (काही ट्रेडसाठी 8 वी पुरेशी)"},
+      {"en": "1–2 year ITI course in chosen trade", "hi": "चूनी गई ट्रेड में 1–2 वर्ष का ITI कोर्स", "mr": "निवडलेल्या ट्रेडमध्ये 1–2 वर्षाचा ITI कोर्स"},
+      {"en": "Apprenticeship (Apprentices Act) with a company", "hi": "किसी कंपनी के साथ अप्रेंटिसशिप", "mr": "कंपनीसोबत अॅप्रेंटिसशिप"},
+      {"en": "Get National Trade Certificate (NCVT/SCVT)", "hi": "राष्ट्रीय व्यापार प्रमाण पत्र प्राप्त करें", "mr": "राष्ट्रीय व्यवसाय प्रमाणपत्र मिळवा"},
+      {"en": "Job in industry, or start own repair/service shop", "hi": "उद्योग में नौकरी, या खुद की दुकान", "mr": "उद्योगात नोकरी, किंवा स्वतःचे दुकान"}
+    ]
+  },
+  {
+    "id": "entrepreneur",
+    "vector": {"technical": 0.2, "academic": 0.2, "vocational": 0.3, "business": 1.0, "healthcare": 0, "publicService": 0.1, "creative": 0.5, "agriculture": 0.2},
+    "minQualification": "10th",
+    "icon": "rocket",
+    "name": {"en": "Entrepreneurship / Own Business", "hi": "उद्यमिता / खुद का व्यवसाय", "mr": "उद्योजकता / स्वतःचा व्यवसाय"},
+    "description": {
+      "en": "Starting a shop, trade, or agri-business with support from government loan schemes.",
+      "hi": "सरकारी ओं प्रभावी लोन योजनाओं की मदद से दुकान या कारोबार शुरू करना।",
+      "mr": "शासकीय कर्ज योजनांच्या मदतीने दुकान किंवा व्यवसाय सुरू करणे."
+    },
+    "pathway": [
+      {"en": "Identify a local need (repair, retail, farm produce, etc.)", "hi": "स्थानीय जरूरत पहचानें (मरम्मत, खुदरा, कृषि उत्पाद)", "mr": "स्थानिक गरज ओळखा (दुरुस्ती, किराणा, शेतीमाल)"},
+      {"en": "Short skill or business management course", "hi": "छोटा कौशल या व्यापार प्रबंधन कोर्स", "mr": "लहान कौशल्य किंवा व्यवसाय व्यवस्थापन अभ्यासक्रम"},
+      {"en": "Apply for PMEGP / Mudra Loan (govt seed funding)", "hi": "PMEGP / मुद्रा लोन के लिए आवेदन", "mr": "PMEGP / मुद्रा लोनसाठी अर्ज"},
+      {"en": "Start small, register the business (Udyam)", "hi": "छोटा शुरू करें, उद्यम पंजीकरण", "mr": "लहान सुरुवात करा, उद्यम नोंदणी करा"},
+      {"en": "Grow steadily, reinvest profits", "hi": "धीरे-धीरे विकास करें, मुनाफा पुनःनिवेश करें", "mr": "हळूहळू वाढवा, नफा पुन्हा गुंतवा"}
+    ]
+  },
+  {
+    "id": "design_creative",
+    "vector": {"technical": 0.2, "academic": 0.2, "vocational": 0.3, "business": 0.3, "healthcare": 0, "publicService": 0.1, "creative": 1.0, "agriculture": 0},
+    "minQualification": "10th",
+    "icon": "palette",
+    "name": {"en": "Design & Creative Arts", "hi": "डिज़ाइन और रचनात्मक कला", "mr": "डिझाइन आणि सर्जनशील कला"},
+    "description": {
+      "en": "Fashion, graphic design, fine arts or craft — growing fields with online and local demand.",
+      "hi": "फैशन, ग्राफिक्स डिज़ाइन, ललित कला या शिल्प — बढ़ता हुआ क्षेत्र।",
+      "mr": "फॅशन, ग्राफिक्स डिझाइन, ललितकला किंवा हस्तकला — वाढती मागणी असलेले क्षेत्र."
+    },
+    "pathway": [
+      {"en": "Class 10/12 (any stream)", "hi": "कक्षा 10/12 (कोई भी स्ट्रीम)", "mr": "इयत्ता 10/12 (कोणतीही शाखा)"},
+      {"en": "Certificate/Diploma in Design, Tailoring, or Fine Arts", "hi": "डिज़ाइन, सिलाई या ललित कला में प्रमाणपत्र/डिप्लोमा", "mr": "डिझाइन, शिवणकाम किंवा ललितकलेत प्रमाणपत्र/डिप्लोमा"},
+      {"en": "Build a portfolio of your own work", "hi": "अपने काम का पोर्टफोलियो बनाएं", "mr": "स्वतःच्या कामाचे पोर्टफोलिओ तयार करा"},
+      {"en": "Freelance or apprentice with a local designer/studio", "hi": "स्थानीय डिज़ाइनर/स्टूडियो के साथ काम", "mr": "स्थानिक डिझाइनर/स्टुडिओसोबत काम"},
+      {"en": "Sell online (social media/marketplaces) or open a studio", "hi": "ऑनलाइन बेचें या स्टूडियो खोलें", "mr": "ऑनलाईन विका किंवा स्वतःचा स्टुडिओ सुरू करा"}
+    ]
+  }
+]

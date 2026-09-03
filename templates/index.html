@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section hero fade-in">
+  <div class="hero-blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+  <div class="container">
+    <span class="hero-eyebrow slide-up">🌾 <span data-i18n="tagline">Find your path. Find it near you.</span></span>
+    <h1 class="hero-title" data-i18n="landing_h1">Your career, mapped from where you stand.</h1>
+    <p class="hero-subtitle" data-i18n="landing_sub">Answer a few questions about yourself. See careers that fit you, colleges near your district, and government scholarships you actually qualify for — all in your language.</p>
+    <a href="/onboarding" class="btn btn-primary btn-lg ripple" data-i18n="start_cta">Discover Your Career Path</a>
+  </div>
+</section>
+
+<section class="section stats slide-up animate-on-scroll">
+  <div class="container grid-2 md-grid-4">
+    <div class="card stat-card stagger-1">
+      <h2 data-count-target="9">0</h2>
+      <p data-i18n="landing_stat1">career tracks</p>
+    </div>
+    <div class="card stat-card stagger-2">
+      <h2 data-count-target="35">0</h2>
+      <p data-i18n="landing_stat2">Maharashtra institutions</p>
+    </div>
+    <div class="card stat-card stagger-3">
+      <h2 data-count-target="11">0</h2>
+      <p data-i18n="landing_stat3">scholarship schemes</p>
+    </div>
+    <div class="card stat-card stagger-4">
+      <h2 data-count-target="3">0</h2>
+      <p data-i18n="landing_stat4">minute assessment</p>
+    </div>
+  </div>
+</section>
+
+<div class="warli-divider" aria-hidden="true"></div>
+
+<section class="section how-it-works slide-up animate-on-scroll">
+  <div class="container">
+    <h2 class="section-title" data-i18n="how_it_works">How it works</h2>
+    <div class="grid-2 md-grid-4">
+      <div class="card step-card stagger-1">
+        <div class="icon-circle">1</div>
+        <p class="step-title" data-i18n="step1_t">Tell us about yourself</p>
+        <p class="step-desc text-muted text-small" data-i18n="step1_d">Class, district, marks, and what you're drawn to.</p>
+      </div>
+      <div class="card step-card stagger-2">
+        <div class="icon-circle">2</div>
+        <p class="step-title" data-i18n="step2_t">Take a short assessment</p>
+        <p class="step-desc text-muted text-small" data-i18n="step2_d">8 quick questions. No right or wrong answers.</p>
+      </div>
+      <div class="card step-card stagger-3">
+        <div class="icon-circle">3</div>
+        <p class="step-title" data-i18n="step3_t">See your matches</p>
+        <p class="step-desc text-muted text-small" data-i18n="step3_d">Careers, nearby colleges, and scholarships you qualify for.</p>
+      </div>
+      <div class="card step-card stagger-4">
+        <div class="icon-circle">4</div>
+        <p class="step-title" data-i18n="step4_t">Get your roadmap</p>
+        <p class="step-desc text-muted text-small" data-i18n="step4_d">A step-by-step plan you can save or print.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

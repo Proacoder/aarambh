@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <path d="M100 200 L95 100 L100 20 L105 100 Z" fill="#3D2B1F" />
+  <line x1="97" y1="150" x2="50" y2="100" stroke="#3D2B1F" stroke-width="4" />
+  <line x1="103" y1="140" x2="160" y2="80" stroke="#3D2B1F" stroke-width="4" />
+  <line x1="98" y1="110" x2="30" y2="50" stroke="#3D2B1F" stroke-width="3" />
+  <line x1="102" y1="90" x2="170" y2="40" stroke="#3D2B1F" stroke-width="3" />
+  <line x1="99" y1="60" x2="60" y2="20" stroke="#3D2B1F" stroke-width="2" />
+  <line x1="101" y1="50" x2="140" y2="10" stroke="#3D2B1F" stroke-width="2" />
+  <circle cx="50" cy="100" r="5" fill="#3D2B1F" />
+  <circle cx="160" cy="80" r="5" fill="#3D2B1F" />
+  <circle cx="30" cy="50" r="4" fill="#3D2B1F" />
+  <circle cx="170" cy="40" r="4" fill="#3D2B1F" />
+  <circle cx="60" cy="20" r="3" fill="#3D2B1F" />
+  <circle cx="140" cy="10" r="3" fill="#3D2B1F" />
+  <circle cx="100" cy="20" r="4" fill="#3D2B1F" />
+</svg>

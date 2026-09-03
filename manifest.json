@@ -1,0 +1,13 @@
+{
+  "name": "Career Mitra - \u0915\u0930\u093f\u0905\u0930 \u092e\u093f\u0924\u094d\u0930",
+  "short_name": "CareerMitra",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF6F0",
+  "theme_color": "#3D2B1F",
+  "description": "Multilingual career guidance for Maharashtra's rural students",
+  "icons": [
+    {"src": "/static/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/static/img/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}

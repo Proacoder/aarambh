@@ -1,0 +1,447 @@
+[
+  {
+    "id": "sch-01",
+    "name": {
+      "en": "Post-Matric Scholarship for SC/ST students",
+      "hi": "SC/ST छात्रों के लिए पोस्ट-मैट्रिक छात्रवृत्ति",
+      "mr": "SC/ST विद्यार्थ्यांसाठी पोस्ट-मॅट्रिक शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 250000,
+    "eligibleCategories": [
+      "SC",
+      "ST"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Covers full tuition fees and maintenance allowance.",
+      "hi": "पूरी ट्यूशन फीस और रखरखाव भत्ता शामिल है।",
+      "mr": "संपूर्ण शिक्षण शुल्क आणि देखभाल भत्ता समाविष्ट."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "Caste Certificate",
+        "Aadhar Card"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "जाति प्रमाण पत्र",
+        "आधार कार्ड"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "जातीचे प्रमाणपत्र",
+        "आधार कार्ड"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-02",
+    "name": {
+      "en": "MAHADBT EBC Freeship",
+      "hi": "महाडीबीटी ईबीसी फ्रीशिप",
+      "mr": "महाडीबीटी ईबीसी फ्रीशिप"
+    },
+    "provider": "State Government",
+    "maxIncome": 800000,
+    "eligibleCategories": [
+      "General",
+      "EWS",
+      "OBC"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "50% reimbursement of tuition fees for professional courses.",
+      "hi": "व्यावसायिक पाठ्यक्रमों के लिए ट्यूशन फीस की 50% वापसी।",
+      "mr": "व्यावसायिक अभ्यासक्रमांसाठी शिक्षण शुल्काची 50% प्रतिपूर्ती."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "Domicile Certificate",
+        "Aadhar Card"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "अधिवास प्रमाण पत्र",
+        "आधार कार्ड"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "रहिवासी प्रमाणपत्र",
+        "आधार कार्ड"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-03",
+    "name": {
+      "en": "MAHADBT OBC Scholarship",
+      "hi": "महाडीबीटी ओबीसी छात्रवृत्ति",
+      "mr": "महाडीबीटी ओबीसी शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 100000,
+    "eligibleCategories": [
+      "OBC"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Full exemption of tuition fees for eligible students.",
+      "hi": "पात्र छात्रों के लिए ट्यूशन फीस से पूर्ण छूट।",
+      "mr": "पात्र विद्यार्थ्यांसाठी शिक्षण शुल्कातून पूर्ण सूट."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "OBC Caste Certificate",
+        "Non-Creamy Layer Certificate"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "ओबीसी जाति प्रमाण पत्र",
+        "नॉन-क्रीमी लेयर प्रमाण पत्र"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "ओबीसी जातीचे प्रमाणपत्र",
+        "नॉन-क्रीमी लेयर प्रमाणपत्र"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-04",
+    "name": {
+      "en": "VJNT/SBC Scholarship",
+      "hi": "वीजेएनटी/एसबीसी छात्रवृत्ति",
+      "mr": "विजेएनटी/एसबीसी शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 150000,
+    "eligibleCategories": [
+      "VJNT / NT",
+      "SBC"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Exemption from tuition and exam fees.",
+      "hi": "ट्यूशन और परीक्षा फीस से छूट।",
+      "mr": "शिक्षण आणि परीक्षा शुल्कातून सूट."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "Caste Certificate",
+        "Mark Sheet"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "जाति प्रमाण पत्र",
+        "मार्क शीट"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "जातीचे प्रमाणपत्र",
+        "गुणपत्रिका"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-05",
+    "name": {
+      "en": "EWS Freeship",
+      "hi": "ईडब्ल्यूएस फ्रीशिप",
+      "mr": "ईडब्ल्यूएस फ्रीशिप"
+    },
+    "provider": "State Government",
+    "maxIncome": 800000,
+    "eligibleCategories": [
+      "EWS"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Financial assistance to economically weaker sections.",
+      "hi": "आर्थिक रूप से कमजोर वर्गों को वित्तीय सहायता।",
+      "mr": "आर्थिकदृष्ट्या दुर्बल घटकांना आर्थिक मदत."
+    },
+    "requiredDocs": {
+      "en": [
+        "EWS Certificate",
+        "Income Certificate"
+      ],
+      "hi": [
+        "ईडब्ल्यूएस प्रमाण पत्र",
+        "आय प्रमाण पत्र"
+      ],
+      "mr": [
+        "ईडब्ल्यूएस प्रमाणपत्र",
+        "उत्पन्न प्रमाणपत्र"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-06",
+    "name": {
+      "en": "Minority Scholarship",
+      "hi": "अल्पसंख्यक छात्रवृत्ति",
+      "mr": "अल्पसंख्याक शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 200000,
+    "eligibleCategories": [
+      "Minority"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Support for students from minority communities.",
+      "hi": "अल्पसंख्यक समुदाय के छात्रों के लिए सहायता।",
+      "mr": "अल्पसंख्याक समाजातील विद्यार्थ्यांसाठी मदत."
+    },
+    "requiredDocs": {
+      "en": [
+        "Minority Declaration",
+        "Income Certificate",
+        "Bank Passbook"
+      ],
+      "hi": [
+        "अल्पसंख्यक घोषणा",
+        "आय प्रमाण पत्र",
+        "बैंक पासबुक"
+      ],
+      "mr": [
+        "अल्पसंख्याक घोषणापत्र",
+        "उत्पन्न प्रमाणपत्र",
+        "बँक पासबुक"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-07",
+    "name": {
+      "en": "Rajarshi Shahu Maharaj Merit Scholarship",
+      "hi": "राजर्षि शाहू महाराज मेधावी छात्रवृत्ति",
+      "mr": "राजर्षी शाहू महाराज गुणवत्ता शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 2500000,
+    "eligibleCategories": [
+      "General",
+      "OBC",
+      "SC",
+      "ST",
+      "VJNT / NT",
+      "SBC",
+      "EWS",
+      "Minority"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Merit-based financial award for high-performing students.",
+      "hi": "उच्च प्रदर्शन करने वाले छात्रों के लिए योग्यता आधारित वित्तीय पुरस्कार।",
+      "mr": "उत्तम कामगिरी करणाऱ्या विद्यार्थ्यांसाठी गुणवत्तेवर आधारित आर्थिक बक्षीस."
+    },
+    "requiredDocs": {
+      "en": [
+        "Previous Year Marksheet (>= 80%)",
+        "Aadhar Card"
+      ],
+      "hi": [
+        "पिछले वर्ष की मार्कशीट (>= 80%)",
+        "आधार कार्ड"
+      ],
+      "mr": [
+        "मागील वर्षाची गुणपत्रिका (>= 80%)",
+        "आधार कार्ड"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-08",
+    "name": {
+      "en": "Girls' Education Encouragement Scheme",
+      "hi": "बालिका शिक्षा प्रोत्साहन योजना",
+      "mr": "मुलींचे शिक्षण प्रोत्साहन योजना"
+    },
+    "provider": "State Government",
+    "maxIncome": 600000,
+    "eligibleCategories": [
+      "General",
+      "OBC",
+      "SC",
+      "ST",
+      "VJNT / NT",
+      "SBC",
+      "EWS",
+      "Minority"
+    ],
+    "genderRestriction": "female",
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Financial aid to encourage female education.",
+      "hi": "महिला शिक्षा को प्रोत्साहित करने के लिए वित्तीय सहायता।",
+      "mr": "मुलींच्या शिक्षणाला प्रोत्साहन देण्यासाठी आर्थिक मदत."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "Aadhar Card",
+        "Gender Declaration/Certificate"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "आधार कार्ड",
+        "लिंग घोषणा/प्रमाण पत्र"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "आधार कार्ड",
+        "लिंग घोषणा/प्रमाणपत्र"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-09",
+    "name": {
+      "en": "Persons with Disability Scholarship",
+      "hi": "विकलांग व्यक्ति छात्रवृत्ति",
+      "mr": "दिव्यांग व्यक्ती शिष्यवृत्ती"
+    },
+    "provider": "State Government",
+    "maxIncome": 300000,
+    "eligibleCategories": [
+      "General",
+      "OBC",
+      "SC",
+      "ST",
+      "VJNT / NT",
+      "SBC",
+      "EWS",
+      "Minority"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": true,
+    "benefit": {
+      "en": "Support for disabled students for accessible education.",
+      "hi": "सुलभ शिक्षा के लिए विकलांग छात्रों के लिए समर्थन।",
+      "mr": "सुलभ शिक्षणासाठी दिव्यांग विद्यार्थ्यांसाठी मदत."
+    },
+    "requiredDocs": {
+      "en": [
+        "Disability Certificate",
+        "Income Certificate"
+      ],
+      "hi": [
+        "विकलांगता प्रमाण पत्र",
+        "आय प्रमाण पत्र"
+      ],
+      "mr": [
+        "दिव्यांग प्रमाणपत्र",
+        "उत्पन्न प्रमाणपत्र"
+      ]
+    },
+    "applyUrl": "https://mahadbt.maharashtra.gov.in/"
+  },
+  {
+    "id": "sch-10",
+    "name": {
+      "en": "PMEGP Entrepreneurship Support",
+      "hi": "PMEGP उद्यमिता सहायता",
+      "mr": "PMEGP उद्योजकता समर्थन"
+    },
+    "provider": "Central/State Government",
+    "maxIncome": 300000,
+    "eligibleCategories": [
+      "General",
+      "OBC",
+      "SC",
+      "ST",
+      "VJNT / NT",
+      "SBC",
+      "EWS",
+      "Minority"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Financial assistance for starting a business/enterprise.",
+      "hi": "व्यवसाय/उद्यम शुरू करने के लिए वित्तीय सहायता।",
+      "mr": "व्यवसाय/उद्योग सुरू करण्यासाठी आर्थिक मदत."
+    },
+    "requiredDocs": {
+      "en": [
+        "Project Report",
+        "Income Certificate",
+        "Aadhar Card"
+      ],
+      "hi": [
+        "प्रोजेक्ट रिपोर्ट",
+        "आय प्रमाण पत्र",
+        "आधार कार्ड"
+      ],
+      "mr": [
+        "प्रकल्प अहवाल",
+        "उत्पन्न प्रमाणपत्र",
+        "आधार कार्ड"
+      ]
+    },
+    "applyUrl": "https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp"
+  },
+  {
+    "id": "sch-11",
+    "name": {
+      "en": "PM-YASASVI Scholarship (OBC/EBC/DNT)",
+      "hi": "पीएम-यशस्वी छात्रवृत्ति (OBC/EBC/DNT)",
+      "mr": "पीएम-यशस्वी शिष्यवृत्ती (OBC/EBC/DNT)"
+    },
+    "provider": "Central Government",
+    "maxIncome": 250000,
+    "eligibleCategories": [
+      "OBC",
+      "VJNT / NT"
+    ],
+    "genderRestriction": null,
+    "disabilityRequired": false,
+    "benefit": {
+      "en": "Up to ₹75,000/year for Class 9-10 and up to ₹1,25,000/year for Class 11-12, covering tuition, hostel and other fees. 30% of seats reserved for girls.",
+      "hi": "कक्षा 9-10 के लिए ₹75,000/वर्ष तक और कक्षा 11-12 के लिए ₹1,25,000/वर्ष तक, जिसमें ट्यूशन, छात्रावास व अन्य शुल्क शामिल हैं। 30% सीटें लड़कियों के लिए आरक्षित।",
+      "mr": "इयत्ता 9-10 साठी ₹75,000/वर्ष पर्यंत आणि इयत्ता 11-12 साठी ₹1,25,000/वर्ष पर्यंत, शिक्षण शुल्क, वसतिगृह व इतर शुल्क समाविष्ट. 30% जागा मुलींसाठी राखीव."
+    },
+    "requiredDocs": {
+      "en": [
+        "Income Certificate",
+        "OBC/EBC/DNT Caste Certificate",
+        "Previous Class Marksheet",
+        "Aadhar Card"
+      ],
+      "hi": [
+        "आय प्रमाण पत्र",
+        "OBC/EBC/DNT जाति प्रमाण पत्र",
+        "पिछली कक्षा की मार्कशीट",
+        "आधार कार्ड"
+      ],
+      "mr": [
+        "उत्पन्न प्रमाणपत्र",
+        "OBC/EBC/DNT जातीचे प्रमाणपत्र",
+        "मागील वर्गाची गुणपत्रिका",
+        "आधार कार्ड"
+      ]
+    },
+    "applyUrl": "https://scholarships.gov.in/"
+  }
+]
