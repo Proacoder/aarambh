@@ -60,8 +60,9 @@ FALLBACK_DISTRICTS = [
 FALLBACK_QUESTIONS = [
   {
     "id": 1,
-    "questionEn": "1. What kind of activities do you enjoy most in your free time?",
-    "questionMr": "१. तुमच्या फावल्या वेळेत तुम्हाला कोणत्या गोष्टी करायला सर्वात जास्त आवडतात?",
+    "key": "q1",
+    "textEn": "1. What kind of activities do you enjoy most in your free time?",
+    "textMr": "१. तुमच्या फावल्या वेळेत तुम्हाला कोणत्या गोष्टी करायला सर्वात जास्त आवडतात?",
     "options": [
       { "id": 1, "textEn": "🛠️ Building, repairing machinery or fixing electrical tools", "textMr": "🛠️ यंत्रसामग्री दुरुस्त करणे किंवा इलेक्ट्रिकल उपकरणे जोडणे", "domain": "realistic" },
       { "id": 2, "textEn": "🔬 Solving scientific puzzles, math problems or researching online", "textMr": "🔬 वैज्ञानिक कोडी सोडवणे, गणिताचे प्रश्न किंवा ऑनलाइन संशोधन", "domain": "investigative" },
@@ -71,8 +72,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 2,
-    "questionEn": "2. Which work environment excites you the most?",
-    "questionMr": "२. कोणते कामाचे वातावरण तुम्हाला सर्वात जास्त आकर्षित करते?",
+    "key": "q2",
+    "textEn": "2. Which work environment excites you the most?",
+    "textMr": "२. कोणते कामाचे वातावरण तुम्हाला सर्वात जास्त आकर्षित करते?",
     "options": [
       { "id": 1, "textEn": "🌾 Outdoor field, engineering site, workshop or farm", "textMr": "🌾 शेतजमीन, अभियांत्रिकी साइट, वर्कशॉप किंवा मैदान", "domain": "realistic" },
       { "id": 2, "textEn": "💻 Research lab, computer software workstation, or tech desk", "textMr": "💻 संशोधन प्रयोगशाळा, संगणक सॉफ्टवेअर वर्कस्टेशन", "domain": "investigative" },
@@ -82,8 +84,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 3,
-    "questionEn": "3. How do you approach solving a complex problem?",
-    "questionMr": "३. एखादी गुंतागुंतीची समस्या सोडवताना तुम्ही कसा मार्ग निवडता?",
+    "key": "q3",
+    "textEn": "3. How do you approach solving a complex problem?",
+    "textMr": "३. एखादी गुंतागुंतीची समस्या सोडवताना तुम्ही कसा मार्ग निवडता?",
     "options": [
       { "id": 1, "textEn": "🔧 Hands-on testing, opening up components and physical trial", "textMr": "🔧 स्वतः हाताने हाताळून, भाग उघडून प्रत्यक्ष प्रयोग करणे", "domain": "realistic" },
       { "id": 2, "textEn": "📊 Data analysis, logical deduction, and step-by-step investigation", "textMr": "📊 डेटा विश्लेषण, तर्कशुद्ध विचार आणि टप्प्याटप्प्याने तपास", "domain": "investigative" },
@@ -93,8 +96,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 4,
-    "questionEn": "4. Which subjects or skills did you naturally excel at in school?",
-    "questionMr": "४. शाळेत असताना कोणत्या विषयात किंवा कौशल्यात तुम्ही आपोआप पुढे होतात?",
+    "key": "q4",
+    "textEn": "4. Which subjects or skills did you naturally excel at in school?",
+    "textMr": "४. शाळेत असताना कोणत्या विषयात किंवा कौशल्यात तुम्ही आपोआप पुढे होतात?",
     "options": [
       { "id": 1, "textEn": "📐 Physics, Applied Mechanics, Technical Drawing or Workshop", "textMr": "📐 भौतिकशास्त्र, यांत्रिकी, तांत्रिक आलेखन किंवा वर्कशॉप", "domain": "realistic" },
       { "id": 2, "textEn": "🧪 Chemistry, Biology, Mathematics or Computer Coding", "textMr": "🧪 रसायनशास्त्र, जीवशास्त्र, गणित किंवा कोडिंग", "domain": "investigative" },
@@ -104,8 +108,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 5,
-    "questionEn": "5. Where do you see yourself making the biggest impact in 5 years?",
-    "questionMr": "५. ५ वर्षांनंतर स्वतःला कुठे काम करताना पाहताना तुम्हाला आनंद होईल?",
+    "key": "q5",
+    "textEn": "5. Where do you see yourself making the biggest impact in 5 years?",
+    "textMr": "५. ५ वर्षांनंतर स्वतःला कुठे काम करताना पाहताना तुम्हाला आनंद होईल?",
     "options": [
       { "id": 1, "textEn": "⚙️ Managing an engineering workshop, tech unit or project", "textMr": "⚙️ इंजिनिअरिंग वर्कशॉप, टेक युनिट किंवा प्रकल्प व्यवस्थापन", "domain": "realistic" },
       { "id": 2, "textEn": "🔬 Leading medical, agricultural, or software research", "textMr": "🔬 वैद्यकीय, कृषी किंवा सॉफ्टवेअर संशोधात नेतृत्व करणे", "domain": "investigative" },
@@ -115,8 +120,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 6,
-    "questionEn": "6. How comfortable are you with new technology and physical equipment?",
-    "questionMr": "६. नवीन तंत्रज्ञान आणि मशिनरी वापरताना तुम्हाला काय वाटते?",
+    "key": "q6",
+    "textEn": "6. How comfortable are you with new technology and physical equipment?",
+    "textMr": "६. नवीन तंत्रज्ञान आणि मशिनरी वापरताना तुम्हाला काय वाटते?",
     "options": [
       { "id": 1, "textEn": "🛠️ Very eager — I love operating engines, electronic circuits & tools", "textMr": "🛠️ खूप उत्सुक — मला इंजिन, सर्किट आणि टूल्स वापरायला आवडतात", "domain": "realistic" },
       { "id": 2, "textEn": "💻 Fascinated — I like understanding the internal code & logic", "textMr": "💻 उत्सुक — मला त्याच्यामागील लॉजिक आणि कोड समजायला आवडतो", "domain": "investigative" },
@@ -126,8 +132,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 7,
-    "questionEn": "7. When interacting with people in your community, what role suits you best?",
-    "questionMr": "७. तुमच्या गावात किंवा शहरात लोकांसोबत काम करताना तुमची भूमिका काय असते?",
+    "key": "q7",
+    "textEn": "7. When interacting with people in your community, what role suits you best?",
+    "textMr": "७. तुमच्या गावात किंवा शहरात लोकांसोबत काम करताना तुमची भूमिका काय असते?",
     "options": [
       { "id": 1, "textEn": "🧑‍🏫 Counselor / Teacher — listening, guiding, healthcare & advice", "textMr": "🧑‍🏫 मार्गदर्शक / शिक्षक — ऐकून घेणे, सल्ला देणे, आरोग्य आणि शिक्षण", "domain": "social" },
       { "id": 2, "textEn": "📢 Organizer / Leader — convincing others, driving campaigns", "textMr": "📢 संघटक / नेता — लोकांना पटवून देणे, कार्यक्रम आणि नेतृत्व", "domain": "enterprising" },
@@ -137,8 +144,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 8,
-    "questionEn": "8. How do you feel about managing financial records and budgets?",
-    "questionMr": "८. आर्थिक नोंदी, कागदपत्रे आणि नियमांचे पालन करण्याबद्दल तुमचे काय मत आहे?",
+    "key": "q8",
+    "textEn": "8. How do you feel about managing financial records and budgets?",
+    "textMr": "८. आर्थिक नोंदी, कागदपत्रे आणि नियमांचे पालन करण्याबद्दल तुमचे काय मत आहे?",
     "options": [
       { "id": 1, "textEn": "📊 Very meticulous — I enjoy precise accounting & budgeting", "textMr": "📊 अत्यंत अचूक — मला अचूक हिशोब, फायलिंग आणि बजेट आवडते", "domain": "conventional" },
       { "id": 2, "textEn": "💰 Business-minded — I focus on profit margins, sales & expansion", "textMr": "💰 व्यवसायिक — माझे लक्ष नफा, विक्री आणि वाढीवर असते", "domain": "enterprising" },
@@ -148,8 +156,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 9,
-    "questionEn": "9. When expressing your original ideas, which medium do you prefer?",
-    "questionMr": "९. तुमच्या कल्पना मांडण्यासाठी तुम्ही कोणते माध्यम निवडाल?",
+    "key": "q9",
+    "textEn": "9. When expressing your original ideas, which medium do you prefer?",
+    "textMr": "९. तुमच्या कल्पना मांडण्यासाठी तुम्ही कोणते माध्यम निवडाल?",
     "options": [
       { "id": 1, "textEn": "🎨 Visual Arts / Design — posters, videos, music or UI design", "textMr": "🎨 दृश्य कला / डिझाईन — पोस्टर, व्हिडिओ, संगीत, हस्तकला", "domain": "artistic" },
       { "id": 2, "textEn": "📐 Physical Models — building a working prototype or 3D model", "textMr": "📐 भौतिक मॉडेल्स — काम करणारा प्रोटोटाइप किंवा मॉडेल तयार करणे", "domain": "realistic" },
@@ -159,8 +168,9 @@ FALLBACK_QUESTIONS = [
   },
   {
     "id": 10,
-    "questionEn": "10. In a group project or development drive, what is your strength?",
-    "questionMr": "१०. गटात किंवा विकासकामात सहभागी होताना तुमची सर्वात मोठी ताकद कोणती असते?",
+    "key": "q10",
+    "textEn": "10. In a group project or development drive, what is your strength?",
+    "textMr": "१०. गटात किंवा विकासकामात सहभागी होताना तुमची सर्वात मोठी ताकद कोणती असते?",
     "options": [
       { "id": 1, "textEn": "📢 Motivational Leadership — inspiring team members & delegating", "textMr": "📢 प्रेरणादायी नेतृत्व — सहकाऱ्यांना प्रोत्साहन देणे आणि नियोजन", "domain": "enterprising" },
       { "id": 2, "textEn": "🛠️ Execution & Construction — doing actual physical work reliably", "textMr": "🛠️ प्रत्यक्ष अंमलबजावणी — प्रत्यक्ष काम विश्वासाने पूर्ण करणे", "domain": "realistic" },
