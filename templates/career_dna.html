@@ -4,15 +4,14 @@
 <section class="section career-dna fade-in" style="padding-top: 2.5rem; padding-bottom: 5rem;">
   <div class="container" style="max-width: 980px;">
     
-    <!-- Header Card -->
     <div class="card glass-card text-center mb-5 p-5 slide-up" style="border-radius: 20px; position: relative;">
-      <div class="badge badge-gold mb-2">🧬 PSYCHOMETRIC DISCOVERY</div>
-      <h1 class="page-title mb-1" style="font-size: 2rem;">Your Career DNA Signature</h1>
-      <p class="page-subtitle text-muted text-small mx-auto mb-2" style="max-width: 620px;">
+      <div class="badge badge-gold mb-2" data-i18n="dna_badge">🧬 PSYCHOMETRIC DISCOVERY</div>
+      <h1 class="page-title mb-1" style="font-size: 2rem;" data-i18n="dna_title">Your Career DNA Signature</h1>
+      <p class="page-subtitle text-muted text-small mx-auto mb-2" style="max-width: 620px;" data-i18n="dna_subtitle">
         An interactive multi-dimensional map of your natural thinking styles, vocational affinities, and practical problem-solving preferences.
       </p>
-      <p class="text-xs text-muted font-italic mb-0">
-        💡 <em>Note: These scores are indicators of your current interests and strengths. You can develop new skills and affinities over time.</em>
+      <p class="text-xs text-muted font-italic mb-0" data-i18n="dna_note">
+        💡 Note: These scores are indicators of your current interests and strengths. You can develop new skills and affinities over time.
       </p>
     </div>
 
@@ -21,16 +20,16 @@
       
       <!-- Left: Interactive Canvas Radar -->
       <div class="card glass-card p-4 flex-column align-center justify-center slide-up" style="border-radius: 20px; min-height: 400px;">
-        <h3 class="text-base font-bold mb-1 self-start">🕸️ Multi-Dimensional Affinity Radar</h3>
-        <p class="text-xs text-muted mb-4 self-start">Visual balance across 6 core RIASEC dimensions.</p>
+        <h3 class="text-base font-bold mb-1 self-start" data-i18n="dna_radar_title">🕸️ Multi-Dimensional Affinity Radar</h3>
+        <p class="text-xs text-muted mb-4 self-start" data-i18n="dna_radar_sub">Visual balance across 6 core RIASEC dimensions.</p>
 
         <div style="position: relative; width: 100%; max-width: 360px; height: 360px;">
           <canvas id="careerDnaCanvas" width="360" height="360" style="display: block; width: 100%; height: 100%;"></canvas>
         </div>
 
         <div class="flex-between w-full mt-3 pt-2 border-t border-light text-xs text-muted">
-          <span>Overall Match: <strong>94% Alignment</strong></span>
-          <span style="color: var(--terracotta); font-weight: 700;">Primary: Realistic & Tech</span>
+          <span data-i18n="dna_overall_match">Overall Match: <strong>94% Alignment</strong></span>
+          <span style="color: var(--terracotta); font-weight: 700;" data-i18n="dna_primary_type">Primary: Realistic & Tech</span>
         </div>
       </div>
 
@@ -38,21 +37,21 @@
       <div class="card glass-card p-5 flex-column justify-between slide-up" style="border-radius: 20px;">
         <div>
           <div class="flex-between align-center mb-3">
-            <span class="badge badge-paper">YOUR DOMINANT ARCHETYPE</span>
-            <span class="badge badge-gold" style="font-size: 0.85rem;">94% Precision</span>
+            <span class="badge badge-paper" data-i18n="dna_archetype_badge">YOUR DOMINANT ARCHETYPE</span>
+            <span class="badge badge-gold" style="font-size: 0.85rem;" data-i18n="dna_precision">94% Precision</span>
           </div>
 
-          <h2 class="text-xl font-bold mb-2" style="color: var(--earth-brown);">The Practical Innovator & Builder</h2>
-          <p class="text-small text-muted mb-4" style="line-height: 1.6;">
+          <h2 class="text-xl font-bold mb-2" style="color: var(--earth-brown);" data-i18n="dna_archetype_name">The Practical Innovator & Builder</h2>
+          <p class="text-small text-muted mb-4" style="line-height: 1.6;" data-i18n="dna_archetype_desc">
             You feel most energized when working with real tools, logical systems, and tangible technology. You enjoy understanding how things work under the hood and solving real-world community challenges.
           </p>
 
-          <h4 class="text-xs font-bold uppercase text-muted mb-2 tracking-wider">Dimension Breakdown</h4>
+          <h4 class="text-xs font-bold uppercase text-muted mb-2 tracking-wider" data-i18n="dna_dimension_title">Dimension Breakdown</h4>
           
           <div class="flex-column gap-3 mb-4">
             <div>
               <div class="flex-between text-xs font-bold mb-1">
-                <span>Realistic (Practical & Engineering)</span>
+                <span data-i18n="dna_dim_realistic">Realistic (Practical & Engineering)</span>
                 <span style="color: var(--terracotta);">94%</span>
               </div>
               <div class="progress-track" style="height: 6px; border-radius: 4px; background: var(--border-light);">
@@ -62,7 +61,7 @@
 
             <div>
               <div class="flex-between text-xs font-bold mb-1">
-                <span>Investigative (Analysis & Scientific Logic)</span>
+                <span data-i18n="dna_dim_investigative">Investigative (Analysis & Scientific Logic)</span>
                 <span style="color: var(--indigo);">82%</span>
               </div>
               <div class="progress-track" style="height: 6px; border-radius: 4px; background: var(--border-light);">
@@ -72,7 +71,7 @@
 
             <div>
               <div class="flex-between text-xs font-bold mb-1">
-                <span>Enterprising (Leadership & Commerce)</span>
+                <span data-i18n="dna_dim_enterprising">Enterprising (Leadership & Commerce)</span>
                 <span style="color: var(--gold);">70%</span>
               </div>
               <div class="progress-track" style="height: 6px; border-radius: 4px; background: var(--border-light);">
@@ -82,7 +81,7 @@
 
             <div>
               <div class="flex-between text-xs font-bold mb-1">
-                <span>Social (Teaching & Community Support)</span>
+                <span data-i18n="dna_dim_social">Social (Teaching & Community Support)</span>
                 <span style="color: var(--green);">64%</span>
               </div>
               <div class="progress-track" style="height: 6px; border-radius: 4px; background: var(--border-light);">
@@ -94,14 +93,14 @@
 
         <!-- Action CTAs -->
         <div class="pt-3 border-t border-light flex-column gap-2">
-          <a href="/dashboard" class="btn btn-primary btn-lg ripple text-center">
+          <a href="/dashboard" class="btn btn-primary btn-lg ripple text-center" data-i18n="dna_cta_matches">
             Go to My Matches & Command Center &rarr;
           </a>
           <div class="flex gap-2">
-            <a href="/careerverse" class="btn btn-outline btn-sm flex-1 text-center">
+            <a href="/careerverse" class="btn btn-outline btn-sm flex-1 text-center" data-i18n="dna_cta_universe">
               🌌 Explore 3D Universe
             </a>
-            <a href="/cost-calculator" class="btn btn-outline btn-sm flex-1 text-center">
+            <a href="/cost-calculator" class="btn btn-outline btn-sm flex-1 text-center" data-i18n="dna_cta_calculator">
               💰 PathPocket Calculator
             </a>
           </div>

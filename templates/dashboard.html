@@ -7,13 +7,13 @@
     <!-- Top Summary Banner -->
     <div class="card p-3 mb-3 slide-up flex-between align-center flex-wrap gap-2" style="border-left: 4px solid var(--gold);">
       <div>
-        <span class="badge badge-gold mb-1">🎯 YOUR AI CAREER DASHBOARD</span>
-        <h2 class="mb-0" id="dash-user-title" style="font-size:1.4rem;">Student Navigator Dashboard</h2>
-        <p class="text-muted text-small mb-0" id="dash-user-subtitle">Personalized career matches, regional insights, and live AI guidance</p>
+        <span class="badge badge-gold mb-1" data-i18n="dash_badge">🎯 YOUR AI CAREER DASHBOARD</span>
+        <h2 class="mb-0" id="dash-user-title" style="font-size:1.4rem;" data-i18n="dash_title">Student Navigator Dashboard</h2>
+        <p class="text-muted text-small mb-0" id="dash-user-subtitle" data-i18n="dash_subtitle">Personalized career matches, regional insights, and live AI guidance</p>
       </div>
       <div class="flex gap-2 align-center">
-        <span class="badge badge-paper" id="dash-auth-mode">👤 Mode: Guest</span>
-        <a href="/onboarding" class="btn btn-secondary btn-sm">✏️ Edit Profile</a>
+        <span class="badge badge-paper" id="dash-auth-mode" data-i18n="dash_guest_mode">👤 Mode: Guest</span>
+        <a href="/onboarding" class="btn btn-secondary btn-sm" data-i18n="dash_edit_profile">✏️ Edit Profile</a>
       </div>
     </div>
 
@@ -24,50 +24,50 @@
       <div class="dash-col dash-col-left">
         <div class="card p-3 mb-3">
           <div class="tools-tab-buttons flex gap-1 mb-3 pb-2" style="overflow-x:auto; border-bottom:1px solid var(--border);">
-            <button class="btn btn-secondary btn-sm tool-tab-btn active" data-tab="matches">🥇 Matches</button>
-            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="kharcha">💰 Kharcha</button>
-            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="docs">📋 Docs</button>
-            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="exams">📅 Exams</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn active" data-tab="matches" data-i18n="dash_tab_matches">🥇 Matches</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="kharcha" data-i18n="dash_tab_kharcha">💰 Kharcha</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="docs" data-i18n="dash_tab_docs">📋 Docs</button>
+            <button class="btn btn-secondary btn-sm tool-tab-btn" data-tab="exams" data-i18n="dash_tab_exams">📅 Exams</button>
           </div>
 
           <!-- Tab Content 1: Career Matches -->
           <div id="tab-content-matches" class="tool-tab-content">
-            <h4 class="mb-2">Recommended Career Paths</h4>
+            <h4 class="mb-2" data-i18n="dash_recommended_careers">Recommended Career Paths</h4>
             <div id="left-career-matches" class="flex-column gap-2">
-              <div class="text-center p-3 text-muted text-small">Loading matches...</div>
+              <div class="text-center p-3 text-muted text-small" data-i18n="loading">Loading matches...</div>
             </div>
             
-            <h4 class="mt-4 mb-2">Nearby Recommended Colleges</h4>
+            <h4 class="mt-4 mb-2" data-i18n="dash_nearby_colleges">Nearby Recommended Colleges</h4>
             <div id="left-college-list" class="flex-column gap-2" style="max-height:350px; overflow-y:auto;">
-              <div class="text-center p-3 text-muted text-small">Loading colleges...</div>
+              <div class="text-center p-3 text-muted text-small" data-i18n="loading">Loading colleges...</div>
             </div>
           </div>
 
           <!-- Tab Content 2: Kharcha Calculator Embed -->
           <div id="tab-content-kharcha" class="tool-tab-content hidden">
-            <h4 class="mb-2">💰 Kharcha Calculator</h4>
-            <p class="text-small text-muted mb-3">Estimate total annual & monthly out-of-pocket expenses.</p>
+            <h4 class="mb-2" data-i18n="dash_kharcha_calc">💰 Kharcha Calculator</h4>
+            <p class="text-small text-muted mb-3" data-i18n="dash_kharcha_desc">Estimate total annual & monthly out-of-pocket expenses.</p>
             <div class="form-group mb-2">
-              <label class="text-small">Target College</label>
+              <label class="text-small" data-i18n="dash_target_college">Target College</label>
               <select id="left-cost-college" class="form-select text-small"></select>
             </div>
             <div class="form-group mb-2">
-              <label class="text-small">Accommodation</label>
+              <label class="text-small" data-i18n="dash_accommodation">Accommodation</label>
               <select id="left-cost-accom" class="form-select text-small">
-                <option value="govtHostel">🏛️ Government Hostel</option>
-                <option value="privateHostel">🏢 Private Hostel</option>
-                <option value="pgRoom">🏠 Paying Guest (PG)</option>
+                <option value="govtHostel" data-i18n="dash_accom_govt">🏛️ Government Hostel</option>
+                <option value="privateHostel" data-i18n="dash_accom_private">🏢 Private Hostel</option>
+                <option value="pgRoom" data-i18n="dash_accom_pg">🏠 Paying Guest (PG)</option>
               </select>
             </div>
-            <button id="left-calc-btn" class="btn btn-primary btn-sm ripple style-100 mt-2 mb-3" style="width:100%">Calculate Expense</button>
+            <button id="left-calc-btn" class="btn btn-primary btn-sm ripple style-100 mt-2 mb-3" style="width:100%" data-i18n="dash_calc_expense">Calculate Expense</button>
             
             <div id="left-cost-result" class="hidden p-3" style="background:var(--bg-card); border-radius:10px; border:1px solid var(--border);">
               <div class="flex-between mb-1">
-                <span class="text-small">Net Annual:</span>
+                <span class="text-small" data-i18n="dash_net_annual">Net Annual:</span>
                 <strong id="left-net-annual" style="color:var(--primary);">₹0</strong>
               </div>
               <div class="flex-between mb-2">
-                <span class="text-small">Monthly Cost:</span>
+                <span class="text-small" data-i18n="dash_monthly_cost">Monthly Cost:</span>
                 <strong id="left-net-monthly">₹0</strong>
               </div>
               <div class="text-small text-muted" id="left-income-impact"></div>
@@ -76,14 +76,14 @@
 
           <!-- Tab Content 3: Document Checklist Embed -->
           <div id="tab-content-docs" class="tool-tab-content hidden">
-            <h4 class="mb-2">📋 Document Checklist</h4>
+            <h4 class="mb-2" data-i18n="dash_doc_checklist">📋 Document Checklist</h4>
             <div id="left-doc-progress" class="mb-2 text-small text-muted">0 / 0 Ready</div>
             <div id="left-doc-checklist" class="flex-column gap-2" style="max-height:400px; overflow-y:auto;"></div>
           </div>
 
           <!-- Tab Content 4: Exam Calendar Embed -->
           <div id="tab-content-exams" class="tool-tab-content hidden">
-            <h4 class="mb-2">📅 Upcoming Exams & Deadlines</h4>
+            <h4 class="mb-2" data-i18n="dash_exams_title">📅 Upcoming Exams & Deadlines</h4>
             <div id="left-exam-list" class="flex-column gap-2" style="max-height:400px; overflow-y:auto;"></div>
           </div>
 
@@ -95,23 +95,23 @@
         <div class="card p-3 mb-3 map-card-container">
           <div class="flex-between align-center mb-2 flex-wrap gap-2">
             <div>
-              <h3 class="mb-0 flex align-center gap-2">🗺️ <span>Maharashtra Regional Hub Map</span></h3>
-              <p class="text-muted text-small mb-0">Explore job sectors, colleges, and distance from your district</p>
+              <h3 class="mb-0 flex align-center gap-2">🗺️ <span data-i18n="dash_map_title">Maharashtra Regional Hub Map</span></h3>
+              <p class="text-muted text-small mb-0" data-i18n="dash_map_subtitle">Explore job sectors, colleges, and distance from your district</p>
             </div>
             
             <!-- Sector Filter Chips -->
             <div class="sector-chips flex gap-1 flex-wrap" id="map-sector-chips">
-              <button class="chip on" data-sector="all">All</button>
-              <button class="chip" data-sector="tech">💻 Tech</button>
-              <button class="chip" data-sector="manufacturing">⚙️ Mfg</button>
-              <button class="chip" data-sector="education">🎓 Edu</button>
-              <button class="chip" data-sector="tourism">🏔️ Tourism</button>
+              <button class="chip on" data-sector="all"><span data-i18n="dash_chip_all">All</span></button>
+              <button class="chip" data-sector="tech">💻 <span data-i18n="dash_chip_tech">Tech</span></button>
+              <button class="chip" data-sector="manufacturing">⚙️ <span data-i18n="dash_chip_mfg">Mfg</span></button>
+              <button class="chip" data-sector="education">🎓 <span data-i18n="dash_chip_edu">Edu</span></button>
+              <button class="chip" data-sector="tourism">🏔️ <span data-i18n="dash_chip_tourism">Tourism</span></button>
             </div>
           </div>
 
           <!-- Search Bar -->
           <div class="map-search-bar mb-2">
-            <input type="text" id="mapSearch" class="form-input text-small" placeholder="🔍 Search city or district (e.g. Pune, Nashik, Latur)...">
+            <input type="text" id="mapSearch" class="form-input text-small" placeholder="🔍 Search city or district (e.g. Pune, Nashik, Latur)..." data-i18n-ph="dash_map_search_ph">
           </div>
 
           <!-- Leaflet Map Container -->
@@ -119,8 +119,8 @@
 
           <!-- Map Footer Stats -->
           <div class="map-stats-footer flex-between mt-2 pt-2 text-small text-muted" style="border-top:1px solid var(--border);">
-            <span>📍 Active Region: Maharashtra</span>
-            <span id="map-pin-count">Loading regional markers...</span>
+            <span data-i18n="dash_active_region">📍 Active Region: Maharashtra</span>
+            <span id="map-pin-count" data-i18n="dash_loading_markers">Loading regional markers...</span>
           </div>
         </div>
       </div>
@@ -133,23 +133,23 @@
           <div class="tai-header flex align-center gap-3 pb-3 mb-3" style="border-bottom: 1px solid var(--border);">
             <div class="tai-avatar" style="font-size:2.2rem; width:50px; height:50px; border-radius:50%; background:rgba(217, 164, 65, 0.2); display:flex; align-center; justify-content:center;">👩‍🏫</div>
             <div>
-              <h3 class="mb-0" style="font-size:1.15rem; font-weight:700;">Mitra Tai (मित्र ताई)</h3>
-              <span class="badge badge-gold text-small" style="font-size:0.7rem;">⚡ Gemini AI Career Mentor</span>
+              <h3 class="mb-0" style="font-size:1.15rem; font-weight:700;" data-i18n="dash_mitra_tai_name">Mitra Tai (मित्र ताई)</h3>
+              <span class="badge badge-gold text-small" style="font-size:0.7rem;" data-i18n="dash_mitra_badge">⚡ Gemini AI Career Mentor</span>
             </div>
           </div>
 
           <!-- Prompt Quick Action Chips -->
           <div class="quick-prompts flex gap-1 mb-3" style="overflow-x:auto; padding-bottom:4px;">
-            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्यासाठी कोणता मार्ग सर्वोत्तम आहे? (Explain my best path)">💡 Best Path</button>
-            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्या बजेटमध्ये वसतिगृह खर्च कसा असेल? (Hostel budget info)">🏠 Hostel Cost</button>
-            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="मला कोणत्या शिष्यवृत्ती मिळतील? (Scholarships info)">🎓 Scholarships</button>
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्यासाठी कोणता मार्ग सर्वोत्तम आहे? (Explain my best path)" data-i18n="dash_prompt_best">💡 Best Path</button>
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="माझ्या बजेटमध्ये वसतिगृह खर्च कसा असेल? (Hostel budget info)" data-i18n="dash_prompt_hostel">🏠 Hostel Cost</button>
+            <button class="btn btn-secondary btn-sm prompt-chip" data-prompt="मला कोणत्या शिष्यवृत्ती मिळतील? (Scholarships info)" data-i18n="dash_prompt_scholarship">🎓 Scholarships</button>
           </div>
 
           <!-- Chat Messages Area -->
           <div id="tai-messages" class="flex-column gap-3 mb-3 p-2" style="flex:1; overflow-y:auto; max-height:420px; background:var(--bg-card); border-radius:12px; border:1px solid var(--border);">
             <div class="message tai-msg flex align-start gap-2">
               <span style="font-size:1.4rem;">👩‍🏫</span>
-              <div class="msg-bubble p-2 text-small" style="background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); color:#333;">
+              <div class="msg-bubble p-2 text-small" style="background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); color:#333;" data-i18n="dash_mitra_greeting">
                 नमस्कार! मी मित्र ताई आहे. तुझा करिअर प्लॅन मी तयार केला आहे. नकाशावरील महाविद्यालये किंवा डावीकडील टूल्स तपासा आणि मला काहीही विचारा!
               </div>
             </div>
@@ -157,7 +157,7 @@
 
           <!-- Chat Input Form -->
           <form id="tai-chat-form" class="flex gap-2 pt-2" style="border-top:1px solid var(--border);">
-            <input type="text" id="tai-input" class="form-input text-small" placeholder="Ask Mitra Tai (मराठी/English)..." required style="flex:1;">
+            <input type="text" id="tai-input" class="form-input text-small" placeholder="Ask Mitra Tai (मराठी/English)..." required style="flex:1;" data-i18n-ph="dash_chat_placeholder">
             <button type="submit" class="btn btn-primary btn-sm flex-center px-3" style="border-radius:8px;">
               <span>🚀</span>
             </button>
