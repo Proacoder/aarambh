@@ -26,6 +26,7 @@
   "packageManager": "pnpm@11.25.0",
   "type": "module",
   "dependencies": {
+    "@google/genai": "^2.21.0",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "cors": "^2.8.6",

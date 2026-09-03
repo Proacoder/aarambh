@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { generateStudentRecommendations } from "../services/recommendationService.ts";
+import { generateAICareerPlan } from "../services/aiActionPlanService.ts";
 
 const router = Router();
 
@@ -229,8 +230,46 @@ router.get("/:studentId", async (req, res, next) => {
       }
     };
 
+    // Optional AI enhancement via Gemini (Person 3 pipeline integration)
+    const preferredLang = (req.query.lang as "en" | "mr" | "hi") || "mr";
+    const shouldRunAi = req.query.ai !== "false" && !!process.env.GEMINI_API_KEY;
+
+    let aiNarrative = null;
+    if (shouldRunAi) {
+      aiNarrative = await generateAICareerPlan(
+        {
+          name: student.name,
+          educationLevel: student.educationLevel,
+          percentage: student.percentage,
+          district: student.district,
+          financialLevel: student.financialLevel,
+          willingToMove: student.willingToMove,
+          topDomain: topDomain
+        },
+        recommendations.slice(0, 5).map((r) => ({
+          name: r.collegeName,
+          type: r.collegeType,
+          district: r.district,
+          courseName: r.courseName,
+          annualFee: r.approximateFees,
+          distanceKm: r.distanceKm,
+          whyQualify: r.reasons
+        })),
+        eligibleScholarships.slice(0, 4).map((s) => ({
+          name: s.name,
+          provider: s.provider,
+          amount: s.amount,
+          whyEligible: s.whyEligible
+        })),
+        preferredLang
+      );
+    }
+
     return res.json({
-      actionPlan
+      actionPlan: {
+        ...actionPlan,
+        aiNarrative
+      }
     });
   } catch (err) {
     next(err);

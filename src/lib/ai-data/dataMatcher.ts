@@ -1,6 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 import { College, Scheme, StudentProfile } from './types';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Deterministically load the local JSON files
 const COLLEGES_PATH = path.resolve(__dirname, '../../../data/colleges.json');

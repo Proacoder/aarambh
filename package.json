@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "pnpm --filter api test",
+    "test:ai": "pnpm --filter api exec tsx ../../src/lib/ai-data/test-runner.ts",
     "dev:api": "pnpm --filter api dev",
     "seed": "pnpm --filter api db:seed"
   },
