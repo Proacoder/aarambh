@@ -1,0 +1,29 @@
+{
+  "name": "aarambh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proacoder/AARAMBH.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Proacoder/AARAMBH/issues"
+  },
+  "homepage": "https://github.com/Proacoder/AARAMBH#readme",
+  "dependencies": {
+    "@google/genai": "^2.21.0",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
