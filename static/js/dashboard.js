@@ -33,6 +33,11 @@ async function initDashboard() {
     if (spinner) spinner.classList.add('hidden');
     if (content) content.classList.remove('hidden');
 
+    const nameEl = document.getElementById('dash-user-name');
+    if (nameEl) nameEl.textContent = `${profile.name}'s Top Matches`;
+    const distEl = document.getElementById('dash-user-district');
+    if (distEl) distEl.textContent = `Targeting options near ${profile.district} District | Class: ${profile.className}`;
+
     renderCareerCards(data.matches || []);
     renderCollegeCards(data.colleges || []);
     renderSchemeCards(data.schemes || []);
@@ -67,23 +72,46 @@ function renderCareerCards(matches) {
     const icon = CAREER_ICONS[match.icon] || CAREER_ICONS.default;
     const matchPct = Math.round(match.matchPct);
 
+    const rankBadgeText = i === 0 
+      ? (CareerMitra.t('best_match_badge') || '🥇 BEST MATCH')
+      : (i === 1 ? (CareerMitra.t('strong_match_badge') || '🥈 STRONG MATCH') : (CareerMitra.t('good_match_badge') || '🥉 GOOD MATCH'));
+    const rankClass = i === 0 ? 'badge-gold' : (i === 1 ? 'badge-indigo' : 'badge-paper');
+
+    const askPrompt = encodeURIComponent(`माझ्यासाठी ${match.name} हे करिअर कसं योग्य आहे? (Why does ${match.name} suit me?)`);
+
     card.innerHTML = `
-      <div class="career-header flex" style="gap: var(--sp-3); align-items:center;">
+      <div class="flex-between align-center mb-2">
+        <span class="badge ${rankClass}">${rankBadgeText}</span>
+        <span class="match-pct-text text-bold" style="color: var(--terracotta);">${matchPct}%</span>
+      </div>
+      
+      <div class="career-header flex align-center gap-2 mb-2">
         <div class="icon-circle" style="font-size:1.25rem;">${icon}</div>
         <h3>${match.name}</h3>
       </div>
-      <p class="career-desc text-muted">${match.description}</p>
-      <div>
-        <div class="flex-between">
-          <span class="text-small text-muted">${CareerMitra.t('match_label') || 'Match'}</span>
-          <span class="match-pct-text">${matchPct}%</span>
+      
+      <p class="career-desc text-muted mb-3">${match.description}</p>
+      
+      <div class="mb-3">
+        <div class="flex-between text-small text-muted mb-1">
+          <span>${CareerMitra.t('match_label') || 'Match'}</span>
+          <span>${matchPct}%</span>
         </div>
         <div class="match-pct-bar-wrap">
           <div class="match-pct-bar" data-target="${matchPct}"></div>
         </div>
       </div>
-      <div class="match-badge">${CareerMitra.t('why_match') || 'Why this fits you'}: ${(match.topDims || []).join(', ')}</div>
-      <a href="/roadmap?careerId=${match.id}" class="btn btn-primary ripple mt-2">${CareerMitra.t('view_roadmap') || 'View Roadmap'}</a>
+
+      <div class="match-badge text-small mb-3">
+        ✓ ${CareerMitra.t('why_match') || 'Why this fits you'}: ${(match.topDims || []).join(', ')}
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <a href="/roadmap?careerId=${match.id}" class="btn btn-primary ripple text-center">${CareerMitra.t('view_roadmap') || 'View Roadmap →'}</a>
+        <button class="btn btn-gold btn-sm ripple tai-ask-trigger" data-prompt="${askPrompt}">
+          👩‍🏫 Ask Mitra Tai why this suits me
+        </button>
+      </div>
     `;
     container.appendChild(card);
 
@@ -92,6 +120,13 @@ function renderCareerCards(matches) {
         const barFill = card.querySelector('.match-pct-bar');
         if (barFill) barFill.style.width = `${matchPct}%`;
       }, 150 + i * 80);
+    });
+  });
+
+  document.querySelectorAll('.tai-ask-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const prompt = btn.getAttribute('data-prompt');
+      window.location.href = `/career-aunty?prompt=${prompt}`;
     });
   });
 }
@@ -113,18 +148,18 @@ function initMap(center, radiusKm, colleges) {
   }).addTo(map);
 
   L.circle([center.lat, center.lng], {
-    color: '#2B4C7E',
-    fillColor: '#2B4C7E',
-    fillOpacity: 0.08,
-    weight: 1,
+    color: '#3D2B1F',
+    fillColor: '#D9A441',
+    fillOpacity: 0.12,
+    weight: 2,
     radius: radiusKm * 1000,
   }).addTo(map);
 
   const studentIcon = L.divIcon({
     className: 'custom-div-icon',
-    html: "<div style='background-color:#C75B3A; width:16px; height:16px; border-radius:50%; border:3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4);'></div>",
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
+    html: "<div style='background-color:#B8573C; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.4);'></div>",
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
   });
 
   L.marker([center.lat, center.lng], { icon: studentIcon }).addTo(map)
@@ -132,13 +167,13 @@ function initMap(center, radiusKm, colleges) {
 
   colleges.forEach((college, index) => {
     const isHighRelevance = college.relevance >= 2;
-    const color = isHighRelevance ? '#3A7D44' : '#2B4C7E';
+    const color = isHighRelevance ? '#4F7A45' : '#4F6FAF';
 
     const collegeIcon = L.divIcon({
       className: 'custom-div-icon',
-      html: `<div style='background-color:${color}; width:13px; height:13px; border-radius:50%; border:2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.4);'></div>`,
-      iconSize: [13, 13],
-      iconAnchor: [6, 6],
+      html: `<div style='background-color:${color}; width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.3);'></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
     });
 
     const marker = L.marker([college.lat, college.lng], { icon: collegeIcon }).addTo(map);
@@ -169,20 +204,28 @@ function renderCollegeCards(colleges) {
     const card = document.createElement('div');
     card.className = 'card card-college';
 
+    const askPrompt = encodeURIComponent(`मला ${college.name} या कॉलेजबद्दल माहिती सांगा (Tell me about ${college.name})`);
+
     card.innerHTML = `
-      <div class="flex-between align-start">
+      <div class="flex-between align-start mb-2">
         <h4>${college.name}</h4>
-        <div class="flex" style="gap: 6px;">
-          <span class="badge">${college.type}</span>
+        <div class="flex gap-1 flex-wrap">
+          <span class="badge badge-paper">${college.type}</span>
           <span class="badge badge-outline">${college.category}</span>
         </div>
       </div>
-      <div class="flex" style="gap: var(--sp-4);">
+      <div class="flex gap-4 mb-2">
         <span class="text-small text-muted">📍 ${college.distanceKm != null ? college.distanceKm + ' km' : '—'}</span>
         <span class="text-small text-muted">💰 ₹${college.annualFee}/yr</span>
       </div>
-      <p class="text-small"><strong>Courses:</strong> ${(college.courses || []).join(', ')}</p>
-      <button class="btn btn-secondary btn-sm mt-2 view-on-map-btn" data-index="${index}">${CareerMitra.t('view_on_map') || 'View on map'}</button>
+      <p class="text-small mb-3"><strong>Courses:</strong> ${(college.courses || []).join(', ')}</p>
+      
+      <div class="flex flex-wrap gap-2 align-center">
+        <button class="btn btn-secondary btn-sm view-on-map-btn" data-index="${index}">${CareerMitra.t('view_on_map') || 'View on map'}</button>
+        <a href="/career-aunty?prompt=${askPrompt}" class="btn btn-link text-small flex align-center gap-1">
+          <span>👩‍🏫</span> <span>Ask Mitra Tai</span>
+        </a>
+      </div>
     `;
 
     container.appendChild(card);
@@ -217,17 +260,28 @@ function renderSchemeCards(schemes) {
 
     let docsHtml = '';
     if (scheme.requiredDocs && scheme.requiredDocs.length) {
-      docsHtml = `<div class="eligibility-list">` + scheme.requiredDocs.map(doc =>
+      docsHtml = `<div class="eligibility-list mt-2 mb-2">` + scheme.requiredDocs.map(doc =>
         `<div class="eligibility-item"><span class="eligibility-icon eligibility-pass">✓</span><span>${doc}</span></div>`
       ).join('') + `</div>`;
     }
 
+    const askPrompt = encodeURIComponent(`मला ${scheme.name} या शिष्यवृत्तीबद्दल माहिती सांगा (Explain ${scheme.name})`);
+
     card.innerHTML = `
-      <h4>${scheme.name}</h4>
-      <p class="text-small text-muted">${scheme.provider}</p>
-      <p class="text-small"><strong>Benefit:</strong> ${scheme.benefit}</p>
+      <div class="flex-between align-start mb-1">
+        <h4>${scheme.name}</h4>
+        <span class="badge badge-gold">MahaDBT</span>
+      </div>
+      <p class="text-small text-muted mb-2">${scheme.provider}</p>
+      <p class="text-small mb-2"><strong>Benefit:</strong> ${scheme.benefit}</p>
+      <p class="text-small text-muted"><strong>Required Documents:</strong></p>
       ${docsHtml}
-      <a href="${scheme.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm mt-2">${CareerMitra.t('official_link') || 'Official portal'}</a>
+      <div class="flex align-center flex-wrap gap-2 mt-3">
+        <a href="${scheme.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">${CareerMitra.t('official_link') || 'Official portal'}</a>
+        <a href="/career-aunty?prompt=${askPrompt}" class="btn btn-link text-small flex align-center gap-1">
+          <span>👩‍🏫</span> <span>Ask Mitra Tai</span>
+        </a>
+      </div>
     `;
     container.appendChild(card);
   });
@@ -256,3 +310,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initDashboard();
   }
 });
+

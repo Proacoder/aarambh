@@ -3,60 +3,86 @@
 {% block content %}
 <section class="section roadmap fade-in">
   <div class="container">
-    <div id="loading-state" class="loading-wrap">
-      <div class="loading-spinner"></div>
-      <p data-i18n="generating">Building your roadmap…</p>
+    <div id="loading-state" class="loading-wrap text-center py-5">
+      <div class="loading-spinner mb-3"></div>
+      <p data-i18n="generating">Building your personal roadmap…</p>
     </div>
 
     <div id="roadmap-content" class="hidden">
-      <div class="flex-between align-start mb-4">
-        <div>
-          <h1 class="page-title" data-i18n="roadmap_title">Your career roadmap</h1>
-          <p class="page-subtitle" id="roadmap-subtitle">A step-by-step guide to your future.</p>
-          <p class="text-muted" id="roadmap-career-desc"></p>
-        </div>
-        <div class="action-buttons flex no-print" style="gap: 1rem;">
-          <button id="btn-download-pdf" class="btn btn-primary ripple" data-i18n="download_pdf">Download as PDF</button>
-          <a href="/onboarding" id="btn-start-over" class="btn btn-secondary" data-i18n="start_over">Start Over</a>
-        </div>
-      </div>
+      <!-- Roadmap Header Card -->
+      <div class="card roadmap-header-card mb-4 slide-up">
+        <div class="flex-between align-start flex-wrap gap-3">
+          <div>
+            <span class="badge badge-gold mb-1">🌟 PERSONAL ACTION ROADMAP</span>
+            <h1 class="page-title mb-1" data-i18n="roadmap_title">Your Career Roadmap</h1>
+            <p class="page-subtitle mb-2" id="roadmap-subtitle">A step-by-step guide to your future.</p>
+            <p class="text-muted text-small mb-0" id="roadmap-career-desc"></p>
+          </div>
 
-      <div class="roadmap-section card animate-on-scroll stagger-1">
-        <h2 data-i18n="immediate_steps">Immediate steps</h2>
-        <div id="immediate-steps" class="roadmap-step-container">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-
-      <div class="roadmap-section card animate-on-scroll stagger-2 mt-4">
-        <h2 data-i18n="later_steps">Later steps</h2>
-        <div id="later-steps" class="roadmap-step-container">
-          <!-- Dynamically populated -->
+          <div class="action-buttons flex align-center flex-wrap gap-2 no-print">
+            <a href="/career-aunty?prompt=%E0%A4%AE%E0%A4%BE%E0%A4%9D%E0%A4%BE%20%E0%A4%B0%E0%A5%8B%E0%A4%A1%E0%A4%AE%E0%A5%8C%E0%A4%AA%20%E0%A4%AE%E0%A4%B2%E0%A4%BE%20%E0%A4%B8%E0%A4%AE%E0%A4%9C%E0%A4%BE%E0%A4%B5%E0%A5%82%E0%A4%A8%20%E0%A4%B8%E0%A4%BE%E0%A4%82%E0%A4%97%E0%A4%BE" class="btn btn-gold ripple flex align-center gap-1">
+              <span>👩‍🏫</span> <span>Ask Mitra Tai</span>
+            </a>
+            <button id="btn-download-pdf" class="btn btn-primary ripple" data-i18n="download_pdf">Download as PDF</button>
+            <a href="/onboarding" id="btn-start-over" class="btn btn-secondary" data-i18n="start_over">Start Over</a>
+          </div>
         </div>
       </div>
 
-      <div class="roadmap-section card animate-on-scroll stagger-3 mt-4">
-        <h2 data-i18n="scholarship_steps">Scholarship steps</h2>
-        <div id="scholarship-steps" class="roadmap-step-container">
-          <!-- Dynamically populated -->
+      <!-- Roadmap Timeline Grid -->
+      <div class="roadmap-timeline">
+        <div class="roadmap-section card animate-on-scroll stagger-1">
+          <div class="section-title-wrap flex align-center gap-2 mb-3">
+            <span class="step-header-icon">🎯</span>
+            <h2 class="mb-0" data-i18n="immediate_steps">Immediate steps (आजचे टप्पे)</h2>
+          </div>
+          <div id="immediate-steps" class="roadmap-step-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="roadmap-section card animate-on-scroll stagger-2 mt-4">
+          <div class="section-title-wrap flex align-center gap-2 mb-3">
+            <span class="step-header-icon">💰</span>
+            <h2 class="mb-0" data-i18n="scholarship_steps">Scholarship & Financial Aid</h2>
+          </div>
+          <div id="scholarship-steps" class="roadmap-step-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="roadmap-section card animate-on-scroll stagger-3 mt-4">
+          <div class="section-title-wrap flex align-center gap-2 mb-3">
+            <span class="step-header-icon">🚀</span>
+            <h2 class="mb-0" data-i18n="later_steps">Later steps (पुढील टप्पे)</h2>
+          </div>
+          <div id="later-steps" class="roadmap-step-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="roadmap-section card animate-on-scroll stagger-4 mt-4">
+          <div class="section-title-wrap flex align-center gap-2 mb-3">
+            <span class="step-header-icon">🏫</span>
+            <h2 class="mb-0" data-i18n="nearby_colleges_roadmap">Nearby colleges for this career</h2>
+          </div>
+          <ul id="nearby-colleges-list" class="roadmap-step-container">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+
+        <div class="roadmap-section card animate-on-scroll stagger-5 mt-4">
+          <div class="section-title-wrap flex align-center gap-2 mb-3">
+            <span class="step-header-icon">🌱</span>
+            <h2 class="mb-0" data-i18n="long_term">Long-term outlook</h2>
+          </div>
+          <div id="long-term" class="roadmap-step-container">
+            <!-- Dynamically populated -->
+          </div>
         </div>
       </div>
 
-      <div class="roadmap-section card animate-on-scroll stagger-4 mt-4">
-        <h2 data-i18n="nearby_colleges_roadmap">Nearby colleges for this career</h2>
-        <ul id="nearby-colleges-list" class="roadmap-step-container">
-          <!-- Dynamically populated -->
-        </ul>
-      </div>
-
-      <div class="roadmap-section card animate-on-scroll stagger-1 mt-4">
-        <h2 data-i18n="long_term">Long-term outlook</h2>
-        <div id="long-term" class="roadmap-step-container">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-
-      <!-- PDF Hidden Content Area (Cloned structure, optimized for print) -->
+      <!-- PDF Hidden Content Area -->
       <div id="pdf-content" class="pdf-content"></div>
     </div>
   </div>

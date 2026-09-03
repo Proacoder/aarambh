@@ -3,43 +3,89 @@
 {% block content %}
 <section class="section dashboard fade-in">
   <div class="container">
-    <div id="loading-spinner" class="loading-wrap" aria-live="polite">
-      <div class="loading-spinner"></div>
-      <p data-i18n="loading">Loading…</p>
+    
+    <!-- Transition Loading State -->
+    <div id="loading-spinner" class="loading-wrap text-center py-5" aria-live="polite">
+      <div class="thinking-brain-icon mb-3">🧠</div>
+      <h3 class="mb-2">आम्ही तुझ्या उत्तरांचा विचार करत आहोत...</h3>
+      <div class="loading-steps-list text-muted text-small flex-column gap-2 align-center">
+        <span>🎯 तुझ्या strengths शोधत आहोत</span>
+        <span>🏫 योग्य संधी शोधत आहोत</span>
+        <span>💰 scholarships तपासत आहोत</span>
+      </div>
+      <div class="loading-bar-wrap mt-4">
+        <div class="loading-bar-inner"></div>
+      </div>
     </div>
 
+    <!-- Main Dashboard Content -->
     <div id="dashboard-content" class="hidden">
-      <h1 class="page-title" data-i18n="dashboard_title">Your top career matches</h1>
-      <p class="page-subtitle" data-i18n="dashboard_sub">Based on your profile and assessment.</p>
+      <!-- Profile Header Summary Card -->
+      <div class="card profile-summary-card mb-4 slide-up">
+        <div class="flex-between flex-wrap gap-3">
+          <div>
+            <span class="badge badge-gold mb-1">🎯 YOUR CAREER PROFILE</span>
+            <h1 class="page-title mb-1" id="dash-user-name">Your Top Matches</h1>
+            <p class="text-muted text-small" id="dash-user-district">Based on your profile and assessment responses.</p>
+          </div>
+          <div class="flex align-center gap-2">
+            <a href="/career-aunty" class="btn btn-gold ripple flex align-center gap-1">
+              <span>👩‍🏫</span> <span>Ask Mitra Tai</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
+      <!-- Top Career Matches -->
+      <div class="section-header flex-between mb-3">
+        <h2>🥇 Top Career Matches</h2>
+      </div>
+      
       <div id="career-matches" class="grid-3 animate-on-scroll">
         <!-- Populated dynamically -->
       </div>
 
-      <div class="warli-divider" aria-hidden="true"></div>
+      <div class="warli-border-wrap my-5" aria-hidden="true">
+        <div class="warli-border-pattern"></div>
+      </div>
 
-      <h2 class="section-title" data-i18n="nearby_colleges">Institutions near you</h2>
-      <div class="map-container card slide-up animate-on-scroll">
-        <div id="map" style="height: 100%; border-radius: 12px; z-index: 1;"></div>
+      <!-- Institutions Near You -->
+      <div class="section-header flex-between align-end mb-3">
+        <div>
+          <h2 data-i18n="nearby_colleges">Institutions near you</h2>
+          <p class="text-muted text-small">Colleges and polytechnics matched to your mobility radius.</p>
+        </div>
+      </div>
+
+      <div class="map-container card slide-up animate-on-scroll mb-4">
+        <div id="map" style="height: 380px; border-radius: 12px; z-index: 1;"></div>
       </div>
 
       <div id="college-cards" class="grid-2 mt-4 animate-on-scroll">
         <!-- Populated dynamically -->
       </div>
 
-      <div class="warli-divider" aria-hidden="true"></div>
+      <div class="warli-border-wrap my-5" aria-hidden="true">
+        <div class="warli-border-pattern"></div>
+      </div>
 
-      <h2 class="section-title" data-i18n="eligible_schemes">Scholarships you may qualify for</h2>
-      <div id="scheme-cards" class="grid-2 animate-on-scroll mb-4">
+      <!-- Scholarships & Financial Aid -->
+      <div class="section-header mb-3">
+        <h2>🎉 Scholarships You Should Explore</h2>
+        <p class="text-muted text-small" data-i18n="eligible_schemes">Scholarships you may qualify for based on verified criteria.</p>
+      </div>
+
+      <div id="scheme-cards" class="grid-2 animate-on-scroll mb-5">
         <!-- Populated dynamically -->
       </div>
     </div>
+
   </div>
 </section>
 
 <div class="sticky-cta hidden no-print" id="sticky-cta">
-  <div class="container flex-between align-center">
-    <span style="font-weight: 600; color: var(--text);">Ready to take the next step?</span>
+  <div class="container flex-between align-center flex-wrap gap-2">
+    <span style="font-weight: 600; color: var(--text);">Ready to view your full step-by-step career path?</span>
     <a href="/dashboard" id="sticky-cta-btn" class="btn btn-primary ripple" data-i18n="gen_career_plan">Generate My Career Plan</a>
   </div>
 </div>

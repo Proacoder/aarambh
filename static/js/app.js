@@ -188,6 +188,47 @@ CareerMitra.celebrate = function celebrate() {
   setTimeout(() => container.remove(), 3800);
 };
 
+// Mobile Bottom Nav & Active Highlights
+function setupMobileBottomNav() {
+  const path = window.location.pathname;
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    item.classList.remove('active');
+  });
+
+  if (path === '/' || path === '') {
+    const el = document.getElementById('bnav-home');
+    if (el) el.classList.add('active');
+  } else if (path.includes('onboarding') || path.includes('assessment')) {
+    const el = document.getElementById('bnav-journey');
+    if (el) el.classList.add('active');
+  } else if (path.includes('dashboard') || path.includes('roadmap')) {
+    const el = document.getElementById('bnav-matches');
+    if (el) el.classList.add('active');
+  } else if (path.includes('career-aunty') || path.includes('mitra-tai')) {
+    const el = document.getElementById('bnav-tai');
+    if (el) el.classList.add('active');
+  }
+}
+
+async function checkReturningUserHero() {
+  const banner = document.getElementById('returning-user-banner');
+  if (!banner) return;
+
+  try {
+    const res = await fetch('/api/profile');
+    if (res.ok) {
+      const profile = await res.json();
+      if (profile && profile.name) {
+        const nameEl = document.getElementById('user-greeting-name');
+        if (nameEl) nameEl.textContent = `👋 ${CareerMitra.t('welcome_back') || 'स्वागत आहे परत'}, ${profile.name}!`;
+        banner.classList.remove('hidden');
+      }
+    }
+  } catch (err) {
+    // Session is empty
+  }
+}
+
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -206,4 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScrollAnimations();
   setupCountUpAnimations();
   setupRippleEffect();
+  setupMobileBottomNav();
+  checkReturningUserHero();
 });

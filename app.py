@@ -184,9 +184,181 @@ def roadmap_page():
     return render_template("roadmap.html")
 
 
+@app.route("/career-aunty")
+@app.route("/mitra-tai")
+def career_aunty_page():
+    return render_template("career_aunty.html")
+
+
 # ---------------------------------------------------------------------------
 # API routes (JSON responses for frontend JS)
 # ---------------------------------------------------------------------------
+def generate_mitra_tai_response(msg, lang, profile, matches, colleges, schemes, roadmap=None):
+    msg_lower = (msg or "").lower()
+    name = profile.get("name", "") if profile else ""
+    name_str = f", {name}" if name else ""
+    district = profile.get("district", "") if profile else "तुमच्या जिल्ह्यात"
+
+    top_match = matches[0] if matches else None
+    if isinstance(top_match, dict):
+        top_career_name = top_match.get("name", "Software / Technical Track")
+        top_match_pct = top_match.get("matchPct", 90)
+    else:
+        top_career_name = "Software / Technical Track"
+        top_match_pct = 90
+
+    if lang == "mr":
+        if any(k in msg_lower for k in ["career", "करिअर", "योग्य", "दिशा", "match", "माझ्यासाठी", "आवड"]):
+            if top_match:
+                reply = (
+                    f"नमस्कार{name_str}! 😊 तुझ्या चाचणीनुसार, तुझ्यासाठी **{top_career_name}** "
+                    f"(जवळपास {top_match_pct}% match) ही उत्तम करिअर दिशा आहे. "
+                    f"तुला practical कामात आणि नवीन गोष्टी शिकण्यात आवड आहे. "
+                    f"या क्षेत्रात पुढील ५ वर्षांत महाराष्ट्रात खूप चांगल्या संधी आहेत!"
+                )
+            else:
+                reply = f"नमस्कार{name_str}! 😊 करिअर शोधण्यासाठी आधी आपली १ मिनिटाची छोटी चाचणी पूर्ण करा. मी तुला योग्य वाट दाखवेन!"
+
+        elif any(k in msg_lower for k in ["college", "कॉलेज", "संस्था", "जवळ", "near"]):
+            if colleges:
+                c_list = ", ".join([c['name'] for c in colleges[:3]])
+                reply = (
+                    f"तुमच्या **{district}** जिल्ह्याजवळ **{c_list}** यांसारख्या "
+                    f"{len(colleges)} उत्कृष्ट शैक्षणिक संस्था उपलब्ध आहेत. "
+                    f"या ठिकाणी कमी शुल्कात दर्जेदार शिक्षण मिळते!"
+                )
+            else:
+                reply = f"तुमच्या **{district}** परिसरात अनेक महाविद्यालये आहेत. प्रोफाइल पूर्ण केल्यावर मी तुला जवळच्या संस्थांची यादी दाखवेन."
+
+        elif any(k in msg_lower for k in ["scholarship", "शिष्यवृत्ती", "योजना", "scheme", "पैसे"]):
+            if schemes:
+                s_names = ", ".join([s['name'] for s in schemes[:2]])
+                reply = (
+                    f"हो नक्कीच! 💰 तुझ्यासाठी **{s_names}** या सरकारी शिष्यवृत्त्या योग्य आहेत. "
+                    f"या योजनेसाठी उत्पन्नाचा दाखला आणि रहिवासी दाखला (Domicile) तयार ठेवा."
+                )
+            else:
+                reply = "महाराष्ट्रात MahaDBT द्वारे विविध प्रवर्गांसाठी शिष्यवृत्ती मिळतात. प्रोफाइलमधील उत्पन्न आणि प्रवर्ग भरल्यास मी योग्य योजना सांगेन."
+
+        elif any(k in msg_lower for k in ["roadmap", "रोडमॅप", "पुढे", "करायचं", "step", "next", "आता"]):
+            reply = (
+                f"तुझा पुढचा टप्पा सोपा आहे{name_str}:\n"
+                f"१. १०वी/१२वी चे मूलभूत विषय पक्के करा.\n"
+                f"२. जवळच्या कॉलेजचे प्रवेश अर्ज तपासा.\n"
+                f"३. MahaDBT पोर्टलवर शिष्यवृत्ती अर्ज भरा."
+            )
+
+        else:
+            reply = (
+                f"नमस्कार{name_str}! 😊 मी मित्र ताई आहे. काळजी करू नकोस, करिअरची निवड करताना तू एकटा नाहीस. "
+                f"तुला कोणत्या करिअरबद्दल किंवा कॉलेजबद्दल माहिती हवी आहे? मी तुला सोप्या भाषेत समजावून सांगेन."
+            )
+
+    elif lang == "hi":
+        if any(k in msg_lower for k in ["career", "करियर", "योग्य", "दिशा", "match", "मेरे लिए", "पसंद"]):
+            if top_match:
+                reply = (
+                    f"नमस्ते{name_str}! 😊 आपके असेसमेंट के आधार पर, आपके लिए **{top_career_name}** "
+                    f"(लगभग {top_match_pct}% मैच) सबसे बेहतरीन करियर विकल्प है। "
+                    f"इसमें प्रैक्टिकल काम और स्किल डेवलपमेंट के बहुत शानदार मौके हैं!"
+                )
+            else:
+                reply = f"नमस्ते{name_str}! 😊 करियर विकल्प देखने के लिए पहले १ मिनट का मूल्यांकन पूरा करें, मैं आपको सही राह दिखाऊंगी!"
+
+        elif any(k in msg_lower for k in ["college", "कॉलेज", "संस्थान", "पास", "near"]):
+            if colleges:
+                c_list = ", ".join([c['name'] for c in colleges[:3]])
+                reply = f"आपके **{district}** जिले के पास **{c_list}** जैसे {len(colleges)} अच्छे संस्थान मौजूद हैं। यहाँ सरकारी व कम फीस में पढ़ाई के विकल्प हैं।"
+            else:
+                reply = f"आपके **{district}** क्षेत्र में कई कॉलेज उपलब्ध हैं। प्रोफाइल पूर्ण करने पर मैं निकटतम कॉलेज दिखाऊंगी।"
+
+        elif any(k in msg_lower for k in ["scholarship", "छात्रवृत्ति", "योजना", "scheme", "पैसा"]):
+            if schemes:
+                s_names = ", ".join([s['name'] for s in schemes[:2]])
+                reply = f"जी हाँ! 💰 आपके लिए **{s_names}** जैसी योजनाएं उपलब्ध हैं। आवश्यक दस्तावेजों में आय प्रमाण पत्र और जाति/निवास प्रमाण पत्र तैयार रखें।"
+            else:
+                reply = "MahaDBT पोर्टल पर कई सरकारी छात्रवृत्तियां उपलब्ध हैं। अपनी प्रोफाइल पूरी करें।"
+
+        elif any(k in msg_lower for k in ["roadmap", "रोडमैप", "आगे", "कदम", "step", "next", "अब"]):
+            reply = f"आपका अगला कदम{name_str}:\n१. आधारभूत विषय मजबूत करें।\n२. पास के कॉलेजों की पात्रता जांचें।\n३. स्कॉलरशिप के लिए आवेदन करें।"
+
+        else:
+            reply = f"नमस्ते{name_str}! 😊 मैं मित्र ताई हूँ। करियर के सफर में घबराने की ज़रूरत नहीं है। आप मुझसे करियर, कॉलेज या छात्रवृत्ति के बारे में कुछ भी पूछ सकते हैं।"
+
+    else:
+        if any(k in msg_lower for k in ["career", "match", "best", "direction", "suitable", "fit"]):
+            if top_match:
+                reply = (
+                    f"Hello{name_str}! 😊 Based on your assessment, **{top_career_name}** "
+                    f"({top_match_pct}% match) is your strongest career path. "
+                    f"Your practical problem-solving skills make this a great fit for your future growth!"
+                )
+            else:
+                reply = f"Hello{name_str}! 😊 Complete the 1-minute assessment first so I can calculate your personalized career matches!"
+
+        elif any(k in msg_lower for k in ["college", "institution", "near", "district"]):
+            if colleges:
+                c_list = ", ".join([c['name'] for c in colleges[:3]])
+                reply = f"Near **{district}**, top options include **{c_list}** among {len(colleges)} matched institutions with affordable fees."
+            else:
+                reply = f"There are several colleges near **{district}**. Complete your profile to view them!"
+
+        elif any(k in msg_lower for k in ["scholarship", "scheme", "financial", "aid", "fee"]):
+            if schemes:
+                s_names = ", ".join([s['name'] for s in schemes[:2]])
+                reply = f"Great news! 💰 You qualify for schemes like **{s_names}**. Make sure your Income and Domicile certificates are ready!"
+            else:
+                reply = "Government scholarships via MahaDBT are available based on income and category criteria."
+
+        elif any(k in msg_lower for k in ["roadmap", "next", "action", "plan", "do"]):
+            reply = f"Here are your immediate next actions{name_str}:\n1. Focus on core exam subjects.\n2. Review entrance requirements for target colleges.\n3. Keep scholarship documents handy."
+
+        else:
+            reply = f"Hello{name_str}! 😊 I am Mitra Tai, your career guide. Ask me anything about career tracks, colleges, or scholarships near you!"
+
+    return {
+        "reply": reply,
+        "language": lang,
+        "contextUsed": {
+            "name": profile.get("name") if profile else None,
+            "district": profile.get("district") if profile else None,
+            "topCareer": top_career_name if top_match else None,
+            "collegeCount": len(colleges) if colleges else 0,
+            "schemeCount": len(schemes) if schemes else 0,
+        }
+    }
+
+
+@app.route("/api/mitra-tai", methods=["POST"])
+def api_mitra_tai():
+    data = request.get_json(force=True) or {}
+    message = data.get("message", "").strip()
+    lang = data.get("language") or session.get("lang") or "mr"
+
+    profile = data.get("studentProfile") or session.get("profile")
+    vector = session.get("vector")
+
+    matches = data.get("careerMatches")
+    colleges = data.get("colleges")
+    schemes = data.get("schemes")
+
+    if profile and vector and not matches:
+        raw_matches = compute_career_matches(vector, top_n=5)
+        matches = [{
+            "id": m["career"]["id"],
+            "name": m["career"]["name"].get(lang, m["career"]["name"]["en"]),
+            "matchPct": m["matchPct"]
+        } for m in raw_matches]
+
+        career_ids = [m["career"]["id"] for m in raw_matches]
+        radius = radius_for_mobility(profile.get("mobility", "district"))
+        colleges = nearby_colleges(profile["district"], career_ids, radius)
+        schemes = eligible_schemes(profile)
+
+    res = generate_mitra_tai_response(message, lang, profile, matches, colleges, schemes)
+    return jsonify(res)
+
+
 @app.route("/api/translations/<lang>")
 def api_translations(lang):
     return jsonify(TRANSLATIONS.get(lang, TRANSLATIONS["en"]))
