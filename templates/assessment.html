@@ -1,46 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section assessment fade-in">
-  <div class="container">
-    <div class="assessment-header card text-center mb-4 slide-up">
-      <h1 class="page-title mb-1" data-i18n="assessment_title">🧭 Let's discover what you enjoy!</h1>
-      <p class="page-subtitle mb-2" data-i18n="assessment_sub">Rate how much each statement sounds like you.</p>
+<section class="section assessment fade-in py-4">
+  <div class="container" style="max-width: 680px;">
+    
+    <!-- Assessment Header Card -->
+    <div class="card text-center p-4 mb-4 slide-up" style="border-top: 4px solid var(--primary); box-shadow: var(--shadow-md);">
+      <div class="greeting-avatar mb-2" style="font-size: 2.5rem;">🧭</div>
+      <h1 class="page-title mb-1" style="font-size: 1.6rem; font-weight: 800; color: var(--primary-dark);">Aptitude & Skill Matcher</h1>
+      <p class="page-subtitle text-muted text-small mb-0">Select the option that best describes your real-world interests</p>
+    </div>
+
+    <!-- Progress Card -->
+    <div class="card p-3 mb-4 slide-up" style="background: #fff; border-radius: 12px; border: 1px solid var(--border);">
+      <div class="flex-between align-center mb-2">
+        <span class="text-small text-muted" style="font-weight:600;">Overall Progress</span>
+        <span id="progress-text" class="badge badge-gold text-small">Question 1 of 10</span>
+      </div>
+      <div class="quiz-progress-wrap" style="width:100%; height:10px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+        <div id="progress-bar-fill" style="width: 10%; height:100%; background:linear-gradient(90deg, var(--primary), var(--gold)); transition: width 0.4s ease;"></div>
+      </div>
+    </div>
+
+    <!-- Question Box -->
+    <div id="question-container" class="card p-4 slide-up" style="background:#fff; border-radius:16px; border: 1px solid var(--border); box-shadow: var(--shadow-lg);">
       
-      <!-- Reassuring Encouragement Banner -->
-      <div class="encouragement-banner">
-        <span class="enc-icon">😊</span>
-        <span data-i18n="no_wrong_answer">इथे चुकीचं उत्तर नाही. जे तुला खरंच आवडतं ते निवड.</span>
+      <!-- Question Number & Title -->
+      <div class="question-header mb-3 pb-3" style="border-bottom: 2px dashed #f1f5f9;">
+        <h2 id="question-text" style="font-size: 1.35rem; font-weight: 800; color: #1e293b; line-height: 1.5; margin: 0;">
+          Loading Question…
+        </h2>
+        <p id="question-subtext" class="text-muted text-small mt-1 mb-0" style="font-size: 0.95rem; color: #64748b;"></p>
       </div>
+
+      <!-- Options Container -->
+      <div id="options-container" class="flex-column gap-3 my-4">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="quiz-actions flex-between align-center mt-4 pt-3" style="border-top: 1px solid #f1f5f9;">
+        <button id="btn-prev" class="btn btn-secondary flex-center gap-2" style="padding: 0.6rem 1.2rem; border-radius: 10px;" disabled>
+          <span>⬅️</span> <span>Back</span>
+        </button>
+        <button id="btn-next" class="btn btn-primary flex-center gap-2 ripple" style="padding: 0.7rem 1.6rem; border-radius: 10px; font-weight: 700;" disabled>
+          <span>Next</span> <span>➔</span>
+        </button>
+      </div>
+
     </div>
 
-    <!-- Progress Indicator -->
-    <div class="quiz-progress-container card mb-4 slide-up stagger-1">
-      <div class="flex-between mb-2">
-        <span class="text-small text-muted">Progress</span>
-        <span id="progress-text" class="text-bold text-small">Question 1 of 10</span>
-      </div>
-      <div class="quiz-progress-wrap">
-        <div id="progress-bar-fill" class="quiz-progress" style="width: 0%;"></div>
-      </div>
-    </div>
-
-    <!-- Question Card -->
-    <div id="question-container" class="quiz-container card slide-up stagger-2">
-      <h2 id="question-text" class="quiz-question" aria-live="polite">Loading…</h2>
-
-      <div id="options-container" class="likert-scale mt-4" role="radiogroup" aria-label="Rating scale"></div>
-
-      <div class="likert-labels flex-between mt-2">
-        <span class="text-small text-muted" data-i18n="scale_low">Not like me</span>
-        <span class="text-small text-muted" data-i18n="scale_high">Very much like me</span>
-      </div>
-
-      <div class="quiz-actions flex-between mt-5">
-        <button id="btn-prev" class="btn btn-secondary" data-i18n="back_btn" disabled>Back</button>
-        <button id="btn-next" class="btn btn-primary btn-lg ripple" data-i18n="next_btn" disabled>Next</button>
-      </div>
-    </div>
   </div>
 </section>
 {% endblock %}

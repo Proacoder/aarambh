@@ -1,5 +1,5 @@
 /* 
-  CareerMitra Competent 10-Question RIASEC Assessment Engine
+  CareerMitra Ultra-Visible 10-Question Competent Assessment Engine
 */
 
 let currentQuestion = 0;
@@ -101,7 +101,7 @@ const COMPETENT_RIASEC_QUESTIONS = [
     questionMr: "९. तुमच्या कल्पना मांडण्यासाठी तुम्ही कोणते माध्यम निवडाल?",
     options: [
       { id: 1, textEn: "🎨 Visual Arts / Design — posters, videos, music or UI design", textMr: "🎨 दृश्य कला / डिझाईन — पोस्टर, व्हिडिओ, संगीत, हस्तकला", domain: "artistic" },
-      { id: 2, textEn: "📐 Physical Models — building a working prototype or 3D model", textMr: "📐 भौतिक मॉडेल्स — काम करणारा प्रोटोटाइप किंवा मॉडेल तयार करणे", domain: "realistic" },
+      { id: 2, textEn: "📐 Physical Models — building a working prototype or 3D model", textMr: "📐 भौतिक मॉडेल्स — काम करणारा प्रोटोटाईप किंवा मॉडेल तयार करणे", domain: "realistic" },
       { id: 3, textEn: "📝 Written Reports — research paper, documentation or technical essay", textMr: "📝 लिखित अहवाल — संशोधन पेपर, दस्तऐवजीकरण किंवा निबंध", domain: "investigative" },
       { id: 4, textEn: "🎤 Speeches & Presentations — pitching in front of an audience", textMr: "🎤 भाषणे आणि सादरीकरण — श्रोत्यांसमोर मत मांडणे", domain: "enterprising" }
     ]
@@ -122,51 +122,32 @@ const COMPETENT_RIASEC_QUESTIONS = [
 document.addEventListener('DOMContentLoaded', initAssessment);
 
 async function initAssessment() {
+  questions = COMPETENT_RIASEC_QUESTIONS;
+
   try {
-    const profileRes = await fetch('/api/profile');
-    if (!profileRes.ok) {
-      window.location.href = '/onboarding';
-      return;
-    }
-    const profile = await profileRes.json();
-    if (!profile) {
-      window.location.href = '/onboarding';
-      return;
-    }
-
-    try {
-      const qRes = await fetch('/api/assessment/questions');
-      if (qRes.ok) {
-        const remoteQuestions = await qRes.json();
-        if (remoteQuestions && remoteQuestions.length > 0) {
-          questions = remoteQuestions;
-        }
+    const qRes = await fetch('/api/assessment/questions');
+    if (qRes.ok) {
+      const data = await qRes.json();
+      if (Array.isArray(data) && data.length > 0 && data[0].options) {
+        questions = data;
       }
-    } catch (e) {
-      console.warn("Using fallback questions list:", e);
     }
-
-    if (!questions || questions.length === 0) {
-      questions = COMPETENT_RIASEC_QUESTIONS;
-    }
-
-    renderQuestion(currentQuestion);
-    setupEventListeners();
-  } catch (error) {
-    console.error('Assessment init error:', error);
-    questions = COMPETENT_RIASEC_QUESTIONS;
-    renderQuestion(currentQuestion);
-    setupEventListeners();
+  } catch (e) {
+    console.warn("Using local questions data");
   }
+
+  renderQuestion(currentQuestion);
+  setupEventListeners();
 }
 
 function renderQuestion(index) {
   const container = document.getElementById('question-container');
   if (!container) return;
 
-  const question = questions[index];
-  if (!question) return;
+  const q = questions[index];
+  if (!q) return;
 
+  // Progress Bar
   const progressBar = document.getElementById('progress-bar-fill');
   if (progressBar) {
     const pct = ((index + 1) / questions.length) * 100;
@@ -178,80 +159,79 @@ function renderQuestion(index) {
     progressText.textContent = `Question ${index + 1} of ${questions.length}`;
   }
 
+  // Question Title & Subtext
   const questionText = document.getElementById('question-text');
+  const questionSubtext = document.getElementById('question-subtext');
+
   if (questionText) {
-    const lang = localStorage.getItem('cm-lang') || 'mr';
-    questionText.textContent = (lang === 'mr' && question.questionMr) 
-      ? question.questionMr 
-      : (question.questionEn || question.textEn || question.key || `Question ${index + 1}`);
+    questionText.textContent = q.questionEn || q.textEn || q.text || `Question ${index + 1}`;
+  }
+  if (questionSubtext) {
+    questionSubtext.textContent = q.questionMr || q.textMr || '';
   }
 
+  // Render Options
   const optionsContainer = document.getElementById('options-container');
   if (optionsContainer) {
     optionsContainer.innerHTML = '';
-    optionsContainer.className = 'grid-1 gap-3 mt-4'; // Stacked rich option cards
 
-    const opts = question.options || [
-      { id: 1, textEn: "Option 1", textMr: "पर्याय १" },
-      { id: 2, textEn: "Option 2", textMr: "पर्याय २" },
-      { id: 3, textEn: "Option 3", textMr: "पर्याय ३" },
-      { id: 4, textEn: "Option 4", textMr: "पर्याय ४" }
-    ];
-
+    const opts = q.options || [];
     opts.forEach((opt, idx) => {
-      const optionBtn = document.createElement('button');
-      optionBtn.type = 'button';
-      optionBtn.className = 'card option-card ripple p-3 text-left flex align-center gap-3';
-      optionBtn.style.cssText = 'border: 2px solid var(--border); border-radius: 12px; background: var(--bg-card); cursor: pointer; transition: all 0.2s; width: 100%;';
-      
-      const lang = localStorage.getItem('cm-lang') || 'mr';
-      const labelText = (lang === 'mr' && opt.textMr) ? opt.textMr : (opt.textEn || opt.text || `Option ${idx + 1}`);
-
-      optionBtn.innerHTML = `
-        <div class="option-check-circle" style="width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--sub); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff;"></div>
-        <span style="font-size: 1rem; font-weight: 600; color: var(--text); flex: 1;">${labelText}</span>
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'card option-card ripple p-3 text-left flex align-center gap-3';
+      btn.style.cssText = `
+        border: 2px solid #cbd5e1;
+        border-radius: 12px;
+        background: #ffffff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       `;
 
-      const optionVal = opt.id || (idx + 1);
-      optionBtn.dataset.value = optionVal;
-      optionBtn.dataset.qid = question.id;
+      const optVal = opt.id || (idx + 1);
+      const isSelected = answers[q.id] === optVal;
 
-      if (answers[question.id] === optionVal) {
-        setSelectedStyles(optionBtn);
+      btn.innerHTML = `
+        <div class="option-check-circle" style="
+          width: 26px; height: 26px; border-radius: 50%;
+          border: 2px solid ${isSelected ? 'var(--primary)' : '#94a3b8'};
+          background: ${isSelected ? 'var(--primary)' : 'transparent'};
+          color: #ffffff;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 13px; font-weight: 700; flex-shrink: 0;
+        ">${isSelected ? '✓' : ''}</div>
+
+        <div style="flex: 1; text-align: left;">
+          <div style="font-size: 1.05rem; font-weight: 700; color: #0f172a; line-height: 1.4;">${opt.textEn || opt.text || ''}</div>
+          ${opt.textMr ? `<div style="font-size: 0.9rem; font-weight: 600; color: #475569; margin-top: 2px;">${opt.textMr}</div>` : ''}
+        </div>
+      `;
+
+      if (isSelected) {
+        btn.style.borderColor = 'var(--primary)';
+        btn.style.background = 'rgba(79, 70, 229, 0.08)';
       }
 
-      optionBtn.addEventListener('click', () => {
-        selectOption(question.id, optionVal, optionBtn);
+      btn.addEventListener('click', () => {
+        selectOption(q.id, optVal, btn);
       });
 
-      optionsContainer.appendChild(optionBtn);
+      optionsContainer.appendChild(btn);
     });
   }
 
-  const backBtn = document.getElementById('btn-prev');
-  if (backBtn) {
-    backBtn.disabled = index === 0;
+  // Navigation Buttons State
+  const prevBtn = document.getElementById('btn-prev');
+  if (prevBtn) {
+    prevBtn.disabled = index === 0;
   }
 
   const nextBtn = document.getElementById('btn-next');
   if (nextBtn) {
-    nextBtn.textContent = index === questions.length - 1 ? 'See My Career Matches 🎯' : 'Next ➔';
-    nextBtn.disabled = !answers[question.id];
-  }
-
-  container.classList.remove('slide-in-right', 'slide-out-left');
-  void container.offsetWidth;
-  container.classList.add('slide-in-right');
-}
-
-function setSelectedStyles(btn) {
-  btn.style.borderColor = 'var(--primary)';
-  btn.style.background = 'rgba(79, 70, 229, 0.1)';
-  const circle = btn.querySelector('.option-check-circle');
-  if (circle) {
-    circle.style.borderColor = 'var(--primary)';
-    circle.style.background = 'var(--primary)';
-    circle.textContent = '✓';
+    nextBtn.textContent = index === questions.length - 1 ? 'See Career Matches 🎯' : 'Next ➔';
+    nextBtn.disabled = !answers[q.id];
   }
 }
 
@@ -259,18 +239,25 @@ function selectOption(questionId, value, btnEl) {
   answers[questionId] = parseInt(value, 10);
 
   document.querySelectorAll('#options-container .option-card').forEach(card => {
-    card.style.borderColor = 'var(--border)';
-    card.style.background = 'var(--bg-card)';
+    card.style.borderColor = '#cbd5e1';
+    card.style.background = '#ffffff';
     const circle = card.querySelector('.option-check-circle');
     if (circle) {
-      circle.style.borderColor = 'var(--sub)';
+      circle.style.borderColor = '#94a3b8';
       circle.style.background = 'transparent';
       circle.textContent = '';
     }
   });
 
   if (btnEl) {
-    setSelectedStyles(btnEl);
+    btnEl.style.borderColor = 'var(--primary)';
+    btnEl.style.background = 'rgba(79, 70, 229, 0.08)';
+    const circle = btnEl.querySelector('.option-check-circle');
+    if (circle) {
+      circle.style.borderColor = 'var(--primary)';
+      circle.style.background = 'var(--primary)';
+      circle.textContent = '✓';
+    }
   }
 
   const nextBtn = document.getElementById('btn-next');
@@ -278,42 +265,38 @@ function selectOption(questionId, value, btnEl) {
 }
 
 function setupEventListeners() {
-  const backBtn = document.getElementById('btn-prev');
-  if (backBtn) {
-    backBtn.addEventListener('click', () => {
+  const prevBtn = document.getElementById('btn-prev');
+  if (prevBtn) {
+    prevBtn.onclick = () => {
       if (currentQuestion > 0) {
         currentQuestion--;
         renderQuestion(currentQuestion);
       }
-    });
+    };
   }
 
   const nextBtn = document.getElementById('btn-next');
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
+    nextBtn.onclick = () => {
       if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         renderQuestion(currentQuestion);
       } else {
         submitAssessment();
       }
-    });
+    };
   }
 }
 
 async function submitAssessment() {
   try {
-    const res = await fetch('/api/assessment', {
+    await fetch('/api/assessment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ answers })
     });
-    if (res.ok) {
-      window.location.href = '/dashboard';
-    } else {
-      window.location.href = '/dashboard';
-    }
   } catch (e) {
-    window.location.href = '/dashboard';
+    console.warn("Submit fallback:", e);
   }
+  window.location.href = '/dashboard';
 }
