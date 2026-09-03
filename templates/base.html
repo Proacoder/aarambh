@@ -25,32 +25,67 @@
   <!-- Navigation -->
   <nav class="nav-bar" role="navigation" aria-label="Main navigation">
     <div class="container flex-between">
-      <a href="/" class="nav-logo">
-        <span style="font-size: 1.4rem;">🌾</span> <span><strong>AARAMBH</strong></span>
+      <a href="/" class="nav-logo flex align-center gap-2">
+        <span style="font-size: 1.5rem;">🌾</span> <span><strong>AARAMBH</strong></span>
       </a>
       
-      <div class="nav-links desktop-only flex align-center gap-4">
+      <div class="nav-links desktop-only flex align-center gap-3">
         <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
         <a href="/careerverse" class="nav-link" style="color: var(--gold); font-weight: 600;">🌌 Careerverse</a>
-        <a href="/dashboard" class="nav-link" data-i18n="nav_dashboard">My Matches</a>
-        <a href="/roadmap" class="nav-link" data-i18n="nav_roadmap">My Roadmap</a>
+        <a href="/dashboard" class="nav-link" data-i18n="nav_dashboard">Matches</a>
+        <a href="/roadmap" class="nav-link" data-i18n="nav_roadmap">Roadmap</a>
         <a href="/cost-calculator" class="nav-link">💰 PathPocket</a>
         <a href="/resume-builder" class="nav-link">📄 Resume</a>
         <a href="/skill-quest" class="nav-link">⚡ Quests</a>
-        <a href="/career-aunty" class="nav-link nav-link-tai flex align-center gap-1">
-          <span class="tai-sparkle">👩‍🏫</span> <span>Mitra Saathi</span>
-        </a>
       </div>
 
-      <div class="nav-right flex align-center gap-3">
-        <div class="lang-toggle" role="group" aria-label="Language selection">
+      <div class="nav-right flex align-center gap-2">
+        <!-- Role Pills (Kiosk & Teacher) -->
+        <a href="/kiosk" class="nav-role-pill nav-pill-kiosk desktop-only">
+          <span>🖥️</span> <span>Kiosk</span>
+        </a>
+        <a href="/guider" class="nav-role-pill nav-pill-teacher desktop-only">
+          <span>👨‍🏫</span> <span>Teacher Portal</span>
+        </a>
+        <a href="/login" class="btn btn-sm btn-outline desktop-only">
+          <span>👤 Login</span>
+        </a>
+
+        <!-- Language toggle -->
+        <div class="lang-toggle flex gap-1" role="group" aria-label="Language selection">
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="mr">मरा</button>
           <button class="lang-btn" data-lang="hi">हिं</button>
         </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <button class="btn btn-outline btn-sm mobile-only" id="mobile-drawer-toggle" aria-label="Toggle Navigation">
+          ☰
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9998;"></div>
+  <div class="mobile-drawer" id="mobile-drawer" style="display:none; position:fixed; top:0; right:0; width:280px; height:100%; background:#FFFDF8; z-index:9999; padding:2rem 1.5rem; flex-direction:column; gap:1rem; box-shadow:-5px 0 25px rgba(0,0,0,0.15);">
+    <div class="flex-between align-center mb-3">
+      <strong>🌾 AARAMBH</strong>
+      <button class="btn btn-sm btn-outline" id="mobile-drawer-close">✕</button>
+    </div>
+    <a href="/" class="nav-link">Home</a>
+    <a href="/careerverse" class="nav-link" style="color:var(--gold);">🌌 3D Careerverse</a>
+    <a href="/dashboard" class="nav-link">Matches</a>
+    <a href="/roadmap" class="nav-link">Roadmap</a>
+    <a href="/cost-calculator" class="nav-link">PathPocket</a>
+    <a href="/resume-builder" class="nav-link">Resume Builder</a>
+    <a href="/skill-quest" class="nav-link">Skill Quests</a>
+    <div style="border-top:1px solid var(--border); margin:0.5rem 0;"></div>
+    <a href="/kiosk" class="nav-role-pill nav-pill-kiosk">🖥️ Kiosk Mode</a>
+    <a href="/guider" class="nav-role-pill nav-pill-teacher">👨‍🏫 Teacher Portal</a>
+    <a href="/parent-mode" class="nav-link">👨‍👩‍👦 पालक संवाद</a>
+    <a href="/login" class="btn btn-primary btn-sm mt-2 text-center">👤 Student Login</a>
+  </div>
   
   <main id="main-content" class="page-content-wrap">
     {% block content %}{% endblock %}
@@ -65,6 +100,8 @@
       <div class="flex-center gap-4 text-small text-muted flex-wrap">
         <a href="/kiosk">🖥️ Kiosk Mode (Schools & CSCs)</a>
         <span>•</span>
+        <a href="/guider">👨‍🏫 Teacher / Counselor Portal</a>
+        <span>•</span>
         <a href="/parent-mode">👨‍👩‍👦 पालक संवाद (Parent Guide)</a>
         <span>•</span>
         <a href="/documents">📋 Document Tracker</a>
@@ -74,11 +111,50 @@
     </div>
   </footer>
 
-  <!-- Floating Mitra AI Companion Pill (Always Accessible) -->
-  <a href="/career-aunty" class="floating-mitra-pill" aria-label="Talk to Mitra">
+  <!-- Global Floating Mitra AI Saathi Trigger Pill (Every Step) -->
+  <button id="global-mitra-trigger" class="floating-mitra-pill" aria-label="Open Mitra AI Saathi">
     <span class="mitra-pulse-dot"></span>
-    <span>👩‍🏫 Talk to Mitra AI</span>
-  </a>
+    <span>👩‍🏫 Mitra Saathi AI</span>
+  </button>
+
+  <!-- Global Interactive Mitra AI Slide-Over Drawer -->
+  <div id="mitra-slideover-overlay" class="mitra-slideover-overlay"></div>
+  <aside id="mitra-global-slideover" class="mitra-slideover" aria-label="Mitra AI Companion">
+    <div class="slideover-header">
+      <div class="flex align-center gap-2">
+        <div id="slideover-mitra-avatar" style="width: 48px; height: 48px;"></div>
+        <div>
+          <strong class="text-sm block">मित्र साथी (Mitra Saathi)</strong>
+          <span class="text-xs text-muted" id="slideover-status">Online • 24/7 AI Guide</span>
+        </div>
+      </div>
+      <button id="close-mitra-slideover" class="btn btn-sm btn-outline" aria-label="Close Drawer">✕</button>
+    </div>
+
+    <div class="slideover-body" id="slideover-messages-stream">
+      <!-- Welcome Bubble -->
+      <div class="chat-bubble bubble-tai fade-in">
+        <p class="text-xs mb-0">
+          नमस्कार! I am Mitra, your Career Saathi. How can I guide your educational pathway today? Ask me about colleges, scholarships, or doubts about your future!
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick prompt pills inside drawer -->
+    <div class="px-3 py-2 flex gap-1 overflow-x-auto" style="scrollbar-width: none; background: var(--paper); border-top: 1px solid var(--border);">
+      <button class="btn btn-sm btn-outline slideover-quick-chip text-xs whitespace-nowrap" data-prompt="माझ्यासाठी कोणतं career योग्य आहे?">🎯 Which career?</button>
+      <button class="btn btn-sm btn-outline slideover-quick-chip text-xs whitespace-nowrap" data-prompt="महाडीबीटी शिष्यवृत्ती कशी मिळेल?">💰 Scholarships</button>
+      <button class="btn btn-sm btn-outline slideover-quick-chip text-xs whitespace-nowrap" data-prompt="शासकीय कॉलेज कोणतं आहे?">🏫 Colleges</button>
+    </div>
+
+    <div class="slideover-footer">
+      <form id="slideover-chat-form" class="flex gap-2">
+        <button type="button" id="slideover-mic-btn" class="btn btn-outline btn-sm" title="Speak">🎙️</button>
+        <input type="text" id="slideover-user-input" class="form-input text-small" placeholder="Ask in Marathi, Hindi, English..." required style="flex:1;">
+        <button type="submit" class="btn btn-primary btn-sm ripple">Send</button>
+      </form>
+    </div>
+  </aside>
 
   <!-- Mobile Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav mobile-only" aria-label="Mobile Bottom Navigation">
@@ -98,16 +174,17 @@
       <span class="bnav-icon">🎯</span>
       <span class="bnav-label" data-i18n="nav_dashboard">Matches</span>
     </a>
-    <a href="/career-aunty" class="bottom-nav-item bottom-nav-tai" id="bnav-tai">
+    <button type="button" class="bottom-nav-item bottom-nav-tai" id="bnav-tai-trigger" style="background:none; border:none; cursor:pointer;">
       <span class="bnav-icon">👩‍🏫</span>
       <span class="bnav-label">Mitra</span>
-    </a>
+    </button>
   </nav>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="/static/js/mitra-character.js"></script>
   <script src="/static/js/app.js"></script>
   {% block scripts %}{% endblock %}
 </body>

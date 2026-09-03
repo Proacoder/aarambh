@@ -53,6 +53,10 @@ def kiosk_page():
 def parent_mode_page():
     return render_template("parent_mode.html")
 
+@app.route("/guider")
+def guider_page():
+    return render_template("guider_dashboard.html")
+
 @app.route("/api/login", methods=["POST"])
 def api_login():
     data = request.get_json(force=True) or {}
@@ -66,15 +70,86 @@ def api_login():
             "mode": "google"
         }
         session["guest_mode"] = False
+    elif mode == "teacher":
+        session["user"] = {
+            "id": f"teacher_{uuid.uuid4().hex[:8]}",
+            "name": data.get("teacherId", "Prof. Anand Kulkarni"),
+            "udise": data.get("udise", "27251401201"),
+            "role": "teacher"
+        }
+        session["is_teacher"] = True
     else:
         session["user"] = {
             "id": f"guest_{uuid.uuid4().hex[:8]}",
-            "email": None,
+            "email": email,
             "mode": "guest"
         }
         session["guest_mode"] = True
 
     return jsonify({"ok": True, "user": session["user"]})
+
+@app.route("/api/register", methods=["POST"])
+def api_register():
+    data = request.get_json(force=True) or {}
+    name = data.get("name", "विद्यार्थी").strip()
+    contact = data.get("contact", "")
+    district = data.get("district", "Maharashtra")
+    class_name = data.get("className", "10th")
+    
+    student_id = str(uuid.uuid4())[:8]
+    session["studentId"] = student_id
+    session["profile"] = {
+        "id": student_id,
+        "name": name,
+        "contact": contact,
+        "district": district,
+        "className": class_name,
+        "marks": 75,
+        "income": 120000,
+        "category": "General",
+        "registered": True
+    }
+    session["user"] = {
+        "id": student_id,
+        "email": contact,
+        "mode": "registered"
+    }
+    return jsonify({"ok": True, "studentId": student_id})
+
+@app.route("/api/forgot-password", methods=["POST"])
+def api_forgot_password():
+    data = request.get_json(force=True) or {}
+    contact = data.get("contact", "")
+    return jsonify({
+        "ok": True,
+        "message": f"Password reset instructions dispatched to {contact}"
+    })
+
+@app.route("/api/guider/register-student", methods=["POST"])
+def api_guider_register_student():
+    data = request.get_json(force=True) or {}
+    name = data.get("name", "").strip()
+    class_name = data.get("className", "10th")
+    district = data.get("district", "Maharashtra")
+    category = data.get("category", "General")
+    income = float(data.get("income") or 120000)
+    mobile = data.get("mobile", "")
+    
+    student_id = f"g_{uuid.uuid4().hex[:6]}"
+    session["studentId"] = student_id
+    session["profile"] = {
+        "id": student_id,
+        "name": name,
+        "className": class_name,
+        "district": district,
+        "category": category,
+        "income": income,
+        "mobile": mobile,
+        "marks": 78,
+        "mobility": "district",
+        "registeredByTeacher": True
+    }
+    return jsonify({"ok": True, "studentId": student_id})
 
 FALLBACK_DISTRICTS = [
     "Mumbai", "Thane", "Pune", "Nashik", "Nagpur", "Kolhapur", 

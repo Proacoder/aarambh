@@ -134,12 +134,38 @@ function renderQuestion(index) {
   }
 }
 
+let assessmentMitraAvatar = null;
+
+const encouragementQuotes = [
+  "इथे चुकीचं उत्तर नाही. जे तुला खरंच आवडतं ते निवड.",
+  "छान! तुझ्या आवडीनुसार आपण पुढे जात आहोत.",
+  "शाब्बास! प्रत्येक उत्तरामुळे तुझे योग्य करिअर स्पष्ट होत आहे.",
+  "फार सुंदर! फक्त काही प्रश्न बाकी आहेत.",
+  "अप्रतिम! आता तुझा Career DNA अनलॉक करायला तयार हो!"
+];
+
+function updateMitraEncouragement(index) {
+  const quoteEl = document.getElementById('mitra-assessment-quote');
+  if (quoteEl) {
+    quoteEl.textContent = encouragementQuotes[index % encouragementQuotes.length];
+  }
+  if (assessmentMitraAvatar) {
+    assessmentMitraAvatar.setState('talking');
+    setTimeout(() => assessmentMitraAvatar.setState('idle'), 1500);
+  }
+}
+
 function selectOption(questionId, value) {
   answers[questionId] = parseInt(value, 10);
   renderQuestion(currentQuestion);
 
   const nextBtn = document.getElementById('btn-next');
   if (nextBtn) nextBtn.disabled = false;
+
+  if (assessmentMitraAvatar) {
+    assessmentMitraAvatar.setState('celebrating');
+    setTimeout(() => assessmentMitraAvatar.setState('idle'), 1200);
+  }
 }
 
 function nextQuestion() {
@@ -149,6 +175,7 @@ function nextQuestion() {
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
     renderQuestion(currentQuestion);
+    updateMitraEncouragement(currentQuestion);
   } else {
     submitAssessment();
   }
@@ -166,6 +193,9 @@ async function submitAssessment() {
   if (btn) {
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span> Analyzing Career DNA...';
+  }
+  if (assessmentMitraAvatar) {
+    assessmentMitraAvatar.setState('thinking');
   }
 
   try {
@@ -197,6 +227,11 @@ function setupEventListeners() {
 
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('question-container')) {
+    const avatarEl = document.getElementById('mitra-assessment-avatar');
+    if (avatarEl && window.MitraCharacter) {
+      assessmentMitraAvatar = new MitraCharacter(avatarEl, { size: 65 });
+    }
     initAssessment();
   }
 });
+

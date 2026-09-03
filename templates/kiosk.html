@@ -4,19 +4,45 @@
 <section class="section kiosk-page fade-in" style="min-height: 90vh; padding-top: 2rem; padding-bottom: 5rem;">
   <div class="container" style="max-width: 1100px;">
 
-    <!-- Kiosk Header -->
-    <div class="card glass-card text-center mb-5 p-5 slide-up" style="border-radius: 24px; border: 3px solid var(--gold);">
-      <div class="inline-flex align-center gap-2 badge badge-gold mb-2" style="font-size: 0.9rem; padding: 0.4rem 1.2rem;">
-        <span>🏫</span> <span>CPM • CAREER PATH MACHINE (KIOSK MODE)</span>
+    <!-- Kiosk Status Bar -->
+    <div class="card glass-card p-3 mb-4 flex-between align-center flex-wrap gap-2 slide-up" style="border-radius: 16px; border-left: 4px solid var(--gold);">
+      <div class="flex align-center gap-2">
+        <span class="mitra-pulse-dot"></span>
+        <strong class="text-sm">शासकीय करिअर मार्गदर्शन कियोस्क (Career Kiosk Mode)</strong>
+        <span class="badge badge-paper">सार्वजनिक केंद्र</span>
       </div>
-      <h1 class="page-title mb-2" style="font-size: 2.4rem; font-weight: 800;">
+
+      <div class="flex align-center gap-3">
+        <div class="text-xs text-muted">
+          <span>सत्र वेळ: </span>
+          <strong id="kiosk-timer-sec" style="color: var(--terracotta); font-size: 1rem;">5:00</strong>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="sessionStorage.clear(); window.location.reload();">
+          🔄 रीसेट (Reset)
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Jumbo Kiosk Hero Banner -->
+    <div class="card glass-card text-center mb-5 p-5 slide-up" style="border-radius: 24px; border: 3px solid var(--gold); position: relative; overflow: hidden;">
+      <div class="inline-flex align-center gap-2 badge badge-gold mb-2" style="font-size: 0.9rem; padding: 0.4rem 1.2rem;">
+        <span>🏫</span> <span>CPM • CAREER PATH MACHINE</span>
+      </div>
+      <h1 class="page-title mb-2" style="font-size: 2.3rem; font-weight: 800;">
         सार्वजनिक करिअर मार्गदर्शन केंद्र
       </h1>
-      <p class="page-subtitle text-muted mx-auto mb-3" style="font-size: 1.15rem; max-width: 650px;">
-        शाळा, ग्रामपंचायत व सेतू सुविधा केंद्रांसाठी स्पर्श-सुलभ (Touch-Friendly) डिजिटल प्रणाली.
+      <p class="page-subtitle text-muted mx-auto mb-4" style="font-size: 1.1rem; max-width: 650px;">
+        १०वी व १२वी नंतर काय करावे? फक्त एका स्पर्शाने तुमची आवड, योग्य कॉलेज आणि १००% शासकीय शिष्यवृत्ती शोधा.
       </p>
-      <div class="flex-center gap-2 text-small text-muted">
-        <span>🔒 No password needed</span> • <span>⚡ Auto-clears after 15 mins</span> • <span>🎙️ Voice assisted</span>
+
+      <!-- Instant 1-Minute Quick Scan CTA -->
+      <div class="flex-center gap-3 flex-wrap">
+        <button id="btn-start-quick-scan" class="btn btn-primary btn-lg ripple flex align-center gap-2" style="font-size: 1.15rem; padding: 1rem 2.2rem; border-radius: 999px;">
+          <span>⚡</span> <span>१ मिनिटांत त्वरित करिअर स्कॅन सुरू करा</span>
+        </button>
+        <a href="/guider" class="btn btn-secondary btn-lg ripple flex align-center gap-2" style="font-size: 1rem; padding: 1rem 1.8rem; border-radius: 999px;">
+          <span>👨‍🏫</span> <span>शिक्षकांसाठी: विद्यार्थी नोंदणी (Guider Portal)</span>
+        </a>
       </div>
     </div>
 
@@ -25,41 +51,145 @@
       
       <!-- Tile 1 -->
       <a href="/onboarding" class="kiosk-tile ripple" style="text-decoration: none; color: inherit;">
-        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🧭</div>
-        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--earth-brown); margin-bottom: 0.5rem;">१. नवीन प्रवास</h2>
-        <p class="text-xs text-muted mb-0">१०वी किंवा १२वी नंतर काय करावे? १ मिनिटात अचूक चाचणी द्या.</p>
+        <div style="font-size: 3.5rem; margin-bottom: 0.8rem;">🧭</div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--earth-brown); margin-bottom: 0.4rem;">१. सविस्तर करिअर प्रवास</h2>
+        <p class="text-xs text-muted mb-3">पूर्ण मानसशास्त्रीय चाचणी द्या आणि सविस्तर Career DNA मिळवा.</p>
+        <span class="btn btn-outline btn-sm">सुरू करा &rarr;</span>
       </a>
 
       <!-- Tile 2 -->
       <a href="/career-aunty" class="kiosk-tile ripple" style="text-decoration: none; color: inherit; border-color: var(--gold);">
-        <div style="font-size: 3.5rem; margin-bottom: 1rem;">👩‍🏫</div>
-        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--terracotta); margin-bottom: 0.5rem;">२. मित्रा ताईंशी बोला</h2>
-        <p class="text-xs text-muted mb-0">माईकवर बोलून कॉलेज, फी व वसतिगृहाबद्दल थेट शंका विचारा.</p>
+        <div style="font-size: 3.5rem; margin-bottom: 0.8rem;">👩‍🏫</div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--terracotta); margin-bottom: 0.4rem;">२. मित्रा ताईंशी बोला</h2>
+        <p class="text-xs text-muted mb-3">माईकवर बोलून कॉलेज, फी व वसतिगृहाबद्दल थेट शंका विचारा.</p>
+        <span class="btn btn-primary btn-sm">थेट बोला 🎙️</span>
       </a>
 
       <!-- Tile 3 -->
       <a href="/cost-calculator" class="kiosk-tile ripple" style="text-decoration: none; color: inherit;">
-        <div style="font-size: 3.5rem; margin-bottom: 1rem;">💰</div>
-        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--green); margin-bottom: 0.5rem;">३. खर्च व शिष्यवृत्ती</h2>
-        <p class="text-xs text-muted mb-0">MahaDBT शिष्यवृत्ती आणि वसतिगृह खर्चाचे अचूक नियोजन करा.</p>
+        <div style="font-size: 3.5rem; margin-bottom: 0.8rem;">💰</div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--green); margin-bottom: 0.4rem;">३. खर्च व शिष्यवृत्ती</h2>
+        <p class="text-xs text-muted mb-3">MahaDBT शिष्यवृत्ती आणि वसतिगृह खर्चाचे अचूक नियोजन करा.</p>
+        <span class="btn btn-outline btn-sm">हिशोब पहा &rarr;</span>
       </a>
 
       <!-- Tile 4 -->
       <a href="/parent-mode" class="kiosk-tile ripple" style="text-decoration: none; color: inherit;">
-        <div style="font-size: 3.5rem; margin-bottom: 1rem;">👨‍👩‍👦</div>
-        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--ai-indigo); margin-bottom: 0.5rem;">४. पालक संवाद</h2>
-        <p class="text-xs text-muted mb-0">आई-वडिलांसाठी सोप्या भाषेत करिअर आणि सुरक्षिततेचे मार्गदर्शन.</p>
+        <div style="font-size: 3.5rem; margin-bottom: 0.8rem;">👨‍👩‍👦</div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--ai-indigo); margin-bottom: 0.4rem;">४. पालक संवाद</h2>
+        <p class="text-xs text-muted mb-3">आई-वडिलांसाठी सोप्या भाषेत करिअर आणि सुरक्षिततेचे मार्गदर्शन.</p>
+        <span class="btn btn-outline btn-sm">सल्ला ऐका 🔊</span>
       </a>
 
     </div>
 
-    <!-- Kiosk Session Reset Button -->
-    <div class="text-center pt-3">
-      <button id="btn-reset-kiosk" class="btn btn-outline btn-lg ripple" onclick="sessionStorage.clear(); window.location.href='/';">
-        🔄 नवीन विद्यार्थ्यासाठी सत्र रीसेट करा (Reset Session)
-      </button>
+    <!-- Quick Scan Touch Modal -->
+    <div id="kiosk-scan-modal" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:1.5rem;">
+      <div class="card glass-card p-4 md-p-5" style="max-width:580px; width:100%; border-radius:24px; background:#FFFDF8; border:3px solid var(--gold); position:relative; max-height:90vh; overflow-y:auto;">
+        <button id="close-scan-modal" class="btn btn-outline btn-sm" style="position:absolute; top:1rem; right:1rem;">✕ बंद करा</button>
+
+        <!-- Step 1: Class Selection -->
+        <div id="scan-step-1">
+          <div class="badge badge-gold mb-2">टप्पा १ / ३ • शैक्षणिक स्तर</div>
+          <h2 class="text-xl font-bold mb-3">तुम्ही सध्या काय शिकत आहात?</h2>
+          <div class="flex-column gap-2">
+            <button class="btn btn-outline p-3 kiosk-stage-opt text-left" data-val="10th" style="font-size:1.1rem;">
+              📘 <strong>१०वी (SSC 10th Pass)</strong>
+            </button>
+            <button class="btn btn-outline p-3 kiosk-stage-opt text-left" data-val="12th" style="font-size:1.1rem;">
+              📗 <strong>१२वी (HSC 12th Pass)</strong>
+            </button>
+            <button class="btn btn-outline p-3 kiosk-stage-opt text-left" data-val="diploma" style="font-size:1.1rem;">
+              🔧 <strong>ITI / पॉलिटेक्निक डिप्लोमा</strong>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Problem Solving Style -->
+        <div id="scan-step-2" style="display:none;">
+          <div class="badge badge-gold mb-2">टप्पा २ / ३ • आवड व कल</div>
+          <h2 class="text-xl font-bold mb-3">तुम्हाला कोणते काम करायला सर्वात जास्त आवडेल?</h2>
+          <div class="flex-column gap-2">
+            <button class="btn btn-outline p-3 kiosk-pref-opt text-left" data-val="tech">
+              ⚙️ <strong>मशिनरी दुरुस्त करणे, सॉफ्टवेअर व नवीन गॅजेट्स बनवणे</strong>
+            </button>
+            <button class="btn btn-outline p-3 kiosk-pref-opt text-left" data-val="agri">
+              🌾 <strong>शेती, सौर ऊर्जा, सिंचन व आधुनिक कृषी व्यवसाय</strong>
+            </button>
+            <button class="btn btn-outline p-3 kiosk-pref-opt text-left" data-val="health">
+              ⚕️ <strong>रुग्णांची सेवा, लॅब चाचण्या व आरोग्य सेवा</strong>
+            </button>
+            <button class="btn btn-outline p-3 kiosk-pref-opt text-left" data-val="govt">
+              🏛️ <strong>प्रशासकीय काम, तलाठी/MPSC व समाज कल्याण</strong>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Name & District -->
+        <div id="scan-step-3" style="display:none;">
+          <div class="badge badge-gold mb-2">टप्पा ३ / ३ • वैयक्तिक माहिती</div>
+          <h2 class="text-xl font-bold mb-3">तुमचे नाव व जिल्हा नोंदवा</h2>
+          <form id="scan-form-step3">
+            <div class="form-group mb-3">
+              <label class="form-label">विद्यार्थ्याचे नाव</label>
+              <input type="text" id="kiosk-student-name" class="form-input" placeholder="उदा. विशाल शिंदे" required>
+            </div>
+            <div class="form-group mb-4">
+              <label class="form-label">जिल्हा (District)</label>
+              <input type="text" id="kiosk-student-district" class="form-input" placeholder="उदा. सातारा, पुणे, नाशिक..." required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg ripple w-full">
+              🎯 त्वरित निकाल व पावती पहा &rarr;
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 4: Result Ticket Receipt -->
+        <div id="scan-result-ticket" style="display:none;">
+          <div class="kiosk-ticket mb-3" id="printable-kiosk-ticket">
+            <div class="text-center mb-3 border-b border-light pb-2">
+              <strong style="color:var(--gold); font-size:1.1rem;">🌾 आरंभ करिअर मार्गदर्शन पावती</strong>
+              <div class="text-xs text-muted">महाराष्ट्र शासन युवा सक्षमीकरण उपक्रम</div>
+            </div>
+            
+            <div class="flex-between text-xs mb-2">
+              <span>विद्यार्थी: <strong id="ticket-name">राहुल पवार</strong></span>
+              <span>जिल्हा: <strong id="ticket-district">पुणे</strong></span>
+            </div>
+
+            <div class="p-2 mb-2" style="background:rgba(217,164,65,0.1); border-radius:8px;">
+              <span class="text-xs text-muted block">शिफारस केलेले करिअर (Career Archetype):</span>
+              <strong id="ticket-archetype" style="color:var(--terracotta); font-size:0.95rem;">Tech Innovator</strong>
+            </div>
+
+            <div class="text-xs mb-2">
+              <span class="text-muted block">स्थानिक शासकीय संस्था (Recommended Hubs):</span>
+              <strong id="ticket-colleges">Govt Polytechnic, Pune</strong>
+            </div>
+
+            <div class="text-xs p-2" style="background:rgba(79,122,69,0.1); border-radius:8px;">
+              <span class="text-muted block">पात्र शिष्यवृत्ती (Scholarship Benefit):</span>
+              <strong id="ticket-aid" style="color:var(--green);">५०% - १००% फी माफी (MahaDBT)</strong>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button id="btn-print-kiosk-ticket" class="btn btn-primary btn-sm flex-1">
+              🖨️ पावती प्रिंट करा (Print Slip)
+            </button>
+            <button class="btn btn-secondary btn-sm flex-1" onclick="sessionStorage.clear(); window.location.reload();">
+              🔄 पुढील विद्यार्थी (Next)
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/kiosk.js"></script>
 {% endblock %}

@@ -1,55 +1,134 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section login-section fade-in">
-  <div class="container flex-center" style="min-height: 75vh;">
+<section class="section login-section fade-in flex-center" style="min-height: 85vh; padding: 3rem 1.5rem;">
+  <div class="container flex-center">
     
-    <div class="card login-card text-center slide-up" style="max-width: 480px; width: 100%; padding: 2.5rem 2rem; border-radius: 20px; box-shadow: var(--shadow-lg);">
+    <div class="card glass-card slide-up" style="max-width: 480px; width: 100%; padding: 2.5rem 2rem; border-radius: 24px; position: relative;">
       
       <!-- Logo & Branding -->
-      <div class="login-brand mb-3">
-        <div class="greeting-avatar mb-2" style="font-size: 3rem;">🌾</div>
-        <h1 class="page-title mb-1" style="font-size: 1.8rem; font-weight: 700; color: var(--primary-dark);">CareerMitra</h1>
-        <p class="text-muted text-small mb-4" data-i18n="app_tagline">Rural Student Career Opportunity Navigator for Maharashtra</p>
+      <div class="login-brand text-center mb-4">
+        <div class="nav-logo justify-center mb-2" style="display:inline-flex; font-size:1.8rem;">
+          <span>🌾</span>
+        </div>
+        <h1 class="page-title mb-1" style="font-size: 1.6rem; font-weight: 800; color: var(--earth-brown);">AARAMBH Portal</h1>
+        <p class="text-muted text-small mb-0">Every journey begins with the right direction.</p>
       </div>
 
-      <div class="warli-border-wrap my-3" aria-hidden="true">
-        <div class="warli-border-pattern"></div>
+      <!-- Auth Navigation Tabs: Student Login | Student Register | Teacher/Guider -->
+      <div class="auth-nav-tabs mb-4">
+        <button type="button" class="auth-tab-btn active" id="tab-student-login">विद्यार्थी लॉगिन</button>
+        <button type="button" class="auth-tab-btn" id="tab-student-register">नवीन नोंदणी</button>
+        <button type="button" class="auth-tab-btn tab-teacher" id="tab-teacher-login">👨‍🏫 शिक्षक / Guider</button>
       </div>
 
-      <h3 class="mb-2" style="font-size: 1.25rem;">Start Your Journey</h3>
-      <p class="text-small text-muted mb-4">Choose how you would like to proceed:</p>
+      <!-- ==================== FORM 1: STUDENT LOGIN ==================== -->
+      <div id="form-student-login">
+        <form id="student-login-form">
+          <div class="form-group mb-3">
+            <label class="form-label">Email किंवा मोबाईल नंबर</label>
+            <input type="text" id="login-email" class="form-input" placeholder="student@example.com" value="rahul.pawar@example.com" required>
+          </div>
+          <div class="form-group mb-2">
+            <div class="flex-between align-center mb-1">
+              <label class="form-label mb-0">Password</label>
+              <a href="#" id="link-forgot-password" class="text-xs" style="color: var(--primary); font-weight: 600;">Forgot Password?</a>
+            </div>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" value="password123" required>
+          </div>
 
-      <!-- Auth Options -->
-      <div class="flex-column gap-3 mb-4">
-        
-        <!-- Google Sign In -->
-        <button id="google-login-btn" class="btn btn-outline flex-center gap-3 ripple" style="width: 100%; padding: 0.85rem; font-weight: 600; border-color: #dadce0; background: #fff; color: #3c4043;">
-          <svg width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-          </svg>
-          <span>Sign in with Google</span>
-        </button>
+          <button type="submit" class="btn btn-primary btn-lg ripple mt-4 mb-3" style="width: 100%;">
+            Sign In &rarr;
+          </button>
+        </form>
 
-        <!-- Divider -->
-        <div class="flex-between align-center my-2 text-muted text-small">
-          <span style="flex:1; height:1px; background:#e0e0e0;"></span>
-          <span class="px-3" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px;">or</span>
-          <span style="flex:1; height:1px; background:#e0e0e0;"></span>
+        <div class="my-4 flex-center">
+          <div style="height: 1px; flex: 1; background: var(--border-light);"></div>
+          <span class="mx-3 text-muted text-xs uppercase" style="letter-spacing: 1px;">OR</span>
+          <div style="height: 1px; flex: 1; background: var(--border-light);"></div>
         </div>
 
-        <!-- Guest Mode -->
-        <button id="guest-login-btn" class="btn btn-gold flex-center gap-2 ripple" style="width: 100%; padding: 0.85rem; font-weight: 600;">
-          <span>👤</span>
-          <span>Continue as Guest</span>
-        </button>
+        <div class="flex-column gap-2">
+          <!-- Google Sign In -->
+          <button id="google-login-btn" class="btn flex-center gap-2 hover-lift" style="width: 100%; background: #ffffff; border: 1px solid var(--border); color: #374151; font-size: 0.9rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+
+          <!-- Instant Guest Mode -->
+          <button id="guest-login-btn" class="btn btn-outline flex-center gap-2 hover-lift" style="width: 100%; font-size: 0.9rem;">
+            <span>⚡</span> <span>Instant Guest Access (विना पासवर्ड)</span>
+          </button>
+        </div>
       </div>
 
-      <div class="guest-info-badge p-3 text-small text-muted" style="background: rgba(217, 164, 65, 0.1); border-radius: 10px; border: 1px dashed var(--gold);">
-        ℹ️ <strong>Guest Mode:</strong> Instant access! Your answers will be processed live without storing personal data in our permanent database.
+      <!-- ==================== FORM 2: STUDENT REGISTRATION ==================== -->
+      <div id="form-student-register" style="display:none;">
+        <form id="student-register-form">
+          <div class="form-group mb-3">
+            <label class="form-label">पूर्ण नाव (Full Name)</label>
+            <input type="text" id="reg-name" class="form-input" placeholder="उदा. रोहन कांबळे" required>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">Email किंवा मोबाईल नंबर</label>
+            <input type="text" id="reg-contact" class="form-input" placeholder="student@gmail.com / 9876543210" required>
+          </div>
+          <div class="grid-2 gap-2 mb-3">
+            <div class="form-group">
+              <label class="form-label">जिल्हा (District)</label>
+              <input type="text" id="reg-district" class="form-input" placeholder="उदा. सातारा" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">इयत्ता (Class)</label>
+              <select id="reg-class" class="form-select">
+                <option value="10th">१०वी (10th)</option>
+                <option value="12th">१२वी (12th)</option>
+                <option value="diploma">ITI / Diploma</option>
+                <option value="ug">Graduate</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label">पासवर्ड तयार करा (Password)</label>
+            <input type="password" id="reg-password" class="form-input" placeholder="किमान ६ अक्षरे" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg ripple" style="width: 100%;">
+            विद्यार्थी खाते तयार करा &rarr;
+          </button>
+        </form>
+      </div>
+
+      <!-- ==================== FORM 3: GUIDER / TEACHER PORTAL ==================== -->
+      <div id="form-teacher-login" style="display:none;">
+        <div class="p-3 mb-3 text-xs" style="background: rgba(79, 111, 175, 0.1); border-radius: 10px; border: 1px solid rgba(79, 111, 175, 0.25);">
+          <strong style="color: var(--ai-indigo); display:block; margin-bottom: 2px;">👨‍🏫 मार्गदर्शक / शिक्षक पोर्टल</strong>
+          शाळेतील विद्यार्थ्यांची थेट नोंदणी करा, चाचणी सुरू करा आणि समुपदेशन अहवाल व्यवस्थापित करा.
+        </div>
+
+        <form id="teacher-login-form">
+          <div class="form-group mb-3">
+            <label class="form-label">शिक्षकाचे नाव किंवा Teacher ID</label>
+            <input type="text" id="teacher-id" class="form-input" placeholder="उदा. प्रा. आनंद कुलकर्णी" value="Prof. Anand Kulkarni" required>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">शाळेचा U-DISE कोड (School U-DISE Code)</label>
+            <input type="text" id="teacher-udise" class="form-input" placeholder="उदा. 27251401201" value="27251401201" required>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label">पासवर्ड (Password)</label>
+            <input type="password" id="teacher-password" class="form-input" placeholder="••••••••" value="teacherpass" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg ripple" style="width: 100%; background: var(--ai-indigo);">
+            👨‍🏫 Guider Dashboard मध्ये प्रवेश करा &rarr;
+          </button>
+        </form>
       </div>
 
     </div>
@@ -57,21 +136,24 @@
   </div>
 </section>
 
-<!-- Google Auth Mock Modal -->
-<div id="google-modal" class="modal-backdrop hidden flex-center" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999;">
-  <div class="card p-4 text-left slide-up" style="max-width: 400px; width:90%; border-radius:16px;">
-    <h3 class="mb-3 flex align-center gap-2">
-      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-      Sign in with Google
-    </h3>
-    <div class="form-group mb-3">
-      <label class="text-small">Enter your Gmail address:</label>
-      <input type="email" id="google-email" class="form-input mt-1" placeholder="student@gmail.com" value="rural.student@gmail.com">
+<!-- ==================== FORGOT PASSWORD MODAL ==================== -->
+<div id="forgot-password-modal" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; padding:1.5rem;">
+  <div class="card glass-card p-4" style="max-width:420px; width:100%; border-radius:20px; background:#FFFDF8;">
+    <div class="flex-between align-center mb-3">
+      <h3 class="text-base font-bold mb-0">🔑 Password Reset</h3>
+      <button id="close-forgot-modal" class="btn btn-sm btn-outline">✕</button>
     </div>
-    <div class="flex gap-2 justify-end mt-4">
-      <button class="btn btn-secondary btn-sm" id="close-modal-btn">Cancel</button>
-      <button class="btn btn-primary btn-sm" id="confirm-google-login">Sign In & Continue</button>
-    </div>
+    <p class="text-xs text-muted mb-3">तुमचा नोंदणीकृत ईमेल किंवा मोबाईल नंबर टाका. आम्ही तात्काळ पासवर्ड रीसेट लिंक किंवा OTP पाठवू.</p>
+
+    <form id="forgot-password-form">
+      <div class="form-group mb-3">
+        <label class="form-label">Email किंवा मोबाईल नंबर</label>
+        <input type="text" id="forgot-input" class="form-input" placeholder="student@example.com" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm ripple w-full">
+        Send Reset Link &rarr;
+      </button>
+    </form>
   </div>
 </div>
 {% endblock %}
@@ -79,41 +161,124 @@
 {% block scripts %}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const googleBtn = document.getElementById('google-login-btn');
-  const guestBtn = document.getElementById('guest-login-btn');
-  const modal = document.getElementById('google-modal');
-  const closeModal = document.getElementById('close-modal-btn');
-  const confirmGoogle = document.getElementById('confirm-google-login');
+  const tabStudentLogin = document.getElementById('tab-student-login');
+  const tabStudentRegister = document.getElementById('tab-student-register');
+  const tabTeacherLogin = document.getElementById('tab-teacher-login');
 
-  googleBtn.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-  });
+  const formStudentLogin = document.getElementById('form-student-login');
+  const formStudentRegister = document.getElementById('form-student-register');
+  const formTeacherLogin = document.getElementById('form-teacher-login');
 
-  closeModal.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
+  // Check URL query parameters (e.g. /login?tab=teacher)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('tab') === 'teacher') {
+    activateTab('teacher');
+  }
 
-  confirmGoogle.addEventListener('click', async () => {
-    const email = document.getElementById('google-email').value || 'student@gmail.com';
+  function activateTab(tab) {
+    [tabStudentLogin, tabStudentRegister, tabTeacherLogin].forEach(b => b.classList.remove('active'));
+    [formStudentLogin, formStudentRegister, formTeacherLogin].forEach(f => f.style.display = 'none');
+
+    if (tab === 'login') {
+      tabStudentLogin.classList.add('active');
+      formStudentLogin.style.display = 'block';
+    } else if (tab === 'register') {
+      tabStudentRegister.classList.add('active');
+      formStudentRegister.style.display = 'block';
+    } else if (tab === 'teacher') {
+      tabTeacherLogin.classList.add('active');
+      formTeacherLogin.style.display = 'block';
+    }
+  }
+
+  tabStudentLogin?.addEventListener('click', () => activateTab('login'));
+  tabStudentRegister?.addEventListener('click', () => activateTab('register'));
+  tabTeacherLogin?.addEventListener('click', () => activateTab('teacher'));
+
+  // Student Sign In
+  document.getElementById('student-login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mode: 'google', email })
+      body: JSON.stringify({ mode: 'email', email })
     });
     if (res.ok) {
+      window.location.href = '/dashboard';
+    }
+  });
+
+  // Student Register
+  document.getElementById('student-register-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('reg-name').value;
+    const contact = document.getElementById('reg-contact').value;
+    const district = document.getElementById('reg-district').value;
+    const className = document.getElementById('reg-class').value;
+
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, contact, district, className })
+    });
+    if (res.ok) {
+      alert('खाते यशस्वीरीत्या तयार झाले! आता तुमचा करिअर प्रवास सुरू करा.');
       window.location.href = '/onboarding';
     }
   });
 
-  guestBtn.addEventListener('click', async () => {
+  // Teacher Sign In
+  document.getElementById('teacher-login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const teacherId = document.getElementById('teacher-id').value;
+    const udise = document.getElementById('teacher-udise').value;
+    
+    sessionStorage.setItem('cm-teacher-name', teacherId);
+    sessionStorage.setItem('cm-teacher-udise', udise);
+    window.location.href = '/guider';
+  });
+
+  // Guest Mode
+  document.getElementById('guest-login-btn')?.addEventListener('click', async () => {
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mode: 'guest' })
     });
-    if (res.ok) {
-      window.location.href = '/onboarding';
-    }
+    if (res.ok) window.location.href = '/onboarding';
+  });
+
+  // Google Sign In Mock
+  document.getElementById('google-login-btn')?.addEventListener('click', async () => {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode: 'google', email: 'student@gmail.com' })
+    });
+    if (res.ok) window.location.href = '/dashboard';
+  });
+
+  // Forgot Password Modal
+  const forgotModal = document.getElementById('forgot-password-modal');
+  document.getElementById('link-forgot-password')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (forgotModal) forgotModal.style.display = 'flex';
+  });
+  document.getElementById('close-forgot-modal')?.addEventListener('click', () => {
+    if (forgotModal) forgotModal.style.display = 'none';
+  });
+
+  document.getElementById('forgot-password-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const val = document.getElementById('forgot-input').value;
+    await fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contact: val })
+    });
+    alert(`पासवर्ड रीसेट लिंक ${val} वर पाठवण्यात आली आहे!`);
+    if (forgotModal) forgotModal.style.display = 'none';
   });
 });
 </script>

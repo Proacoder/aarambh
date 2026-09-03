@@ -240,6 +240,168 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Global Mitra AI Slide-Over Controller
+function setupGlobalMitraSlideover() {
+  const triggerBtn = document.getElementById('global-mitra-trigger');
+  const bnavBtn = document.getElementById('bnav-tai-trigger');
+  const closeBtn = document.getElementById('close-mitra-slideover');
+  const overlay = document.getElementById('mitra-slideover-overlay');
+  const slideover = document.getElementById('mitra-global-slideover');
+  const form = document.getElementById('slideover-chat-form');
+  const input = document.getElementById('slideover-user-input');
+  const stream = document.getElementById('slideover-messages-stream');
+  const micBtn = document.getElementById('slideover-mic-btn');
+
+  let avatar = null;
+  const avatarBox = document.getElementById('slideover-mitra-avatar');
+  if (avatarBox && window.MitraCharacter) {
+    avatar = new MitraCharacter(avatarBox, { size: 44 });
+  }
+
+  function openSlideover() {
+    if (!slideover || !overlay) return;
+    slideover.classList.add('active');
+    overlay.classList.add('active');
+    if (avatar) avatar.setState('idle');
+    if (input) input.focus();
+  }
+
+  function closeSlideover() {
+    if (!slideover || !overlay) return;
+    slideover.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  triggerBtn?.addEventListener('click', openSlideover);
+  bnavBtn?.addEventListener('click', openSlideover);
+  closeBtn?.addEventListener('click', closeSlideover);
+  overlay?.addEventListener('click', closeSlideover);
+
+  // Send message
+  async function sendSlideoverMessage(text) {
+    if (!text.trim() || !stream) return;
+
+    // Append user bubble
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble bubble-user fade-in';
+    userBubble.innerHTML = `<p class="text-xs mb-0">${text}</p>`;
+    stream.appendChild(userBubble);
+    stream.scrollTop = stream.scrollHeight;
+
+    if (avatar) avatar.setState('thinking');
+
+    // Append typing indicator
+    const typingBubble = document.createElement('div');
+    typingBubble.className = 'chat-bubble bubble-tai fade-in text-xs text-muted';
+    typingBubble.id = 'slideover-typing';
+    typingBubble.innerHTML = `<em>Mitra is thinking... 🤔</em>`;
+    stream.appendChild(typingBubble);
+    stream.scrollTop = stream.scrollHeight;
+
+    try {
+      const res = await fetch('/api/mitra-tai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          language: CareerMitra.lang || 'mr'
+        })
+      });
+
+      const data = await res.json();
+      typingBubble.remove();
+
+      const taiBubble = document.createElement('div');
+      taiBubble.className = 'chat-bubble bubble-tai fade-in';
+      taiBubble.innerHTML = `<p class="text-xs mb-0">${data.reply.replace(/\n/g, '<br/>')}</p>`;
+      stream.appendChild(taiBubble);
+      stream.scrollTop = stream.scrollHeight;
+
+      if (avatar) {
+        avatar.setState('talking');
+        setTimeout(() => avatar.setState('idle'), 3000);
+      }
+
+      // Voice read aloud if synthesis is available
+      if (window.speechSynthesis) {
+        const utter = new SpeechSynthesisUtterance(data.reply.replace(/[*#]/g, ''));
+        utter.lang = CareerMitra.lang === 'mr' ? 'mr-IN' : (CareerMitra.lang === 'hi' ? 'hi-IN' : 'en-IN');
+        utter.rate = 1.0;
+        window.speechSynthesis.speak(utter);
+      }
+    } catch (err) {
+      typingBubble.remove();
+      const errBubble = document.createElement('div');
+      errBubble.className = 'chat-bubble bubble-tai fade-in text-xs';
+      errBubble.innerHTML = `<p class="text-xs mb-0">माफ करा, कृपया पुन्हा प्रयत्न करा. मी सदैव तुमच्या सोबत आहे!</p>`;
+      stream.appendChild(errBubble);
+      if (avatar) avatar.setState('idle');
+    }
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = input.value;
+    input.value = '';
+    sendSlideoverMessage(val);
+  });
+
+  // Quick Chips
+  document.querySelectorAll('.slideover-quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      sendSlideoverMessage(chip.dataset.prompt);
+    });
+  });
+
+  // Speech to text mic
+  if (micBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRec();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    micBtn.addEventListener('click', () => {
+      recognition.lang = CareerMitra.lang === 'mr' ? 'mr-IN' : (CareerMitra.lang === 'hi' ? 'hi-IN' : 'en-US');
+      micBtn.style.background = '#EF4444';
+      micBtn.style.color = '#fff';
+      if (avatar) avatar.setState('listening');
+      recognition.start();
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      if (input) input.value = transcript;
+      micBtn.style.background = '';
+      micBtn.style.color = '';
+      sendSlideoverMessage(transcript);
+    };
+
+    recognition.onerror = () => {
+      micBtn.style.background = '';
+      micBtn.style.color = '';
+      if (avatar) avatar.setState('idle');
+    };
+  }
+
+  // Mobile Drawer Toggle
+  const mobileToggle = document.getElementById('mobile-drawer-toggle');
+  const mobileClose = document.getElementById('mobile-drawer-close');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileOverlay = document.getElementById('mobile-drawer-overlay');
+
+  mobileToggle?.addEventListener('click', () => {
+    if (mobileDrawer) mobileDrawer.style.display = 'flex';
+    if (mobileOverlay) mobileOverlay.style.display = 'block';
+  });
+
+  const closeMobile = () => {
+    if (mobileDrawer) mobileDrawer.style.display = 'none';
+    if (mobileOverlay) mobileOverlay.style.display = 'none';
+  };
+  mobileClose?.addEventListener('click', closeMobile);
+  mobileOverlay?.addEventListener('click', closeMobile);
+}
+
 // Init
 document.addEventListener('DOMContentLoaded', () => {
   CareerMitra.loadTranslations(CareerMitra.lang);
@@ -249,4 +411,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupRippleEffect();
   setupMobileBottomNav();
   checkReturningUserHero();
+  setupGlobalMitraSlideover();
 });
+

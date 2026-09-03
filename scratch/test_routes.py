@@ -93,4 +93,41 @@ mitra_data = json.loads(res.data)
 assert "reply" in mitra_data and len(mitra_data["reply"]) > 10
 print("[OK] Mitra Tai AI API -> HTTP 200")
 
+# 8. Guider Page Route
+res = client.get("/guider")
+assert res.status_code == 200, "Guider page failed"
+print("[OK] Route /guider -> HTTP 200")
+
+# 9. Student Registration API
+reg_payload = {
+    "name": "Pooja Kadam",
+    "contact": "pooja@example.com",
+    "district": "Satara",
+    "className": "10th"
+}
+res = client.post("/api/register", json=reg_payload)
+assert res.status_code == 200, "Register API failed"
+print("[OK] Student Register API -> HTTP 200")
+
+# 10. Forgot Password API
+res = client.post("/api/forgot-password", json={"contact": "pooja@example.com"})
+assert res.status_code == 200, "Forgot password API failed"
+print("[OK] Forgot Password API -> HTTP 200")
+
+# 11. Teacher Registers Student API
+guider_student_payload = {
+    "name": "Santosh Mane",
+    "className": "10th",
+    "district": "Pune",
+    "category": "OBC",
+    "income": 95000,
+    "mobile": "9811122233"
+}
+res = client.post("/api/guider/register-student", json=guider_student_payload)
+assert res.status_code == 200, "Guider student register failed"
+print("[OK] Guider Register Student API -> HTTP 200")
+
+print("\n--- ALL BACKEND, GUIDER & API TESTS PASSED PERFECTLY! ---")
+
+
 print("\n--- ALL BACKEND & API TESTS PASSED PERFECTLY! ---")
