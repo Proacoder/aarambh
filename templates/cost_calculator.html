@@ -5,51 +5,51 @@
     <!-- Header card -->
     <div class="card text-center mb-4 slide-up">
       <div class="greeting-avatar mb-2">💰</div>
-      <h1 class="page-title mb-1">Kharcha Calculator</h1>
-      <p class="page-subtitle">Find out the real total cost of studying at any college</p>
+      <h1 class="page-title mb-1" data-i18n="kharcha_title">Kharcha Calculator</h1>
+      <p class="page-subtitle" data-i18n="kharcha_subtitle">Find out the real total cost of studying at any college</p>
     </div>
 
     <!-- College Selection -->
     <div class="card mb-4" id="cost-input-section">
-      <h3 class="mb-3">📍 Select Your Details</h3>
+      <h3 class="mb-3">📍 <span data-i18n="kharcha_select_details">Select Your Details</span></h3>
       <div class="grid-2 gap-3 mb-3">
         <div class="form-group">
-          <label>Your Home District</label>
+          <label data-i18n="kharcha_home_district">Your Home District</label>
           <select id="cost-home-district" class="form-select"></select>
         </div>
         <div class="form-group">
-          <label>Target College</label>
+          <label data-i18n="kharcha_target_college">Target College</label>
           <select id="cost-college" class="form-select"></select>
         </div>
       </div>
       <div class="grid-2 gap-3 mb-3">
         <div class="form-group">
-          <label>Accommodation Type</label>
+          <label data-i18n="kharcha_accom_type">Accommodation Type</label>
           <select id="cost-accommodation" class="form-select">
-            <option value="govtHostel">🏛️ Government Hostel</option>
-            <option value="privateHostel">🏢 Private Hostel</option>
-            <option value="pgRoom">🏠 Paying Guest (PG)</option>
-            <option value="sharedFlat">👥 Shared Flat</option>
+            <option value="govtHostel">🏛️ <span data-i18n="kharcha_govt_hostel">Government Hostel</span></option>
+            <option value="privateHostel">🏢 <span data-i18n="kharcha_private_hostel">Private Hostel</span></option>
+            <option value="pgRoom">🏠 <span data-i18n="kharcha_pg_room">Paying Guest (PG)</span></option>
+            <option value="sharedFlat">👥 <span data-i18n="kharcha_shared_flat">Shared Flat</span></option>
           </select>
         </div>
         <div class="form-group">
-          <label>Food Preference</label>
+          <label data-i18n="kharcha_food_pref">Food Preference</label>
           <select id="cost-food" class="form-select">
-            <option value="collegeMess">🍽️ College Mess</option>
-            <option value="selfCooking">🍳 Self Cooking</option>
-            <option value="mixed">🥘 Mixed</option>
+            <option value="collegeMess">🍽️ <span data-i18n="kharcha_college_mess">College Mess</span></option>
+            <option value="selfCooking">🍳 <span data-i18n="kharcha_self_cooking">Self Cooking</span></option>
+            <option value="mixed">🥘 <span data-i18n="kharcha_mixed">Mixed</span></option>
           </select>
         </div>
       </div>
       <div class="grid-2 gap-3 mb-4">
         <div class="form-group">
-          <label>Annual Family Income (₹)</label>
-          <input type="number" id="cost-income" class="form-input" placeholder="e.g. 200000" value="">
+          <label data-i18n="kharcha_annual_income">Annual Family Income (₹)</label>
+          <input type="number" id="cost-income" class="form-input" placeholder="e.g. 200000" value="" data-i18n-ph="kharcha_ph_income">
         </div>
         <div class="form-group">
-          <label>Category</label>
+          <label data-i18n="kharcha_category">Category</label>
           <select id="cost-category" class="form-select">
-            <option value="OPEN">Open / General</option>
+            <option value="OPEN" data-i18n="kharcha_open_gen">Open / General</option>
             <option value="EBC">EBC</option>
             <option value="OBC">OBC</option>
             <option value="SC">SC</option>
@@ -57,7 +57,7 @@
           </select>
         </div>
       </div>
-      <button id="calculate-btn" class="btn btn-primary ripple" style="width:100%">🧮 Calculate Total Cost</button>
+      <button id="calculate-btn" class="btn btn-primary ripple" style="width:100%">🧮 <span data-i18n="kharcha_calculate_btn">Calculate Total Cost</span></button>
     </div>
 
     <!-- Results Section (hidden initially) -->
@@ -72,26 +72,26 @@
           </div>
           <div class="text-center">
             <div style="font-size:2rem;font-weight:700;color:var(--primary)" id="cost-net-annual"></div>
-            <p class="text-small text-muted">Net Annual Cost</p>
+            <p class="text-small text-muted" data-i18n="kharcha_net_annual">Net Annual Cost</p>
           </div>
         </div>
       </div>
 
       <!-- Breakdown Bars -->
       <div class="card mb-4" id="cost-breakdown-card">
-        <h3 class="mb-3">📊 Annual Cost Breakdown</h3>
+        <h3 class="mb-3">📊 <span data-i18n="kharcha_breakdown_title">Annual Cost Breakdown</span></h3>
         <div id="cost-bars"></div>
         <div class="mt-4" style="border-top:2px solid var(--primary);padding-top:1rem">
           <div class="flex-between mb-2">
-            <span style="font-weight:600">Total Before Scholarships</span>
+            <span style="font-weight:600" data-i18n="kharcha_total_before">Total Before Scholarships</span>
             <span style="font-weight:700" id="cost-gross"></span>
           </div>
           <div class="flex-between mb-2" style="color:var(--success)">
-            <span>🎓 Scholarship Deductions</span>
+            <span>🎓 <span data-i18n="kharcha_scholarship_deductions">Scholarship Deductions</span></span>
             <span style="font-weight:700" id="cost-scholarship"></span>
           </div>
           <div class="flex-between" style="font-size:1.3rem;font-weight:700;color:var(--primary)">
-            <span>✅ Net Out-of-Pocket</span>
+            <span>✅ <span data-i18n="kharcha_net_oop">Net Out-of-Pocket</span></span>
             <span id="cost-net"></span>
           </div>
         </div>
@@ -99,15 +99,15 @@
 
       <!-- Family Impact Card -->
       <div class="card mb-4" id="family-impact-card">
-        <h3 class="mb-3">👨👩👧 Family Budget Impact</h3>
+        <h3 class="mb-3">👨👩👧 <span data-i18n="kharcha_family_impact">Family Budget Impact</span></h3>
         <div class="grid-2 gap-3">
           <div class="text-center">
             <div style="font-size:2rem;font-weight:700" id="cost-monthly"></div>
-            <p class="text-small text-muted">Monthly Cost</p>
+            <p class="text-small text-muted" data-i18n="kharcha_monthly_cost">Monthly Cost</p>
           </div>
           <div class="text-center">
             <div style="font-size:2rem;font-weight:700" id="cost-income-pct"></div>
-            <p class="text-small text-muted">% of Family Income</p>
+            <p class="text-small text-muted" data-i18n="kharcha_pct_income">% of Family Income</p>
           </div>
         </div>
         <div id="affordability-msg" class="mt-3 text-center" style="padding:1rem;border-radius:8px"></div>
@@ -115,7 +115,7 @@
 
       <!-- Matched Scholarships -->
       <div class="card mb-4" id="cost-scholarships-card">
-        <h3 class="mb-3">🎓 Scholarships You Qualify For</h3>
+        <h3 class="mb-3">🎓 <span data-i18n="kharcha_qualify_scholarships">Scholarships You Qualify For</span></h3>
         <div id="cost-scholarship-list"></div>
       </div>
     </div>

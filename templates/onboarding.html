@@ -57,7 +57,7 @@
         <div class="grid-2">
           <div class="form-group">
             <label for="name" class="form-label" data-i18n="field_name">Your name</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="उदा. राहुल पवार" required aria-required="true">
+            <input type="text" id="name" name="name" class="form-input" placeholder="उदा. राहुल पवार" data-i18n-ph="placeholder_name" required aria-required="true">
           </div>
           <div class="form-group">
             <label for="age" class="form-label" data-i18n="field_age">Age</label>
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label for="taluka" class="form-label" data-i18n="field_taluka">Taluka / City (optional)</label>
-            <input type="text" id="taluka" name="taluka" class="form-input" placeholder="उदा. बारामती">
+            <input type="text" id="taluka" name="taluka" class="form-input" placeholder="उदा. बारामती" data-i18n-ph="placeholder_taluka">
           </div>
         </div>
       </fieldset>
@@ -105,18 +105,18 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Gender</label>
+            <label class="form-label" data-i18n="field_gender">Gender</label>
             <select id="gender" name="gender" class="form-select">
-              <option value="" selected>Prefer not to say</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-              <option value="other">Other</option>
+              <option value="" selected data-i18n="gender_prefer_not_say">Prefer not to say</option>
+              <option value="female" data-i18n="gender_female">Female</option>
+              <option value="male" data-i18n="gender_male">Male</option>
+              <option value="other" data-i18n="gender_other">Other</option>
             </select>
           </div>
           <div class="form-group span-2">
             <label class="form-checkbox-label flex align-center gap-2">
               <input type="checkbox" id="disability" name="disability" class="form-checkbox">
-              <span>Person with disability (दिव्यांग)</span>
+              <span data-i18n="field_pwd">Person with disability (दिव्यांग)</span>
             </label>
           </div>
         </div>

@@ -4,7 +4,7 @@
 <section class="section assessment fade-in">
   <div class="container">
     <div class="assessment-header card text-center mb-4 slide-up">
-      <h1 class="page-title mb-1" data-i18n="assessment_title">🧭 Let's discover what you enjoy!</h1>
+      <h1 class="page-title mb-1">🧭 <span data-i18n="assessment_title_text">Let's discover what you enjoy!</span></h1>
       <p class="page-subtitle mb-2" data-i18n="assessment_sub">Rate how much each statement sounds like you.</p>
       
       <!-- Reassuring Encouragement Banner -->
@@ -17,7 +17,7 @@
     <!-- Progress Indicator -->
     <div class="quiz-progress-container card mb-4 slide-up stagger-1">
       <div class="flex-between mb-2">
-        <span class="text-small text-muted">Progress</span>
+        <span class="text-small text-muted" data-i18n="progress_label">Progress</span>
         <span id="progress-text" class="text-bold text-small">Question 1 of 10</span>
       </div>
       <div class="quiz-progress-wrap">
@@ -27,7 +27,7 @@
 
     <!-- Question Card -->
     <div id="question-container" class="quiz-container card slide-up stagger-2">
-      <h2 id="question-text" class="quiz-question" aria-live="polite">Loading…</h2>
+      <h2 id="question-text" class="quiz-question" aria-live="polite" data-i18n="loading_text">Loading…</h2>
 
       <div id="options-container" class="likert-scale mt-4" role="radiogroup" aria-label="Rating scale"></div>
 

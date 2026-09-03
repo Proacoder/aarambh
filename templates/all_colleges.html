@@ -756,23 +756,23 @@
         <!-- View Switcher -->
         <div class="nav-tabs">
             <button class="nav-tab-btn active" id="btnTabColleges" onclick="switchTab('colleges')">
-                <i class="fa-solid fa-graduation-cap"></i> Colleges &amp; Rural Map
+                <i class="fa-solid fa-graduation-cap"></i> <span data-i18n="nav_colleges_map">Colleges &amp; Rural Map</span>
             </button>
             <button class="nav-tab-btn tab-dist" id="btnTabDistribution" onclick="switchTab('distribution')">
-                <i class="fa-solid fa-chart-pie"></i> Distribution &amp; Coverage
+                <i class="fa-solid fa-chart-pie"></i> <span data-i18n="nav_distribution">Distribution &amp; Coverage</span>
             </button>
             <button class="nav-tab-btn" id="btnTabCities" onclick="switchTab('cities')">
-                <i class="fa-solid fa-city"></i> Career Hubs
+                <i class="fa-solid fa-city"></i> <span data-i18n="nav_career_hubs">Career Hubs</span>
             </button>
         </div>
 
         <div class="nav-right" style="display:flex; align-items:center; gap:12px;">
             <a href="/dashboard" style="text-decoration:none; display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:50px; font-size:12px; font-weight:700; background:linear-gradient(135deg,#4F46E5,#3b82f6); color:#fff; box-shadow:0 2px 10px rgba(79,70,229,.35);">
-                <i class="fa-solid fa-arrow-left"></i> My Dashboard
+                <i class="fa-solid fa-arrow-left"></i> <span data-i18n="nav_dashboard">My Dashboard</span>
             </a>
             <div class="badge-live">
                 <div class="pulse-dot"></div>
-                <span id="topLiveCounter">65+ Rural &amp; Urban Institutes</span>
+                <span id="topLiveCounter" data-i18n="nav_live_counter">65+ Rural &amp; Urban Institutes</span>
             </div>
         </div>
     </nav>
@@ -784,10 +784,10 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-title-group">
-                    <h2><i class="fa-solid fa-building-columns" style="color:var(--accent);"></i>Colleges &amp; Institutes</h2>
-                    <p>Subsidized, polytechnics, ITIs &amp; degree colleges</p>
+                    <h2><i class="fa-solid fa-building-columns" style="color:var(--accent);"></i><span data-i18n="sidebar_title_colleges">Colleges &amp; Institutes</span></h2>
+                    <p data-i18n="sidebar_subtitle_colleges">Subsidized, polytechnics, ITIs &amp; degree colleges</p>
                 </div>
-                <span class="count-pill" id="filteredCountBadge">0 colleges</span>
+                <span class="count-pill" id="filteredCountBadge" data-i18n="sidebar_count_colleges">0 colleges</span>
             </div>
 
             <!-- Filter Panel -->
@@ -795,24 +795,24 @@
                 <!-- Search -->
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="clgSearch" placeholder="Search college, course, taluka…" oninput="applyCollegeFilters()">
+                    <input type="text" id="clgSearch" placeholder="Search college, course, taluka…" oninput="applyCollegeFilters()" data-i18n-ph="sidebar_search_placeholder">
                     <button class="search-clear-btn" id="clgSearchClear" onclick="clearSearch()" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
                 <!-- Quick District / Category Badges -->
                 <div class="quick-badges">
-                    <button class="q-badge active-primary" onclick="setQuickArea('all', this)">All Maharashtra</button>
-                    <button class="q-badge" onclick="setQuickArea('Rural', this)">🌾 Rural Only</button>
-                    <button class="q-badge" onclick="setQuickArea('Tribal', this)">🏹 Tribal Belts</button>
-                    <button class="q-badge" onclick="setQuickType('Government', this)">🏛️ Govt Only</button>
-                    <button class="q-badge" onclick="setQuickCat('ITI', this)">🔧 ITI</button>
-                    <button class="q-badge" onclick="setQuickCat('Polytechnic', this)">📐 Polytechnic</button>
+                    <button class="q-badge active-primary" onclick="setQuickArea('all', this)" data-i18n="badge_all_mh">All Maharashtra</button>
+                    <button class="q-badge" onclick="setQuickArea('Rural', this)">🌾 <span data-i18n="badge_rural">Rural Only</span></button>
+                    <button class="q-badge" onclick="setQuickArea('Tribal', this)">🏹 <span data-i18n="badge_tribal">Tribal Belts</span></button>
+                    <button class="q-badge" onclick="setQuickType('Government', this)">🏛️ <span data-i18n="badge_govt">Govt Only</span></button>
+                    <button class="q-badge" onclick="setQuickCat('ITI', this)">🔧 <span data-i18n="badge_iti">ITI</span></button>
+                    <button class="q-badge" onclick="setQuickCat('Polytechnic', this)">📐 <span data-i18n="badge_polytechnic">Polytechnic</span></button>
                 </div>
 
                 <!-- 2x2 Dropdowns -->
                 <div class="filter-grid-2">
                     <div class="filter-field">
-                        <label>District</label>
+                        <label data-i18n="filter_district">District</label>
                         <select class="filter-select" id="clgDistrict" onchange="applyCollegeFilters()">
                             <option value="all">All Districts (36)</option>
                             <!-- Urban & Suburban -->
@@ -842,7 +842,7 @@
                     </div>
 
                     <div class="filter-field">
-                        <label>Institute Type</label>
+                        <label data-i18n="filter_institute_type">Institute Type</label>
                         <select class="filter-select" id="clgType" onchange="applyCollegeFilters()">
                             <option value="all">All Types</option>
                             <option value="Government">Government (Subsidized)</option>
@@ -854,7 +854,7 @@
 
                 <div class="filter-grid-2">
                     <div class="filter-field">
-                        <label>Category</label>
+                        <label data-i18n="filter_category">Category</label>
                         <select class="filter-select" id="clgCategory" onchange="applyCollegeFilters()">
                             <option value="all">All Streams</option>
                             <option value="ITI">ITI / Vocational</option>
@@ -868,7 +868,7 @@
                     </div>
 
                     <div class="filter-field">
-                        <label>Min Qualification</label>
+                        <label data-i18n="filter_min_qual">Min Qualification</label>
                         <select class="filter-select" id="clgQual" onchange="applyCollegeFilters()">
                             <option value="all">Any Qualification</option>
                             <option value="10th">After 10th (SSC)</option>
@@ -880,7 +880,7 @@
                 <!-- Fee Range Slider -->
                 <div class="fee-slider-row">
                     <div class="fee-label-row">
-                        <span class="fee-label-title">Max Annual Tuition</span>
+                        <span class="fee-label-title" data-i18n="filter_max_fee">Max Annual Tuition</span>
                         <span class="fee-label-val" id="feeValDisplay">₹1,60,000</span>
                     </div>
                     <input type="range" class="range-slider" id="feeRangeSlider" min="1500" max="160000" step="2500" value="160000" oninput="updateFeeDisplay(); applyCollegeFilters()">
@@ -888,7 +888,7 @@
 
                 <!-- Scheme Filter -->
                 <div class="filter-field">
-                    <label>Scholarship / Scheme</label>
+                    <label data-i18n="filter_scheme">Scholarship / Scheme</label>
                     <select class="filter-select" id="clgScheme" onchange="applyCollegeFilters()">
                         <option value="all">Any Government Scheme</option>
                         <option value="sch-ebc-01">EBC Fee Concession (Rajarshi Shahu)</option>
@@ -905,10 +905,10 @@
                 <!-- Action row -->
                 <div class="action-row">
                     <button class="btn-act btn-act-gps" onclick="findUserLocation()">
-                        <i class="fa-solid fa-location-crosshairs"></i> Find Colleges Near Me (GPS)
+                        <i class="fa-solid fa-location-crosshairs"></i> <span data-i18n="btn_find_gps">Find Colleges Near Me (GPS)</span>
                     </button>
                     <button class="btn-act btn-act-reset" onclick="resetCollegeFilters()">
-                        <i class="fa-solid fa-rotate-left"></i> Reset
+                        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="btn_reset">Reset</span>
                     </button>
                 </div>
             </div>
@@ -923,39 +923,39 @@
 
             <!-- Quick Region Jump Bar -->
             <div class="map-quick-regions">
-                <button class="region-btn active" onclick="zoomToRegion('all')">All Maharashtra</button>
-                <button class="region-btn" onclick="zoomToRegion('rural')">🌾 Rural &amp; Tribal Belts</button>
-                <button class="region-btn" onclick="zoomToRegion('vidarbha')">Vidarbha</button>
-                <button class="region-btn" onclick="zoomToRegion('marathwada')">Marathwada</button>
-                <button class="region-btn" onclick="zoomToRegion('khandesh')">North MH / Khandesh</button>
-                <button class="region-btn" onclick="zoomToRegion('konkan')">Konkan Coast</button>
-                <button class="region-btn" onclick="zoomToRegion('western')">Western MH</button>
+                <button class="region-btn active" onclick="zoomToRegion('all')" data-i18n="region_all">All Maharashtra</button>
+                <button class="region-btn" onclick="zoomToRegion('rural')">🌾 <span data-i18n="region_rural">Rural &amp; Tribal Belts</span></button>
+                <button class="region-btn" onclick="zoomToRegion('vidarbha')" data-i18n="region_vidarbha">Vidarbha</button>
+                <button class="region-btn" onclick="zoomToRegion('marathwada')" data-i18n="region_marathwada">Marathwada</button>
+                <button class="region-btn" onclick="zoomToRegion('khandesh')" data-i18n="region_khandesh">North MH / Khandesh</button>
+                <button class="region-btn" onclick="zoomToRegion('konkan')" data-i18n="region_konkan">Konkan Coast</button>
+                <button class="region-btn" onclick="zoomToRegion('western')" data-i18n="region_western">Western MH</button>
             </div>
 
             <!-- Basemap Switcher (Zero Watermark / No Key Required) -->
             <div class="map-basemap-toggle">
-                <button class="basemap-btn active" id="btnBaseDark" onclick="setBasemap('dark', this)"><i class="fa-solid fa-moon"></i> Dark</button>
-                <button class="basemap-btn" id="btnBaseOsm" onclick="setBasemap('osm', this)"><i class="fa-solid fa-map"></i> Streets</button>
-                <button class="basemap-btn" id="btnBaseSat" onclick="setBasemap('sat', this)"><i class="fa-solid fa-satellite"></i> Satellite</button>
+                <button class="basemap-btn active" id="btnBaseDark" onclick="setBasemap('dark', this)"><i class="fa-solid fa-moon"></i> <span data-i18n="map_dark">Dark</span></button>
+                <button class="basemap-btn" id="btnBaseOsm" onclick="setBasemap('osm', this)"><i class="fa-solid fa-map"></i> <span data-i18n="map_streets">Streets</span></button>
+                <button class="basemap-btn" id="btnBaseSat" onclick="setBasemap('sat', this)"><i class="fa-solid fa-satellite"></i> <span data-i18n="map_satellite">Satellite</span></button>
             </div>
 
             <!-- Legend Overlay -->
             <div class="map-legend-overlay">
-                <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Government (Subsidized)</div>
-                <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>Aided</div>
-                <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Private</div>
-                <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;box-shadow:0 0 8px #3b82f6"></span>Your Location</div>
+                <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span><span data-i18n="legend_govt">Government (Subsidized)</span></div>
+                <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span><span data-i18n="legend_aided">Aided</span></div>
+                <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span><span data-i18n="legend_private">Private</span></div>
+                <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;box-shadow:0 0 8px #3b82f6"></span><span data-i18n="legend_location">Your Location</span></div>
             </div>
 
             <!-- Stats Overlay -->
             <div class="map-stats-overlay">
                 <div class="stat-pill">
                     <i class="fa-solid fa-graduation-cap" style="color:var(--green);"></i>
-                    <span id="statCollegesCount">66</span> Colleges Plotted
+                    <span id="statCollegesCount">66</span> <span data-i18n="stat_colleges">Colleges Plotted</span>
                 </div>
                 <div class="stat-pill">
                     <i class="fa-solid fa-wheat-awn" style="color:var(--amber);"></i>
-                    <span id="statRuralCount">28</span> Rural/Tribal
+                    <span id="statRuralCount">28</span> <span data-i18n="stat_rural">Rural/Tribal</span>
                 </div>
             </div>
         </div>
@@ -970,11 +970,11 @@
                 <!-- Hero Section -->
                 <div class="analytics-hero">
                     <div class="analytics-hero-text">
-                        <h1>📊 Maharashtra College Distribution &amp; Rural Reach</h1>
-                        <p>Detailed breakdown of higher education and technical institutions across rural talukas, tribal belts, and industrial centers with fee subsidy coverage.</p>
+                        <h1 data-i18n="dist_hero_title">📊 Maharashtra College Distribution &amp; Rural Reach</h1>
+                        <p data-i18n="dist_hero_desc">Detailed breakdown of higher education and technical institutions across rural talukas, tribal belts, and industrial centers with fee subsidy coverage.</p>
                     </div>
                     <button class="btn-act btn-act-gps" style="padding:10px 18px;font-size:13px;" onclick="switchTab('colleges')">
-                        <i class="fa-solid fa-map"></i> Open Interactive Map
+                        <i class="fa-solid fa-map"></i> <span data-i18n="btn_open_map">Open Interactive Map</span>
                     </button>
                 </div>
 
@@ -986,7 +986,7 @@
                         </div>
                         <div>
                             <div class="kpi-val" id="kpiTotal">66</div>
-                            <div class="kpi-label">Institutions Documented</div>
+                            <div class="kpi-label" data-i18n="kpi_institutions">Institutions Documented</div>
                         </div>
                     </div>
 
@@ -996,7 +996,7 @@
                         </div>
                         <div>
                             <div class="kpi-val" id="kpiRuralPct">45%</div>
-                            <div class="kpi-label">Rural &amp; Tribal Talukas</div>
+                            <div class="kpi-label" data-i18n="kpi_rural">Rural &amp; Tribal Talukas</div>
                         </div>
                     </div>
 
@@ -1006,7 +1006,7 @@
                         </div>
                         <div>
                             <div class="kpi-val" id="kpiGovtCount">34</div>
-                            <div class="kpi-label">Govt &amp; Low-Fee (&lt;₹10k/yr)</div>
+                            <div class="kpi-label" data-i18n="kpi_govt">Govt &amp; Low-Fee (&lt;₹10k/yr)</div>
                         </div>
                     </div>
 
@@ -1016,7 +1016,7 @@
                         </div>
                         <div>
                             <div class="kpi-val">100%</div>
-                            <div class="kpi-label">MahaDBT Scheme Eligible</div>
+                            <div class="kpi-label" data-i18n="kpi_scheme">MahaDBT Scheme Eligible</div>
                         </div>
                     </div>
                 </div>
@@ -1029,9 +1029,9 @@
                         <div class="dist-card-header">
                             <div class="dist-card-title">
                                 <i class="fa-solid fa-map-location-dot" style="color:var(--accent);"></i>
-                                District Coverage &amp; Rural Spread
+                                <span data-i18n="chart_district_title">District Coverage &amp; Rural Spread</span>
                             </div>
-                            <span style="font-size:11px;color:var(--muted);font-weight:700;">Count</span>
+                            <span style="font-size:11px;color:var(--muted);font-weight:700;" data-i18n="chart_count">Count</span>
                         </div>
                         <div class="bar-group" id="districtBarChart"></div>
                     </div>
@@ -1041,9 +1041,9 @@
                         <div class="dist-card-header">
                             <div class="dist-card-title">
                                 <i class="fa-solid fa-layer-group" style="color:var(--green);"></i>
-                                Stream &amp; Category Distribution
+                                <span data-i18n="chart_stream_title">Stream &amp; Category Distribution</span>
                             </div>
-                            <span style="font-size:11px;color:var(--muted);font-weight:700;">Share</span>
+                            <span style="font-size:11px;color:var(--muted);font-weight:700;" data-i18n="chart_share">Share</span>
                         </div>
                         <div class="bar-group" id="categoryBarChart"></div>
                     </div>
@@ -1053,7 +1053,7 @@
                         <div class="dist-card-header">
                             <div class="dist-card-title">
                                 <i class="fa-solid fa-scale-balanced" style="color:var(--amber);"></i>
-                                Government vs. Private vs. Aided
+                                <span data-i18n="chart_type_title">Government vs. Private vs. Aided</span>
                             </div>
                         </div>
                         <div class="bar-group" id="typeBarChart"></div>
@@ -1064,7 +1064,7 @@
                         <div class="dist-card-header">
                             <div class="dist-card-title">
                                 <i class="fa-solid fa-indian-rupee-sign" style="color:var(--pink);"></i>
-                                Annual Fee Brackets
+                                <span data-i18n="chart_fee_title">Annual Fee Brackets</span>
                             </div>
                         </div>
                         <div class="bar-group" id="feeBarChart"></div>
@@ -1077,21 +1077,21 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                         <h3 style="font-size:15px; font-weight:800; color:#fff;">
                             <i class="fa-solid fa-table-list" style="color:var(--accent);margin-right:8px;"></i>
-                            District Higher Education Directory
+                            <span data-i18n="table_dir_title">District Higher Education Directory</span>
                         </h3>
-                        <span style="font-size:12px; color:var(--muted);">Click any district to explore on map</span>
+                        <span style="font-size:12px; color:var(--muted);" data-i18n="table_dir_hint">Click any district to explore on map</span>
                     </div>
 
                     <table class="dist-table">
                         <thead>
                             <tr>
-                                <th>District</th>
-                                <th>Region</th>
-                                <th>Rural / Tribal Focus</th>
-                                <th>Colleges Tracked</th>
-                                <th>Lowest Fee</th>
-                                <th>Key Streams</th>
-                                <th>Action</th>
+                                <th data-i18n="th_district">District</th>
+                                <th data-i18n="th_region">Region</th>
+                                <th data-i18n="th_focus">Rural / Tribal Focus</th>
+                                <th data-i18n="th_colleges">Colleges Tracked</th>
+                                <th data-i18n="th_fee">Lowest Fee</th>
+                                <th data-i18n="th_streams">Key Streams</th>
+                                <th data-i18n="th_action">Action</th>
                             </tr>
                         </thead>
                         <tbody id="districtDirectoryTable"></tbody>
@@ -1107,15 +1107,15 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-title-group">
-                    <h2><i class="fa-solid fa-city" style="color:var(--accent);"></i>District Career Hubs</h2>
-                    <p>Employment centers &amp; major economic sectors</p>
+                    <h2><i class="fa-solid fa-city" style="color:var(--accent);"></i><span data-i18n="hubs_title">District Career Hubs</span></h2>
+                    <p data-i18n="hubs_subtitle">Employment centers &amp; major economic sectors</p>
                 </div>
             </div>
 
             <div class="filter-panel" style="max-height:120px;">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="citySearch" placeholder="Search industrial hub…" oninput="filterCitiesSearch(this.value)">
+                    <input type="text" id="citySearch" placeholder="Search industrial hub…" oninput="filterCitiesSearch(this.value)" data-i18n-ph="hubs_search_placeholder">
                 </div>
             </div>
 
