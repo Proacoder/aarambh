@@ -1,53 +1,93 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section hero fade-in">
+<!-- ========================================================================
+     CINEMATIC HERO SECTION
+     ======================================================================== -->
+<section class="section hero fade-in" style="padding-top: 3.5rem; padding-bottom: 4rem; position: relative;">
   <div class="hero-warli-bg" aria-hidden="true">
-    <img src="/static/img/warli-tree.svg" class="warli-bg-asset asset-tree" alt="">
-    <img src="/static/img/warli-dancers.svg" class="warli-bg-asset asset-dancers" alt="">
+    <img src="/static/img/warli-tree.svg" class="warli-bg-asset asset-tree" alt="" style="opacity: 0.25;">
+    <img src="/static/img/warli-dancers.svg" class="warli-bg-asset asset-dancers" alt="" style="opacity: 0.25;">
   </div>
 
-  <div class="container hero-container">
+  <div class="container hero-container text-center" style="max-width: 900px; position: relative; z-index: 2;">
+    
     <!-- Personalized Greeting for Returning Students -->
-    <div id="returning-user-banner" class="personalized-banner hidden slide-up">
+    <div id="returning-user-banner" class="personalized-banner hidden slide-up mb-4">
       <div class="banner-pill">
         <span class="pill-wave">👋</span>
         <span id="user-greeting-name" data-i18n="welcome_back">स्वागत आहे परत!</span>
       </div>
       <p class="banner-sub text-muted">Ready to continue your personalized career journey?</p>
       <div class="flex-center gap-3 mt-2">
-        <a href="/dashboard" class="btn btn-primary ripple" data-i18n="continue_journey">Continue My Journey</a>
+        <a href="/dashboard" class="btn btn-primary ripple" data-i18n="continue_journey">Continue My Journey &rarr;</a>
         <a href="/career-aunty" class="btn btn-gold ripple flex align-center gap-1">
-          <span>👩‍🏫</span> <span data-i18n="hero_cta_talk_mitra">Talk to Mitra Tai</span>
+          <span>👩‍🏫</span> <span data-i18n="hero_cta_talk_mitra">Talk to Mitra</span>
         </a>
       </div>
     </div>
 
-    <!-- Main Hero Content -->
-    <div id="main-hero-content" class="hero-content text-center">
-      <span class="hero-eyebrow slide-up">🌾 <span data-i18n="tagline">तुमची स्वप्नं. तुमचा मार्ग. तुमची मित्र ताई.</span></span>
-      <h1 class="hero-title slide-up" data-i18n="landing_h1">तुमचा करिअरचा मार्ग शोधा.</h1>
-      <p class="hero-subtitle slide-up" data-i18n="landing_sub">Discover careers, colleges, scholarships and opportunities designed around your interests, your location and your future — all in your language.</p>
+    <!-- Main Master Prompt Hero Content -->
+    <div id="main-hero-content" class="hero-content">
       
-      <div class="hero-ctas flex-center flex-wrap gap-3 slide-up">
-        <a href="/onboarding" class="btn btn-primary btn-lg ripple hero-cta-main" data-i18n="start_cta">
-          🧭 माझा करिअर प्रवास सुरू करा
+      <!-- Eyebrow Badge -->
+      <div class="inline-flex align-center gap-2 badge badge-gold mb-3 slide-up" style="padding: 0.4rem 1rem; border-radius: 999px;">
+        <span>🌾</span> <span>AARAMBH • CAREER NAVIGATION ECOSYSTEM</span>
+      </div>
+
+      <!-- Master Prompt Hero Headline -->
+      <h1 class="hero-title-cinematic slide-up mb-2">
+        Your future isn't a single road.
+      </h1>
+      <h2 class="hero-title-cinematic slide-up mb-4" style="color: var(--terracotta);">
+        Let's discover yours.
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle-cinematic slide-up mx-auto mb-5">
+        Discover careers, polytechnic & engineering colleges, and 100% government fee waivers tailored to your personal strengths, location, and dreams.
+      </p>
+      
+      <!-- Master Prompt Primary & Secondary CTAs -->
+      <div class="hero-ctas flex-center flex-wrap gap-3 slide-up mb-6">
+        <a href="/onboarding" class="btn btn-primary btn-lg ripple hero-cta-main flex align-center gap-2" style="font-size: 1.05rem; padding: 0.9rem 1.8rem; border-radius: 999px;">
+          <span>✨</span> <span>Begin My Journey</span>
         </a>
-        <a href="/career-aunty" class="btn btn-secondary btn-lg ripple hero-cta-tai flex align-center gap-2">
-          <span>👩‍🏫</span> <span data-i18n="hero_cta_talk_mitra">मित्र ताईंशी बोला</span>
+        <a href="/career-aunty" class="btn btn-secondary btn-lg ripple flex align-center gap-2" style="font-size: 1.05rem; padding: 0.9rem 1.8rem; border-radius: 999px; background: #fff; border: 2px solid var(--border);">
+          <span>🎙️</span> <span>Talk to Mitra</span>
         </a>
       </div>
+
+      <!-- Floating 3D Career Domain Symbols (Master Prompt Section 8) -->
+      <div class="career-orbs-container slide-up">
+        <div class="career-orb-card" title="Technology & Software">
+          <span>💻</span> <span>Technology</span>
+        </div>
+        <div class="career-orb-card" title="Medicine & Healthcare">
+          <span>⚕️</span> <span>Medicine</span>
+        </div>
+        <div class="career-orb-card" title="Engineering & Mechanics">
+          <span>⚙️</span> <span>Engineering</span>
+        </div>
+        <div class="career-orb-card" title="Agriculture & Agri-Tech">
+          <span>🌾</span> <span>Agriculture</span>
+        </div>
+        <div class="career-orb-card" title="Government & Civil Services">
+          <span>🏛️</span> <span>Government</span>
+        </div>
+        <div class="career-orb-card" title="Skilled Trades & ITI">
+          <span>🔧</span> <span>Skilled Trades</span>
+        </div>
+        <div class="career-orb-card" title="Arts & Creative Media">
+          <span>🎨</span> <span>Arts & Media</span>
+        </div>
+        <div class="career-orb-card" title="Science & Research">
+          <span>🔬</span> <span>Science</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Floating Career Track Icons Visual Composition -->
-    <div class="hero-icons-composition slide-up mt-5">
-      <div class="track-chip track-agri"><span class="chip-icon">🌾</span> Agriculture</div>
-      <div class="track-chip track-tech"><span class="chip-icon">💻</span> Technology</div>
-      <div class="track-chip track-health"><span class="chip-icon">⚕️</span> Healthcare</div>
-      <div class="track-chip track-trades"><span class="chip-icon">🔧</span> Skilled Trades</div>
-      <div class="track-chip track-govt"><span class="chip-icon">🏛️</span> Govt Services</div>
-      <div class="track-chip track-edu"><span class="chip-icon">📚</span> Education</div>
-    </div>
   </div>
 </section>
 
@@ -56,83 +96,97 @@
   <div class="warli-border-pattern"></div>
 </div>
 
-<section class="section stats slide-up animate-on-scroll">
-  <div class="container grid-2 md-grid-4">
-    <div class="card stat-card stagger-1">
-      <h2 data-count-target="9">0</h2>
-      <p data-i18n="landing_stat1">career tracks</p>
+<!-- ========================================================================
+     COUNT-UP IMPACT STATISTICS
+     ======================================================================== -->
+<section class="section stats slide-up animate-on-scroll py-5">
+  <div class="container grid-2 md-grid-4 gap-4">
+    <div class="card stat-card stagger-1 text-center p-4 glass-card">
+      <h2 data-count-target="50" style="color: var(--terracotta); font-size: 2.2rem; font-weight: 800;">0</h2>
+      <p class="text-muted text-small mb-0">High-Growth Career Paths</p>
     </div>
-    <div class="card stat-card stagger-2">
-      <h2 data-count-target="35">0</h2>
-      <p data-i18n="landing_stat2">Maharashtra institutions</p>
+    <div class="card stat-card stagger-2 text-center p-4 glass-card">
+      <h2 data-count-target="450" style="color: var(--gold); font-size: 2.2rem; font-weight: 800;">0</h2>
+      <p class="text-muted text-small mb-0">Maharashtra Institutes & ITIs</p>
     </div>
-    <div class="card stat-card stagger-3">
-      <h2 data-count-target="11">0</h2>
-      <p data-i18n="landing_stat3">scholarship schemes</p>
+    <div class="card stat-card stagger-3 text-center p-4 glass-card">
+      <h2 data-count-target="36" style="color: var(--green); font-size: 2.2rem; font-weight: 800;">0</h2>
+      <p class="text-muted text-small mb-0">Districts Mapped</p>
     </div>
-    <div class="card stat-card stagger-4">
-      <h2 data-count-target="3">0</h2>
-      <p data-i18n="landing_stat4">minute assessment</p>
+    <div class="card stat-card stagger-4 text-center p-4 glass-card">
+      <h2 data-count-target="100" style="color: var(--ai-indigo); font-size: 2.2rem; font-weight: 800;">0</h2>
+      <p class="text-muted text-small mb-0">% Free & Public Guidance</p>
     </div>
   </div>
 </section>
 
-<!-- Winding Career Journey Path -->
-<section class="section career-journey slide-up animate-on-scroll">
-  <div class="container">
+<!-- ========================================================================
+     WINDING CAREER JOURNEY PATHWAY
+     ======================================================================== -->
+<section class="section career-journey slide-up animate-on-scroll py-5">
+  <div class="container" style="max-width: 900px;">
     <div class="section-header text-center mb-5">
-      <span class="badge badge-paper mb-2">🌿 CAREER JOURNEY</span>
-      <h2 class="section-title" data-i18n="how_it_works">तुमचा करिअर प्रवास</h2>
+      <span class="badge badge-paper mb-2">🌿 STEP-BY-STEP NAVIGATOR</span>
+      <h2 class="section-title" data-i18n="how_it_works">Your Career Discovery Path</h2>
+      <p class="text-muted text-small">How Mitra Saathi guides you from confusion to certainty.</p>
     </div>
 
     <div class="journey-winding-path">
-      <div class="journey-node card stagger-1">
+      
+      <!-- Step 1 -->
+      <div class="journey-node card stagger-1 glass-card">
         <div class="journey-badge-icon">🌱</div>
         <div class="journey-info">
-          <h3>DISCOVER YOURSELF</h3>
-          <p class="text-muted" data-i18n="step1_d">Tell us what you enjoy, your district, and your background.</p>
+          <h3 style="font-size: 1.1rem;">1. DISCOVER YOURSELF</h3>
+          <p class="text-muted text-small mb-0" data-i18n="step1_d">Share what you enjoy, your district, your class, and your family goals.</p>
         </div>
       </div>
 
       <div class="path-connector"></div>
 
-      <div class="journey-node card stagger-2">
-        <div class="journey-badge-icon">🧠</div>
+      <!-- Step 2 -->
+      <div class="journey-node card stagger-2 glass-card">
+        <div class="journey-badge-icon">🧬</div>
         <div class="journey-info">
-          <h3>UNDERSTAND YOUR STRENGTHS</h3>
-          <p class="text-muted" data-i18n="step2_d">8 quick questions. Discover your career personality.</p>
+          <h3 style="font-size: 1.1rem;">2. UNLOCK CAREER DNA</h3>
+          <p class="text-muted text-small mb-0">Engage in scenario-based problem solving to map your 6 RIASEC strengths.</p>
         </div>
       </div>
 
       <div class="path-connector"></div>
 
-      <div class="journey-node card stagger-3">
+      <!-- Step 3 -->
+      <div class="journey-node card stagger-3 glass-card">
         <div class="journey-badge-icon">🏫</div>
         <div class="journey-info">
-          <h3>DISCOVER OPPORTUNITIES</h3>
-          <p class="text-muted" data-i18n="step3_d">Find colleges and vocational courses near your district.</p>
+          <h3 style="font-size: 1.1rem;">3. EXPLORE REGIONAL OPPORTUNITIES</h3>
+          <p class="text-muted text-small mb-0" data-i18n="step3_d">Discover polytechnic colleges, ITI hubs, and degree universities near your home.</p>
         </div>
       </div>
 
       <div class="path-connector"></div>
 
-      <div class="journey-node card stagger-4">
+      <!-- Step 4 -->
+      <div class="journey-node card stagger-4 glass-card">
         <div class="journey-badge-icon">💰</div>
         <div class="journey-info">
-          <h3>FIND SUPPORT</h3>
-          <p class="text-muted">Explore government scholarships you actually qualify for.</p>
+          <h3 style="font-size: 1.1rem;">4. PATHPOCKET FINANCIAL AID</h3>
+          <p class="text-muted text-small mb-0">Estimate hostel and travel costs, and auto-subtract matching MahaDBT scholarships.</p>
         </div>
       </div>
 
       <div class="path-connector"></div>
 
-      <div class="journey-node card journey-node-hero stagger-5">
+      <!-- Step 5 -->
+      <div class="journey-node card journey-node-hero stagger-5 glass-card" style="border: 2px solid var(--gold);">
         <div class="journey-badge-icon">🚀</div>
         <div class="journey-info">
-          <h3>BUILD YOUR FUTURE</h3>
-          <p class="text-muted" data-i18n="step4_d">Follow your personal roadmap with step-by-step guidance from Mitra Tai.</p>
+          <h3 style="font-size: 1.15rem; color: var(--terracotta);">5. BUILD YOUR FUTURE ROADMAP</h3>
+          <p class="text-muted text-small mb-2" data-i18n="step4_d">Follow your personal subway timeline with continuous guidance from Mitra Saathi.</p>
+          <a href="/onboarding" class="btn btn-primary btn-sm ripple">Start Now &rarr;</a>
         </div>
       </div>
+
     </div>
   </div>
 </section>

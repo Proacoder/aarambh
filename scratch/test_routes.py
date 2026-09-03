@@ -10,7 +10,12 @@ client = app.app.test_client()
 print("--- Testing Routes & APIs ---")
 
 # 1. Page Routes
-routes = ["/", "/onboarding", "/assessment", "/dashboard", "/roadmap", "/career-aunty", "/mitra-tai"]
+routes = [
+    "/", "/login", "/onboarding", "/assessment", "/dashboard", "/roadmap", 
+    "/career-aunty", "/mitra-tai", "/careerverse", "/career-dna", 
+    "/resume-builder", "/skill-quest", "/kiosk", "/parent-mode",
+    "/cost-calculator", "/documents", "/exam-calendar"
+]
 for r in routes:
     res = client.get(r)
     assert res.status_code == 200, f"Route {r} failed with status {res.status_code}"

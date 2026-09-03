@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section careerverse-page fade-in" style="min-height: 90vh; padding-top: 1.5rem; padding-bottom: 3rem; position: relative;">
+  <div class="container-fluid px-3">
+    
+    <!-- Top HUD Navigation -->
+    <div class="card glass-card p-3 mb-3 flex-between align-center flex-wrap gap-2 slide-up" style="border-left: 4px solid var(--gold); border-radius: 14px;">
+      <div>
+        <div class="inline-flex align-center gap-2 badge badge-gold mb-1">
+          <span>🌌</span> <span>3D CAREERVERSE • GALAXY EXPLORER</span>
+        </div>
+        <h1 class="page-title mb-0" style="font-size: 1.4rem;">The Interactive Career Cosmos</h1>
+        <p class="text-muted text-small mb-0">Drag to rotate • Scroll to zoom • Tap any glowing star to inspect qualifications & salaries</p>
+      </div>
+
+      <div class="flex align-center gap-2 flex-wrap">
+        <span class="badge badge-paper">🖱️ Left Drag: Orbit</span>
+        <span class="badge badge-paper">🔍 Wheel: Zoom</span>
+        <a href="/dashboard" class="btn btn-secondary btn-sm">Command Center &rarr;</a>
+      </div>
+    </div>
+
+    <!-- 3D Canvas Viewport + Interactive HUD Overlay -->
+    <div class="card p-0 relative" style="border-radius: 16px; overflow: hidden; background: #070B14; border: 1px solid var(--border); height: 75vh;">
+      
+      <!-- Three.js Canvas Destination -->
+      <div id="careerverse-webgl-container" style="width: 100%; height: 100%; position: absolute; inset: 0;"></div>
+
+      <!-- Domain Filter Pills (HUD Overlay) -->
+      <div class="galaxy-hud-filters" style="position: absolute; top: 1.25rem; left: 1.25rem; z-index: 10; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn btn-sm btn-gold galaxy-filter-btn active" data-constellation="all">✨ All Constellations</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="tech" style="color: #60A5FA;">💻 Tech & IT</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="agri" style="color: #34D399;">🌾 Agri-Tech</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="health" style="color: #F87171;">⚕️ Healthcare</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="govt" style="color: #FBBF24;">🏛️ Public Service</button>
+      </div>
+
+      <!-- Selected Career Node Flyout Modal / HUD -->
+      <div id="careerverse-flyout" class="card glass-card p-4 hidden slide-up" style="position: absolute; bottom: 1.5rem; right: 1.5rem; max-width: 360px; width: 90%; z-index: 20; border: 2px solid var(--gold); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
+        <div class="flex-between align-center mb-2">
+          <span class="badge badge-paper" id="flyout-cluster">Domain Cluster</span>
+          <button id="btn-close-flyout" class="btn btn-sm btn-outline p-1" style="line-height: 1;">✕</button>
+        </div>
+        <h3 id="flyout-title" class="text-lg font-bold mb-1" style="color: var(--terracotta);">Career Name</h3>
+        <p id="flyout-desc" class="text-xs text-muted mb-3" style="line-height: 1.5;">Description of career path.</p>
+
+        <div class="p-2 mb-3 text-xs" style="background: rgba(217,164,65,0.1); border-radius: 8px;">
+          <div class="flex-between mb-1">
+            <span>Entry Salary:</span>
+            <strong id="flyout-salary" class="text-green">₹3.5 - 6.0 LPA</strong>
+          </div>
+          <div class="flex-between">
+            <span>Qualification:</span>
+            <strong id="flyout-education">Diploma / Degree</strong>
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <a id="flyout-mitra-link" href="/career-aunty" class="btn btn-primary btn-sm ripple flex-1 text-center">
+            Ask Mitra Tai &rarr;
+          </a>
+          <a href="/roadmap" class="btn btn-secondary btn-sm flex-1 text-center">
+            View Roadmap
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="/static/js/careerverse.js"></script>
+{% endblock %}

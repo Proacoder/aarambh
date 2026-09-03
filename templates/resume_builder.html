@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section resume-builder-page fade-in" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 1180px;">
+
+    <!-- Header Banner -->
+    <div class="card glass-card p-4 mb-4 flex-between align-center flex-wrap gap-3 slide-up" style="border-left: 4px solid var(--indigo); border-radius: 16px;">
+      <div>
+        <div class="inline-flex align-center gap-2 badge badge-indigo mb-1">
+          <span>📄</span> <span>RESUMEMITRA • ATS RESUME ARCHITECT</span>
+        </div>
+        <h1 class="page-title mb-1" style="font-size: 1.6rem;">Single-Page Professional Resume Generator</h1>
+        <p class="text-muted text-small mb-0">Craft an ATS-optimized resume for ITI apprenticeships, polytechnic diplomas, and internships.</p>
+      </div>
+
+      <div class="flex align-center gap-2">
+        <button id="btn-export-resume-pdf" class="btn btn-primary ripple flex align-center gap-2">
+          <span>📥</span> <span>Download A4 PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2-Column Split: Form Editor (Left) + Live Preview Sheet (Right) -->
+    <div class="grid grid-2 gap-4">
+      
+      <!-- Left Column: Interactive Form -->
+      <div class="card glass-card p-4 flex-column gap-3" style="border-radius: 16px; max-height: 85vh; overflow-y: auto;">
+        <h3 class="text-base font-bold mb-1" style="color: var(--earth-brown);">✏️ Candidate Details</h3>
+
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="res-name" class="form-input" value="Rahul Ashok Pawar" placeholder="Rahul Pawar">
+        </div>
+
+        <div class="grid-2 gap-2">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="res-email" class="form-input" value="rahul.pawar@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="text" id="res-phone" class="form-input" value="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="grid-2 gap-2">
+          <div class="form-group">
+            <label class="form-label">District & State</label>
+            <input type="text" id="res-location" class="form-input" value="Pune, Maharashtra">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Role</label>
+            <input type="text" id="res-target" class="form-input" value="Junior Web Developer & IT Trainee">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Professional Summary (AI Suggested)</label>
+          <textarea id="res-summary" class="form-input" rows="3">Dedicated student with high analytical problem-solving skills from Pune district. Completed 10th with 82% and building foundational proficiency in Python, HTML/CSS, and hardware troubleshooting. Seeking junior apprenticeship.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Education (Degree / Institute / Marks / Year)</label>
+          <textarea id="res-education" class="form-input" rows="2">Secondary School Certificate (SSC 10th) | Z.P. High School Baramati | 82.4% (2025)</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Technical & Practical Skills (Comma separated)</label>
+          <input type="text" id="res-skills" class="form-input" value="Python, HTML5, CSS3, Hardware Maintenance, MS-CIT Certified, Marathi, Hindi, English">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Projects & Practical Lab Work</label>
+          <textarea id="res-projects" class="form-input" rows="3">1. Village Soil Moisture Drip Automation: Prototyped low-cost IoT irrigation circuit using Arduino and moisture sensors.
+2. Panchayati Raj Portal Helper: Built simple offline informational webpage for local Gram Panchayat schemes.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Certifications & Co-Curricular</label>
+          <input type="text" id="res-certs" class="form-input" value="MS-CIT Computer Operations (Distinction), Maharashtra State Talent Search Ranker">
+        </div>
+      </div>
+
+      <!-- Right Column: Live A4 Paper Sheet Preview -->
+      <div class="flex-column align-center">
+        <div class="mb-2 text-xs text-muted font-bold flex-between w-full px-2">
+          <span>📄 LIVE ATS-FRIENDLY A4 PREVIEW</span>
+          <span>Single-Page Optimized</span>
+        </div>
+
+        <div id="resume-paper" style="background: #ffffff; color: #111827; width: 100%; max-width: 520px; min-height: 720px; padding: 2.2rem 2rem; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); font-family: 'Inter', sans-serif; font-size: 11px; line-height: 1.45; border: 1px solid #e5e7eb;">
+          
+          <!-- Header -->
+          <div style="border-bottom: 2px solid #3b82f6; padding-bottom: 0.8rem; margin-bottom: 0.8rem;">
+            <h2 id="prev-name" style="font-size: 18px; font-weight: 800; color: #1e3a8a; margin-bottom: 3px; letter-spacing: -0.02em;">Rahul Ashok Pawar</h2>
+            <div id="prev-target" style="font-weight: 600; color: #2563eb; font-size: 12px; margin-bottom: 4px;">Junior Web Developer & IT Trainee</div>
+            <div style="color: #4b5563; font-size: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+              <span id="prev-location">Pune, Maharashtra</span> •
+              <span id="prev-phone">+91 98765 43210</span> •
+              <span id="prev-email">rahul.pawar@example.com</span>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div style="margin-bottom: 0.9rem;">
+            <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; margin-bottom: 3px; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px;">Profile Summary</h4>
+            <p id="prev-summary" style="color: #374151; margin: 0; line-height: 1.4;">
+              Dedicated student with high analytical problem-solving skills from Pune district. Completed 10th with 82% and building foundational proficiency in Python, HTML/CSS, and hardware troubleshooting. Seeking junior apprenticeship.
+            </p>
+          </div>
+
+          <!-- Education -->
+          <div style="margin-bottom: 0.9rem;">
+            <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; margin-bottom: 3px; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px;">Education</h4>
+            <p id="prev-education" style="color: #374151; margin: 0; font-weight: 500;">
+              Secondary School Certificate (SSC 10th) | Z.P. High School Baramati | 82.4% (2025)
+            </p>
+          </div>
+
+          <!-- Skills -->
+          <div style="margin-bottom: 0.9rem;">
+            <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; margin-bottom: 3px; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px;">Technical Skills</h4>
+            <p id="prev-skills" style="color: #374151; margin: 0;">
+              Python, HTML5, CSS3, Hardware Maintenance, MS-CIT Certified, Marathi, Hindi, English
+            </p>
+          </div>
+
+          <!-- Projects -->
+          <div style="margin-bottom: 0.9rem;">
+            <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; margin-bottom: 3px; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px;">Projects & Applied Labs</h4>
+            <div id="prev-projects" style="color: #374151; white-space: pre-line; line-height: 1.4;">
+              1. Village Soil Moisture Drip Automation: Prototyped low-cost IoT irrigation circuit using Arduino and moisture sensors.
+              2. Panchayati Raj Portal Helper: Built simple offline informational webpage for local Gram Panchayat schemes.
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div>
+            <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; margin-bottom: 3px; border-bottom: 1px solid #e5e7eb; padding-bottom: 2px;">Certifications</h4>
+            <p id="prev-certs" style="color: #374151; margin: 0;">
+              MS-CIT Computer Operations (Distinction), Maharashtra State Talent Search Ranker
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const syncMap = [
+    { input: 'res-name', prev: 'prev-name' },
+    { input: 'res-email', prev: 'prev-email' },
+    { input: 'res-phone', prev: 'prev-phone' },
+    { input: 'res-location', prev: 'prev-location' },
+    { input: 'res-target', prev: 'prev-target' },
+    { input: 'res-summary', prev: 'prev-summary' },
+    { input: 'res-education', prev: 'prev-education' },
+    { input: 'res-skills', prev: 'prev-skills' },
+    { input: 'res-projects', prev: 'prev-projects' },
+    { input: 'res-certs', prev: 'prev-certs' }
+  ];
+
+  syncMap.forEach(item => {
+    const inEl = document.getElementById(item.input);
+    const prevEl = document.getElementById(item.prev);
+    if (inEl && prevEl) {
+      inEl.addEventListener('input', () => {
+        prevEl.textContent = inEl.value;
+      });
+    }
+  });
+
+  // Client-side PDF Download
+  document.getElementById('btn-export-resume-pdf')?.addEventListener('click', () => {
+    const element = document.getElementById('resume-paper');
+    if (!element || !window.html2pdf) return;
+
+    const opt = {
+      margin: 10,
+      filename: 'AARAMBH_Resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  });
+});
+</script>
+{% endblock %}
