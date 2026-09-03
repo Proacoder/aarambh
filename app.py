@@ -152,6 +152,11 @@ def dashboard():
 def roadmap_page():
     return render_template("roadmap.html")
 
+@app.route("/all-colleges")
+@app.route("/colleges")
+def all_colleges_page():
+    return render_template("all_colleges.html")
+
 @app.route("/career-aunty")
 @app.route("/mitra-tai")
 def career_aunty_page():

@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Mitra | Maharashtra Career & College Explorer</title>
+    <meta name="description" content="Explore colleges, ITIs, polytechnics, schemes, and rural educational opportunities across all Maharashtra districts.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        /* ── Tokens ────────────────────────────────────────────── */
+        :root {
+            --bg:          #0A0E1A;
+            --panel:       rgba(14, 20, 35, 0.95);
+            --card:        rgba(20, 28, 48, 0.90);
+            --surface2:    #151D30;
+            --surface3:    #1C2640;
+            --primary:     #4F46E5;
+            --primary-glow:rgba(79,70,229,.35);
+            --accent:      #06B6D4;
+            --accent-glow: rgba(6,182,212,.25);
+            --accent2:     #8B5CF6;
+            --green:       #10B981;
+            --green-glow:  rgba(16,185,129,.25);
+            --amber:       #F59E0B;
+            --red:         #EF4444;
+            --pink:        #EC4899;
+            --text:        #F1F5F9;
+            --muted:       #94A3B8;
+            --sub:         #64748B;
+            --border:      rgba(255,255,255,.09);
+            --border-hover:rgba(79,70,229,.4);
+            --radius:      14px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans',sans-serif; }
+
+        html, body { height:100%; overflow:hidden; background:var(--bg); color:var(--text); }
+
+        /* ── App shell ─────────────────────────────────────────── */
+        .app-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* ── Top navbar ────────────────────────────────────────── */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 58px;
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            flex-shrink: 0;
+            z-index: 1000;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg,#4F46E5,#06B6D4);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; color:#fff;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+        .nav-title {
+            font-size: 17px; font-weight: 800; color: var(--text);
+            letter-spacing: -.3px;
+        }
+        .nav-title span { color: var(--accent); }
+
+        /* View Mode Switcher */
+        .nav-tabs {
+            display: flex;
+            background: rgba(15,23,42,.8);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 3px;
+            gap: 2px;
+        }
+        .nav-tab-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px; font-weight: 700;
+            color: var(--muted);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .nav-tab-btn:hover { color: var(--text); }
+        .nav-tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: #fff;
+            box-shadow: 0 2px 10px var(--primary-glow);
+        }
+        .nav-tab-btn.active.tab-dist {
+            background: linear-gradient(135deg, #059669, #10B981);
+            box-shadow: 0 2px 10px var(--green-glow);
+        }
+
+        .nav-right {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .badge-live {
+            display: flex; align-items: center; gap: 6px;
+            padding: 5px 12px;
+            background: rgba(16,185,129,.12);
+            border: 1px solid rgba(16,185,129,.25);
+            border-radius: 50px;
+            font-size: 11.5px; font-weight: 700; color: var(--green);
+        }
+        .pulse-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 3px rgba(16,185,129,.25);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,100%{ box-shadow:0 0 0 3px rgba(16,185,129,.25); }
+            50%    { box-shadow:0 0 0 7px rgba(16,185,129,.04); }
+        }
+
+        /* ── Content Viewports ─────────────────────────────────── */
+        .viewport-view {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 58px);
+            overflow: hidden;
+        }
+        .viewport-view.hidden { display: none !important; }
+
+        /* ── Sidebar Layout ────────────────────────────────────── */
+        .sidebar {
+            width: 360px;
+            flex-shrink: 0;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 500;
+        }
+
+        .sidebar-header {
+            padding: 14px 18px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sidebar-title-group h2 {
+            font-size: 14.5px; font-weight: 700; color: var(--text);
+            margin-bottom: 2px;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .sidebar-title-group p {
+            font-size: 11.5px; color: var(--muted);
+        }
+        .count-pill {
+            padding: 3px 10px;
+            background: rgba(79,70,229,.18);
+            border: 1px solid rgba(79,70,229,.35);
+            border-radius: 50px;
+            font-size: 11px; font-weight: 800;
+            color: #818cf8;
+            white-space: nowrap;
+        }
+
+        /* ── Filters Section ───────────────────────────────────── */
+        .filter-panel {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            background: rgba(10,14,26,.4);
+            overflow-y: auto;
+            max-height: 290px;
+        }
+        .filter-panel::-webkit-scrollbar { width: 3px; }
+        .filter-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
+
+        .search-box {
+            position: relative;
+        }
+        .search-box input {
+            width: 100%; padding: 8px 12px 8px 34px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            color: var(--text); font-size: 12.5px; outline: none;
+            transition: all .2s;
+        }
+        .search-box input::placeholder { color: var(--sub); }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .search-box i {
+            position: absolute; left: 11px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--sub); font-size: 12px; pointer-events: none;
+        }
+
+        .filter-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+        }
+        .filter-field {
+            display: flex; flex-direction: column; gap: 3px;
+        }
+        .filter-field label {
+            font-size: 10px; font-weight: 700; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .5px;
+        }
+        select.filter-select {
+            width: 100%;
+            padding: 6px 8px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 12px;
+            font-family: inherit;
+            outline: none;
+            cursor: pointer;
+        }
+        select.filter-select:focus { border-color: var(--accent); }
+
+        /* Quick Filter Badges */
+        .quick-badges {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+        .quick-badges::-webkit-scrollbar { height: 0; }
+        .q-badge {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            color: var(--muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .2s;
+        }
+        .q-badge:hover { color: var(--text); border-color: var(--accent); }
+        .q-badge.active {
+            background: rgba(16,185,129,.18);
+            border-color: var(--green);
+            color: var(--green);
+        }
+        .q-badge.active-primary {
+            background: rgba(79,70,229,.2);
+            border-color: var(--primary);
+            color: #818cf8;
+        }
+
+        /* Fee Slider */
+        .fee-slider-row {
+            display: flex; flex-direction: column; gap: 3px;
+        }
+        .fee-label-row {
+            display: flex; justify-content: space-between;
+            font-size: 10.5px; font-weight: 700;
+        }
+        .fee-label-title { color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+        .fee-label-val { color: var(--amber); }
+        input[type="range"].range-slider {
+            width: 100%;
+            height: 4px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            background: rgba(255,255,255,.1);
+            border-radius: 2px;
+        }
+
+        /* Action Buttons */
+        .action-row {
+            display: flex; gap: 6px;
+        }
+        .btn-act {
+            flex: 1; padding: 7px 10px;
+            border-radius: 8px;
+            font-size: 11.5px; font-weight: 700;
+            cursor: pointer; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            transition: all .2s;
+        }
+        .btn-act-gps {
+            background: linear-gradient(135deg, #059669, #10B981);
+            color: #fff;
+            box-shadow: 0 2px 10px var(--green-glow);
+        }
+        .btn-act-gps:hover { transform: translateY(-1px); opacity: .92; }
+        .btn-act-reset {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            flex: 0 0 70px;
+        }
+        .btn-act-reset:hover { color: var(--text); border-color: rgba(255,255,255,.2); }
+
+        /* ── List of Colleges ──────────────────────────────────── */
+        .items-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 10px;
+        }
+        .items-list::-webkit-scrollbar { width: 4px; }
+        .items-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+        .college-item-card {
+            padding: 10px 12px;
+            border-radius: 11px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+        }
+        .college-item-card::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3.5px;
+            border-radius: 11px 0 0 11px;
+        }
+        .college-item-card[data-type="Government"]::before { background: var(--green); }
+        .college-item-card[data-type="Private"]::before { background: var(--amber); }
+        .college-item-card[data-type="Aided"]::before { background: var(--accent); }
+
+        .college-item-card:hover {
+            border-color: var(--border-hover);
+            transform: translateX(2px);
+            background: rgba(30, 41, 68, 0.95);
+        }
+        .college-item-card.active {
+            border-color: var(--primary);
+            background: rgba(79,70,229,.15);
+        }
+
+        .item-top {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            gap: 6px; margin-bottom: 4px;
+        }
+        .item-name {
+            font-size: 12.5px; font-weight: 700; color: var(--text);
+            line-height: 1.35;
+        }
+        .item-fee-tag {
+            font-size: 10px; font-weight: 800;
+            padding: 2px 6px; border-radius: 5px;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .fee-low { background: rgba(16,185,129,.18); color: var(--green); }
+        .fee-mid { background: rgba(6,182,212,.18); color: var(--accent); }
+        .fee-high { background: rgba(245,158,11,.18); color: var(--amber); }
+
+        .item-badges {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 5px;
+        }
+        .tag-pill {
+            font-size: 9.5px; font-weight: 700;
+            padding: 1.5px 6px; border-radius: 4px;
+        }
+        .tag-distr { background: rgba(79,70,229,.15); color: #818cf8; }
+        .tag-rural { background: rgba(16,185,129,.15); color: var(--green); }
+        .tag-tribal { background: rgba(236,72,153,.15); color: var(--pink); }
+        .tag-urban { background: rgba(148,163,184,.15); color: var(--muted); }
+        .tag-cat { background: rgba(245,158,11,.15); color: var(--amber); }
+        .tag-distance { background: rgba(236,72,153,.2); color: #f472b6; font-weight: 800; }
+
+        .item-courses-preview {
+            font-size: 11px; color: var(--muted);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* ── Map Container ─────────────────────────────────────── */
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            background: #0d121f;
+        }
+
+        /* Quick Region Bar on Map */
+        .map-quick-regions {
+            position: absolute; top: 16px; left: 16px;
+            z-index: 400;
+            display: flex; gap: 6px; flex-wrap: wrap;
+        }
+        .region-btn {
+            padding: 6px 12px;
+            background: rgba(14,20,35,.88);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 11px; font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            transition: all .2s;
+        }
+        .region-btn:hover, .region-btn.active {
+            color: var(--text);
+            border-color: var(--accent);
+            background: rgba(20,28,48,.95);
+        }
+
+        /* Legend overlay on Map */
+        .map-legend-overlay {
+            position: absolute; bottom: 20px; left: 20px;
+            z-index: 400;
+            background: rgba(14,20,35,.92);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex; gap: 14px;
+            backdrop-filter: blur(12px);
+            font-size: 11px; font-weight: 600;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+        /* Bottom stats bar */
+        .map-stats-overlay {
+            position: absolute; bottom: 20px; right: 20px;
+            z-index: 400;
+            display: flex; gap: 8px;
+        }
+        .stat-pill {
+            display: flex; align-items: center; gap: 6px;
+            padding: 7px 13px;
+            background: rgba(14,20,35,.92);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 11.5px; font-weight: 700; color: var(--muted);
+            backdrop-filter: blur(12px);
+        }
+        .stat-pill span { color: var(--text); }
+
+        /* ── Custom Leaflet Popups ─────────────────────────────── */
+        .leaflet-popup-content-wrapper {
+            background: rgba(14, 20, 35, 0.98) !important;
+            border: 1px solid rgba(79,70,229,.4) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 16px 48px rgba(0,0,0,.7) !important;
+            color: var(--text) !important;
+            font-family: 'Plus Jakarta Sans',sans-serif !important;
+            min-width: 290px;
+            max-width: 320px;
+        }
+        .leaflet-popup-tip { background: rgba(14, 20, 35, 0.98) !important; }
+        .leaflet-popup-content { margin: 14px 16px !important; }
+
+        .popup-college-type {
+            font-size: 10px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .6px; margin-bottom: 4px; display: inline-block;
+            padding: 2px 7px; border-radius: 4px;
+        }
+        .popup-college-name {
+            font-size: 14px; font-weight: 800; color: #fff;
+            line-height: 1.35; margin-bottom: 6px;
+        }
+        .popup-loc-row {
+            font-size: 11.5px; color: var(--accent);
+            font-weight: 600; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .popup-stat-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+            margin-bottom: 10px;
+        }
+        .popup-stat-box {
+            background: var(--surface2);
+            border-radius: 8px; padding: 6px 8px;
+            border: 1px solid var(--border);
+        }
+        .popup-stat-lbl {
+            font-size: 9.5px; color: var(--muted); text-transform: uppercase; font-weight: 700;
+        }
+        .popup-stat-val {
+            font-size: 12px; font-weight: 800; color: var(--text); margin-top: 1px;
+        }
+        .popup-section-title {
+            font-size: 10px; font-weight: 800; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px;
+        }
+        .popup-tag-wrap {
+            display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px;
+        }
+        .popup-tag-c {
+            font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px;
+            background: rgba(79,70,229,.15); color: #a5b4fc; border: 1px solid rgba(79,70,229,.3);
+        }
+        .popup-tag-s {
+            font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+            background: rgba(16,185,129,.15); color: var(--green); border: 1px solid rgba(16,185,129,.3);
+        }
+
+        /* ── Tab 2: Distribution & Analytics View ──────────────── */
+        .analytics-view {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            background: #0B0F1C;
+        }
+        .analytics-view::-webkit-scrollbar { width: 6px; }
+        .analytics-view::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 6px; }
+
+        .analytics-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .analytics-hero {
+            background: linear-gradient(135deg, rgba(79,70,229,.25), rgba(6,182,212,.15));
+            border: 1px solid rgba(79,70,229,.35);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .analytics-hero-text h1 {
+            font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px;
+        }
+        .analytics-hero-text p {
+            font-size: 13.5px; color: var(--muted); max-width: 680px; line-height: 1.5;
+        }
+
+        /* KPI Metric Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .kpi-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all .2s;
+        }
+        .kpi-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+        .kpi-icon {
+            width: 46px; height: 46px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .kpi-val { font-size: 24px; font-weight: 800; color: #fff; line-height: 1.1; }
+        .kpi-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 3px; }
+
+        /* Distribution Charts Grid */
+        .dist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 18px;
+        }
+        .dist-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .dist-card-header {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .dist-card-title {
+            font-size: 15px; font-weight: 700; color: var(--text);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        /* Bar Item */
+        .bar-group {
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .bar-row {
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .bar-meta {
+            display: flex; justify-content: space-between; font-size: 12px; font-weight: 600;
+        }
+        .bar-label { color: var(--text); }
+        .bar-count { color: var(--muted); font-weight: 700; }
+        .bar-track {
+            height: 8px; background: rgba(255,255,255,.07); border-radius: 50px; overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%; border-radius: 50px;
+            transition: width 1s ease-out;
+        }
+
+        /* District Table */
+        .table-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            overflow-x: auto;
+        }
+        .dist-table {
+            width: 100%; border-collapse: collapse; text-align: left; font-size: 12.5px;
+        }
+        .dist-table th {
+            padding: 10px 14px;
+            color: var(--muted);
+            text-transform: uppercase;
+            font-size: 10.5px; font-weight: 700; letter-spacing: .5px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dist-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+            color: var(--text);
+        }
+        .dist-table tr:hover td {
+            background: rgba(255,255,255,.02);
+        }
+        .btn-view-map {
+            padding: 4px 10px; border-radius: 6px;
+            background: rgba(79,70,229,.18);
+            color: #818cf8; border: 1px solid rgba(79,70,229,.35);
+            font-size: 11px; font-weight: 700; cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-view-map:hover {
+            background: var(--primary); color: #fff;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            padding: 12px 20px;
+            background: rgba(14,20,35,.96);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            font-size: 13px; font-weight: 600; color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,.6);
+            z-index: 9999;
+            opacity: 0; transform: translateY(12px);
+            transition: all .3s; pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: 42vh; border-right: none; border-bottom: 1px solid var(--border); }
+            .viewport-view { flex-direction: column; }
+            .map-wrapper { height: 58vh; }
+            .map-legend-overlay { display: none; }
+            .map-quick-regions { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- ── Navbar ─────────────────────────────────────────────── -->
+    <nav class="navbar">
+        <a class="nav-brand" href="/dashboard">
+            <div class="nav-logo"><i class="fa-solid fa-compass"></i></div>
+            <span class="nav-title">Career <span>Mitra</span></span>
+        </a>
+
+        <!-- View Switcher -->
+        <div class="nav-tabs">
+            <button class="nav-tab-btn active" id="btnTabColleges" onclick="switchTab('colleges')">
+                <i class="fa-solid fa-graduation-cap"></i> Colleges &amp; Rural Map
+            </button>
+            <button class="nav-tab-btn tab-dist" id="btnTabDistribution" onclick="switchTab('distribution')">
+                <i class="fa-solid fa-chart-pie"></i> Distribution &amp; Coverage
+            </button>
+            <button class="nav-tab-btn" id="btnTabCities" onclick="switchTab('cities')">
+                <i class="fa-solid fa-city"></i> Career Hubs
+            </button>
+        </div>
+
+        <div class="nav-right" style="display:flex; align-items:center; gap:12px;">
+            <a href="/dashboard" style="text-decoration:none; display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:50px; font-size:12px; font-weight:700; background:linear-gradient(135deg,#4F46E5,#3b82f6); color:#fff; box-shadow:0 2px 10px rgba(79,70,229,.35);">
+                <i class="fa-solid fa-arrow-left"></i> My Dashboard
+            </a>
+            <div class="badge-live">
+                <div class="pulse-dot"></div>
+                <span id="topLiveCounter">65+ Rural &amp; Urban Institutes</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── Viewport 1: Colleges & Rural Map ────────────────────── -->
+    <div class="viewport-view" id="viewColleges">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title-group">
+                    <h2><i class="fa-solid fa-building-columns" style="color:var(--accent);"></i>Colleges &amp; Institutes</h2>
+                    <p>Subsidized, polytechnics, ITIs &amp; degree colleges</p>
+                </div>
+                <span class="count-pill" id="filteredCountBadge">0 colleges</span>
+            </div>
+
+            <!-- Filter Panel -->
+            <div class="filter-panel">
+                <!-- Search -->
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="clgSearch" placeholder="Search college, course, taluka…" oninput="applyCollegeFilters()">
+                </div>
+
+                <!-- Quick District / Category Badges -->
+                <div class="quick-badges">
+                    <button class="q-badge active-primary" onclick="setQuickArea('all', this)">All Maharashtra</button>
+                    <button class="q-badge" onclick="setQuickArea('Rural', this)">🌾 Rural Only</button>
+                    <button class="q-badge" onclick="setQuickArea('Tribal', this)">🏹 Tribal Belts</button>
+                    <button class="q-badge" onclick="setQuickType('Government', this)">🏛️ Govt Only</button>
+                    <button class="q-badge" onclick="setQuickCat('ITI', this)">🔧 ITI</button>
+                    <button class="q-badge" onclick="setQuickCat('Polytechnic', this)">📐 Polytechnic</button>
+                </div>
+
+                <!-- 2x2 Dropdowns -->
+                <div class="filter-grid-2">
+                    <div class="filter-field">
+                        <label>District</label>
+                        <select class="filter-select" id="clgDistrict" onchange="applyCollegeFilters()">
+                            <option value="all">All Districts (36)</option>
+                            <!-- Urban & Suburban -->
+                            <option value="Pune">Pune</option>
+                            <option value="Nashik">Nashik</option>
+                            <option value="Nagpur">Nagpur</option>
+                            <option value="Kolhapur">Kolhapur</option>
+                            <option value="Chhatrapati Sambhajinagar">Chhatrapati Sambhajinagar</option>
+                            <!-- Rural & Tribal Focus -->
+                            <option value="Gadchiroli">Gadchiroli (Tribal/Forest)</option>
+                            <option value="Nandurbar">Nandurbar (Tribal)</option>
+                            <option value="Yavatmal">Yavatmal (Vidarbha Rural)</option>
+                            <option value="Beed">Beed (Marathwada Rural)</option>
+                            <option value="Dharashiv">Dharashiv / Osmanabad</option>
+                            <option value="Sindhudurg">Sindhudurg (Konkan Rural)</option>
+                            <option value="Ratnagiri">Ratnagiri (Konkan Coast)</option>
+                            <option value="Jalgaon">Jalgaon (Khandesh)</option>
+                            <option value="Solapur">Solapur &amp; Pandharpur</option>
+                            <option value="Nanded">Nanded</option>
+                            <option value="Latur">Latur</option>
+                            <option value="Amravati">Amravati</option>
+                            <option value="Gondia">Gondia</option>
+                            <option value="Chandrapur">Chandrapur</option>
+                            <option value="Palghar">Palghar (Tribal Rural)</option>
+                            <option value="Washim">Washim</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label>Institute Type</label>
+                        <select class="filter-select" id="clgType" onchange="applyCollegeFilters()">
+                            <option value="all">All Types</option>
+                            <option value="Government">Government (Subsidized)</option>
+                            <option value="Aided">Aided</option>
+                            <option value="Private">Private</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-grid-2">
+                    <div class="filter-field">
+                        <label>Category</label>
+                        <select class="filter-select" id="clgCategory" onchange="applyCollegeFilters()">
+                            <option value="all">All Streams</option>
+                            <option value="ITI">ITI / Vocational</option>
+                            <option value="Polytechnic">Polytechnic Diploma</option>
+                            <option value="Engineering">Engineering &amp; Tech</option>
+                            <option value="Pharmacy">Pharmacy</option>
+                            <option value="Agriculture">Agriculture &amp; Allied</option>
+                            <option value="Fisheries">Fisheries Science</option>
+                            <option value="Management">Management / IT</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label>Min Qualification</label>
+                        <select class="filter-select" id="clgQual" onchange="applyCollegeFilters()">
+                            <option value="all">Any Qualification</option>
+                            <option value="10th">After 10th (SSC)</option>
+                            <option value="12th">After 12th (HSC)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fee Range Slider -->
+                <div class="fee-slider-row">
+                    <div class="fee-label-row">
+                        <span class="fee-label-title">Max Annual Tuition</span>
+                        <span class="fee-label-val" id="feeValDisplay">₹1,60,000</span>
+                    </div>
+                    <input type="range" class="range-slider" id="feeRangeSlider" min="1500" max="160000" step="2500" value="160000" oninput="updateFeeDisplay(); applyCollegeFilters()">
+                </div>
+
+                <!-- Scheme Filter -->
+                <div class="filter-field">
+                    <label>Scholarship / Scheme</label>
+                    <select class="filter-select" id="clgScheme" onchange="applyCollegeFilters()">
+                        <option value="all">Any Government Scheme</option>
+                        <option value="sch-ebc-01">EBC Fee Concession (Rajarshi Shahu)</option>
+                        <option value="sch-hostel-02">Swadhar Free Hostel Allowance</option>
+                        <option value="sch-sc-03">SC Freeship &amp; Scholarship</option>
+                        <option value="sch-st-04">ST Tribal Welfare Scheme</option>
+                        <option value="sch-obc-05">OBC / VJNT Fee Reimbursement</option>
+                        <option value="sch-minority-06">State Minority Scholarship</option>
+                        <option value="sch-pwd-07">Persons with Disability (PwD) Aid</option>
+                        <option value="sch-skill-08">Pramod Mahajan Skill Voucher</option>
+                    </select>
+                </div>
+
+                <!-- Action row -->
+                <div class="action-row">
+                    <button class="btn-act btn-act-gps" onclick="findUserLocation()">
+                        <i class="fa-solid fa-location-crosshairs"></i> Find Colleges Near Me (GPS)
+                    </button>
+                    <button class="btn-act btn-act-reset" onclick="resetCollegeFilters()">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- College Cards List -->
+            <div class="items-list" id="collegeItemsList"></div>
+        </aside>
+
+        <!-- Map -->
+        <div class="map-wrapper">
+            <div id="map"></div>
+
+            <!-- Quick Region Jump Bar -->
+            <div class="map-quick-regions">
+                <button class="region-btn active" onclick="zoomToRegion('all')">All Maharashtra</button>
+                <button class="region-btn" onclick="zoomToRegion('rural')">🌾 Rural &amp; Tribal Belts</button>
+                <button class="region-btn" onclick="zoomToRegion('vidarbha')">Vidarbha</button>
+                <button class="region-btn" onclick="zoomToRegion('marathwada')">Marathwada</button>
+                <button class="region-btn" onclick="zoomToRegion('khandesh')">North MH / Khandesh</button>
+                <button class="region-btn" onclick="zoomToRegion('konkan')">Konkan Coast</button>
+                <button class="region-btn" onclick="zoomToRegion('western')">Western MH</button>
+            </div>
+
+            <!-- Legend Overlay -->
+            <div class="map-legend-overlay">
+                <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Government (Subsidized)</div>
+                <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>Aided</div>
+                <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Private</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;box-shadow:0 0 8px #3b82f6"></span>Your Location</div>
+            </div>
+
+            <!-- Stats Overlay -->
+            <div class="map-stats-overlay">
+                <div class="stat-pill">
+                    <i class="fa-solid fa-graduation-cap" style="color:var(--green);"></i>
+                    <span id="statCollegesCount">66</span> Colleges Plotted
+                </div>
+                <div class="stat-pill">
+                    <i class="fa-solid fa-wheat-awn" style="color:var(--amber);"></i>
+                    <span id="statRuralCount">28</span> Rural/Tribal
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /viewport 1 -->
+
+    <!-- ── Viewport 2: College Distribution & Analytics ────────── -->
+    <div class="viewport-view hidden" id="viewDistribution">
+        <div class="analytics-view">
+            <div class="analytics-container">
+
+                <!-- Hero Section -->
+                <div class="analytics-hero">
+                    <div class="analytics-hero-text">
+                        <h1>📊 Maharashtra College Distribution &amp; Rural Reach</h1>
+                        <p>Detailed breakdown of higher education and technical institutions across rural talukas, tribal belts, and industrial centers with fee subsidy coverage.</p>
+                    </div>
+                    <button class="btn-act btn-act-gps" style="padding:10px 18px;font-size:13px;" onclick="switchTab('colleges')">
+                        <i class="fa-solid fa-map"></i> Open Interactive Map
+                    </button>
+                </div>
+
+                <!-- KPI Metric Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(16,185,129,.18);color:var(--green);">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <div class="kpi-val" id="kpiTotal">66</div>
+                            <div class="kpi-label">Institutions Documented</div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(245,158,11,.18);color:var(--amber);">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <div>
+                            <div class="kpi-val" id="kpiRuralPct">45%</div>
+                            <div class="kpi-label">Rural &amp; Tribal Talukas</div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(6,182,212,.18);color:var(--accent);">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <div>
+                            <div class="kpi-val" id="kpiGovtCount">34</div>
+                            <div class="kpi-label">Govt &amp; Low-Fee (&lt;₹10k/yr)</div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(79,70,229,.18);color:#818cf8;">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <div>
+                            <div class="kpi-val">100%</div>
+                            <div class="kpi-label">MahaDBT Scheme Eligible</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribution Charts -->
+                <div class="dist-grid">
+
+                    <!-- District-wise Distribution -->
+                    <div class="dist-card">
+                        <div class="dist-card-header">
+                            <div class="dist-card-title">
+                                <i class="fa-solid fa-map-location-dot" style="color:var(--accent);"></i>
+                                District Coverage &amp; Rural Spread
+                            </div>
+                            <span style="font-size:11px;color:var(--muted);font-weight:700;">Count</span>
+                        </div>
+                        <div class="bar-group" id="districtBarChart"></div>
+                    </div>
+
+                    <!-- Category / Stream Distribution -->
+                    <div class="dist-card">
+                        <div class="dist-card-header">
+                            <div class="dist-card-title">
+                                <i class="fa-solid fa-layer-group" style="color:var(--green);"></i>
+                                Stream &amp; Category Distribution
+                            </div>
+                            <span style="font-size:11px;color:var(--muted);font-weight:700;">Share</span>
+                        </div>
+                        <div class="bar-group" id="categoryBarChart"></div>
+                    </div>
+
+                    <!-- Institution Type Breakdown -->
+                    <div class="dist-card">
+                        <div class="dist-card-header">
+                            <div class="dist-card-title">
+                                <i class="fa-solid fa-scale-balanced" style="color:var(--amber);"></i>
+                                Government vs. Private vs. Aided
+                            </div>
+                        </div>
+                        <div class="bar-group" id="typeBarChart"></div>
+                    </div>
+
+                    <!-- Affordability Bracket -->
+                    <div class="dist-card">
+                        <div class="dist-card-header">
+                            <div class="dist-card-title">
+                                <i class="fa-solid fa-indian-rupee-sign" style="color:var(--pink);"></i>
+                                Annual Fee Brackets
+                            </div>
+                        </div>
+                        <div class="bar-group" id="feeBarChart"></div>
+                    </div>
+
+                </div>
+
+                <!-- District Details Directory Table -->
+                <div class="table-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                        <h3 style="font-size:15px; font-weight:800; color:#fff;">
+                            <i class="fa-solid fa-table-list" style="color:var(--accent);margin-right:8px;"></i>
+                            District Higher Education Directory
+                        </h3>
+                        <span style="font-size:12px; color:var(--muted);">Click any district to explore on map</span>
+                    </div>
+
+                    <table class="dist-table">
+                        <thead>
+                            <tr>
+                                <th>District</th>
+                                <th>Region</th>
+                                <th>Rural / Tribal Focus</th>
+                                <th>Colleges Tracked</th>
+                                <th>Lowest Fee</th>
+                                <th>Key Streams</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="districtDirectoryTable"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /viewport 2 -->
+
+    <!-- ── Viewport 3: Career Hubs ─────────────────────────────── -->
+    <div class="viewport-view hidden" id="viewCities">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title-group">
+                    <h2><i class="fa-solid fa-city" style="color:var(--accent);"></i>District Career Hubs</h2>
+                    <p>Employment centers &amp; major economic sectors</p>
+                </div>
+            </div>
+
+            <div class="filter-panel" style="max-height:120px;">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="citySearch" placeholder="Search industrial hub…" oninput="filterCitiesSearch(this.value)">
+                </div>
+            </div>
+
+            <div class="items-list" id="citiesList"></div>
+        </aside>
+
+        <div class="map-wrapper">
+            <div id="cityMap" style="width:100%;height:100%;background:#0d121f;"></div>
+        </div>
+    </div><!-- /viewport 3 -->
+
+</div><!-- /app-shell -->
+
+<!-- Toast -->
+<div class="toast" id="toastBox"></div>
+
+
+<!-- Leaflet & App Logic -->
+<script>
+/* ================================================================
+   1. DATA DEFINITIONS
+================================================================ */
+
+// Government Welfare Schemes
+const SCHEMES = {
+    "sch-ebc-01": { name: "Rajarshi Shahu Maharaj EBC Concession", tag: "EBC (50% Fee)" },
+    "sch-hostel-02": { name: "Dr. Babasaheb Ambedkar Swadhar Hostel Scheme", tag: "Free Hostel/Meal" },
+    "sch-sc-03": { name: "Government of India Post-Matric SC Scholarship", tag: "SC Full Waiver" },
+    "sch-st-04": { name: "Tribal Development Post-Matric ST Scholarship", tag: "ST Tribal Aid" },
+    "sch-obc-05": { name: "OBC / VJNT / SBC Tuition Fee Reimbursement", tag: "OBC/VJNT Concession" },
+    "sch-minority-06": { name: "State Minority Scholarship (Muslim/Buddhist/Christian/Jain)", tag: "Minority Aid" },
+    "sch-pwd-07": { name: "Higher Education Scholarship for Persons with Disabilities", tag: "PwD Support" },
+    "sch-skill-08": { name: "Pramod Mahajan Skill & Entrepreneurship Mission (MSSDS)", tag: "Skill Grant" }
+};
+
+// Comprehensive College Dataset (User-provided + Extensive Rural Maharashtra)
+const COLLEGES = [
+    /* ── 1. NASHIK DISTRICT (User + Extended) ── */
+    {
+        id: "clg-gp-nashik",
+        name: "Government Polytechnic, Nashik",
+        district: "Nashik", division: "Nashik", areaType: "Semi-Urban",
+        lat: 19.9875, lng: 73.8180,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 8000,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Computer Technology", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-kkwagh-nashik",
+        name: "K. K. Wagh Institute of Engineering Education & Research",
+        district: "Nashik", division: "Nashik", areaType: "Urban",
+        lat: 20.0142, lng: 73.8198,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 125000,
+        courses: ["Computer Engineering", "IT", "Artificial Intelligence", "Mechanical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-minority-06"]
+    },
+    {
+        id: "clg-giti-nashik",
+        name: "Government Industrial Training Institute (ITI), Nashik",
+        district: "Nashik", division: "Nashik", areaType: "Urban",
+        lat: 20.0210, lng: 73.7915,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Fitter", "Welder", "COPA"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08", "sch-pwd-07"]
+    },
+    {
+        id: "clg-ndmvp-pharmacy-nashik",
+        name: "NDMVP Samaj's College of Pharmacy",
+        district: "Nashik", division: "Nashik", areaType: "Urban",
+        lat: 19.9982, lng: 73.7654,
+        type: "Aided", category: "Pharmacy",
+        minQualification: "12th", annualFee: 85000,
+        courses: ["B.Pharmacy", "M.Pharmacy", "Pharm.D"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-nashik",
+        name: "K.K. Wagh College of Agriculture",
+        district: "Nashik", division: "Nashik", areaType: "Rural",
+        lat: 20.0355, lng: 73.8341,
+        type: "Private", category: "Agriculture",
+        minQualification: "12th", annualFee: 75000,
+        courses: ["B.Sc. Agriculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-snjb-nashik",
+        name: "SNJB's Late Sau. KB Jain College of Engineering, Chandwad",
+        district: "Nashik", division: "Nashik", areaType: "Rural",
+        lat: 20.3298, lng: 74.2423,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 95000,
+        courses: ["Civil Engineering", "Computer Engineering", "E&TC Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-minority-06"]
+    },
+    {
+        id: "clg-giti-surgana",
+        name: "Government ITI Surgana (Tribal Taluka)",
+        district: "Nashik", division: "Nashik", areaType: "Tribal",
+        lat: 20.5750, lng: 73.6180,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1800,
+        courses: ["Electrician", "Fitter", "Wireman", "Carpenter"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-skill-08", "sch-hostel-02"]
+    },
+
+    /* ── 2. PUNE DISTRICT (User + Extended) ── */
+    {
+        id: "clg-gp-pune",
+        name: "Government Polytechnic, Pune",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.5375, lng: 73.8377,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 8500,
+        courses: ["Metallurgy", "Civil Engineering", "Computer Engineering", "IT"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-giti-aundh-pune",
+        name: "Government ITI, Aundh, Pune",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.5582, lng: 73.8055,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2500,
+        courses: ["Machinist", "Turner", "Electrician", "Draftsman Civil"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08", "sch-pwd-07"]
+    },
+    {
+        id: "clg-coep-pune",
+        name: "College of Engineering Pune Technological University (COEP)",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.5293, lng: 73.8565,
+        type: "Government", category: "Engineering",
+        minQualification: "12th", annualFee: 90000,
+        courses: ["Mechanical Engineering", "Computer Engineering", "Civil Engineering", "E&TC Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-aissms-pharmacy-pune",
+        name: "AISSMS College of Pharmacy",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.5305, lng: 73.8585,
+        type: "Private", category: "Pharmacy",
+        minQualification: "12th", annualFee: 110000,
+        courses: ["B.Pharmacy", "M.Pharmacy"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-pune",
+        name: "College of Agriculture, Pune",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.5348, lng: 73.8436,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 20000,
+        courses: ["B.Sc. Agriculture", "M.Sc. Agriculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-dypatil-pune",
+        name: "Dr. D.Y. Patil Institute of Technology, Pimpri",
+        district: "Pune", division: "Pune", areaType: "Urban",
+        lat: 18.6231, lng: 73.8227,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 135000,
+        courses: ["Computer Engineering", "Artificial Intelligence & Data Science", "Robotics and Automation"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-baramati",
+        name: "Government ITI, Baramati (Rural Agri Belt)",
+        district: "Pune", division: "Pune", areaType: "Rural",
+        lat: 18.1518, lng: 74.5772,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2200,
+        courses: ["Tractor Mechanic", "Electrician", "Solar Technician", "COPA"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+
+    /* ── 3. KOLHAPUR DISTRICT (User + Extended) ── */
+    {
+        id: "clg-gp-kolhapur",
+        name: "Government Polytechnic, Kolhapur",
+        district: "Kolhapur", division: "Pune", areaType: "Semi-Urban",
+        lat: 16.7025, lng: 74.2251,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Sugar Technology"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-kolhapur",
+        name: "Government ITI, Kolhapur",
+        district: "Kolhapur", division: "Pune", areaType: "Semi-Urban",
+        lat: 16.7102, lng: 74.2385,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2200,
+        courses: ["Fitter", "Mechanic Motor Vehicle", "Electrician"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-rit-kolhapur",
+        name: "Rajaram Bapu Institute of Technology",
+        district: "Kolhapur", division: "Pune", areaType: "Rural",
+        lat: 17.0423, lng: 74.3415,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 120000,
+        courses: ["Mechanical Engineering", "Civil Engineering", "Computer Science", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-minority-06"]
+    },
+    {
+        id: "clg-bvp-pharmacy-kolhapur",
+        name: "Bharati Vidyapeeth College of Pharmacy",
+        district: "Kolhapur", division: "Pune", areaType: "Semi-Urban",
+        lat: 16.6912, lng: 74.2341,
+        type: "Private", category: "Pharmacy",
+        minQualification: "12th", annualFee: 95000,
+        courses: ["B.Pharmacy", "M.Pharmacy"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-kolhapur",
+        name: "College of Agriculture, Kolhapur",
+        district: "Kolhapur", division: "Pune", areaType: "Rural",
+        lat: 16.6958, lng: 74.2413,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 18000,
+        courses: ["B.Sc. Agriculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-csiber-kolhapur",
+        name: "CSIBER Kolhapur",
+        district: "Kolhapur", division: "Pune", areaType: "Semi-Urban",
+        lat: 16.6985, lng: 74.2388,
+        type: "Aided", category: "Management",
+        minQualification: "12th", annualFee: 45000,
+        courses: ["BBA", "BCA", "MBA", "MCA"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-gadhinglaj",
+        name: "Government ITI, Gadhinglaj (Border Rural)",
+        district: "Kolhapur", division: "Pune", areaType: "Rural",
+        lat: 16.2285, lng: 74.3512,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Welder", "Automobile Mechanic"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+
+    /* ── 4. NAGPUR DISTRICT (User + Extended) ── */
+    {
+        id: "clg-gp-nagpur",
+        name: "Government Polytechnic, Nagpur",
+        district: "Nagpur", division: "Vidarbha", areaType: "Urban",
+        lat: 21.1345, lng: 79.0832,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 8000,
+        courses: ["Textile Technology", "Mining Engineering", "Computer Engineering", "Electronics Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-nagpur",
+        name: "Government ITI, Nagpur",
+        district: "Nagpur", division: "Vidarbha", areaType: "Urban",
+        lat: 21.1278, lng: 79.0521,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Fitter", "Welder", "Machinist"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-vnit-nagpur",
+        name: "Visvesvaraya National Institute of Technology (VNIT)",
+        district: "Nagpur", division: "Vidarbha", areaType: "Urban",
+        lat: 21.1228, lng: 79.0526,
+        type: "Government", category: "Engineering",
+        minQualification: "12th", annualFee: 140000,
+        courses: ["Mechanical Engineering", "Computer Science", "Civil Engineering", "Metallurgical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-pharma-nagpur",
+        name: "Department of Pharmaceutical Sciences, RTMNU",
+        district: "Nagpur", division: "Vidarbha", areaType: "Urban",
+        lat: 21.1412, lng: 79.0705,
+        type: "Government", category: "Pharmacy",
+        minQualification: "12th", annualFee: 35000,
+        courses: ["B.Pharmacy", "M.Pharmacy"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-nagpur",
+        name: "College of Agriculture, Nagpur",
+        district: "Nagpur", division: "Vidarbha", areaType: "Semi-Urban",
+        lat: 21.1511, lng: 79.0722,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 22000,
+        courses: ["B.Sc. Agriculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-ramdeobaba-nagpur",
+        name: "Shri Ramdeobaba College of Engineering and Management",
+        district: "Nagpur", division: "Vidarbha", areaType: "Urban",
+        lat: 21.1765, lng: 79.0611,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 155000,
+        courses: ["Computer Science and Engineering", "Electronics and Communication", "Industrial Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-minority-06"]
+    },
+    {
+        id: "clg-giti-ramtek",
+        name: "Government ITI, Ramtek (Rural Vidarbha)",
+        district: "Nagpur", division: "Vidarbha", areaType: "Rural",
+        lat: 21.3980, lng: 79.3320,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Turner", "Surveyor", "COPA"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+
+    /* ── 5. CHHATRAPATI SAMBHAJINAGAR (User + Extended) ── */
+    {
+        id: "clg-gp-sambhajinagar",
+        name: "Government Polytechnic, Chhatrapati Sambhajinagar",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 19.8702, lng: 75.3218,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 8500,
+        courses: ["Civil Engineering", "Computer Engineering", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-giti-sambhajinagar",
+        name: "Government ITI, Chhatrapati Sambhajinagar",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 19.8752, lng: 75.3125,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Fitter", "Welder", "Mechanic Diesel"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-gcoe-sambhajinagar",
+        name: "Government College of Engineering, Chhatrapati Sambhajinagar",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 19.8665, lng: 75.3211,
+        type: "Government", category: "Engineering",
+        minQualification: "12th", annualFee: 28000,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Computer Science"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-gcop-sambhajinagar",
+        name: "Government College of Pharmacy, Chhatrapati Sambhajinagar",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 19.8672, lng: 75.3245,
+        type: "Government", category: "Pharmacy",
+        minQualification: "12th", annualFee: 25000,
+        courses: ["B.Pharmacy", "M.Pharmacy", "Pharm.D"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-badnapur",
+        name: "College of Agriculture, Badnapur",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Rural",
+        lat: 19.8655, lng: 75.9221,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 15000,
+        courses: ["B.Sc. Agriculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-jnec-sambhajinagar",
+        name: "Jawaharlal Nehru Engineering College (JNEC)",
+        district: "Chhatrapati Sambhajinagar", division: "Marathwada", areaType: "Urban",
+        lat: 19.8885, lng: 75.3562,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 140000,
+        courses: ["Architecture", "Computer Science and Engineering", "Mechanical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-minority-06"]
+    },
+
+    /* ── 6. GADCHIROLI DISTRICT (Rural & Deep Tribal Vidarbha) ── */
+    {
+        id: "clg-gp-gadchiroli",
+        name: "Government Polytechnic, Gadchiroli",
+        district: "Gadchiroli", division: "Vidarbha", areaType: "Tribal",
+        lat: 20.1795, lng: 79.9980,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 6500,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Mining Technology"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-ebc-01", "sch-hostel-02", "sch-skill-08"]
+    },
+    {
+        id: "clg-giti-gadchiroli",
+        name: "Government ITI, Gadchiroli",
+        district: "Gadchiroli", division: "Vidarbha", areaType: "Tribal",
+        lat: 20.1850, lng: 80.0050,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1500,
+        courses: ["Electrician", "Fitter", "Welder", "Forestry Equipment Operator"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-skill-08", "sch-hostel-02"]
+    },
+    {
+        id: "clg-giti-aheri",
+        name: "Government Tribal ITI, Aheri",
+        district: "Gadchiroli", division: "Vidarbha", areaType: "Tribal",
+        lat: 19.4180, lng: 80.0020,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1200,
+        courses: ["Wireman", "Motor Mechanic", "Carpentry", "Masonry"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-hostel-02", "sch-skill-08"]
+    },
+    {
+        id: "clg-shivaji-gadchiroli",
+        name: "Shivaji Mahavidyalaya Arts & Science, Gadchiroli",
+        district: "Gadchiroli", division: "Vidarbha", areaType: "Rural",
+        lat: 20.1760, lng: 79.9920,
+        type: "Aided", category: "Management",
+        minQualification: "12th", annualFee: 8500,
+        courses: ["B.Sc. Computer Science", "BBA", "B.Com"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-ebc-01", "sch-hostel-02"]
+    },
+
+    /* ── 7. NANDURBAR DISTRICT (Satpuda Tribal Belt) ── */
+    {
+        id: "clg-gp-nandurbar",
+        name: "Government Polytechnic, Nandurbar",
+        district: "Nandurbar", division: "Nashik", areaType: "Tribal",
+        lat: 21.3650, lng: 74.2405,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7000,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Computer Technology"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-ebc-01", "sch-hostel-02", "sch-pwd-07"]
+    },
+    {
+        id: "clg-giti-nandurbar",
+        name: "Government ITI, Nandurbar",
+        district: "Nandurbar", division: "Nashik", areaType: "Tribal",
+        lat: 21.3702, lng: 74.2380,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1500,
+        courses: ["Electrician", "Fitter", "Diesel Mechanic", "Plumber"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-skill-08", "sch-hostel-02"]
+    },
+    {
+        id: "clg-giti-dhadgaon",
+        name: "Government Tribal ITI, Dhadgaon (Akrani Hills)",
+        district: "Nandurbar", division: "Nashik", areaType: "Tribal",
+        lat: 21.6521, lng: 74.2185,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1000,
+        courses: ["Solar Lighting Tech", "Wireman", "Agro-Machine Mechanic"],
+        schemesApplicable: ["sch-st-04", "sch-hostel-02", "sch-skill-08"]
+    },
+    {
+        id: "clg-agri-nandurbar",
+        name: "College of Agriculture, Nandurbar",
+        district: "Nandurbar", division: "Nashik", areaType: "Rural",
+        lat: 21.3780, lng: 74.2500,
+        type: "Aided", category: "Agriculture",
+        minQualification: "12th", annualFee: 24000,
+        courses: ["B.Sc. Agriculture (Horticulture)"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-ebc-01", "sch-hostel-02"]
+    },
+
+    /* ── 8. YAVATMAL DISTRICT (Cotton Belt Rural Vidarbha) ── */
+    {
+        id: "clg-gp-yavatmal",
+        name: "Government Polytechnic, Yavatmal",
+        district: "Yavatmal", division: "Vidarbha", areaType: "Rural",
+        lat: 20.3950, lng: 78.1320,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Textile Manufacture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-yavatmal",
+        name: "Government ITI, Yavatmal",
+        district: "Yavatmal", division: "Vidarbha", areaType: "Rural",
+        lat: 20.4010, lng: 78.1250,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Gin & Press Machine Operator", "Electrician", "Welder", "Tractor Mechanic"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-jarda-yavatmal",
+        name: "Jawaharlal Darda Institute of Engineering & Technology",
+        district: "Yavatmal", division: "Vidarbha", areaType: "Semi-Urban",
+        lat: 20.3780, lng: 78.1180,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 92000,
+        courses: ["Textile Plant Engineering", "Computer Engineering", "Chemical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-umarkhed",
+        name: "Vasantrao Naik College of Agriculture, Umarkhed",
+        district: "Yavatmal", division: "Vidarbha", areaType: "Rural",
+        lat: 19.5980, lng: 77.7020,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 16000,
+        courses: ["B.Sc. Agriculture (Dryland Farming)"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 9. BEED DISTRICT (Rural Marathwada) ── */
+    {
+        id: "clg-gp-beed",
+        name: "Government Polytechnic, Beed",
+        district: "Beed", division: "Marathwada", areaType: "Rural",
+        lat: 18.9910, lng: 75.7610,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7800,
+        courses: ["Civil Engineering", "Computer Technology", "Electronics Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-beed",
+        name: "Government ITI, Beed",
+        district: "Beed", division: "Marathwada", areaType: "Rural",
+        lat: 18.9850, lng: 75.7530,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Electrician", "Fitter", "Automobile Mechanic", "COPA"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-vaidyanath-parli",
+        name: "Vaidyanath College of Arts & Science, Parli",
+        district: "Beed", division: "Marathwada", areaType: "Rural",
+        lat: 18.8500, lng: 76.5350,
+        type: "Aided", category: "Management",
+        minQualification: "12th", annualFee: 12000,
+        courses: ["BCA", "B.Sc. Chemistry", "B.Com"],
+        schemesApplicable: ["sch-ebc-01", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-aditya-eng-beed",
+        name: "Aditya Engineering College, Beed",
+        district: "Beed", division: "Marathwada", areaType: "Rural",
+        lat: 18.9720, lng: 75.7890,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 85000,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Computer Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 10. DHARASHIV / OSMANABAD DISTRICT (Rural Marathwada) ── */
+    {
+        id: "clg-gp-dharashiv",
+        name: "Government Polytechnic, Dharashiv (Osmanabad)",
+        district: "Dharashiv", division: "Marathwada", areaType: "Rural",
+        lat: 18.1750, lng: 76.0420,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Mechanical Engineering", "Civil Engineering", "Electronics & Telecommunication"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-tuljapur",
+        name: "Government ITI, Tuljapur",
+        district: "Dharashiv", division: "Marathwada", areaType: "Rural",
+        lat: 18.0050, lng: 76.0820,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1900,
+        courses: ["Electrician", "Wireman", "Plumber", "Welder"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-agri-dharashiv",
+        name: "College of Agriculture, Dharashiv",
+        district: "Dharashiv", division: "Marathwada", areaType: "Rural",
+        lat: 18.1820, lng: 76.0510,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 15000,
+        courses: ["B.Sc. Agriculture (Oilseeds & Pulses)"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 11. SINDHUDURG DISTRICT (Coastal / Rural Konkan) ── */
+    {
+        id: "clg-gp-malvan",
+        name: "Government Polytechnic, Malvan",
+        district: "Sindhudurg", division: "Konkan", areaType: "Rural",
+        lat: 16.0590, lng: 73.4680,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7800,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Marine Engineering Diploma"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-sawantwadi",
+        name: "Government ITI, Sawantwadi (Woodcraft & Tech)",
+        district: "Sindhudurg", division: "Konkan", areaType: "Rural",
+        lat: 15.9080, lng: 73.8190,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Carpentry & Wooden Toy Making", "Electrician", "Refrigeration & AC Mechanic"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-sspm-kankavli",
+        name: "SSPM College of Engineering, Kankavli",
+        district: "Sindhudurg", division: "Konkan", areaType: "Rural",
+        lat: 16.2710, lng: 73.7120,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 85000,
+        courses: ["Computer Engineering", "Mechanical Engineering", "Civil Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 12. RATNAGIRI DISTRICT (Konkan Coast & Fisheries) ── */
+    {
+        id: "clg-gp-ratnagiri",
+        name: "Government Polytechnic, Ratnagiri",
+        district: "Ratnagiri", division: "Konkan", areaType: "Semi-Urban",
+        lat: 16.9850, lng: 73.3080,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 8000,
+        courses: ["Chemical Engineering", "Civil Engineering", "Mechanical Engineering", "Computer Tech"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-fish-ratnagiri",
+        name: "College of Fisheries, Shirgaon (DBSKKV)",
+        district: "Ratnagiri", division: "Konkan", areaType: "Rural",
+        lat: 17.0210, lng: 73.3150,
+        type: "Government", category: "Fisheries",
+        minQualification: "12th", annualFee: 22000,
+        courses: ["B.F.Sc. (Bachelor of Fishery Science)", "M.F.Sc. Aquaculture"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-famt-ratnagiri",
+        name: "Finolex Academy of Management & Technology",
+        district: "Ratnagiri", division: "Konkan", areaType: "Semi-Urban",
+        lat: 17.0110, lng: 73.3320,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 98000,
+        courses: ["Chemical Engineering", "Information Technology", "Mechanical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 13. JALGAON DISTRICT (Khandesh Rural Belt) ── */
+    {
+        id: "clg-gp-jalgaon",
+        name: "Government Polytechnic, Jalgaon",
+        district: "Jalgaon", division: "Nashik", areaType: "Semi-Urban",
+        lat: 21.0020, lng: 75.5680,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7800,
+        courses: ["Plastic Polymer Engineering", "Computer Engineering", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-bhusawal",
+        name: "Government ITI, Bhusawal (Railway & Thermal Hub)",
+        district: "Jalgaon", division: "Nashik", areaType: "Semi-Urban",
+        lat: 21.0450, lng: 75.7950,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2100,
+        courses: ["Electrician (Loco Traction)", "Fitter", "Welder", "Machinist"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+    {
+        id: "clg-agri-jamner",
+        name: "College of Agriculture, Jamner",
+        district: "Jalgaon", division: "Nashik", areaType: "Rural",
+        lat: 20.8120, lng: 75.7850,
+        type: "Aided", category: "Agriculture",
+        minQualification: "12th", annualFee: 18000,
+        courses: ["B.Sc. Agriculture (Banana Tissue Culture)"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 14. SOLAPUR & PANDHARPUR (Rural Textile & Sugar Belt) ── */
+    {
+        id: "clg-gp-solapur",
+        name: "Government Polytechnic, Solapur",
+        district: "Solapur", division: "Pune", areaType: "Semi-Urban",
+        lat: 17.6866, lng: 75.9064,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7800,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Textile Technology", "Computer Technology"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-sveri-pandharpur",
+        name: "SVERI's College of Engineering, Pandharpur",
+        district: "Solapur", division: "Pune", areaType: "Rural",
+        lat: 17.6780, lng: 75.3250,
+        type: "Private", category: "Engineering",
+        minQualification: "12th", annualFee: 95000,
+        courses: ["Computer Science", "Mechanical Engineering", "Civil Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-pandharpur",
+        name: "Government ITI, Pandharpur",
+        district: "Solapur", division: "Pune", areaType: "Rural",
+        lat: 17.6820, lng: 75.3180,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 2000,
+        courses: ["Fitter", "Electrician", "Solar Technician"],
+        schemesApplicable: ["sch-sc-03", "sch-st-04", "sch-obc-05", "sch-skill-08"]
+    },
+
+    /* ── 15. NANDED & HINGOLI (Marathwada Border Rural) ── */
+    {
+        id: "clg-gp-nanded",
+        name: "Government Polytechnic, Nanded",
+        district: "Nanded", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 19.1389, lng: 77.3201,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Civil Engineering", "Computer Engineering", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+    {
+        id: "clg-giti-kinwat",
+        name: "Government Tribal ITI, Kinwat",
+        district: "Nanded", division: "Marathwada", areaType: "Tribal",
+        lat: 19.6350, lng: 78.2010,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1500,
+        courses: ["Electrician", "Wireman", "Mechanic Diesel", "COPA"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-hostel-02", "sch-skill-08"]
+    },
+    {
+        id: "clg-gp-hingoli",
+        name: "Government Polytechnic, Hingoli",
+        district: "Nanded", division: "Marathwada", areaType: "Rural",
+        lat: 19.7180, lng: 77.1450,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7200,
+        courses: ["Civil Engineering", "Mechanical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 16. AMRAVATI & WASHIM (Rural Vidarbha) ── */
+    {
+        id: "clg-gp-amravati",
+        name: "Government Polytechnic, Amravati",
+        district: "Amravati", division: "Vidarbha", areaType: "Semi-Urban",
+        lat: 20.9374, lng: 77.7796,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7800,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electronics Engineering", "Computer Technology"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-gp-washim",
+        name: "Government Polytechnic, Washim",
+        district: "Washim", division: "Vidarbha", areaType: "Rural",
+        lat: 20.1080, lng: 77.1350,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7200,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-giti-chikhaldara",
+        name: "Government Tribal ITI, Chikhaldara (Melghat Tiger Reserve)",
+        district: "Amravati", division: "Vidarbha", areaType: "Tribal",
+        lat: 21.4010, lng: 77.3250,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1400,
+        courses: ["Ecotourism Guide", "Solar Tech", "Horticulture Assistant", "Electrician"],
+        schemesApplicable: ["sch-st-04", "sch-hostel-02", "sch-skill-08"]
+    },
+
+    /* ── 17. LATUR DISTRICT (Marathwada Coaching & Agri) ── */
+    {
+        id: "clg-gp-latur",
+        name: "Government Polytechnic, Latur",
+        district: "Latur", division: "Marathwada", areaType: "Semi-Urban",
+        lat: 18.4088, lng: 76.5604,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Computer Technology"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-agri-latur",
+        name: "Vasantrao Naik College of Agriculture, Latur",
+        district: "Latur", division: "Marathwada", areaType: "Rural",
+        lat: 18.4001, lng: 76.5521,
+        type: "Government", category: "Agriculture",
+        minQualification: "12th", annualFee: 16000,
+        courses: ["B.Sc. Agriculture (Pulses & Oilseeds)"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+
+    /* ── 18. GONDIA & CHANDRAPUR (Mineral, Forest & Rice Belt) ── */
+    {
+        id: "clg-gp-gondia",
+        name: "Government Polytechnic, Gondia",
+        district: "Gondia", division: "Vidarbha", areaType: "Rural",
+        lat: 21.4580, lng: 80.1980,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7000,
+        courses: ["Civil Engineering", "Mechanical Engineering", "Electronics Engineering"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05"]
+    },
+    {
+        id: "clg-gcoec-chandrapur",
+        name: "Government College of Engineering, Chandrapur",
+        district: "Chandrapur", division: "Vidarbha", areaType: "Semi-Urban",
+        lat: 19.9580, lng: 79.3010,
+        type: "Government", category: "Engineering",
+        minQualification: "12th", annualFee: 32000,
+        courses: ["Mining Engineering", "Mechanical Engineering", "Electrical Engineering", "Computer Science"],
+        schemesApplicable: ["sch-ebc-01", "sch-hostel-02", "sch-sc-03", "sch-st-04", "sch-obc-05", "sch-pwd-07"]
+    },
+
+    /* ── 19. PALGHAR (Tribal Coastal Rural) ── */
+    {
+        id: "clg-giti-jawhar",
+        name: "Government Tribal ITI, Jawhar",
+        district: "Palghar", division: "Konkan", areaType: "Tribal",
+        lat: 19.9150, lng: 73.2320,
+        type: "Government", category: "ITI",
+        minQualification: "10th", annualFee: 1500,
+        courses: ["Warli Art & Handicrafts", "Electrician", "Fitter", "Welder"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-hostel-02", "sch-skill-08"]
+    },
+    {
+        id: "clg-gp-vikramgad",
+        name: "Government Polytechnic, Vikramgad",
+        district: "Palghar", division: "Konkan", areaType: "Rural",
+        lat: 19.7980, lng: 73.0950,
+        type: "Government", category: "Polytechnic",
+        minQualification: "10th", annualFee: 7500,
+        courses: ["Civil Engineering", "Computer Engineering", "Mechanical Engineering"],
+        schemesApplicable: ["sch-st-04", "sch-sc-03", "sch-ebc-01", "sch-hostel-02"]
+    }
+];
+
+// City data for Career Hubs
+const CITIES = [
+    {
+        name: 'Mumbai', region: 'Konkan Division', lat: 18.9388, lng: 72.8354,
+        sectors: ['Finance', 'Tech', 'Media', 'Film'], color: '#4F46E5', icon: '🏙️',
+        jobs: '4.2L+', colleges: 68, desc: 'Financial capital of India — home to BSE, NSE, Bollywood & top MNCs.'
+    },
+    {
+        name: 'Pune', region: 'Pune Division', lat: 18.5204, lng: 73.8567,
+        sectors: ['IT', 'Automotive', 'Education', 'Defense'], color: '#06B6D4', icon: '💻',
+        jobs: '2.8L+', colleges: 57, desc: 'Oxford of the East — premier universities, IT clusters & automotive giants.'
+    },
+    {
+        name: 'Nagpur', region: 'Vidarbha Division', lat: 21.1458, lng: 79.0882,
+        sectors: ['Government', 'Logistics', 'Mining', 'Healthcare'], color: '#F59E0B', icon: '🏛️',
+        jobs: '85K+', colleges: 31, desc: 'Zero Mile city — sub-capital of Maharashtra, logistics & transport interchange.'
+    },
+    {
+        name: 'Nashik', region: 'Nashik Division', lat: 19.9975, lng: 73.7898,
+        sectors: ['Manufacturing', 'Viticulture', 'Tourism', 'Defense'], color: '#10B981', icon: '🍇',
+        jobs: '72K+', colleges: 24, desc: 'Wine & agri-processing capital with defense aviation and printing press.'
+    },
+    {
+        name: 'Chhatrapati Sambhajinagar', region: 'Marathwada Division', lat: 19.8762, lng: 75.3433,
+        sectors: ['Automotive', 'Tourism', 'Textiles', 'Pharma'], color: '#8B5CF6', icon: '🏰',
+        jobs: '60K+', colleges: 22, desc: 'Automotive belt, pharma hub & gateway to Ajanta-Ellora UNESCO heritage.'
+    },
+    {
+        name: 'Kolhapur', region: 'Kolhapur Division', lat: 16.7050, lng: 74.2433,
+        sectors: ['Sugar', 'Foundry', 'Textiles', 'Film'], color: '#EC4899', icon: '⚙️',
+        jobs: '44K+', colleges: 18, desc: 'Heavy foundry castings exporter & rich sugarcane processing belt.'
+    },
+    {
+        name: 'Gadchiroli (Rural Hub)', region: 'Vidarbha Division', lat: 20.1795, lng: 79.9980,
+        sectors: ['Forestry', 'Mining & Steel', 'Bamboo Craft', 'Eco-Tourism'], color: '#10B981', icon: '🌲',
+        jobs: '12K+', colleges: 9, desc: 'Rich in iron ore deposits (Surjagarh), medicinal plants & bamboo crafts.'
+    },
+    {
+        name: 'Nandurbar (Tribal Hub)', region: 'Nashik Division', lat: 21.3650, lng: 74.2405,
+        sectors: ['Chilli Processing', 'Wind Energy', 'Organic Farming', 'Agri MSME'], color: '#F59E0B', icon: '🌾',
+        jobs: '15K+', colleges: 8, desc: 'Asia’s largest chilli market (Dondaicha) and extensive wind turbine farms.'
+    }
+];
+
+
+/* ================================================================
+   2. STATE & GLOBALS
+================================================================ */
+let map;
+let cityMap;
+let collegeMarkers = {};
+let allMapMarkers = [];
+let userLocationMarker = null;
+let userCoords = null;
+let currentFilteredColleges = [...COLLEGES];
+let activeQuickArea = 'all';
+let activeQuickType = 'all';
+let activeQuickCat = 'all';
+
+// Bounds of Maharashtra
+const MH_BOUNDS = L.latLngBounds([15.5, 72.5], [22.2, 81.0]);
+
+/* ================================================================
+   3. TAB SWITCHING
+================================================================ */
+function switchTab(tabId) {
+    document.getElementById('viewColleges').classList.toggle('hidden', tabId !== 'colleges');
+    document.getElementById('viewDistribution').classList.toggle('hidden', tabId !== 'distribution');
+    document.getElementById('viewCities').classList.toggle('hidden', tabId !== 'cities');
+
+    document.getElementById('btnTabColleges').classList.toggle('active', tabId === 'colleges');
+    document.getElementById('btnTabDistribution').classList.toggle('active', tabId === 'distribution');
+    document.getElementById('btnTabCities').classList.toggle('active', tabId === 'cities');
+
+    if (tabId === 'colleges') {
+        setTimeout(() => { if (map) map.invalidateSize(); }, 200);
+    } else if (tabId === 'distribution') {
+        renderAnalytics();
+    } else if (tabId === 'cities') {
+        setTimeout(() => {
+            if (!cityMap) initCityMap();
+            else cityMap.invalidateSize();
+        }, 200);
+    }
+}
+
+
+/* ================================================================
+   4. MAP INITIALIZATION & MARKERS
+================================================================ */
+function initCollegeMap() {
+    map = L.map('map', {
+        center: [19.5, 76.2],
+        zoom: 7,
+        minZoom: 6,
+        maxZoom: 17,
+        maxBounds: MH_BOUNDS,
+        maxBoundsViscosity: 0.8,
+        zoomControl: false
+    });
+
+    // Dark Carto tiles
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+        subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    // Initial Marker render
+    renderCollegeMarkers(COLLEGES);
+    renderCollegeList(COLLEGES);
+    updateStatsCounters(COLLEGES);
+}
+
+function getCategoryIcon(cat) {
+    switch (cat) {
+        case 'ITI': return '🔧';
+        case 'Polytechnic': return '📐';
+        case 'Engineering': return '⚙️';
+        case 'Pharmacy': return '💊';
+        case 'Agriculture': return '🌾';
+        case 'Fisheries': return '🐟';
+        case 'Management': return '📊';
+        default: return '🎓';
+    }
+}
+
+function getTypeColor(type) {
+    if (type === 'Government') return '#10B981'; // Green
+    if (type === 'Aided') return '#06B6D4';      // Cyan
+    return '#F59E0B';                            // Amber (Private)
+}
+
+function createCollegeIcon(clg) {
+    const color = getTypeColor(clg.type);
+    const emoji = getCategoryIcon(clg.category);
+
+    const isRural = clg.areaType === 'Rural' || clg.areaType === 'Tribal';
+    const borderGlow = isRural ? `0 0 0 3px ${color}35, 0 4px 14px rgba(0,0,0,.6)` : `0 2px 8px rgba(0,0,0,.5)`;
+
+    return L.divIcon({
+        className: '',
+        html: `
+            <div style="
+                width: 32px; height: 32px; border-radius: 50%;
+                background: ${color};
+                border: 2px solid #ffffffd9;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 13px;
+                box-shadow: ${borderGlow};
+                cursor: pointer;
+                transition: transform .2s;
+            ">${emoji}</div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+    });
+}
+
+function renderCollegeMarkers(list) {
+    // Clear old
+    allMapMarkers.forEach(m => map.removeLayer(m));
+    allMapMarkers = [];
+    collegeMarkers = {};
+
+    list.forEach(clg => {
+        const icon = createCollegeIcon(clg);
+        const marker = L.marker([clg.lat, clg.lng], { icon }).addTo(map);
+
+        marker.bindPopup(buildCollegePopupHtml(clg), { maxWidth: 320 });
+
+        marker.on('click', () => {
+            highlightCollegeInSidebar(clg.id);
+        });
+
+        collegeMarkers[clg.id] = marker;
+        allMapMarkers.push(marker);
+    });
+
+    document.getElementById('filteredCountBadge').textContent = `${list.length} colleges`;
+    document.getElementById('statCollegesCount').textContent = list.length;
+}
+
+function buildCollegePopupHtml(clg) {
+    const color = getTypeColor(clg.type);
+    const emoji = getCategoryIcon(clg.category);
+
+    // Fee presentation
+    const feeFmt = clg.annualFee <= 10000
+        ? `₹${clg.annualFee.toLocaleString()} <span style="color:var(--green);font-size:10px;">(Subsidized)</span>`
+        : `₹${clg.annualFee.toLocaleString()} /yr`;
+
+    // Schemes tags
+    const schemesHtml = clg.schemesApplicable.map(s => {
+        const sc = SCHEMES[s] || { tag: s };
+        return `<span class="popup-tag-s">${sc.tag}</span>`;
+    }).join('');
+
+    // Courses tags
+    const coursesHtml = clg.courses.map(c => `<span class="popup-tag-c">${c}</span>`).join('');
+
+    return `
+        <div>
+            <span class="popup-college-type" style="background:${color}25;color:${color};border:1px solid ${color}45;">
+                ${emoji} ${clg.type} ${clg.category}
+            </span>
+            <div class="popup-college-name">${clg.name}</div>
+            <div class="popup-loc-row">
+                <i class="fa-solid fa-location-dot"></i>
+                ${clg.district} · <span style="color:var(--muted);">${clg.areaType} Area</span>
+            </div>
+
+            <div class="popup-stat-grid">
+                <div class="popup-stat-box">
+                    <div class="popup-stat-lbl">Annual Tuition</div>
+                    <div class="popup-stat-val" style="color:${color}">${feeFmt}</div>
+                </div>
+                <div class="popup-stat-box">
+                    <div class="popup-stat-lbl">Min Eligibility</div>
+                    <div class="popup-stat-val">After ${clg.minQualification}</div>
+                </div>
+            </div>
+
+            <div class="popup-section-title">Courses Available</div>
+            <div class="popup-tag-wrap">${coursesHtml}</div>
+
+            <div class="popup-section-title" style="margin-top:8px;">Schemes &amp; Fee Waiver</div>
+            <div class="popup-tag-wrap">${schemesHtml}</div>
+        </div>
+    `;
+}
+
+function renderCollegeList(list) {
+    const container = document.getElementById('collegeItemsList');
+    container.innerHTML = '';
+
+    if (!list.length) {
+        container.innerHTML = `
+            <div style="text-align:center;padding:40px 16px;color:var(--sub);font-size:13px;">
+                <i class="fa-solid fa-filter-circle-xmark" style="font-size:28px;margin-bottom:10px;display:block;"></i>
+                No institutions match these filters. Try adjusting your search criteria.
+            </div>`;
+        return;
+    }
+
+    // Sort by distance if user coords available
+    let displayList = [...list];
+    if (userCoords) {
+        displayList.sort((a, b) => {
+            const distA = getDistanceKm(userCoords.lat, userCoords.lng, a.lat, a.lng);
+            const distB = getDistanceKm(userCoords.lat, userCoords.lng, b.lat, b.lng);
+            return distA - distB;
+        });
+    }
+
+    displayList.forEach(clg => {
+        const card = document.createElement('div');
+        card.className = 'college-item-card';
+        card.setAttribute('data-type', clg.type);
+        card.id = `clg-card-${clg.id}`;
+
+        let feeClass = 'fee-low';
+        if (clg.annualFee > 50000) feeClass = 'fee-high';
+        else if (clg.annualFee > 10000) feeClass = 'fee-mid';
+
+        const feeText = clg.annualFee >= 100000
+            ? `₹${(clg.annualFee/1000).toFixed(0)}k/yr`
+            : `₹${clg.annualFee.toLocaleString()}/yr`;
+
+        // Area badge
+        let areaTagClass = 'tag-urban';
+        if (clg.areaType === 'Rural') areaTagClass = 'tag-rural';
+        else if (clg.areaType === 'Tribal') areaTagClass = 'tag-tribal';
+
+        // Distance tag
+        let distTagHtml = '';
+        if (userCoords) {
+            const d = getDistanceKm(userCoords.lat, userCoords.lng, clg.lat, clg.lng);
+            distTagHtml = `<span class="tag-pill tag-distance"><i class="fa-solid fa-person-walking"></i> ${d.toFixed(1)} km</span>`;
+        }
+
+        card.innerHTML = `
+            <div class="item-top">
+                <div class="item-name">${clg.name}</div>
+                <span class="item-fee-tag ${feeClass}">${feeText}</span>
+            </div>
+            <div class="item-badges">
+                <span class="tag-pill tag-distr">${clg.district}</span>
+                <span class="tag-pill ${areaTagClass}">${clg.areaType}</span>
+                <span class="tag-pill tag-cat">${getCategoryIcon(clg.category)} ${clg.category}</span>
+                ${distTagHtml}
+            </div>
+            <div class="item-courses-preview">
+                <i class="fa-solid fa-book-open" style="color:var(--sub);margin-right:4px;"></i>
+                ${clg.courses.slice(0, 3).join(', ')}${clg.courses.length > 3 ? '...' : ''}
+            </div>
+        `;
+
+        card.onclick = () => focusCollegeOnMap(clg);
+        container.appendChild(card);
+    });
+}
+
+function focusCollegeOnMap(clg) {
+    highlightCollegeInSidebar(clg.id);
+    map.flyTo([clg.lat, clg.lng], 13, { duration: 1.0 });
+    setTimeout(() => {
+        if (collegeMarkers[clg.id]) collegeMarkers[clg.id].openPopup();
+    }, 900);
+}
+
+function highlightCollegeInSidebar(id) {
+    document.querySelectorAll('.college-item-card').forEach(c => c.classList.remove('active'));
+    const card = document.getElementById(`clg-card-${id}`);
+    if (card) {
+        card.classList.add('active');
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+function updateStatsCounters(list) {
+    const ruralCount = list.filter(c => c.areaType === 'Rural' || c.areaType === 'Tribal').length;
+    document.getElementById('statRuralCount').textContent = ruralCount;
+}
+
+
+/* ================================================================
+   5. FILTERING LOGIC
+================================================================ */
+function setQuickArea(area, btn) {
+    activeQuickArea = area;
+    document.querySelectorAll('.quick-badges .q-badge').forEach(b => b.classList.remove('active', 'active-primary'));
+    btn.classList.add(area === 'all' ? 'active-primary' : 'active');
+    applyCollegeFilters();
+}
+
+function setQuickType(type, btn) {
+    document.getElementById('clgType').value = type;
+    applyCollegeFilters();
+}
+
+function setQuickCat(cat, btn) {
+    document.getElementById('clgCategory').value = cat;
+    applyCollegeFilters();
+}
+
+function updateFeeDisplay() {
+    const val = parseInt(document.getElementById('feeRangeSlider').value);
+    document.getElementById('feeValDisplay').textContent =
+        val >= 160000 ? 'Any Fee (Up to ₹1.6L)' : `₹${val.toLocaleString()}`;
+}
+
+function applyCollegeFilters() {
+    const search = document.getElementById('clgSearch').value.toLowerCase().trim();
+    const district = document.getElementById('clgDistrict').value;
+    const type = document.getElementById('clgType').value;
+    const category = document.getElementById('clgCategory').value;
+    const qual = document.getElementById('clgQual').value;
+    const maxFee = parseInt(document.getElementById('feeRangeSlider').value);
+    const scheme = document.getElementById('clgScheme').value;
+
+    currentFilteredColleges = COLLEGES.filter(c => {
+        // Quick area button
+        if (activeQuickArea === 'Rural' && c.areaType !== 'Rural') return false;
+        if (activeQuickArea === 'Tribal' && c.areaType !== 'Tribal') return false;
+
+        // Dropdowns
+        if (district !== 'all' && c.district !== district) return false;
+        if (type !== 'all' && c.type !== type) return false;
+        if (category !== 'all' && c.category !== category) return false;
+        if (qual !== 'all' && c.minQualification !== qual) return false;
+        if (c.annualFee > maxFee) return false;
+        if (scheme !== 'all' && !c.schemesApplicable.includes(scheme)) return false;
+
+        // Text search
+        if (search) {
+            const haystack = `${c.name} ${c.district} ${c.division} ${c.courses.join(' ')} ${c.areaType}`.toLowerCase();
+            if (!haystack.includes(search)) return false;
+        }
+
+        return true;
+    });
+
+    renderCollegeMarkers(currentFilteredColleges);
+    renderCollegeList(currentFilteredColleges);
+    updateStatsCounters(currentFilteredColleges);
+
+    // Zoom map to fit filtered points
+    if (currentFilteredColleges.length > 0) {
+        const bounds = L.latLngBounds(currentFilteredColleges.map(c => [c.lat, c.lng]));
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
+    }
+}
+
+function resetCollegeFilters() {
+    document.getElementById('clgSearch').value = '';
+    document.getElementById('clgDistrict').value = 'all';
+    document.getElementById('clgType').value = 'all';
+    document.getElementById('clgCategory').value = 'all';
+    document.getElementById('clgQual').value = 'all';
+    document.getElementById('clgScheme').value = 'all';
+    document.getElementById('feeRangeSlider').value = 160000;
+    activeQuickArea = 'all';
+    updateFeeDisplay();
+
+    document.querySelectorAll('.quick-badges .q-badge').forEach(b => b.classList.remove('active', 'active-primary'));
+    document.querySelector('.quick-badges .q-badge').classList.add('active-primary');
+
+    applyCollegeFilters();
+    map.fitBounds(MH_BOUNDS);
+    showToast("Filters cleared. Showing all Maharashtra colleges.");
+}
+
+function zoomToRegion(region) {
+    document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    switch (region) {
+        case 'rural':
+            map.flyToBounds([[18.5, 74.0], [21.8, 80.5]], { duration: 1.2 });
+            activeQuickArea = 'Rural';
+            applyCollegeFilters();
+            break;
+        case 'vidarbha':
+            map.flyToBounds([[19.3, 77.5], [21.8, 80.8]], { duration: 1.2 });
+            break;
+        case 'marathwada':
+            map.flyToBounds([[18.0, 75.0], [20.2, 77.8]], { duration: 1.2 });
+            break;
+        case 'khandesh':
+            map.flyToBounds([[20.5, 73.8], [21.8, 76.2]], { duration: 1.2 });
+            break;
+        case 'konkan':
+            map.flyToBounds([[15.8, 72.8], [19.9, 73.8]], { duration: 1.2 });
+            break;
+        case 'western':
+            map.flyToBounds([[16.5, 73.8], [19.2, 75.5]], { duration: 1.2 });
+            break;
+        default:
+            map.flyToBounds(MH_BOUNDS, { duration: 1.0 });
+            break;
+    }
+}
+
+
+/* ================================================================
+   6. USER GEOLOCATION & DISTANCE
+================================================================ */
+function findUserLocation() {
+    if (!navigator.geolocation) {
+        showToast("⚠️ Geolocation is not supported by your browser.");
+        return;
+    }
+
+    showToast("📡 Detecting your current location in Maharashtra…");
+
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            userCoords = { lat, lng };
+
+            // Check if inside rough MH bounds
+            const insideMH = (lat >= 15.5 && lat <= 22.2 && lng >= 72.5 && lng <= 81.0);
+
+            if (!insideMH) {
+                showToast("📍 Note: Detected coordinates are outside Maharashtra. Showing nearest.");
+            }
+
+            if (userLocationMarker) map.removeLayer(userLocationMarker);
+
+            const userIcon = L.divIcon({
+                className: '',
+                html: `
+                    <div style="
+                        width: 24px; height: 24px; border-radius: 50%;
+                        background: #3B82F6;
+                        border: 3px solid #fff;
+                        box-shadow: 0 0 0 6px rgba(59,130,246,.35), 0 4px 12px rgba(0,0,0,.5);
+                        animation: pulse 1.5s infinite;
+                    "></div>
+                `,
+                iconSize: [24, 24], iconAnchor: [12, 12]
+            });
+
+            userLocationMarker = L.marker([lat, lng], { icon: userIcon, zIndexOffset: 1000 }).addTo(map);
+            userLocationMarker.bindPopup("<strong>📍 You Are Here</strong>").openPopup();
+
+            map.setView([lat, lng], 11);
+
+            // Re-render list sorted by distance
+            renderCollegeList(currentFilteredColleges);
+
+            // Find nearest
+            let nearest = null, minDist = Infinity;
+            COLLEGES.forEach(c => {
+                const d = getDistanceKm(lat, lng, c.lat, c.lng);
+                if (d < minDist) { minDist = d; nearest = c; }
+            });
+
+            if (nearest) {
+                showToast(`🎓 Nearest Institute: ${nearest.name} (${minDist.toFixed(1)} km)`);
+            }
+        },
+        err => {
+            showToast("❌ Could not get location. Please allow location permissions.");
+        },
+        { timeout: 10000, enableHighAccuracy: false }
+    );
+}
+
+function getDistanceKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+
+/* ================================================================
+   7. ANALYTICS & DISTRIBUTION TAB
+================================================================ */
+function renderAnalytics() {
+    const total = COLLEGES.length;
+    document.getElementById('kpiTotal').textContent = total;
+
+    const ruralCount = COLLEGES.filter(c => c.areaType === 'Rural' || c.areaType === 'Tribal').length;
+    document.getElementById('kpiRuralPct').textContent = `${Math.round((ruralCount/total)*100)}% (${ruralCount})`;
+
+    const govtCount = COLLEGES.filter(c => c.type === 'Government').length;
+    document.getElementById('kpiGovtCount').textContent = `${govtCount} Institutes`;
+
+    // 1. District Bars
+    const distMap = {};
+    COLLEGES.forEach(c => {
+        distMap[c.district] = (distMap[c.district] || 0) + 1;
+    });
+    const distSorted = Object.entries(distMap).sort((a,b) => b[1] - a[1]);
+
+    const distHtml = distSorted.map(([dist, cnt]) => {
+        const pct = Math.round((cnt / total) * 100);
+        return `
+            <div class="bar-row">
+                <div class="bar-meta">
+                    <span class="bar-label">${dist}</span>
+                    <span class="bar-count">${cnt} colleges (${pct}%)</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${pct*2.8}%;background:linear-gradient(90deg,#4F46E5,#06B6D4);"></div>
+                </div>
+            </div>`;
+    }).join('');
+    document.getElementById('districtBarChart').innerHTML = distHtml;
+
+    // 2. Category Bars
+    const catMap = {};
+    COLLEGES.forEach(c => { catMap[c.category] = (catMap[c.category] || 0) + 1; });
+    const catSorted = Object.entries(catMap).sort((a,b) => b[1] - a[1]);
+
+    const catHtml = catSorted.map(([cat, cnt]) => {
+        const pct = Math.round((cnt / total) * 100);
+        return `
+            <div class="bar-row">
+                <div class="bar-meta">
+                    <span class="bar-label">${getCategoryIcon(cat)} ${cat}</span>
+                    <span class="bar-count">${cnt} (${pct}%)</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${pct*2.2}%;background:linear-gradient(90deg,#10B981,#059669);"></div>
+                </div>
+            </div>`;
+    }).join('');
+    document.getElementById('categoryBarChart').innerHTML = catHtml;
+
+    // 3. Type Bars
+    const typeMap = {};
+    COLLEGES.forEach(c => { typeMap[c.type] = (typeMap[c.type] || 0) + 1; });
+    const typeHtml = Object.entries(typeMap).map(([tp, cnt]) => {
+        const pct = Math.round((cnt / total) * 100);
+        const col = getTypeColor(tp);
+        return `
+            <div class="bar-row">
+                <div class="bar-meta">
+                    <span class="bar-label" style="color:${col};">${tp}</span>
+                    <span class="bar-count">${cnt} (${pct}%)</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${pct}%;background:${col};"></div>
+                </div>
+            </div>`;
+    }).join('');
+    document.getElementById('typeBarChart').innerHTML = typeHtml;
+
+    // 4. Fee Bracket
+    const feeUnder10k = COLLEGES.filter(c => c.annualFee <= 10000).length;
+    const fee10to50k  = COLLEGES.filter(c => c.annualFee > 10000 && c.annualFee <= 50000).length;
+    const fee50to100k = COLLEGES.filter(c => c.annualFee > 50000 && c.annualFee <= 100000).length;
+    const feeOver100k = COLLEGES.filter(c => c.annualFee > 100000).length;
+
+    const brackets = [
+        { label: 'Under ₹10,000 (Govt Subsidized)', cnt: feeUnder10k, color: '#10B981' },
+        { label: '₹10,000 - ₹50,000 (Affordable/Aided)', cnt: fee10to50k, color: '#06B6D4' },
+        { label: '₹50,000 - ₹1,00,000 (Standard Degree)', cnt: fee50to100k, color: '#8B5CF6' },
+        { label: 'Above ₹1,00,000 (Private Professional)', cnt: feeOver100k, color: '#F59E0B' }
+    ];
+    const feeHtml = brackets.map(b => {
+        const pct = Math.round((b.cnt / total) * 100);
+        return `
+            <div class="bar-row">
+                <div class="bar-meta">
+                    <span class="bar-label">${b.label}</span>
+                    <span class="bar-count">${b.cnt} (${pct}%)</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${pct*1.8}%;background:${b.color};"></div>
+                </div>
+            </div>`;
+    }).join('');
+    document.getElementById('feeBarChart').innerHTML = feeHtml;
+
+    // 5. Directory Table
+    renderDirectoryTable();
+}
+
+function renderDirectoryTable() {
+    const tbody = document.getElementById('districtDirectoryTable');
+    tbody.innerHTML = '';
+
+    // Group colleges by district
+    const grouped = {};
+    COLLEGES.forEach(c => {
+        if (!grouped[c.district]) grouped[c.district] = [];
+        grouped[c.district].push(c);
+    });
+
+    Object.keys(grouped).sort().forEach(dist => {
+        const list = grouped[dist];
+        const division = list[0].division || 'Maharashtra';
+        const hasRural = list.some(c => c.areaType === 'Rural' || c.areaType === 'Tribal');
+        const minFee = Math.min(...list.map(c => c.annualFee));
+        const streams = [...new Set(list.map(c => c.category))].slice(0, 3).join(', ');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${dist}</strong></td>
+            <td><span style="color:var(--muted);">${division}</span></td>
+            <td>
+                ${hasRural ? '<span class="tag-pill tag-rural">🌾 Rural Covered</span>' : '<span class="tag-pill tag-urban">Urban Hub</span>'}
+            </td>
+            <td><strong>${list.length}</strong></td>
+            <td style="color:var(--green);">₹${minFee.toLocaleString()}/yr</td>
+            <td style="color:var(--muted);">${streams}</td>
+            <td>
+                <button class="btn-view-map" onclick="viewDistrictOnMap('${dist}')">
+                    <i class="fa-solid fa-map-pin"></i> View
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function viewDistrictOnMap(district) {
+    switchTab('colleges');
+    document.getElementById('clgDistrict').value = district;
+    applyCollegeFilters();
+    showToast(`📍 Showing colleges in ${district}`);
+}
+
+
+/* ================================================================
+   8. TAB 3: CITY CAREER HUBS (PRESERVED)
+================================================================ */
+function initCityMap() {
+    cityMap = L.map('cityMap', {
+        center: [19.5, 76.0],
+        zoom: 7,
+        zoomControl: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 18
+    }).addTo(cityMap);
+
+    L.control.zoom({ position: 'topright' }).addTo(cityMap);
+
+    renderCitiesList(CITIES);
+
+    // City markers
+    CITIES.forEach(c => {
+        const icon = L.divIcon({
+            html: `
+                <div style="
+                    width:36px; height:36px; border-radius:50%;
+                    background:${c.color}25; border:2px solid ${c.color};
+                    display:flex; align-items:center; justify-content:center;
+                    font-size:16px; box-shadow:0 0 0 4px ${c.color}25, 0 4px 14px rgba(0,0,0,.6);
+                ">${c.icon}</div>
+            `,
+            className: '', iconSize: [36, 36], iconAnchor: [18, 18]
+        });
+
+        L.marker([c.lat, c.lng], { icon })
+            .addTo(cityMap)
+            .bindPopup(`
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;">
+                    <strong style="font-size:14px;color:#fff;">${c.icon} ${c.name}</strong>
+                    <div style="font-size:11px;color:${c.color};margin:3px 0 8px;">${c.region}</div>
+                    <p style="font-size:12px;color:#94A3B8;margin-bottom:8px;">${c.desc}</p>
+                    <div style="font-size:11.5px;color:#fff;border-top:1px solid rgba(255,255,255,.1);padding-top:6px;">
+                        Jobs: <strong>${c.jobs}</strong> | Colleges: <strong>${c.colleges}</strong>
+                    </div>
+                </div>
+            `);
+    });
+}
+
+function renderCitiesList(list) {
+    const el = document.getElementById('citiesList');
+    el.innerHTML = '';
+    list.forEach(c => {
+        const d = document.createElement('div');
+        d.className = 'college-item-card';
+        d.innerHTML = `
+            <div style="display:flex;gap:10px;align-items:center;">
+                <span style="font-size:20px;">${c.icon}</span>
+                <div style="flex:1;">
+                    <div style="font-size:13px;font-weight:800;color:#fff;">${c.name}</div>
+                    <div style="font-size:11px;color:var(--muted);">${c.sectors.slice(0, 3).join(' · ')}</div>
+                </div>
+                <span class="tag-pill tag-distr">${c.jobs}</span>
+            </div>
+        `;
+        d.onclick = () => {
+            cityMap.flyTo([c.lat, c.lng], 11, { duration: 1.0 });
+        };
+        el.appendChild(d);
+    });
+}
+
+function filterCitiesSearch(val) {
+    const filtered = CITIES.filter(c => c.name.toLowerCase().includes(val.toLowerCase()));
+    renderCitiesList(filtered);
+}
+
+
+/* ================================================================
+   9. TOAST
+================================================================ */
+let toastTimer;
+function showToast(msg) {
+    const box = document.getElementById('toastBox');
+    box.textContent = msg;
+    box.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => box.classList.remove('show'), 3800);
+}
+
+
+/* ================================================================
+   10. BOOT
+================================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+    initCollegeMap();
+});
+</script>
+
+</body>
+</html>
