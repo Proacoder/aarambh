@@ -15,7 +15,7 @@ interface EntranceExamInfo {
 }
 
 const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
-  technology: [
+  realistic: [
     {
       name: "MHT-CET (Engineering)",
       conductingBody: "State Common Entrance Test Cell, Maharashtra",
@@ -23,7 +23,7 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       tentativeExamMonth: "April - May",
       registrationMonth: "January - March",
       officialWebsite: "https://cetcell.mahacet.org/",
-      description: "State-level entrance test for admissions into first-year engineering and technology degree courses across Maharashtra colleges."
+      description: "State-level entrance test for admissions into first-year engineering and realistic degree courses across Maharashtra colleges."
     },
     {
       name: "DTE Maharashtra Polytechnic CAP",
@@ -44,7 +44,7 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       description: "National entrance examination accepted by premier autonomous institutes in Maharashtra (COEP, VJTI) and national NITs/IIITs."
     }
   ],
-  healthcare: [
+  social: [
     {
       name: "NEET-UG",
       conductingBody: "National Testing Agency (NTA) & DMER Maharashtra",
@@ -52,7 +52,7 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       tentativeExamMonth: "May",
       registrationMonth: "February - March",
       officialWebsite: "https://neet.nta.nic.in/",
-      description: "Mandatory all-India entrance examination for admissions into government and municipal medical/dental/nursing colleges."
+      description: "Mandatory all-India entrance examination for admissions into conventional and municipal medical/dental/nursing colleges."
     },
     {
       name: "MHT-CET (PCB Group - Pharmacy)",
@@ -61,10 +61,10 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       tentativeExamMonth: "April",
       registrationMonth: "January - March",
       officialWebsite: "https://cetcell.mahacet.org/",
-      description: "State entrance test for degree pharmacy admissions in Government College of Pharmacy Karad/Amravati and affiliated colleges."
+      description: "State entrance test for degree pharmacy admissions in conventional College of Pharmacy Karad/Amravati and affiliated colleges."
     }
   ],
-  science: [
+  investigative: [
     {
       name: "MCAER PG-CET / MHT-CET Agriculture",
       conductingBody: "Maharashtra Council of Agricultural Education and Research (MCAER)",
@@ -75,7 +75,7 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       description: "Entrance test for undergraduate admissions into Maharashtra's 4 State Agricultural Universities (MPKV, PDKV, VNMKV, DBSKKV)."
     }
   ],
-  government: [
+  conventional: [
     {
       name: "MPSC Subordinate Services (Non-Gazetted)",
       conductingBody: "Maharashtra Public Service Commission (MPSC)",
@@ -95,7 +95,7 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       description: "District-wise competitive examination for village revenue administration positions."
     }
   ],
-  business: [
+  enterprising: [
     {
       name: "MAH-CET (MBA / MMS / BBA CET)",
       conductingBody: "State CET Cell, Maharashtra",
@@ -106,15 +106,15 @@ const ENTRANCE_EXAMS: Record<string, EntranceExamInfo[]> = {
       description: "State-level examination for admissions into professional commerce, management, and computer application degrees."
     }
   ],
-  arts: [
+  artistic: [
     {
-      name: "MAH-AAC-CET / Fine Arts & Design CET",
+      name: "MAH-AAC-CET / Fine artistic & Design CET",
       conductingBody: "State CET Cell, Maharashtra",
-      targetCourses: ["Bachelor of Fine Arts (BFA)", "Visual Communication"],
+      targetCourses: ["Bachelor of Fine artistic (BFA)", "Visual Communication"],
       tentativeExamMonth: "May",
       registrationMonth: "March - April",
       officialWebsite: "https://cetcell.mahacet.org/",
-      description: "Admission into Government Chitrakala Mahavidyalayas and design institutes across Maharashtra."
+      description: "Admission into conventional Chitrakala Mahavidyalayas and design institutes across Maharashtra."
     }
   ]
 };
@@ -131,7 +131,7 @@ router.get("/:studentId", async (req, res, next) => {
     const recPayload = await generateStudentRecommendations(studentId);
     const { student, topDomains, recommendations, eligibleScholarships } = recPayload;
 
-    const topDomain = topDomains[0]?.domain || "technology";
+    const topDomain = topDomains[0]?.domain || "realistic";
 
     // Gather entrance examinations relevant to the student's top domains
     const relevantExams = [
@@ -168,7 +168,7 @@ router.get("/:studentId", async (req, res, next) => {
           "Visit the local Setu Seva Kendra / MahaOnline centre to procure your Tahsildar Income Certificate (valid for current FY).",
           "Ensure your Aadhaar is linked to your bank account with NPCI mapping enabled for MahaDBT direct benefit transfer.",
           "Obtain 3 certified copies of all prior academic marksheets and school leaving/transfer certificate.",
-          `Explore the top recommended college in your region: ${recommendations[0]?.collegeName || "Local Government Polytechnic"}.`
+          `Explore the top recommended college in your region: ${recommendations[0]?.collegeName || "Local conventional Polytechnic"}.`
         ]
       },
       {
@@ -187,7 +187,7 @@ router.get("/:studentId", async (req, res, next) => {
         title: "CAP Admission & Scholarship Application",
         timeframe: "Months 5 to 8",
         actions: [
-          "Participate in the Centralized Admission Process (CAP) rounds; fill option forms with preference for top-matched government colleges.",
+          "Participate in the Centralized Admission Process (CAP) rounds; fill option forms with preference for top-matched conventional colleges.",
           "Upon allotment, verify documents at the Scrutiny Centre (FC/ARC) and confirm seat acceptance.",
           `Submit the online scholarship application on MahaDBT (${eligibleScholarships[0]?.name || "EBC Fee Reimbursement"}) immediately after college fee receipt is issued.`,
           "Submit verified hard copy of scholarship application along with required documents to the college scholarship clerk."

@@ -12,7 +12,7 @@ import districtRoutes from "./routes/districtRoutes.ts";
 import actionPlanRoutes from "./routes/actionPlanRoutes.ts";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({ origin: true, credentials: true }));

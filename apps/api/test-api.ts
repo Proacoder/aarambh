@@ -53,16 +53,16 @@ async function verifyAll() {
   const assessment = await prisma.assessmentResult.create({
     data: {
       studentId: student.id,
-      technology: 85,
-      science: 70,
-      business: 40,
-      government: 45,
-      healthcare: 30,
-      arts: 25,
-      answers: [{ q: 1, chosen: "technology" }, { q: 2, chosen: "technology" }]
+      realistic: 85,
+      investigative: 70,
+      enterprising: 40,
+      conventional: 45,
+      social: 30,
+      artistic: 25,
+      answers: [{ q: 1, chosen: "realistic" }, { q: 2, chosen: "realistic" }]
     }
   });
-  console.log(`   Recorded Assessment for student: Technology=${assessment.technology}, Science=${assessment.science}`);
+  console.log(`   Recorded Assessment for student: realistic=${assessment.realistic}, investigative=${assessment.investigative}`);
   console.log("   ✅ Assessment recording PASSED");
 
   // 5. Test Deterministic Recommendation Engine

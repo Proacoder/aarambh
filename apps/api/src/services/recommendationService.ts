@@ -6,12 +6,12 @@ import {
 } from "../lib/geo.ts";
 
 export interface DomainScores {
-  technology: number;
-  business: number;
-  healthcare: number;
-  government: number;
-  arts: number;
-  science: number;
+  realistic: number;
+  enterprising: number;
+  social: number;
+  conventional: number;
+  artistic: number;
+  investigative: number;
 }
 
 export interface RecommendationResult {
@@ -74,28 +74,28 @@ function classifyCourse(courseName: string): { primary: keyof DomainScores; seco
   const lower = courseName.toLowerCase();
 
   if (lower.includes("computer") || lower.includes("information tech") || lower.includes("software") || lower.includes("robotics") || lower.includes("electrician") || lower.includes("copa")) {
-    return { primary: "technology", secondary: "science" };
+    return { primary: "realistic", secondary: "investigative" };
   }
   if (lower.includes("mining") || lower.includes("mechanical") || lower.includes("electrical") || lower.includes("electronics") || lower.includes("civil") || lower.includes("automobile") || lower.includes("b.tech") || lower.includes("polytechnic")) {
-    return { primary: "technology", secondary: "science" };
+    return { primary: "realistic", secondary: "investigative" };
   }
   if (lower.includes("agriculture") || lower.includes("horticulture") || lower.includes("forestry") || lower.includes("fisheries") || lower.includes("food tech")) {
-    return { primary: "science", secondary: "technology" };
+    return { primary: "investigative", secondary: "realistic" };
   }
-  if (lower.includes("mbbs") || lower.includes("nursing") || lower.includes("pharmacy") || lower.includes("b.pharm") || lower.includes("d.pharm") || lower.includes("dmlt") || lower.includes("physiotherapy") || lower.includes("gnm") || lower.includes("healthcare")) {
-    return { primary: "healthcare", secondary: "science" };
+  if (lower.includes("mbbs") || lower.includes("nursing") || lower.includes("pharmacy") || lower.includes("b.pharm") || lower.includes("d.pharm") || lower.includes("dmlt") || lower.includes("physiotherapy") || lower.includes("gnm") || lower.includes("social")) {
+    return { primary: "social", secondary: "investigative" };
   }
-  if (lower.includes("social work") || lower.includes("public admin") || lower.includes("political science") || lower.includes("civil services")) {
-    return { primary: "government", secondary: "arts" };
+  if (lower.includes("social work") || lower.includes("public admin") || lower.includes("political investigative") || lower.includes("civil services")) {
+    return { primary: "conventional", secondary: "artistic" };
   }
-  if (lower.includes("banking") || lower.includes("b.com") || lower.includes("bba") || lower.includes("management") || lower.includes("cooperative") || lower.includes("agri-business")) {
-    return { primary: "business", secondary: "technology" };
+  if (lower.includes("banking") || lower.includes("b.com") || lower.includes("bba") || lower.includes("management") || lower.includes("cooperative") || lower.includes("agri-enterprising")) {
+    return { primary: "enterprising", secondary: "realistic" };
   }
-  if (lower.includes("arts") || lower.includes("history") || lower.includes("marathi") || lower.includes("economics") || lower.includes("b.a.")) {
-    return { primary: "arts", secondary: "government" };
+  if (lower.includes("artistic") || lower.includes("history") || lower.includes("marathi") || lower.includes("economics") || lower.includes("b.a.")) {
+    return { primary: "artistic", secondary: "conventional" };
   }
 
-  return { primary: "science", secondary: "technology" };
+  return { primary: "investigative", secondary: "realistic" };
 }
 
 /**
@@ -135,7 +135,7 @@ function calculateAcademicScore(
   }
 
   const margin = studentPercentage - courseCutoff;
-  // Passing cutoff starts at 70 points, +2.5 points per margin % up to 100
+  // Passing cutoff startistic at 70 points, +2.5 points per margin % up to 100
   return Math.min(100, Math.round(70 + margin * 2.5));
 }
 
@@ -185,12 +185,12 @@ export async function generateStudentRecommendations(
 
   // Extract domain scores or use balanced defaults
   const domainScores: DomainScores = {
-    technology: student.assessment?.technology ?? 50,
-    business: student.assessment?.business ?? 50,
-    healthcare: student.assessment?.healthcare ?? 50,
-    government: student.assessment?.government ?? 50,
-    arts: student.assessment?.arts ?? 50,
-    science: student.assessment?.science ?? 50
+    realistic: student.assessment?.realistic ?? 50,
+    enterprising: student.assessment?.enterprising ?? 50,
+    social: student.assessment?.social ?? 50,
+    conventional: student.assessment?.conventional ?? 50,
+    artistic: student.assessment?.artistic ?? 50,
+    investigative: student.assessment?.investigative ?? 50
   };
 
   // Rank top interest domains
@@ -273,9 +273,9 @@ export async function generateStudentRecommendations(
 
       const feeFormatted = course.approximateFees ? `₹${course.approximateFees.toLocaleString("en-IN")}/yr` : "Subsidized";
       if ((student.financialLevel || "").toLowerCase().includes("low") || (course.approximateFees ?? 0) <= 25000) {
-        reasons.push(`Affordability: Government-subsidized fee of ${feeFormatted} with high scholarship eligibility.`);
+        reasons.push(`Affordability: conventional-subsidized fee of ${feeFormatted} with high scholarship eligibility.`);
       } else {
-        reasons.push(`Fee Structure: ${feeFormatted} with government installment & scholarship support.`);
+        reasons.push(`Fee Structure: ${feeFormatted} with conventional installment & scholarship support.`);
       }
 
       reasons.push(`Aspiration Alignment: Matches your interest in ${domainCategory.toUpperCase()} (${domainFit}% affinity score).`);

@@ -28,12 +28,12 @@ model AssessmentResult {
   studentId String   @unique
   student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  technology  Float @default(0)
-  business    Float @default(0)
-  healthcare  Float @default(0)
-  government  Float @default(0)
-  arts        Float @default(0)
-  science     Float @default(0)
+  realistic     Float @default(0)
+  investigative Float @default(0)
+  artistic      Float @default(0)
+  social        Float @default(0)
+  enterprising  Float @default(0)
+  conventional  Float @default(0)
 
   answers   Json?
   createdAt DateTime @default(now())
