@@ -2,165 +2,237 @@
 
 {% block content %}
 <section class="section onboarding fade-in" style="padding-top: 2rem; padding-bottom: 4rem;">
-  <div class="container" style="max-width: 820px;">
+  <div class="container" style="max-width: 720px;">
     
     <!-- Mitra Saathi Dialogue & Avatar Header -->
     <div class="onboarding-greeting card glass-card p-4 md-p-5 mb-4 slide-up flex align-center gap-4 flex-wrap" style="border-left: 4px solid var(--gold);">
-      <div id="mitra-onboarding-avatar" style="flex-shrink: 0;"></div>
+      <div id="mitra-onboarding-avatar" style="flex-shrink: 0; width: 90px; height: 90px;"></div>
       <div style="flex: 1; min-width: 240px;">
-        <div class="badge badge-paper mb-1">👩‍🏫 MITRA SAATHI</div>
-        <h1 class="page-title mb-1" style="font-size: 1.5rem;" data-i18n="onboarding_title">नमस्कार! मी तुमची करिअर साथी मित्र.</h1>
-        <p class="page-subtitle text-muted text-small mb-0" data-i18n="onboarding_sub">
+        <div class="badge badge-paper mb-1">👩‍🏫 MITRA TAI</div>
+        <h1 class="page-title mb-1" style="font-size: 1.5rem;" data-i18n="onboarding_title">नमस्कार! मी तुमची करिअर साथी मित्र ताई.</h1>
+        <p class="page-subtitle text-muted text-small mb-0" id="mitra-dialogue" data-i18n="onboarding_sub">
           चल, आधी तुझ्याबद्दल थोडं जाणून घेऊया. यामध्ये फक्त २ मिनिटे लागतील आणि तुझ्यासाठी सर्वोत्तम पर्याय शोधता येतील!
         </p>
       </div>
     </div>
 
+    <!-- Progress Bar -->
+    <div class="onboarding-progress mb-4 slide-up stagger-1">
+      <div class="flex justify-between align-center mb-2">
+        <span class="text-small font-bold" id="step-indicator" style="color: var(--navy-soft);">Step 1 of 6</span>
+        <span class="text-small text-muted" id="step-title">Basic Information</span>
+      </div>
+      <div class="progress-bar-bg" style="height: 6px; background: var(--line); border-radius: 4px; overflow: hidden;">
+        <div id="progress-bar-fill" style="height: 100%; width: 16.6%; background: var(--gold); border-radius: 4px; transition: width 0.3s ease;"></div>
+      </div>
+    </div>
+
     <div id="error-message" class="form-error card hidden mb-3" role="alert"></div>
 
-    <form id="onboarding-form" class="card glass-card p-5 onboarding-card-form" novalidate>
+    <form id="onboarding-form" class="card glass-card p-5 onboarding-card-form slide-up stagger-2 relative" style="overflow: hidden; min-height: 400px;" novalidate>
       
-      <!-- Stage Selector Cards -->
-      <fieldset class="form-section stagger-1 border-0 p-0 mb-4">
-        <legend class="section-legend" style="font-size: 1.1rem; font-weight: 700; color: var(--earth-brown);" data-i18n="field_class">
-          तू सध्या काय शिकत आहेस? (Your Current Stage)
-        </legend>
-        
-        <div class="stage-selector-grid grid-2 md-grid-4 gap-3 mt-3">
-          <label class="stage-card ripple active hover-lift">
-            <input type="radio" name="class_level" value="10th" required checked>
-            <div class="stage-content text-center p-3">
-              <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">📘</span>
-              <span class="stage-title font-bold text-small" data-i18n="class_10_pass">10वी (10th Pass)</span>
+      <!-- STEP 1: Basic Information -->
+      <div class="onboarding-step active" id="step-1" data-step="1" data-title="Basic Information">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Basic Information</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;" data-i18n="about_you">तुझी माहिती (About You)</h2>
+          <div class="grid-1 gap-4">
+            <div class="form-group">
+              <label for="name" class="form-label" data-i18n="field_name">What is your full name? (तुझे पूर्ण नाव काय?)</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="उदा. राहुल पवार" required aria-required="true">
             </div>
-          </label>
-
-          <label class="stage-card ripple hover-lift">
-            <input type="radio" name="class_level" value="12th">
-            <div class="stage-content text-center p-3">
-              <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">📗</span>
-              <span class="stage-title font-bold text-small" data-i18n="class_12_pass">12वी (12th Pass)</span>
+            <div class="form-group">
+              <label for="age" class="form-label" data-i18n="field_age">How old are you? (तुझे वय किती?)</label>
+              <input type="number" id="age" name="age" class="form-input" min="10" max="35" placeholder="17" required aria-required="true">
             </div>
-          </label>
-
-          <label class="stage-card ripple hover-lift">
-            <input type="radio" name="class_level" value="diploma">
-            <div class="stage-content text-center p-3">
-              <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">🔧</span>
-              <span class="stage-title font-bold text-small" data-i18n="diploma">ITI / Diploma</span>
+            <div class="form-group">
+              <label class="form-label">Gender (लिंग)</label>
+              <div class="form-radio-group flex gap-3 flex-wrap" role="radiogroup">
+                <label class="radio-chip"><input type="radio" name="gender" value="female"> Female (स्त्री)</label>
+                <label class="radio-chip"><input type="radio" name="gender" value="male"> Male (पुरुष)</label>
+                <label class="radio-chip"><input type="radio" name="gender" value="other"> Other (इतर)</label>
+                <label class="radio-chip"><input type="radio" name="gender" value="" checked> Prefer not to say</label>
+              </div>
             </div>
-          </label>
+          </div>
+        </fieldset>
+      </div>
 
-          <label class="stage-card ripple hover-lift">
-            <input type="radio" name="class_level" value="ug">
-            <div class="stage-content text-center p-3">
-              <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">🎓</span>
-              <span class="stage-title font-bold text-small" data-i18n="graduate">Graduate (पदवीधर)</span>
-            </div>
-          </label>
-        </div>
-      </fieldset>
-
-      <!-- About You -->
-      <fieldset class="form-section stagger-2 mt-4 pt-3 border-t border-light">
-        <legend style="font-size: 1.1rem; font-weight: 700; color: var(--earth-brown);" data-i18n="about_you">तुमची माहिती (About You)</legend>
-        <div class="grid-2 gap-3 mt-3">
-          <div class="form-group">
-            <label for="name" class="form-label" data-i18n="field_name">Your Name</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="उदा. राहुल पवार" required aria-required="true">
-          </div>
-          <div class="form-group">
-            <label for="age" class="form-label" data-i18n="field_age">Age</label>
-            <input type="number" id="age" name="age" class="form-input" min="10" max="35" placeholder="17" required aria-required="true">
-          </div>
-          <div class="form-group">
-            <label for="district" class="form-label" data-i18n="field_district">District (महाराष्ट्र जिल्हा)</label>
-            <select id="district" name="district" class="form-select" required aria-required="true">
-              <option value="" disabled selected data-i18n="select_district">Select district</option>
-              {% for dist in districts %}
-              <option value="{{ dist }}">{{ dist }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="taluka" class="form-label" data-i18n="field_taluka">Taluka / City (optional)</label>
-            <input type="text" id="taluka" name="taluka" class="form-input" placeholder="उदा. बारामती">
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- Academic & Financial Context -->
-      <fieldset class="form-section stagger-3 mt-4 pt-3 border-t border-light">
-        <legend style="font-size: 1.1rem; font-weight: 700; color: var(--earth-brown);" data-i18n="academic_info">Academic & Aid Eligibility</legend>
-        <div class="grid-2 gap-3 mt-3">
-          <div class="form-group">
-            <label for="marks" class="form-label" data-i18n="field_marks">Recent Exam Marks (%)</label>
-            <input type="number" id="marks" name="marks" class="form-input" min="0" max="100" placeholder="75" required aria-required="true">
-          </div>
-          <div class="form-group">
-            <label for="income" class="form-label" data-i18n="field_income">Family Annual Income (₹)</label>
-            <input type="number" id="income" name="income" class="form-input" min="0" placeholder="150000" required aria-required="true">
-          </div>
-          <div class="form-group">
-            <label for="category" class="form-label" data-i18n="field_category">Category (शासकीय सवलतींसाठी)</label>
-            <select id="category" name="category" class="form-select" required aria-required="true">
-              <option value="" disabled selected data-i18n="select_category">Select category</option>
-              <option value="General" data-i18n="gen_category">General / Open</option>
-              <option value="OBC" data-i18n="obc_category">OBC</option>
-              <option value="SC" data-i18n="sc_category">SC</option>
-              <option value="ST" data-i18n="st_category">ST</option>
-              <option value="VJNT / NT" data-i18n="vjnt_category">VJNT / NT</option>
-              <option value="SBC" data-i18n="sbc_category">SBC</option>
-              <option value="EWS" data-i18n="ews_category">EWS</option>
-              <option value="Minority" data-i18n="minority_category">Minority</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Gender</label>
-            <select id="gender" name="gender" class="form-select">
-              <option value="" selected>Prefer not to say</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group span-2">
-            <label class="form-checkbox-label flex align-center gap-2 p-2" style="background: rgba(217,164,65,0.08); border-radius: 8px;">
-              <input type="checkbox" id="disability" name="disability" class="form-checkbox">
-              <span>Person with disability (दिव्यांग सवलत)</span>
+      <!-- STEP 2: Education -->
+      <div class="onboarding-step hidden" id="step-2" data-step="2" data-title="Education">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Education</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;" data-i18n="field_class">तू सध्या काय शिकत आहेस? (Your Current Education)</h2>
+          
+          <div class="stage-selector-grid grid-2 gap-3 mb-4">
+            <label class="stage-card ripple active hover-lift">
+              <input type="radio" name="class_level" value="10th" required checked onchange="updateStageCards()">
+              <div class="stage-content text-center p-3">
+                <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">📘</span>
+                <span class="stage-title font-bold text-small" data-i18n="class_10_pass">10वी (10th Pass)</span>
+              </div>
+            </label>
+            <label class="stage-card ripple hover-lift">
+              <input type="radio" name="class_level" value="12th" onchange="updateStageCards()">
+              <div class="stage-content text-center p-3">
+                <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">📗</span>
+                <span class="stage-title font-bold text-small" data-i18n="class_12_pass">12वी (12th Pass)</span>
+              </div>
+            </label>
+            <label class="stage-card ripple hover-lift">
+              <input type="radio" name="class_level" value="diploma" onchange="updateStageCards()">
+              <div class="stage-content text-center p-3">
+                <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">🔧</span>
+                <span class="stage-title font-bold text-small" data-i18n="diploma">ITI / Diploma</span>
+              </div>
+            </label>
+            <label class="stage-card ripple hover-lift">
+              <input type="radio" name="class_level" value="ug" onchange="updateStageCards()">
+              <div class="stage-content text-center p-3">
+                <span class="stage-icon" style="font-size: 2rem; display: block; margin-bottom: 0.4rem;">🎓</span>
+                <span class="stage-title font-bold text-small" data-i18n="graduate">Undergraduate</span>
+              </div>
             </label>
           </div>
-        </div>
-      </fieldset>
-
-      <!-- Preferences & Boundaries -->
-      <fieldset class="form-section stagger-4 mt-4 pt-3 border-t border-light">
-        <legend style="font-size: 1.1rem; font-weight: 700; color: var(--earth-brown);" data-i18n="preferences">Preferences & Budget</legend>
-        <div class="form-group mt-3">
-          <label class="form-label" data-i18n="field_language">Preferred Guidance Language</label>
-          <div class="form-radio-group flex gap-4" role="radiogroup">
-            <label class="radio-chip"><input type="radio" name="language" value="mr" checked> मराठी</label>
-            <label class="radio-chip"><input type="radio" name="language" value="hi"> हिंदी</label>
-            <label class="radio-chip"><input type="radio" name="language" value="en"> English</label>
+          
+          <div class="form-group">
+            <label for="marks" class="form-label" data-i18n="field_marks">Recent Exam Marks (%) (मागील परीक्षेतील गुण)</label>
+            <input type="number" id="marks" name="marks" class="form-input" min="0" max="100" placeholder="75" required aria-required="true">
           </div>
-        </div>
-        <div class="form-group mt-3">
-          <label class="form-label" data-i18n="field_mobility">How far can you travel for education?</label>
-          <div class="form-radio-group flex flex-wrap gap-3" role="radiogroup">
-            <label class="radio-chip"><input type="radio" name="mobility" value="local" data-i18n="mobility_local"> Within my taluka</label>
-            <label class="radio-chip"><input type="radio" name="mobility" value="district" data-i18n="mobility_district" checked> Within my district</label>
-            <label class="radio-chip"><input type="radio" name="mobility" value="state" data-i18n="mobility_state"> Anywhere in Maharashtra</label>
-          </div>
-        </div>
-        <div class="form-group mt-3">
-          <label for="budget" class="form-label" data-i18n="field_budget">Affordable yearly fees (₹)</label>
-          <input type="number" id="budget" name="budget" class="form-input" min="0" placeholder="50000" value="50000" required aria-required="true">
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
 
-      <div class="form-actions mt-5 text-center">
-        <button type="submit" class="btn btn-primary btn-lg ripple w-100-mobile" id="onboarding-submit" data-i18n="continue_btn">
-          Continue to Assessment &rarr;
+      <!-- STEP 3: Location -->
+      <div class="onboarding-step hidden" id="step-3" data-step="3" data-title="Location">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Location</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;" data-i18n="field_district">तू कुठे राहतोस? (Your Location)</h2>
+          <div class="grid-1 gap-4">
+            <div class="form-group">
+              <label for="district" class="form-label" data-i18n="field_district">District (महाराष्ट्र जिल्हा)</label>
+              <select id="district" name="district" class="form-select" required aria-required="true">
+                <option value="" disabled selected data-i18n="select_district">Select district</option>
+                {% for dist in districts %}
+                <option value="{{ dist }}">{{ dist }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="taluka" class="form-label" data-i18n="field_taluka">Taluka / City (तालुका किंवा शहर)</label>
+              <input type="text" id="taluka" name="taluka" class="form-input" placeholder="उदा. बारामती">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- STEP 4: Financial Information -->
+      <div class="onboarding-step hidden" id="step-4" data-step="4" data-title="Financial Information">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Financial Information</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;" data-i18n="academic_info">आर्थिक माहिती (Financial Context)</h2>
+          <p class="text-muted text-small mb-4">This helps us identify affordable education pathways and possible financial support. (यामुळे आम्हाला तुझ्यासाठी योग्य शिष्यवृत्ती आणि परवडणारे पर्याय शोधण्यात मदत होईल.)</p>
+          
+          <div class="grid-1 gap-4">
+            <div class="form-group">
+              <label for="income" class="form-label" data-i18n="field_income">Approximate Family Annual Income (₹)</label>
+              <input type="number" id="income" name="income" class="form-input" min="0" placeholder="150000" required aria-required="true">
+            </div>
+            <div class="form-group">
+              <label for="category" class="form-label" data-i18n="field_category">Category (शासकीय सवलतींसाठी प्रवर्ग)</label>
+              <select id="category" name="category" class="form-select" required aria-required="true">
+                <option value="" disabled selected data-i18n="select_category">Select category</option>
+                <option value="General" data-i18n="gen_category">General / Open</option>
+                <option value="OBC" data-i18n="obc_category">OBC</option>
+                <option value="SC" data-i18n="sc_category">SC</option>
+                <option value="ST" data-i18n="st_category">ST</option>
+                <option value="VJNT / NT" data-i18n="vjnt_category">VJNT / NT</option>
+                <option value="SBC" data-i18n="sbc_category">SBC</option>
+                <option value="EWS" data-i18n="ews_category">EWS</option>
+                <option value="Minority" data-i18n="minority_category">Minority</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-checkbox-label flex align-center gap-2 p-3" style="background: rgba(217,164,65,0.08); border-radius: 8px; border: 1px solid rgba(217,164,65,0.3);">
+                <input type="checkbox" id="disability" name="disability" class="form-checkbox">
+                <span>Person with disability (दिव्यांग सवलत लागू आहे का?)</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- STEP 5: Preferences and Mobility -->
+      <div class="onboarding-step hidden" id="step-5" data-step="5" data-title="Preferences & Mobility">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Preferences</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;" data-i18n="preferences">तुझ्या पसंती (Preferences)</h2>
+          
+          <div class="grid-1 gap-4">
+            <div class="form-group">
+              <label class="form-label" data-i18n="field_language">Preferred App Language (माहिती कोणत्या भाषेत हवी?)</label>
+              <div class="form-radio-group flex gap-3 flex-wrap" role="radiogroup">
+                <label class="radio-chip"><input type="radio" name="language" value="mr" checked> मराठी</label>
+                <label class="radio-chip"><input type="radio" name="language" value="hi"> हिंदी</label>
+                <label class="radio-chip"><input type="radio" name="language" value="en"> English</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="field_mobility">Are you willing to relocate for education? (शिक्षणासाठी बाहेरगावी जाऊ शकतोस का?)</label>
+              <div class="form-radio-group flex gap-2 flex-column" role="radiogroup" style="flex-direction: column;">
+                <label class="radio-chip block"><input type="radio" name="mobility" value="state"> YES - I can relocate for a good opportunity.</label>
+                <label class="radio-chip block"><input type="radio" name="mobility" value="district" checked> MAYBE - It depends on the cost and situation.</label>
+                <label class="radio-chip block"><input type="radio" name="mobility" value="local"> NO - I prefer nearby options.</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="budget" class="form-label" data-i18n="field_budget">Affordable yearly tuition budget (₹)</label>
+              <input type="number" id="budget" name="budget" class="form-input" min="0" placeholder="50000" value="50000" required aria-required="true">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- STEP 6: Review -->
+      <div class="onboarding-step hidden" id="step-6" data-step="6" data-title="Review">
+        <fieldset class="border-0 p-0 m-0">
+          <legend class="sr-only">Review</legend>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 1.5rem;">तुमची माहिती तपासा (Review Your Profile)</h2>
+          
+          <div class="review-card p-4" style="background: var(--bg-alt); border-radius: 12px; font-size: 0.95rem;">
+            <div class="flex justify-between border-b pb-2 mb-2 border-light">
+              <span class="text-muted">Name</span>
+              <strong id="review-name" class="font-bold text-navy">-</strong>
+            </div>
+            <div class="flex justify-between border-b pb-2 mb-2 border-light">
+              <span class="text-muted">Education</span>
+              <strong id="review-edu" class="font-bold text-navy">-</strong>
+            </div>
+            <div class="flex justify-between border-b pb-2 mb-2 border-light">
+              <span class="text-muted">Location</span>
+              <strong id="review-loc" class="font-bold text-navy">-</strong>
+            </div>
+            <div class="flex justify-between border-b pb-2 mb-2 border-light">
+              <span class="text-muted">Category</span>
+              <strong id="review-cat" class="font-bold text-navy">-</strong>
+            </div>
+            <div class="flex justify-between border-b pb-2 mb-2 border-light">
+              <span class="text-muted">Mobility</span>
+              <strong id="review-mob" class="font-bold text-navy">-</strong>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Form Navigation Actions -->
+      <div class="form-actions mt-5 flex justify-between align-center" style="border-top: 1px solid var(--line); padding-top: 1.5rem;">
+        <button type="button" class="btn btn-ghost ripple hidden" id="btn-prev" onclick="prevStep()">
+          &larr; Back
+        </button>
+        <button type="button" class="btn btn-primary ripple ml-auto" id="btn-next" onclick="nextStep()">
+          Continue &rarr;
+        </button>
+        <button type="submit" class="btn btn-primary ripple hidden ml-auto" id="onboarding-submit" data-i18n="continue_btn">
+          Start Career Discovery &rarr;
         </button>
       </div>
     </form>
@@ -175,10 +247,46 @@
 document.addEventListener('DOMContentLoaded', () => {
   const avatarBox = document.getElementById('mitra-onboarding-avatar');
   if (avatarBox && window.MitraCharacter) {
-    const character = new MitraCharacter(avatarBox, { size: 90 });
-    character.setState('talking');
-    setTimeout(() => character.setState('idle'), 2500);
+    window.onboardingCharacter = new MitraCharacter(avatarBox, { size: 90 });
+    window.onboardingCharacter.setState('talking');
+    setTimeout(() => window.onboardingCharacter.setState('idle'), 2500);
   }
 });
 </script>
+<style>
+  .onboarding-step {
+    animation: fadeInStep 0.4s ease-out forwards;
+  }
+  .onboarding-step.hidden {
+    display: none;
+  }
+  @keyframes fadeInStep {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .radio-chip {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .radio-chip:hover {
+    border-color: var(--gold);
+    background: rgba(207,156,70,0.05);
+  }
+  .radio-chip:has(input:checked) {
+    border-color: var(--gold);
+    background: rgba(207,156,70,0.1);
+    font-weight: 600;
+    color: var(--navy-deep);
+  }
+  .radio-chip input {
+    accent-color: var(--gold);
+  }
+</style>
 {% endblock %}

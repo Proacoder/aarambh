@@ -13,6 +13,18 @@ from flask import Flask, render_template, request, jsonify, session, send_from_d
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 
+def load_env():
+    env_path = BASE_DIR / ".env"
+    if env_path.exists():
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+load_env()
+
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "careermitra-dev-secret-change-me")
 
@@ -61,12 +73,17 @@ def guider_page():
 def api_login():
     data = request.get_json(force=True) or {}
     mode = data.get("mode", "guest")
-    email = data.get("email")
+    email = data.get("email") or "student@example.com"
+    name = data.get("name") or email.split("@")[0].replace(".", " ").title()
+
+    student_id = session.get("studentId") or str(uuid.uuid4())[:8]
+    session["studentId"] = student_id
 
     if mode == "google":
         session["user"] = {
             "id": f"google_{uuid.uuid4().hex[:8]}",
             "email": email or "student@gmail.com",
+            "name": name,
             "mode": "google"
         }
         session["guest_mode"] = False
@@ -80,13 +97,26 @@ def api_login():
         session["is_teacher"] = True
     else:
         session["user"] = {
-            "id": f"guest_{uuid.uuid4().hex[:8]}",
+            "id": student_id,
             "email": email,
-            "mode": "guest"
+            "name": name,
+            "mode": mode
         }
-        session["guest_mode"] = True
+        session["guest_mode"] = (mode == "guest")
 
-    return jsonify({"ok": True, "user": session["user"]})
+    if not session.get("profile"):
+        session["profile"] = {
+            "id": student_id,
+            "name": name if name and name != "Student" else "राहुल पवार",
+            "district": "Pune",
+            "className": "10th",
+            "marks": 78,
+            "income": 120000,
+            "category": "General",
+            "registered": True
+        }
+
+    return jsonify({"ok": True, "user": session["user"], "profile": session["profile"]})
 
 @app.route("/api/register", methods=["POST"])
 def api_register():
@@ -757,21 +787,71 @@ def api_mitra_conversation():
     name = profile.get("name", "विद्यार्थी मित्र")
     cls_lvl = profile.get("className", "10th")
     
-    # 1. Try Gemini / NVIDIA LLM if key is configured
-    ai_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("NVIDIA_API_KEY")
-    if ai_key:
-        try:
-            prompt = (
-                f"You are Mitra, a warm, highly encouraging, and knowledgeable career guide for Maharashtra rural students. "
-                f"Student name: {name}, District: {district}, Education: {cls_lvl}. "
-                f"User asked: {user_msg}. "
-                f"Reply in language: {lang} (Marathi, Hindi, or English). "
-                f"Keep tone encouraging, practical, and under 120 words. Include specific schemes like MahaDBT, Govt Polytechnics, or ITIs if relevant."
+    # 1. Try NVIDIA NIM LLM if key is configured
+    nvidia_key = os.environ.get("NVIDIA_API_KEY")
+    if nvidia_key:
+        active_models = [
+            "meta/llama-3.2-11b-vision-instruct",
+            "openai/gpt-oss-20b",
+            "nvidia/nemotron-3-super-120b-a12b"
+        ]
+        
+        headers = {
+            "Authorization": f"Bearer {nvidia_key}",
+            "Content-Type": "application/json"
+        }
+        
+        if lang == "mr":
+            system_instruction = (
+                "तुम्ही 'मित्र ताई' (Mitra Tai) आहात — महाराष्ट्रातील ग्रामीण व निमशहरी विद्यार्थ्यांच्या करिअर मार्गदर्शक. "
+                f"विद्यार्थ्याचे नाव: {name}, जिल्हा: {district}, शिक्षण: {cls_lvl}. "
+                "नेहमी शुद्ध, सोप्या आणि उत्साहवर्धक मराठीत (Devanagari script) उत्तर द्या. "
+                "उत्तरात १०वी/१२वी नंतरचे पर्याय, शासकीय तंत्रनिकेतन (Polytechnic), ITI, CAP rounds आणि महाडीबीटी शिष्यवृत्ती (MahaDBT EBC ५०% फी माफी, स्वाधार वसतिगृह योजना) यांचा उल्लेख करा. "
+                "उत्तर १०० शब्दांच्या आत आणि मुद्द्यांमध्ये ठेवा."
             )
-            # Example API call if configured
-            # ...
-        except Exception:
-            pass
+        elif lang == "hi":
+            system_instruction = (
+                "आप 'मित्र ताई' (Mitra Tai) हैं — महाराष्ट्र के विद्यार्थियों के लिए एक आत्मीय और बुद्धिमान करियर काउंसलर। "
+                f"छात्र: {name}, जिला: {district}, कक्षा: {cls_lvl}. "
+                "सरल और उत्साहजनक हिंदी में जवाब दें। सरकारी कॉलेज, ITI, और MahaDBT छात्रवृत्ति की सही जानकारी दें। उत्तर 100 शब्दों के अंदर रखें।"
+            )
+        else:
+            system_instruction = (
+                "You are Mitra Tai, a warm, highly encouraging, and intelligent female AI career guide for Maharashtra students. "
+                f"Student: {name}, District: {district}, Education: {cls_lvl}. "
+                "Provide practical, motivating advice in clear English. Mention Government Polytechnics, ITIs, CAP rounds, and MahaDBT scholarships when relevant. Keep response under 100 words."
+            )
+
+        for model_name in active_models:
+            try:
+                payload = {
+                    "model": model_name,
+                    "messages": [
+                        {"role": "system", "content": system_instruction},
+                        {"role": "user", "content": user_msg}
+                    ],
+                    "temperature": 0.6,
+                    "max_tokens": 300
+                }
+                resp = requests.post(
+                    "https://integrate.api.nvidia.com/v1/chat/completions",
+                    headers=headers,
+                    json=payload,
+                    timeout=5.0
+                )
+                if resp.status_code == 200:
+                    result = resp.json()
+                    content = result.get("choices", [{}])[0].get("message", {}).get("content")
+                    if content and len(content.strip()) > 5:
+                        return jsonify({
+                            "reply": content.strip(),
+                            "ok": True,
+                            "engine": "nvidia_nim",
+                            "model": model_name
+                        })
+            except Exception as e:
+                print(f"NVIDIA model {model_name} error:", e)
+                continue
 
     # 2. Local Contextual Knowledge Engine (Deterministic & Fast Fallback)
     lower = user_msg.lower()

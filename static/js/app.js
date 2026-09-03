@@ -1,5 +1,5 @@
 const CareerMitra = {
-  lang: localStorage.getItem('cm-lang') || 'en',
+  lang: localStorage.getItem('cm-lang') || 'mr',
   translations: {},
 
   async loadTranslations(lang) {
