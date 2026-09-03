@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nearby Opportunities</title>
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <script>
+
+        // Maharashtra starting position
+        const map = L.map("map").setView(
+            [19.7515, 75.7139],
+            7
+        );
+
+
+        // OpenStreetMap
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors"
+            }
+        ).addTo(map);
+
+
+        // Get opportunities from Flask
+        fetch("/api/opportunities")
+
+            .then(response => response.json())
+
+            .then(opportunities => {
+
+                opportunities.forEach(place => {
+
+                    const marker = L.marker([
+                        place.latitude,
+                        place.longitude
+                    ]).addTo(map);
+
+
+                    marker.bindPopup(`
+                        <strong>${place.name}</strong>
+                        <br>
+                        ${place.type}
+                        <br>
+                        ${place.address}
+                        <br><br>
+                        ${place.description}
+                    `);
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Failed to load opportunities:",
+                    error
+                );
+
+            });
+
+    </script>
+
+</body>
+
+</html>
