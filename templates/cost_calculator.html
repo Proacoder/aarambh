@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section cost-calculator fade-in">
+  <div class="container">
+    <!-- Header card -->
+    <div class="card text-center mb-4 slide-up">
+      <div class="greeting-avatar mb-2">💰</div>
+      <h1 class="page-title mb-1">Kharcha Calculator</h1>
+      <p class="page-subtitle">Find out the real total cost of studying at any college</p>
+    </div>
+
+    <!-- College Selection -->
+    <div class="card mb-4" id="cost-input-section">
+      <h3 class="mb-3">📍 Select Your Details</h3>
+      <div class="grid-2 gap-3 mb-3">
+        <div class="form-group">
+          <label>Your Home District</label>
+          <select id="cost-home-district" class="form-select"></select>
+        </div>
+        <div class="form-group">
+          <label>Target College</label>
+          <select id="cost-college" class="form-select"></select>
+        </div>
+      </div>
+      <div class="grid-2 gap-3 mb-3">
+        <div class="form-group">
+          <label>Accommodation Type</label>
+          <select id="cost-accommodation" class="form-select">
+            <option value="govtHostel">🏛️ Government Hostel</option>
+            <option value="privateHostel">🏢 Private Hostel</option>
+            <option value="pgRoom">🏠 Paying Guest (PG)</option>
+            <option value="sharedFlat">👥 Shared Flat</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Food Preference</label>
+          <select id="cost-food" class="form-select">
+            <option value="collegeMess">🍽️ College Mess</option>
+            <option value="selfCooking">🍳 Self Cooking</option>
+            <option value="mixed">🥘 Mixed</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2 gap-3 mb-4">
+        <div class="form-group">
+          <label>Annual Family Income (₹)</label>
+          <input type="number" id="cost-income" class="form-input" placeholder="e.g. 200000" value="">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="cost-category" class="form-select">
+            <option value="OPEN">Open / General</option>
+            <option value="EBC">EBC</option>
+            <option value="OBC">OBC</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+          </select>
+        </div>
+      </div>
+      <button id="calculate-btn" class="btn btn-primary ripple" style="width:100%">🧮 Calculate Total Cost</button>
+    </div>
+
+    <!-- Results Section (hidden initially) -->
+    <div id="cost-results" class="hidden">
+      <!-- College + Distance Header -->
+      <div class="card mb-4 slide-up" id="cost-header-card">
+        <div class="flex-between flex-wrap gap-2">
+          <div>
+            <span class="badge badge-gold mb-1" id="cost-tier-badge"></span>
+            <h2 id="cost-college-name"></h2>
+            <p class="text-muted text-small" id="cost-route"></p>
+          </div>
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700;color:var(--primary)" id="cost-net-annual"></div>
+            <p class="text-small text-muted">Net Annual Cost</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown Bars -->
+      <div class="card mb-4" id="cost-breakdown-card">
+        <h3 class="mb-3">📊 Annual Cost Breakdown</h3>
+        <div id="cost-bars"></div>
+        <div class="mt-4" style="border-top:2px solid var(--primary);padding-top:1rem">
+          <div class="flex-between mb-2">
+            <span style="font-weight:600">Total Before Scholarships</span>
+            <span style="font-weight:700" id="cost-gross"></span>
+          </div>
+          <div class="flex-between mb-2" style="color:var(--success)">
+            <span>🎓 Scholarship Deductions</span>
+            <span style="font-weight:700" id="cost-scholarship"></span>
+          </div>
+          <div class="flex-between" style="font-size:1.3rem;font-weight:700;color:var(--primary)">
+            <span>✅ Net Out-of-Pocket</span>
+            <span id="cost-net"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Family Impact Card -->
+      <div class="card mb-4" id="family-impact-card">
+        <h3 class="mb-3">👨👩👧 Family Budget Impact</h3>
+        <div class="grid-2 gap-3">
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700" id="cost-monthly"></div>
+            <p class="text-small text-muted">Monthly Cost</p>
+          </div>
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700" id="cost-income-pct"></div>
+            <p class="text-small text-muted">% of Family Income</p>
+          </div>
+        </div>
+        <div id="affordability-msg" class="mt-3 text-center" style="padding:1rem;border-radius:8px"></div>
+      </div>
+
+      <!-- Matched Scholarships -->
+      <div class="card mb-4" id="cost-scholarships-card">
+        <h3 class="mb-3">🎓 Scholarships You Qualify For</h3>
+        <div id="cost-scholarship-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/cost_calculator.js"></script>
+{% endblock %}

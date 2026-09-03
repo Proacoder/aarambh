@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section documents fade-in">
+  <div class="container">
+    <div class="card text-center mb-4 slide-up">
+      <div class="greeting-avatar mb-2">📋</div>
+      <h1 class="page-title mb-1">Document Readiness Tracker</h1>
+      <p class="page-subtitle">Track your admission documents — never miss a deadline!</p>
+      <div class="mt-3" id="doc-progress-wrap">
+        <div class="flex-between mb-1">
+          <span class="text-small text-muted">Progress</span>
+          <span class="text-small" style="font-weight:600" id="doc-progress-text">0 / 0</span>
+        </div>
+        <div class="loading-bar-wrap"><div class="loading-bar-inner" id="doc-progress-bar" style="width:0%;transition:width 0.5s"></div></div>
+      </div>
+    </div>
+
+    <div id="doc-checklist"></div>
+
+    <div class="card mt-4 text-center">
+      <button class="btn btn-secondary ripple" id="doc-reset-btn">🔄 Reset All Progress</button>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/documents.js"></script>
+{% endblock %}

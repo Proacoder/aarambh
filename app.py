@@ -5,6 +5,7 @@ Flask frontend proxying to Node.js Backend API.
 import os
 import uuid
 import requests
+import math
 from pathlib import Path
 
 from flask import Flask, render_template, request, jsonify, session, send_from_directory
@@ -314,6 +315,142 @@ def api_mitra_tai():
 def api_reset():
     session.clear()
     return jsonify({"ok": True})
+
+@app.route("/cost-calculator")
+def cost_calculator():
+    return render_template("cost_calculator.html")
+
+@app.route("/documents")
+def documents():
+    return render_template("documents.html")
+
+@app.route("/exam-calendar")
+def exam_calendar():
+    return render_template("exam_calendar.html")
+
+@app.route("/api/cost-calculator", methods=["POST"])
+def api_cost_calculator():
+    import json, math
+    data = request.get_json(force=True) or {}
+    college_id = data.get("collegeId")
+    home_district = data.get("homeDistrict") or (session.get("profile", {}).get("district"))
+    accommodation_type = data.get("accommodationType", "govtHostel")
+    food_type = data.get("foodType", "collegeMess")
+    family_income = data.get("familyIncome") or (session.get("profile", {}).get("income", 0))
+    
+    # Load data
+    with open(DATA_DIR / "colleges.json", encoding="utf-8") as f:
+        colleges = json.load(f)
+    with open(DATA_DIR / "city_cost_index.json", encoding="utf-8") as f:
+        cost_index = json.load(f)
+    with open(DATA_DIR / "districts.json", encoding="utf-8") as f:
+        districts = json.load(f)
+    with open(DATA_DIR / "schemes.json", encoding="utf-8") as f:
+        schemes = json.load(f)
+    
+    # Find college
+    college = next((c for c in colleges if c["id"] == college_id), None)
+    if not college:
+        return jsonify({"error": "college_not_found"}), 404
+    
+    college_district = college["district"]
+    costs = cost_index.get(college_district, cost_index.get("Pune"))  # fallback
+    
+    # Calculate travel distance
+    home_coords = districts.get(home_district, {"lat": 19.0, "lng": 75.0})
+    R = 6371.0
+    lat1, lng1 = math.radians(home_coords["lat"]), math.radians(home_coords["lng"])
+    lat2, lng2 = math.radians(college["lat"]), math.radians(college["lng"])
+    dlat = lat2 - lat1
+    dlng = lng2 - lng1
+    a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlng/2)**2
+    distance_km = round(R * 2 * math.atan2(math.sqrt(a), math.sqrt(1-a)), 1)
+    
+    # Costs
+    tuition = college.get("annualFee", 0)
+    accom = costs["accommodation"].get(accommodation_type, costs["accommodation"]["govtHostel"])
+    food = costs["food"].get(food_type, costs["food"]["collegeMess"])
+    accom_annual = accom["monthly"] * 10  # 10 months (exclude summer)
+    food_annual = food["monthly"] * 10
+    local_transport_annual = costs["transport"]["localMonthlyPass"] * 10
+    personal_annual = costs["personal"]["monthly"] * 10
+    phone_annual = costs["phone"]["monthly"] * 12
+    books_annual = costs["books"]["annual"]
+    medical_annual = costs["medical"]["annual"]
+    
+    # Inter-city travel (MSRTC rate ~₹1.2/km, 5 round trips/year)
+    st_bus_rate = 1.2
+    trips_per_year = 5
+    one_way_fare = round(distance_km * st_bus_rate)
+    travel_annual = one_way_fare * 2 * trips_per_year
+    
+    subtotal = tuition + accom_annual + food_annual + travel_annual + local_transport_annual + personal_annual + phone_annual + books_annual + medical_annual
+    emergency = round(subtotal * 0.05)
+    total = subtotal + emergency
+    
+    # Scholarship deductions
+    profile = session.get("profile", {})
+    category = profile.get("category", data.get("category", "General"))
+    income = float(family_income or 0)
+    scholarship_total = 0
+    matched_scholarships = []
+    for s in schemes:
+        if income and income > s.get("maxIncome", float("inf")):
+            continue
+        if category not in s.get("eligibleCategories", []):
+            continue
+        matched_scholarships.append({"name": s["title"], "benefit": s["benefits"]})
+    
+    # Estimate scholarship value (simplified)
+    if any("tuition" in s["benefit"].lower() or "fee" in s["benefit"].lower() for s in matched_scholarships):
+        scholarship_total += tuition
+    if any("hostel" in s["benefit"].lower() for s in matched_scholarships):
+        scholarship_total += min(30000, accom_annual)
+    
+    net_cost = max(0, total - scholarship_total)
+    monthly_cost = round(net_cost / 12)
+    family_monthly_income = round(income / 12) if income > 0 else 0
+    income_pct = round((monthly_cost / family_monthly_income) * 100) if family_monthly_income > 0 else 0
+    
+    return jsonify({
+        "college": {"name": college["name"], "district": college_district, "type": college["type"]},
+        "homeDistrict": home_district,
+        "distanceKm": distance_km,
+        "breakdown": {
+            "tuition": {"annual": tuition, "label": "Tuition & Fees"},
+            "accommodation": {"annual": accom_annual, "monthly": accom["monthly"], "label": accom.get("label", accommodation_type)},
+            "food": {"annual": food_annual, "monthly": food["monthly"], "label": food.get("label", food_type)},
+            "travel": {"annual": travel_annual, "oneWayFare": one_way_fare, "tripsPerYear": trips_per_year, "label": f"ST Bus Travel ({trips_per_year} round trips)"},
+            "localTransport": {"annual": local_transport_annual, "monthly": costs["transport"]["localMonthlyPass"], "label": costs["transport"]["label"]},
+            "personal": {"annual": personal_annual, "monthly": costs["personal"]["monthly"], "label": "Personal & Miscellaneous"},
+            "phone": {"annual": phone_annual, "monthly": costs["phone"]["monthly"], "label": costs["phone"]["label"]},
+            "books": {"annual": books_annual, "label": costs["books"]["label"]},
+            "medical": {"annual": medical_annual, "label": costs["medical"]["label"]},
+            "emergency": {"annual": emergency, "label": "Emergency Fund (5%)"}
+        },
+        "totals": {
+            "grossAnnual": total,
+            "scholarshipDeduction": scholarship_total,
+            "netAnnual": net_cost,
+            "netMonthly": monthly_cost
+        },
+        "familyImpact": {
+            "monthlyFamilyIncome": family_monthly_income,
+            "incomePercentage": income_pct
+        },
+        "matchedScholarships": matched_scholarships[:5],
+        "costTier": costs.get("tierLabel", "Unknown")
+    })
+
+@app.route("/api/exam-calendar")
+def api_exam_calendar():
+    import json
+    education_level = request.args.get("level") or session.get("profile", {}).get("className", "")
+    with open(DATA_DIR / "exam_calendar.json", encoding="utf-8") as f:
+        exams = json.load(f)
+    if education_level:
+        exams = [e for e in exams if education_level in e.get("forEducationLevel", [])]
+    return jsonify(exams)
 
 # ---------------------------------------------------------------------------
 # Serve PWA files from root

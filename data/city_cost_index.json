@@ -1,0 +1,314 @@
+{
+  "Mumbai": {
+    "tier": 1,
+    "tierLabel": "Metro",
+    "accommodation": {
+      "govtHostel": { "monthly": 1500, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 5000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 8000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 6000, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3500, "label": "College Mess" },
+      "selfCooking": { "monthly": 2500, "label": "Self Cooking" },
+      "mixed": { "monthly": 4000, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 1200,
+      "label": "BEST/Metro Monthly Pass"
+    },
+    "personal": {
+      "monthly": 1500,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 5000, "label": "Books & Stationery" },
+    "medical": { "annual": 2000, "label": "Basic Medical / First Aid" }
+  },
+  "Thane": {
+    "tier": 1,
+    "tierLabel": "Metro",
+    "accommodation": {
+      "govtHostel": { "monthly": 1500, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 5000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 8000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 6000, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3500, "label": "College Mess" },
+      "selfCooking": { "monthly": 2500, "label": "Self Cooking" },
+      "mixed": { "monthly": 4000, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 1200,
+      "label": "Local Transport Monthly Pass"
+    },
+    "personal": {
+      "monthly": 1500,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 5000, "label": "Books & Stationery" },
+    "medical": { "annual": 2000, "label": "Basic Medical / First Aid" }
+  },
+  "Pune": {
+    "tier": 1,
+    "tierLabel": "Metro",
+    "accommodation": {
+      "govtHostel": { "monthly": 1500, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 5000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 8000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 6000, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3500, "label": "College Mess" },
+      "selfCooking": { "monthly": 2500, "label": "Self Cooking" },
+      "mixed": { "monthly": 4000, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 1000,
+      "label": "PMPML Monthly Pass"
+    },
+    "personal": {
+      "monthly": 1500,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 5000, "label": "Books & Stationery" },
+    "medical": { "annual": 2000, "label": "Basic Medical / First Aid" }
+  },
+  "Nashik": {
+    "tier": 2,
+    "tierLabel": "Tier 2",
+    "accommodation": {
+      "govtHostel": { "monthly": 1200, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 4000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 6000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 4500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3000, "label": "College Mess" },
+      "selfCooking": { "monthly": 2000, "label": "Self Cooking" },
+      "mixed": { "monthly": 3500, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 800,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1200,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 4000, "label": "Books & Stationery" },
+    "medical": { "annual": 1500, "label": "Basic Medical / First Aid" }
+  },
+  "Nagpur": {
+    "tier": 2,
+    "tierLabel": "Tier 2",
+    "accommodation": {
+      "govtHostel": { "monthly": 1200, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 4000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 6000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 4500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3000, "label": "College Mess" },
+      "selfCooking": { "monthly": 2000, "label": "Self Cooking" },
+      "mixed": { "monthly": 3500, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 800,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1200,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 4000, "label": "Books & Stationery" },
+    "medical": { "annual": 1500, "label": "Basic Medical / First Aid" }
+  },
+  "Chhatrapati Sambhajinagar": {
+    "tier": 2,
+    "tierLabel": "Tier 2",
+    "accommodation": {
+      "govtHostel": { "monthly": 1200, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 4000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 6000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 4500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 3000, "label": "College Mess" },
+      "selfCooking": { "monthly": 2000, "label": "Self Cooking" },
+      "mixed": { "monthly": 3500, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 800,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1200,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 4000, "label": "Books & Stationery" },
+    "medical": { "annual": 1500, "label": "Basic Medical / First Aid" }
+  },
+  "Kolhapur": {
+    "tier": 3,
+    "tierLabel": "Tier 3",
+    "accommodation": {
+      "govtHostel": { "monthly": 1000, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 3000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 4000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 3500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2500, "label": "College Mess" },
+      "selfCooking": { "monthly": 1500, "label": "Self Cooking" },
+      "mixed": { "monthly": 2800, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 600,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1000,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 3000, "label": "Books & Stationery" },
+    "medical": { "annual": 1000, "label": "Basic Medical / First Aid" }
+  },
+  "Solapur": {
+    "tier": 3,
+    "tierLabel": "Tier 3",
+    "accommodation": {
+      "govtHostel": { "monthly": 1000, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 3000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 4000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 3500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2500, "label": "College Mess" },
+      "selfCooking": { "monthly": 1500, "label": "Self Cooking" },
+      "mixed": { "monthly": 2800, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 600,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1000,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 3000, "label": "Books & Stationery" },
+    "medical": { "annual": 1000, "label": "Basic Medical / First Aid" }
+  },
+  "Satara": {
+    "tier": 3,
+    "tierLabel": "Tier 3",
+    "accommodation": {
+      "govtHostel": { "monthly": 1000, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 3000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 4000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 3500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2500, "label": "College Mess" },
+      "selfCooking": { "monthly": 1500, "label": "Self Cooking" },
+      "mixed": { "monthly": 2800, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 600,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1000,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 3000, "label": "Books & Stationery" },
+    "medical": { "annual": 1000, "label": "Basic Medical / First Aid" }
+  },
+  "Sangli": {
+    "tier": 3,
+    "tierLabel": "Tier 3",
+    "accommodation": {
+      "govtHostel": { "monthly": 1000, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 3000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 4000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 3500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2500, "label": "College Mess" },
+      "selfCooking": { "monthly": 1500, "label": "Self Cooking" },
+      "mixed": { "monthly": 2800, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 600,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1000,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 3000, "label": "Books & Stationery" },
+    "medical": { "annual": 1000, "label": "Basic Medical / First Aid" }
+  },
+  "Ahmednagar": {
+    "tier": 3,
+    "tierLabel": "Tier 3",
+    "accommodation": {
+      "govtHostel": { "monthly": 1000, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 3000, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 4000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 3500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2500, "label": "College Mess" },
+      "selfCooking": { "monthly": 1500, "label": "Self Cooking" },
+      "mixed": { "monthly": 2800, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 600,
+      "label": "City Bus Pass"
+    },
+    "personal": {
+      "monthly": 1000,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 3000, "label": "Books & Stationery" },
+    "medical": { "annual": 1000, "label": "Basic Medical / First Aid" }
+  },
+  "Ratnagiri": {
+    "tier": 4,
+    "tierLabel": "Tier 4",
+    "accommodation": {
+      "govtHostel": { "monthly": 800, "label": "Government Hostel" },
+      "privateHostel": { "monthly": 2500, "label": "Private Hostel" },
+      "pgRoom": { "monthly": 3000, "label": "Paying Guest (PG)" },
+      "sharedFlat": { "monthly": 2500, "label": "Shared Flat (2-3 students)" }
+    },
+    "food": {
+      "collegeMess": { "monthly": 2000, "label": "College Mess" },
+      "selfCooking": { "monthly": 1200, "label": "Self Cooking" },
+      "mixed": { "monthly": 2200, "label": "Mixed (Mess + Outside)" }
+    },
+    "transport": {
+      "localMonthlyPass": 500,
+      "label": "Local Transport Pass"
+    },
+    "personal": {
+      "monthly": 800,
+      "includes": ["Toiletries", "Laundry", "Haircut", "Basic clothing"]
+    },
+    "phone": { "monthly": 300, "label": "Jio/Airtel Data Plan" },
+    "books": { "annual": 2000, "label": "Books & Stationery" },
+    "medical": { "annual": 800, "label": "Basic Medical / First Aid" }
+  }
+}
