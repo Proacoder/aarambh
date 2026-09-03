@@ -88,8 +88,12 @@ function renderLeftMatches(matches) {
   if (!container) return;
   container.innerHTML = '';
 
+  const t = window.CareerMitra ? window.CareerMitra.t : (key) => key;
+  const lang = window.CareerMitra ? window.CareerMitra.lang : 'en';
+
   if (matches.length === 0) {
-    container.innerHTML = `<div class="text-small text-muted p-2">No matches generated yet. Take the assessment!</div>`;
+    container.innerHTML = `<div class="text-small text-muted p-2" data-i18n="dash_no_matches">No matches generated yet. Take the assessment!</div>`;
+    if (window.CareerMitra) CareerMitra.applyTranslations();
     return;
   }
 
@@ -97,38 +101,49 @@ function renderLeftMatches(matches) {
     const div = document.createElement('div');
     div.className = 'p-2 style-card mb-1';
     div.style.cssText = 'background:var(--bg-card); border-radius:8px; border:1px solid var(--border);';
+    
+    const name = (lang === 'mr' && m.nameMr) ? m.nameMr : (lang === 'hi' && m.nameHi) ? m.nameHi : m.name;
+    const desc = (lang === 'mr' && m.descMr) ? m.descMr : (lang === 'hi' && m.descHi) ? m.descHi : m.description;
+
     div.innerHTML = `
       <div class="flex-between align-center mb-1">
-        <strong class="text-small" style="color:var(--primary);">${m.name}</strong>
-        <span class="badge badge-gold text-small">${m.matchPct || 90}% Match</span>
+        <strong class="text-small" style="color:var(--primary);">${name}</strong>
+        <span class="badge badge-gold text-small">${m.matchPct || 90}% <span data-i18n="dash_match_pct_label">Match</span></span>
       </div>
-      <p class="text-small text-muted mb-0" style="font-size:0.75rem;">${m.description || ''}</p>
+      <p class="text-small text-muted mb-0" style="font-size:0.75rem;">${desc || ''}</p>
     `;
     container.appendChild(div);
   });
+  if (window.CareerMitra) CareerMitra.applyTranslations();
 }
 
 function renderLeftColleges(colleges) {
   const container = document.getElementById('left-college-list');
   if (!container) return;
   container.innerHTML = '';
+  
+  const lang = window.CareerMitra ? window.CareerMitra.lang : 'en';
 
   colleges.forEach(c => {
     const div = document.createElement('div');
     div.className = 'p-2 mb-1';
     div.style.cssText = 'background:var(--bg-card); border-radius:8px; border:1px solid var(--border);';
+    
+    const name = (lang === 'mr' && c.nameMr) ? c.nameMr : (lang === 'hi' && c.nameHi) ? c.nameHi : c.name;
+
     div.innerHTML = `
       <div class="flex-between align-center">
-        <strong class="text-small" style="font-size:0.8rem;">${c.name}</strong>
+        <strong class="text-small" style="font-size:0.8rem;">${name}</strong>
         <span class="badge badge-paper text-small">${c.district}</span>
       </div>
       <div class="flex-between text-small text-muted mt-1" style="font-size:0.75rem;">
         <span>📏 ${c.distanceKm || 10} km</span>
-        <span>💵 ₹${c.annualFee || 'Subsidized'}/yr</span>
+        <span>💵 ₹${c.annualFee || 'Subsidized'}/<span data-i18n="dash_yr">yr</span></span>
       </div>
     `;
     container.appendChild(div);
   });
+  if (window.CareerMitra) CareerMitra.applyTranslations();
 }
 
 // ---------------------------------------------------------------------------
@@ -191,6 +206,8 @@ function initDarkMap() {
 }
 
 function addCityMarker(city) {
+  const lang = window.CareerMitra ? window.CareerMitra.lang : 'en';
+  
   const markerHtml = `
     <div style="
       width:34px; height:34px; border-radius:50%;
@@ -203,17 +220,25 @@ function addCityMarker(city) {
 
   const icon = L.divIcon({ html: markerHtml, className: '', iconSize: [34, 34], iconAnchor: [17, 17] });
 
+  const name = (lang === 'mr' && city.nameMr) ? city.nameMr : (lang === 'hi' && city.nameHi) ? city.nameHi : city.name;
+  const region = (lang === 'mr' && city.regionMr) ? city.regionMr : (lang === 'hi' && city.regionHi) ? city.regionHi : city.region;
+  const desc = (lang === 'mr' && city.descMr) ? city.descMr : (lang === 'hi' && city.descHi) ? city.descHi : city.desc;
+
   const popupHtml = `
-    <div class="popup-title" style="font-weight:700; font-size:0.95rem; color:#f8fafc;">${city.icon} ${city.name}</div>
-    <div class="popup-region" style="font-size:0.75rem; color:#94a3b8; margin-bottom:4px;">${city.region}</div>
-    <p style="font-size:0.75rem; color:#cbd5e1; margin-bottom:6px; line-height:1.4;">${city.desc}</p>
+    <div class="popup-title" style="font-weight:700; font-size:0.95rem; color:#f8fafc;">${city.icon} ${name}</div>
+    <div class="popup-region" style="font-size:0.75rem; color:#94a3b8; margin-bottom:4px;">${region}</div>
+    <p style="font-size:0.75rem; color:#cbd5e1; margin-bottom:6px; line-height:1.4;">${desc}</p>
     <div class="popup-stat" style="font-size:0.75rem; color:#10b981;">
-      <strong>Jobs: ${city.jobs}</strong> | <strong>Colleges: ${city.colleges}</strong>
+      <strong><span data-i18n="dash_jobs">Jobs:</span> ${city.jobs}</strong> | <strong><span data-i18n="dash_colleges">Colleges:</span> ${city.colleges}</strong>
     </div>`;
 
   const marker = L.marker([city.lat, city.lng], { icon })
     .addTo(darkMap)
     .bindPopup(popupHtml, { maxWidth: 240, className: 'cm-popup' });
+    
+  marker.on('popupopen', () => {
+    if(window.CareerMitra) CareerMitra.applyTranslations();
+  });
 
   mapMarkers[city.name] = { marker, city };
 }
