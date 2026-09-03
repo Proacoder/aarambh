@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="CareerMitra - Multilingual career guidance & AI companion for Maharashtra's rural students">
+  <meta name="theme-color" content="#3D2B1F">
+  <title>CareerMitra - करिअर मित्र</title>
+  
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Fonts: Mukta (body, Devanagari) + Poppins (headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+    <div class="container flex-between">
+      <a href="/" class="nav-logo">
+        <span>🌾</span> <span data-i18n="app_name">CareerMitra</span>
+      </a>
+      
+      <div class="nav-links desktop-only flex align-center gap-4">
+        <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
+        <a href="/dashboard" class="nav-link" data-i18n="nav_dashboard">My Matches</a>
+        <a href="/roadmap" class="nav-link" data-i18n="nav_roadmap">My Roadmap</a>
+        <a href="/career-aunty" class="nav-link nav-link-tai flex align-center gap-1">
+          <span class="tai-sparkle">👩‍🏫</span> <span data-i18n="nav_mitra_tai">Mitra Tai</span>
+        </a>
+      </div>
+
+      <div class="nav-right flex align-center gap-3">
+        <div class="lang-toggle" role="group" aria-label="Language selection">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">हिं</button>
+          <button class="lang-btn" data-lang="mr">मरा</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <main id="main-content" class="page-content-wrap">
+    {% block content %}{% endblock %}
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="footer-text" data-i18n="footer_note">Built for Maharashtra's rural and small-town students. Works on slow connections.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav mobile-only" aria-label="Mobile Bottom Navigation">
+    <a href="/" class="bottom-nav-item" id="bnav-home">
+      <span class="bnav-icon">🏠</span>
+      <span class="bnav-label" data-i18n="nav_home">Home</span>
+    </a>
+    <a href="/onboarding" class="bottom-nav-item" id="bnav-journey">
+      <span class="bnav-icon">🧭</span>
+      <span class="bnav-label" data-i18n="nav_journey">Journey</span>
+    </a>
+    <a href="/dashboard" class="bottom-nav-item" id="bnav-matches">
+      <span class="bnav-icon">🎯</span>
+      <span class="bnav-label" data-i18n="nav_dashboard">Matches</span>
+    </a>
+    <a href="/career-aunty" class="bottom-nav-item bottom-nav-tai" id="bnav-tai">
+      <span class="bnav-icon">👩‍🏫</span>
+      <span class="bnav-label" data-i18n="nav_mitra_tai">Mitra Tai</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="/static/js/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
