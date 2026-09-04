@@ -1,6 +1,28 @@
 services:
+  # ---------------------------------------------------------------------------
+  # 1. Node.js Backend API (Prisma + Supabase PostgreSQL + Gemini)
+  # ---------------------------------------------------------------------------
   - type: web
-    name: careermitra
+    name: careermitra-api
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: apps/api
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # ---------------------------------------------------------------------------
+  # 2. Python Flask Web Application (Fullstack option on Render)
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: careermitra-web
     runtime: python
     plan: free
     region: oregon
@@ -18,4 +40,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: NODE_API_URL
-        value: http://localhost:3000/api
+        fromService:
+          type: web
+          name: careermitra-api
+          property: host
