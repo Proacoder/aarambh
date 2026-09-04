@@ -4,6 +4,8 @@
   "description": "CareerMitra - Rural Student Career Opportunity Navigator",
   "main": "index.js",
   "scripts": {
+    "start": "npm --prefix apps/api start",
+    "build": "npm --prefix apps/api install && npx --prefix apps/api prisma generate",
     "test": "pnpm --filter api test",
     "test:ai": "pnpm --filter api exec tsx ../../src/lib/ai-data/test-runner.ts",
     "dev:api": "pnpm --filter api dev",
