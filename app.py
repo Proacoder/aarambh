@@ -14,10 +14,15 @@ from flask import Flask, render_template, request, jsonify, session, send_from_d
 
 load_dotenv()
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=str(BASE_DIR / "templates"),
+    static_folder=str(BASE_DIR / "static"),
+    static_url_path="/static"
+)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "careermitra-dev-secret-change-me")
 
 oauth = OAuth(app)
