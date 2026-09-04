@@ -253,12 +253,13 @@ async function setupAuthUI() {
     
     if (data.authenticated) {
       function updateAuthButtonText() {
-        const dashText = CareerMitra.t('nav_dashboard') || 'Dashboard';
+        const dashText = CareerMitra.t('nav_dashboard') || 'My Matches';
         if (navUseNow) {
+          navUseNow.className = 'nav-cta nav-cta-matches desktop-only';
           if (!data.isGuest && data.user && data.user.picture) {
             navUseNow.innerHTML = `<img src="${data.user.picture}" alt="" style="width:20px; height:20px; border-radius:50%; vertical-align:middle; margin-right:4px;"> <span>${dashText}</span>`;
           } else {
-            navUseNow.textContent = `📊 ${dashText}`;
+            navUseNow.innerHTML = `<span>🎯</span> <span>${dashText}</span>`;
           }
           navUseNow.href = '/dashboard';
           navUseNow.setAttribute('data-i18n', 'nav_dashboard');

@@ -30,15 +30,14 @@
 <body>
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="nav-bar" role="navigation" aria-label="Main navigation" id="main-nav">
-    <div class="container flex-between">
-      <a href="/" class="nav-logo" style="margin-right: 1.5rem; text-decoration: none;">
+    <div class="container flex-between align-center">
+      <a href="/" class="nav-logo" style="text-decoration: none;">
         <span>🌾</span> <span data-i18n="app_name">CareerMitra</span>
       </a>
       
       <!-- Desktop Nav Links -->
-      <div class="nav-links desktop-only flex align-center gap-3">
+      <div class="nav-links desktop-only flex align-center">
         <a href="/" class="nav-link"><span data-i18n="nav_home">Home</span></a>
-        <a href="/dashboard" class="nav-link"><span data-i18n="nav_dashboard">My Matches</span></a>
         <a href="/schemes" class="nav-link"><span>🎓</span> <span data-i18n="nav_schemes">Maha Schemes</span></a>
         <a href="/tutorials" class="nav-link"><span>📺</span> <span data-i18n="nav_tutorials">Video Guides</span></a>
         <a href="/all-colleges" class="nav-link"><span>🏫</span> <span data-i18n="nav_colleges">Colleges</span></a>
@@ -48,20 +47,17 @@
         </a>
       </div>
 
-      <div class="nav-right flex align-center gap-3">
+      <div class="nav-right flex align-center">
         <div class="lang-toggle" role="group" aria-label="Language selection">
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="hi">हिं</button>
           <button class="lang-btn" data-lang="mr">मरा</button>
         </div>
-        <button id="nav-game-tour-btn" type="button" class="btn btn-outline btn-sm desktop-only ripple flex align-center gap-1" style="border-color: rgba(245,158,11,0.7); color: #d97706; font-weight:700; border-radius:18px; padding:0.32rem 0.75rem; background: rgba(245,158,11,0.08);" title="Interactive Game Tutorial">
-          <span>🎮</span> <span data-i18n="nav_tour">Tour</span>
-        </button>
         <button class="btn-pwa-install desktop-only hidden" id="pwa-install-btn-desktop" title="Install App on Home Screen">
           <span>📲</span> <span data-i18n="pwa_install_btn">Install</span>
         </button>
         <a href="/login" class="nav-cta desktop-only" id="nav-use-now" data-i18n="use_now">Use Now</a>
-        <button id="nav-logout-btn" class="btn btn-outline btn-sm desktop-only hidden" style="border-color: rgba(234,67,53,0.4); color: #ea4335; font-weight:600; border-radius:18px; padding:0.35rem 0.85rem;" title="Logout">
+        <button id="nav-logout-btn" class="btn btn-outline btn-sm desktop-only hidden" title="Logout">
           <span>🚪</span> <span data-i18n="logout">Logout</span>
         </button>
         <!-- Hamburger -->
