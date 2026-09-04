@@ -1,90 +1,175 @@
 [
   {
     "id": "sch-ebc-01",
-    "title": "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna (EBC)",
+    "name": "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna (EBC)",
     "provider": "Department of Higher and Technical Education",
-    "maxIncome": 800000,
-    "eligibleCategories": ["OPEN", "EBC"],
-    "minQualification": "12th",
-    "benefits": "50% to 100% tuition fee waiver depending on income level.",
-    "requiredDocs": ["Income Certificate", "Domicile Certificate", "CAP Allotment Letter", "Aadhar Card"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "50% to 100% tuition fee waiver depending on income level.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "category": [
+        "OPEN",
+        "EBC"
+      ]
+    },
+    "documents": [
+      "Income Certificate",
+      "Domicile Certificate",
+      "CAP Allotment Letter",
+      "Aadhar Card"
+    ]
   },
   {
     "id": "sch-hostel-02",
-    "title": "Dr. Panjabrao Deshmukh Vasatigruh Nirvah Bhatta Yojna",
+    "name": "Dr. Panjabrao Deshmukh Vasatigruh Nirvah Bhatta Yojna",
     "provider": "Department of Higher and Technical Education",
-    "maxIncome": 800000,
-    "eligibleCategories": ["OPEN", "EBC"],
-    "minQualification": "12th",
-    "benefits": "Hostel allowance up to INR 30,000 per year for students studying out of their hometown.",
-    "requiredDocs": ["Income Certificate", "Hostel Certificate/Rent Agreement", "Domicile Certificate", "Aadhar Card"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Hostel allowance up to INR 30,000 per year for students studying out of their hometown.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "category": [
+        "OPEN",
+        "EBC"
+      ]
+    },
+    "documents": [
+      "Income Certificate",
+      "Hostel Certificate/Rent Agreement",
+      "Domicile Certificate",
+      "Aadhar Card"
+    ]
   },
   {
     "id": "sch-sc-03",
-    "title": "Government of India Post-Matric Scholarship for SC Students",
+    "name": "Government of India Post-Matric Scholarship for SC Students",
     "provider": "Social Justice and Special Assistance Department",
-    "maxIncome": 250000,
-    "eligibleCategories": ["SC"],
-    "minQualification": "10th",
-    "benefits": "Full tuition fee waiver and maintenance allowance.",
-    "requiredDocs": ["Caste Certificate", "Income Certificate", "SSC/HSC Marksheets", "Bank Passbook"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Full tuition fee waiver and maintenance allowance.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "category": [
+        "SC"
+      ]
+    },
+    "documents": [
+      "Caste Certificate",
+      "Income Certificate",
+      "SSC/HSC Marksheets",
+      "Bank Passbook"
+    ]
   },
   {
     "id": "sch-st-04",
-    "title": "Post-Matric Scholarship for ST Students",
+    "name": "Post-Matric Scholarship for ST Students",
     "provider": "Tribal Development Department",
-    "maxIncome": 250000,
-    "eligibleCategories": ["ST"],
-    "minQualification": "10th",
-    "benefits": "Full tuition fee waiver and maintenance allowance.",
-    "requiredDocs": ["Caste Certificate", "Caste Validity", "Income Certificate", "Aadhar Card"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Full tuition fee waiver and maintenance allowance.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "category": [
+        "ST"
+      ]
+    },
+    "documents": [
+      "Caste Certificate",
+      "Caste Validity",
+      "Income Certificate",
+      "Aadhar Card"
+    ]
   },
   {
     "id": "sch-obc-05",
-    "title": "Post-Matric Scholarship to VJNT, OBC, and SBC Students",
+    "name": "Post-Matric Scholarship to VJNT, OBC, and SBC Students",
     "provider": "VJNT, OBC and SBC Welfare Department",
-    "maxIncome": 150000,
-    "eligibleCategories": ["OBC", "VJNT", "SBC"],
-    "minQualification": "10th",
-    "benefits": "Tuition fees, exam fees, and maintenance allowance.",
-    "requiredDocs": ["Caste Certificate", "Non-Creamy Layer Certificate", "Income Certificate", "Aadhar Card"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Tuition fees, exam fees, and maintenance allowance.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 150000,
+      "category": [
+        "OBC",
+        "VJNT",
+        "SBC"
+      ]
+    },
+    "documents": [
+      "Caste Certificate",
+      "Non-Creamy Layer Certificate",
+      "Income Certificate",
+      "Aadhar Card"
+    ]
   },
   {
     "id": "sch-minority-06",
-    "title": "State Minority Scholarship Part II (DHE)",
+    "name": "State Minority Scholarship Part II (DHE)",
     "provider": "Minority Development Department",
-    "maxIncome": 800000,
-    "eligibleCategories": ["MINORITY"],
-    "minQualification": "12th",
-    "benefits": "Financial assistance of INR 5,000 for arts/commerce/science and higher for technical courses.",
-    "requiredDocs": ["Minority Declaration/Certificate", "Income Certificate", "Domicile Certificate", "Previous Year Marksheet"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Financial assistance of INR 5,000 for arts/commerce/science and higher for technical courses.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "category": [
+        "MINORITY"
+      ]
+    },
+    "documents": [
+      "Minority Declaration/Certificate",
+      "Income Certificate",
+      "Domicile Certificate",
+      "Previous Year Marksheet"
+    ]
   },
   {
     "id": "sch-pwd-07",
-    "title": "Post-Matric Scholarship for Persons with Disability",
+    "name": "Post-Matric Scholarship for Persons with Disability",
     "provider": "Social Justice and Special Assistance Department",
-    "maxIncome": 250000,
-    "eligibleCategories": ["OPEN", "SC", "ST", "OBC", "PWD"],
-    "minQualification": "10th",
-    "benefits": "Maintenance allowance, book grant, and reimbursement of compulsory non-refundable fees.",
-    "requiredDocs": ["Disability Certificate (minimum 40%)", "Income Certificate", "Aadhar Card", "Previous Year Marksheet"],
-    "applyUrl": "https://mahadbtmahait.gov.in"
+    "amount": "Maintenance allowance, book grant, and reimbursement of compulsory non-refundable fees.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "category": [
+        "OPEN",
+        "SC",
+        "ST",
+        "OBC",
+        "PWD"
+      ]
+    },
+    "documents": [
+      "Disability Certificate (minimum 40%)",
+      "Income Certificate",
+      "Aadhar Card",
+      "Previous Year Marksheet"
+    ]
   },
   {
     "id": "sch-skill-08",
-    "title": "Pramod Mahajan Skill and Entrepreneurship Development Mission",
+    "name": "Pramod Mahajan Skill and Entrepreneurship Development Mission",
     "provider": "Skill Development and Entrepreneurship Department",
-    "maxIncome": 500000,
-    "eligibleCategories": ["OPEN", "SC", "ST", "OBC", "EBC", "MINORITY"],
-    "minQualification": "10th",
-    "benefits": "Free skill training and certification, placement assistance.",
-    "requiredDocs": ["Aadhar Card", "Educational Certificates", "Passport Size Photo", "Domicile Certificate"],
-    "applyUrl": "https://skillindia.gov.in"
+    "amount": "Free skill training and certification, placement assistance.",
+    "officialUrl": "https://skillindia.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 500000,
+      "category": [
+        "OPEN",
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "MINORITY"
+      ]
+    },
+    "documents": [
+      "Aadhar Card",
+      "Educational Certificates",
+      "Passport Size Photo",
+      "Domicile Certificate"
+    ]
   }
 ]

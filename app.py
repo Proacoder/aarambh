@@ -749,7 +749,7 @@ def api_mitra_tai():
         ai_narrative = plan.get("aiNarrative")
         
         if ai_narrative and "Hello" not in message and "नमस्कार" not in message:
-            reply = f"{ai_narrative.get('greeting', '')} {ai_narrative.get('roadmapExplanation', '')}"
+            reply = f"{ai_narrative.get('summary', '')} {ai_narrative.get('financialOutlook', '')}"
         else:
             if lang == "mr":
                 reply = "नमस्कार! मी मित्र ताई आहे. तुझा AI-Action Plan तयार आहे, डॅशबोर्डवर तपासा!"
