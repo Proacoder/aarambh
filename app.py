@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 
 from flask import Flask, render_template, request, jsonify, session, send_from_directory, redirect, url_for
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
@@ -18,6 +19,8 @@ BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 
 app = Flask(__name__)
+# Trust headers from Vercel/reverse proxy so _external=True uses https
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "careermitra-dev-secret-change-me")
 
 oauth = OAuth(app)
