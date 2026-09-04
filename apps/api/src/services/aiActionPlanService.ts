@@ -1,4 +1,4 @@
-import { generateMitraTaiResponse, MitraTaiResponse } from "../../../../src/lib/ai-data/geminiService.ts";
+import { generateMitraTaiResponse, MitraTaiResponse } from "../lib/ai-data/geminiService.ts";
 
 export interface AICareerPlanResponse extends MitraTaiResponse {
   isAiGenerated: boolean;
