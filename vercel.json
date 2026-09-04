@@ -8,16 +8,14 @@
         "includeFiles": [
           "data/**",
           "templates/**",
-          "static/**"
+          "static/**",
+          "manifest.json",
+          "sw.js"
         ]
       }
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "/api/index.py"
