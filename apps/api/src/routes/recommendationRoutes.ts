@@ -10,7 +10,8 @@ const router = Router();
 router.get("/:studentId", async (req, res, next) => {
   try {
     const { studentId } = req.params;
-    const payload = await generateStudentRecommendations(studentId);
+    const persist = String(req.query.refresh || "") === "true";
+    const payload = await generateStudentRecommendations(studentId, { persist });
     return res.json(payload);
   } catch (err: any) {
     if (err.message && err.message.includes("not found")) {

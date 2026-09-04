@@ -1,5 +1,14 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma.ts";
+import {
+  ValidationError,
+  normalizeFinancialLevel,
+  parseDistrict,
+  parseEducationLevel,
+  parsePercentage,
+  parseStudentName,
+  parseWillingToMove
+} from "../lib/validation.ts";
 
 const router = Router();
 
@@ -19,21 +28,22 @@ router.post("/", async (req, res, next) => {
       willingToMove = false
     } = req.body;
 
-    if (!educationLevel || !district) {
-      return res.status(400).json({
-        error: "educationLevel and district are required fields."
-      });
-    }
+    const parsedEducation = parseEducationLevel(educationLevel);
+    const parsedDistrict = parseDistrict(district);
+    const parsedPercentage = parsePercentage(percentage);
+    const parsedFinancial = normalizeFinancialLevel(financialLevel);
+    const parsedMove = parseWillingToMove(willingToMove, false);
+    const parsedName = parseStudentName(name);
 
     const student = await prisma.student.create({
       data: {
-        name: name || null,
-        educationLevel,
-        percentage: percentage !== undefined && percentage !== null ? parseFloat(percentage) : null,
-        district,
-        state,
-        financialLevel: financialLevel || null,
-        willingToMove: Boolean(willingToMove)
+        name: parsedName,
+        educationLevel: parsedEducation,
+        percentage: parsedPercentage,
+        district: parsedDistrict,
+        state: typeof state === "string" && state.trim() ? state.trim() : "Maharashtra",
+        financialLevel: parsedFinancial,
+        willingToMove: parsedMove
       }
     });
 
@@ -42,6 +52,9 @@ router.post("/", async (req, res, next) => {
       student
     });
   } catch (err) {
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
     next(err);
   }
 });

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma.ts";
 import { generateStudentRecommendations } from "../services/recommendationService.ts";
+import { ValidationError } from "../lib/validation.ts";
 
 const router = Router();
 
@@ -194,7 +195,7 @@ router.post("/", async (req, res, next) => {
   try {
     const { studentId, answers, directScores } = req.body;
 
-    if (!studentId) {
+    if (!studentId || typeof studentId !== "string") {
       return res.status(400).json({ error: "studentId is required." });
     }
 
@@ -213,49 +214,49 @@ router.post("/", async (req, res, next) => {
     let artistic = 0;
     let investigative = 0;
 
-    if (directScores) {
-      // Direct scores passed from frontend
-      realistic = Number(directScores.realistic ?? 0);
-      enterprising = Number(directScores.enterprising ?? 0);
-      social = Number(directScores.social ?? 0);
-      conventional = Number(directScores.conventional ?? 0);
-      artistic = Number(directScores.artistic ?? 0);
-      investigative = Number(directScores.investigative ?? 0);
-    } else if (Array.isArray(answers)) {
-      // Calculate scores based on selected option index per question
-      // answers can be [{ questionId: 1, selectedOptionIndex: 0 }, ...]
-      for (const ans of answers) {
-        const q = ASSESSMENT_QUESTIONS.find((item) => item.id === ans.questionId);
-        if (q && q.options[ans.selectedOptionIndex]) {
-          const sc = q.options[ans.selectedOptionIndex].scores;
-          realistic += sc.realistic ?? 0;
-          enterprising += sc.enterprising ?? 0;
-          social += sc.social ?? 0;
-          conventional += sc.conventional ?? 0;
-          artistic += sc.artistic ?? 0;
-          investigative += sc.investigative ?? 0;
-        }
+    // Backend always computes scores from selected options. directScores is ignored
+    // so the client cannot invent domain winners.
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return res.status(400).json({
+        error: "answers must be a non-empty array of { questionId, selectedOptionIndex }."
+      });
+    }
+
+    const seenQuestionIds = new Set<number>();
+    for (const ans of answers) {
+      const questionId = Number(ans?.questionId);
+      const selectedOptionIndex = Number(ans?.selectedOptionIndex);
+      const q = ASSESSMENT_QUESTIONS.find((item) => item.id === questionId);
+
+      if (!q) {
+        throw new ValidationError(`Unknown questionId: ${ans?.questionId}.`);
+      }
+      if (seenQuestionIds.has(q.id)) {
+        throw new ValidationError(`Duplicate answer for questionId ${q.id}.`);
+      }
+      if (!Number.isInteger(selectedOptionIndex) || selectedOptionIndex < 0 || selectedOptionIndex >= q.options.length) {
+        throw new ValidationError(`Invalid selectedOptionIndex for questionId ${q.id}.`);
       }
 
-      // Normalize scores to roughly 0-100 range
-      const maxScore = Math.max(realistic, enterprising, social, conventional, artistic, investigative, 1);
-      const normalize = (val: number) => Math.round((val / maxScore) * 100);
-
-      realistic = normalize(realistic);
-      enterprising = normalize(enterprising);
-      social = normalize(social);
-      conventional = normalize(conventional);
-      artistic = normalize(artistic);
-      investigative = normalize(investigative);
-    } else {
-      // Baseline defaults
-      realistic = 60;
-      enterprising = 50;
-      social = 45;
-      conventional = 50;
-      artistic = 40;
-      investigative = 55;
+      seenQuestionIds.add(q.id);
+      const sc = q.options[selectedOptionIndex].scores;
+      realistic += sc.realistic ?? 0;
+      enterprising += sc.enterprising ?? 0;
+      social += sc.social ?? 0;
+      conventional += sc.conventional ?? 0;
+      artistic += sc.artistic ?? 0;
+      investigative += sc.investigative ?? 0;
     }
+
+    const maxScore = Math.max(realistic, enterprising, social, conventional, artistic, investigative, 1);
+    const normalize = (val: number) => Math.round((val / maxScore) * 100);
+
+    realistic = normalize(realistic);
+    enterprising = normalize(enterprising);
+    social = normalize(social);
+    conventional = normalize(conventional);
+    artistic = normalize(artistic);
+    investigative = normalize(investigative);
 
     const assessment = await prisma.assessmentResult.upsert({
       where: { studentId },
@@ -266,7 +267,7 @@ router.post("/", async (req, res, next) => {
         conventional,
         artistic,
         investigative,
-        answers: answers ?? directScores ?? null
+        answers: answers
       },
       create: {
         studentId,
@@ -276,12 +277,14 @@ router.post("/", async (req, res, next) => {
         conventional,
         artistic,
         investigative,
-        answers: answers ?? directScores ?? null
+        answers: answers
       }
     });
 
-    // Automatically trigger recommendations generation
-    const recommendationsPayload = await generateStudentRecommendations(studentId);
+    // Persist recommendations when assessment is submitted (not on dashboard refresh)
+    const recommendationsPayload = await generateStudentRecommendations(studentId, {
+      persist: true
+    });
 
     return res.status(200).json({
       message: "Assessment recorded and recommendations generated.",
@@ -289,6 +292,9 @@ router.post("/", async (req, res, next) => {
       recommendationsPayload
     });
   } catch (err) {
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
     next(err);
   }
 });

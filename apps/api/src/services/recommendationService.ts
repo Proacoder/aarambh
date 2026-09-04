@@ -67,6 +67,10 @@ export interface CareerRecommendationPayload {
   generatedAt: string;
 }
 
+interface GenerateRecommendationsOptions {
+  persist?: boolean;
+}
+
 /**
  * Classifies a course into primary and secondary domains and career pathways.
  */
@@ -172,8 +176,11 @@ function calculateFinancialScore(
  * Core Deterministic Recommendation Function
  */
 export async function generateStudentRecommendations(
-  studentId: string
+  studentId: string,
+  options: GenerateRecommendationsOptions = {}
 ): Promise<CareerRecommendationPayload> {
+  const { persist = true } = options;
+  
   const student = await prisma.student.findUnique({
     where: { id: studentId },
     include: { assessment: true }
@@ -369,24 +376,27 @@ export async function generateStudentRecommendations(
   // Sort scholarships by matchScore descending
   eligibleScholarships.sort((a, b) => b.matchScore - a.matchScore);
 
-  // Persist top 10 recommendations in PostgreSQL Recommendation table
-  // Clear previous recommendations for this student
-  await prisma.recommendation.deleteMany({
-    where: { studentId }
-  });
-
-  const recordsToInsert = topRecommendations.slice(0, 10).map((rec) => ({
-    studentId,
-    collegeId: rec.collegeId,
-    category: rec.domainCategory,
-    score: rec.overallScore,
-    reason: rec.reasons[0] || `${rec.courseName} at ${rec.collegeName}`
-  }));
-
-  if (recordsToInsert.length > 0) {
-    await prisma.recommendation.createMany({
-      data: recordsToInsert
+  // Persist recommendations if requested
+  if (persist) {
+    // Persist top 10 recommendations in PostgreSQL Recommendation table
+    // Clear previous recommendations for this student
+    await prisma.recommendation.deleteMany({
+      where: { studentId }
     });
+
+    const recordsToInsert = topRecommendations.slice(0, 10).map((rec) => ({
+      studentId,
+      collegeId: rec.collegeId,
+      category: rec.domainCategory,
+      score: rec.overallScore,
+      reason: rec.reasons[0] || `${rec.courseName} at ${rec.collegeName}`
+    }));
+
+    if (recordsToInsert.length > 0) {
+      await prisma.recommendation.createMany({
+        data: recordsToInsert
+      });
+    }
   }
 
   return {

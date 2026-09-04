@@ -59,27 +59,55 @@ const ALIAS_MAP: Record<string, string> = {
 };
 
 /**
+ * Resolves a district name (including aliases like Aurangabad) to the canonical key.
+ * Returns null if the name is not a supported Maharashtra district.
+ */
+export function resolveDistrictName(districtName?: string | null): string | null {
+  if (!districtName || typeof districtName !== "string") {
+    return null;
+  }
+
+  const trimmed = districtName.trim();
+  if (!trimmed) return null;
+
+  if (MAHARASHTRA_DISTRICTS[trimmed]) {
+    return MAHARASHTRA_DISTRICTS[trimmed].name;
+  }
+
+  const lower = trimmed.toLowerCase();
+  if (ALIAS_MAP[lower] && MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]]) {
+    return MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]].name;
+  }
+
+  const matchKey = Object.keys(MAHARASHTRA_DISTRICTS).find(
+    (key) => key.toLowerCase() === lower
+  );
+
+  if (matchKey) {
+    return MAHARASHTRA_DISTRICTS[matchKey].name;
+  }
+
+  return null;
+}
+
+/**
  * Returns district coordinates given district name with fuzzy alias matching.
  */
 export function getDistrictCoordinates(districtName?: string | null): GeoLocation {
+  const resolved = resolveDistrictName(districtName);
+  if (resolved && MAHARASHTRA_DISTRICTS[resolved]) {
+    const d = MAHARASHTRA_DISTRICTS[resolved];
+    return { latitude: d.latitude, longitude: d.longitude };
+  }
+
   if (!districtName) {
     return { latitude: 19.7515, longitude: 75.7139 }; // Center of Maharashtra
   }
 
   const trimmed = districtName.trim();
-  if (MAHARASHTRA_DISTRICTS[trimmed]) {
-    const d = MAHARASHTRA_DISTRICTS[trimmed];
-    return { latitude: d.latitude, longitude: d.longitude };
-  }
-
   const lower = trimmed.toLowerCase();
-  if (ALIAS_MAP[lower] && MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]]) {
-    const d = MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]];
-    return { latitude: d.latitude, longitude: d.longitude };
-  }
-
   const matchKey = Object.keys(MAHARASHTRA_DISTRICTS).find(
-    key => key.toLowerCase() === lower || key.toLowerCase().includes(lower) || lower.includes(key.toLowerCase())
+    (key) => key.toLowerCase().includes(lower) || lower.includes(key.toLowerCase())
   );
 
   if (matchKey) {

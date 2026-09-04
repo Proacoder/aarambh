@@ -128,7 +128,7 @@ router.get("/:studentId", async (req, res, next) => {
     const { studentId } = req.params;
 
     // Get deterministic recommendations
-    const recPayload = await generateStudentRecommendations(studentId);
+    const recPayload = await generateStudentRecommendations(studentId, { persist: false });
     const { student, topDomains, recommendations, eligibleScholarships } = recPayload;
 
     const topDomain = topDomains[0]?.domain || "realistic";
