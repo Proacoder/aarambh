@@ -1,0 +1,14 @@
+{
+  "Mumbai": {"lat": 19.0760, "lng": 72.8777},
+  "Thane": {"lat": 19.2183, "lng": 72.9781},
+  "Pune": {"lat": 18.5204, "lng": 73.8567},
+  "Nashik": {"lat": 19.9975, "lng": 73.7898},
+  "Nagpur": {"lat": 21.1458, "lng": 79.0882},
+  "Kolhapur": {"lat": 16.7050, "lng": 74.2433},
+  "Satara": {"lat": 17.6805, "lng": 74.0183},
+  "Solapur": {"lat": 17.6599, "lng": 75.9064},
+  "Sangli": {"lat": 16.8524, "lng": 74.5815},
+  "Ahmednagar": {"lat": 19.0948, "lng": 74.7480},
+  "Ratnagiri": {"lat": 16.9902, "lng": 73.3120},
+  "Chhatrapati Sambhajinagar": {"lat": 19.8762, "lng": 75.3433}
+}

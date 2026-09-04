@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section guider-page fade-in" style="min-height: 90vh; padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 1200px;">
+
+    <!-- Teacher Profile & School Banner -->
+    <div class="card glass-card p-4 mb-4 flex-between align-center flex-wrap gap-3 slide-up" style="border-left: 4px solid var(--ai-indigo); border-radius: 16px;">
+      <div class="flex align-center gap-3">
+        <div style="font-size: 2.5rem; width: 60px; height: 60px; border-radius: 50%; background: rgba(79, 111, 175, 0.15); display: flex; align-items: center; justify-content: center;">
+          👨‍🏫
+        </div>
+        <div>
+          <div class="inline-flex align-center gap-2 badge badge-indigo mb-1">
+            <span>🎓</span> <span>CAREER COUNSELOR & TEACHER PORTAL (मार्गदर्शक केंद्र)</span>
+          </div>
+          <h1 class="page-title mb-0" id="teacher-profile-title" style="font-size: 1.6rem;">
+            Prof. Anand Kulkarni (करिअर मार्गदर्शक)
+          </h1>
+          <p class="text-muted text-small mb-0">
+            Z.P. Higher Secondary School • U-DISE Code: <strong id="teacher-profile-udise">27251401201</strong> • Pune District
+          </p>
+        </div>
+      </div>
+
+      <div class="flex align-center gap-2">
+        <button id="btn-export-roster" class="btn btn-outline btn-sm">
+          📥 Export Student Roster
+        </button>
+        <a href="/login" class="btn btn-secondary btn-sm">
+          🚪 Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Metric Cards -->
+    <div class="grid grid-3 gap-3 mb-4">
+      <div class="card glass-card p-3 text-center">
+        <div class="text-xs text-muted font-bold uppercase">Total Students Registered</div>
+        <div class="text-2xl font-bold mt-1" style="color: var(--ai-indigo);" id="metric-total-students">24</div>
+        <span class="text-xs text-muted">Across 10th & 12th standards</span>
+      </div>
+      <div class="card glass-card p-3 text-center">
+        <div class="text-xs text-muted font-bold uppercase">Assessments Completed</div>
+        <div class="text-2xl font-bold mt-1" style="color: var(--green);" id="metric-completed-students">18</div>
+        <span class="text-xs text-muted">Career DNA generated</span>
+      </div>
+      <div class="card glass-card p-3 text-center">
+        <div class="text-xs text-muted font-bold uppercase">Scholarship Aid Unlocked</div>
+        <div class="text-2xl font-bold mt-1" style="color: var(--gold);">₹9.2 Lakhs+</div>
+        <span class="text-xs text-muted">Eligible MahaDBT waivers</span>
+      </div>
+    </div>
+
+    <!-- 2 Columns: Fast Student Registration (Left) + Student Roster (Right) -->
+    <div class="grid grid-3 gap-4">
+      
+      <!-- Left 1-Column: Quick Student Registration Form -->
+      <div class="card glass-card p-4 slide-up" style="border-radius: 16px;">
+        <h3 class="text-base font-bold mb-1 flex align-center gap-2" style="color: var(--earth-brown);">
+          <span>📝</span> <span>नवीन विद्यार्थी नोंदणी</span>
+        </h3>
+        <p class="text-xs text-muted mb-3">ग्रामीण व गरजू विद्यार्थ्यांची थेट नोंदणी करा (No smartphone needed for student).</p>
+
+        <form id="guider-add-student-form">
+          <div class="form-group mb-2">
+            <label class="form-label text-xs">विद्यार्थ्याचे पूर्ण नाव (Full Name)</label>
+            <input type="text" id="g-name" class="form-input text-small" placeholder="उदा. विशाल ज्ञानदेव शिंदे" required>
+          </div>
+
+          <div class="grid-2 gap-2 mb-2">
+            <div class="form-group">
+              <label class="form-label text-xs">इयत्ता (Class)</label>
+              <select id="g-class" class="form-select text-small">
+                <option value="10th">१०वी (10th)</option>
+                <option value="12th">१२वी (12th)</option>
+                <option value="diploma">ITI / Diploma</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label text-xs">प्रवर्ग (Category)</label>
+              <select id="g-category" class="form-select text-small">
+                <option value="General">Open / General</option>
+                <option value="OBC">OBC</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2 gap-2 mb-2">
+            <div class="form-group">
+              <label class="form-label text-xs">जिल्हा (District)</label>
+              <input type="text" id="g-district" class="form-input text-small" value="Pune" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label text-xs">वार्षिक उत्पन्न (Income ₹)</label>
+              <input type="number" id="g-income" class="form-input text-small" placeholder="120000" value="120000">
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="form-label text-xs">पालकांचा मोबाईल नंबर (Parent Mobile)</label>
+            <input type="text" id="g-mobile" class="form-input text-small" placeholder="9876543210" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-sm ripple w-full flex-center gap-1" style="background: var(--ai-indigo);">
+            <span>➕</span> <span>विद्यार्थी जोडा व चाचणी सुरू करा</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Right 2-Columns: Student Roster Table -->
+      <div class="card glass-card p-4 slide-up" style="grid-column: span 2; border-radius: 16px; overflow-x: auto;">
+        <div class="flex-between align-center mb-3">
+          <div>
+            <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">
+              📋 समुपदेशन नोंदवही (Assisted Students Roster)
+            </h3>
+            <p class="text-xs text-muted mb-0">शिक्षकांनी नोंदवलेल्या विद्यार्थ्यांची प्रगती व करिअर अहवाल</p>
+          </div>
+          <input type="text" id="filter-roster" class="form-input text-small" placeholder="🔍 विद्यार्थी शोधा..." style="max-width: 200px;">
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;" id="roster-table">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border); text-align: left; color: var(--text-muted);">
+              <th style="padding: 8px 10px;">विद्यार्थी (Name)</th>
+              <th style="padding: 8px 10px;">इयत्ता</th>
+              <th style="padding: 8px 10px;">Career DNA</th>
+              <th style="padding: 8px 10px;">शिफारस केलेला मार्ग</th>
+              <th style="padding: 8px 10px;">कृती (Actions)</th>
+            </tr>
+          </thead>
+          <tbody id="roster-table-body">
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px;"><strong>राहुल पवार</strong><div class="text-xs text-muted">98765 43210</div></td>
+              <td style="padding: 10px;"><span class="badge badge-paper">10th</span></td>
+              <td style="padding: 10px;"><strong style="color: var(--terracotta);">Realistic & Tech (94%)</strong></td>
+              <td style="padding: 10px;">Govt Polytechnic Diploma</td>
+              <td style="padding: 10px;">
+                <a href="/dashboard" class="btn btn-outline btn-sm">निकाल पहा &rarr;</a>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px;"><strong>अनिता जाधव</strong><div class="text-xs text-muted">98221 11223</div></td>
+              <td style="padding: 10px;"><span class="badge badge-paper">12th</span></td>
+              <td style="padding: 10px;"><strong style="color: var(--green);">Agri-Biotech (88%)</strong></td>
+              <td style="padding: 10px;">B.Sc Agriculture + Drip Tech</td>
+              <td style="padding: 10px;">
+                <a href="/dashboard" class="btn btn-outline btn-sm">निकाल पहा &rarr;</a>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px;"><strong>सचिन गायकवाड</strong><div class="text-xs text-muted">97654 33211</div></td>
+              <td style="padding: 10px;"><span class="badge badge-paper">10th</span></td>
+              <td style="padding: 10px;"><strong style="color: var(--indigo);">Skilled Trades (91%)</strong></td>
+              <td style="padding: 10px;">ITI Electrician / Solar Tech</td>
+              <td style="padding: 10px;">
+                <a href="/onboarding" class="btn btn-primary btn-sm ripple">चाचणी सुरू करा &rarr;</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Read teacher name from session if available
+  const teacherName = sessionStorage.getItem('cm-teacher-name');
+  const teacherUdise = sessionStorage.getItem('cm-teacher-udise');
+
+  if (teacherName) {
+    document.getElementById('teacher-profile-title').textContent = `${teacherName} (करिअर मार्गदर्शक)`;
+  }
+  if (teacherUdise) {
+    document.getElementById('teacher-profile-udise').textContent = teacherUdise;
+  }
+
+  // Teacher registers a student directly
+  document.getElementById('guider-add-student-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('g-name').value;
+    const className = document.getElementById('g-class').value;
+    const district = document.getElementById('g-district').value;
+    const category = document.getElementById('g-category').value;
+    const income = document.getElementById('g-income').value;
+    const mobile = document.getElementById('g-mobile').value;
+
+    const res = await fetch('/api/guider/register-student', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, className, district, category, income, mobile })
+    });
+
+    if (res.ok) {
+      alert(`विद्यार्थी ${name} ची यशस्वी नोंदणी झाली! आता थेट चाचणी सुरू होत आहे.`);
+      window.location.href = '/assessment';
+    }
+  });
+
+  // Filter roster
+  document.getElementById('filter-roster')?.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const rows = document.querySelectorAll('#roster-table-body tr');
+    rows.forEach(r => {
+      const text = r.textContent.toLowerCase();
+      r.style.display = text.includes(term) ? '' : 'none';
+    });
+  });
+});
+</script>
+{% endblock %}

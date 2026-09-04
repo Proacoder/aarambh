@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section skill-quest-page fade-in" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 960px;">
+
+    <!-- Top Hero Banner with Level & XP -->
+    <div class="card glass-card p-4 mb-4 flex-between align-center flex-wrap gap-3 slide-up" style="border-left: 5px solid var(--gold); border-radius: 16px;">
+      <div>
+        <div class="inline-flex align-center gap-2 badge badge-gold mb-1">
+          <span>🎯</span> <span data-i18n="sq_header_badge">SKILLQUEST • CAREER READINESS MISSIONS</span>
+        </div>
+        <h1 class="page-title mb-1" style="font-size: 1.6rem;" data-i18n="sq_main_title">Master Your Career Milestones</h1>
+        <p class="text-muted text-small mb-0" data-i18n="sq_subtitle">Step-by-step practical missions to build your portfolio and ace polytechnic/job readiness in Maharashtra.</p>
+      </div>
+
+      <!-- XP & Level Display -->
+      <div class="card p-3 glass-card text-center" style="min-width: 200px; border: 1.5px solid var(--gold); border-radius: 12px; background: rgba(255, 255, 255, 0.7);">
+        <div class="text-xs font-bold uppercase text-muted" data-i18n="sq_current_rank">Current Rank</div>
+        <div class="text-lg font-bold" id="sq-rank-title" style="color: var(--terracotta);">Novice</div>
+        <div class="text-xs text-gold font-bold mt-1" id="sq-xp-text">0 / 600 XP</div>
+        <div class="progress-track mt-2" style="height: 8px; border-radius: 4px; background: var(--border-light); overflow: hidden;">
+          <div id="sq-xp-progress" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--terracotta)); border-radius: 4px; transition: width 0.4s ease;"></div>
+        </div>
+        <button id="sq-reset-progress-btn" class="btn btn-text btn-xs text-muted mt-2" style="font-size: 0.72rem; padding: 2px 6px;">
+          🔄 <span data-i18n="sq_reset_btn">Reset Progress</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Missions Section -->
+    <div class="card glass-card p-4 mb-4 slide-up" style="border-radius: 16px;">
+      <div class="flex-between align-center flex-wrap gap-2 mb-3">
+        <h3 class="text-base font-bold flex align-center gap-2 mb-0" style="color: var(--earth-brown);">
+          <span>⚔️</span> <span data-i18n="sq_active_missions">Active Career Missions</span>
+        </h3>
+        <span class="text-xs text-muted" data-i18n="sq_interactive_hint">Click 'Start' to solve practical challenge & earn XP</span>
+      </div>
+
+      <!-- Interactive Missions Container (Dynamically rendered by skill_quest.js) -->
+      <div id="sq-missions-container" class="flex-column gap-3">
+        <div class="p-4 text-center text-muted">
+          <div class="spinner mb-2"></div>
+          <p class="text-sm">Loading interactive missions...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievement Badge Showcase -->
+    <div class="card glass-card p-4 slide-up" style="border-radius: 16px;">
+      <h3 class="text-base font-bold mb-3 flex align-center gap-2" style="color: var(--earth-brown);">
+        <span>🏆</span> <span data-i18n="sq_unlocked_badges">Unlocked Badges & Credentials</span>
+      </h3>
+
+      <!-- Dynamic Badges Grid -->
+      <div id="sq-badges-grid" class="grid grid-2 md-grid-4 gap-3 text-center">
+        <!-- Rendered by skill_quest.js -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SkillQuest Controller Script -->
+<script src="/static/js/skill_quest.js?v=2.3.0"></script>
+{% endblock %}

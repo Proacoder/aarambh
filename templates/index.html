@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ==================== HERO SECTION ==================== -->
+<section class="section hero landing-hero fade-in" id="hero">
+  <!-- Animated Background -->
+  <div class="hero-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-warli-bg" aria-hidden="true">
+    <img src="/static/img/warli-tree.svg" class="warli-bg-asset asset-tree" alt="">
+    <img src="/static/img/warli-dancers.svg" class="warli-bg-asset asset-dancers" alt="">
+  </div>
+
+  <div class="container hero-container">
+    <!-- Personalized Greeting for Returning Students -->
+    <div id="returning-user-banner" class="personalized-banner hidden slide-up">
+      <div class="banner-pill">
+        <span class="pill-wave">👋</span>
+        <span id="user-greeting-name" data-i18n="welcome_back">स्वागत आहे परत!</span>
+      </div>
+      <p class="banner-sub text-muted" data-i18n="banner_continue_sub">Ready to continue your personalized career journey?</p>
+      <div class="flex-center gap-3 mt-2">
+        <a href="/dashboard" class="btn btn-primary ripple" data-i18n="continue_journey">Continue My Journey</a>
+      </div>
+    </div>
+
+    <!-- Main Hero Content -->
+    <div id="main-hero-content" class="hero-content text-center">
+      <span class="hero-eyebrow slide-up">🌾 <span data-i18n="tagline">तुमची स्वप्नं. तुमचा मार्ग. तुमची मित्र ताई.</span></span>
+      <h1 class="hero-title slide-up" data-i18n="landing_h1_new">Your Future Deserves a Clear Path.</h1>
+      <p class="hero-subtitle slide-up" data-i18n="landing_sub">CareerMitra helps students discover careers, explore education pathways, understand costs, find scholarships, and create a realistic plan for their future — all in your language.</p>
+      
+      <div class="hero-ctas flex-center flex-wrap gap-3 slide-up">
+        <a href="/login" class="btn btn-primary btn-lg ripple hero-cta-main" id="hero-use-now-btn">
+          🚀 <span data-i18n="use_now_cta">Use CareerMitra Now</span>
+        </a>
+        <a href="#how-it-works" class="btn btn-outline btn-lg ripple hero-cta-secondary">
+          <span data-i18n="explore_how">Explore How It Works</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating Career Track Chips -->
+    <div class="hero-icons-composition slide-up mt-5">
+      <div class="track-chip track-agri"><span class="chip-icon">🌾</span> <span data-i18n="track_agriculture">Agriculture</span></div>
+      <div class="track-chip track-tech"><span class="chip-icon">💻</span> <span data-i18n="track_technology">Technology</span></div>
+      <div class="track-chip track-health"><span class="chip-icon">⚕️</span> <span data-i18n="track_healthcare">Healthcare</span></div>
+      <div class="track-chip track-trades"><span class="chip-icon">🔧</span> <span data-i18n="track_trades">Skilled Trades</span></div>
+      <div class="track-chip track-govt"><span class="chip-icon">🏛️</span> <span data-i18n="track_govt">Govt Services</span></div>
+      <div class="track-chip track-edu"><span class="chip-icon">📚</span> <span data-i18n="track_education">Education</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Warli Border Divider -->
+<div class="warli-border-wrap" aria-hidden="true">
+  <div class="warli-border-pattern"></div>
+</div>
+
+<!-- ==================== STATS SECTION ==================== -->
+<section class="section stats animate-on-scroll" id="stats">
+  <div class="container grid-2 md-grid-4">
+    <div class="card stat-card stagger-1">
+      <h2 data-count-target="9">0</h2>
+      <p data-i18n="landing_stat1">career tracks</p>
+    </div>
+    <div class="card stat-card stagger-2">
+      <h2 data-count-target="35">0</h2>
+      <p data-i18n="landing_stat2">Maharashtra institutions</p>
+    </div>
+    <div class="card stat-card stagger-3">
+      <h2 data-count-target="11">0</h2>
+      <p data-i18n="landing_stat3">scholarship schemes</p>
+    </div>
+    <div class="card stat-card stagger-4">
+      <h2 data-count-target="3">0</h2>
+      <p data-i18n="landing_stat4">minute assessment</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section career-journey animate-on-scroll" id="how-it-works">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="badge badge-paper mb-2" data-i18n="career_journey_badge">🌿 HOW IT WORKS</span>
+      <h2 class="section-title" data-i18n="how_it_works">Your Career Journey</h2>
+      <p class="text-muted" style="max-width: 560px; margin: 0 auto;" data-i18n="how_subtitle">Six simple steps to discover your path and build your future.</p>
+    </div>
+
+    <div class="journey-winding-path">
+      <div class="journey-node card stagger-1">
+        <div class="journey-badge-icon">🌱</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_step1_title">Tell Us About Yourself</h3>
+          <p class="text-muted" data-i18n="step1_d">Share your district, education level, and family background.</p>
+        </div>
+      </div>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-2">
+        <div class="journey-badge-icon">🧠</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_step2_title">Discover Your Strengths</h3>
+          <p class="text-muted" data-i18n="step2_d">10 quick questions reveal your career personality type.</p>
+        </div>
+      </div>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-3">
+        <div class="journey-badge-icon">🎯</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_step3_title">Explore Career Options</h3>
+          <p class="text-muted" data-i18n="step3_d_new">Get personalized career recommendations based on your interests.</p>
+        </div>
+      </div>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-4">
+        <div class="journey-badge-icon">🏫</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_step4_title">Find Colleges & Scholarships</h3>
+          <p class="text-muted" data-i18n="step_support_d">Discover nearby colleges, courses, and financial support.</p>
+        </div>
+      </div>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-5">
+        <div class="journey-badge-icon">💰</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_step5_title">Understand Your Costs</h3>
+          <p class="text-muted" data-i18n="step5_d">Know exactly what education will cost — tuition, hostel, food, travel.</p>
+        </div>
+      </div>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card journey-node-hero stagger-5">
+        <div class="journey-badge-icon">🚀</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_build">Get Your Career Action Plan</h3>
+          <p class="text-muted" data-i18n="step6_d">Your personal roadmap with step-by-step guidance from Mitra Tai.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURES SECTION ==================== -->
+<section class="section features-section animate-on-scroll" id="features">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="badge badge-gold mb-2">✨ FEATURES</span>
+      <h2 class="section-title" data-i18n="features_title">Everything You Need to Plan Your Career</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card card stagger-1">
+        <div class="feature-icon">🎯</div>
+        <h3 data-i18n="feat_career_discovery">Career Discovery</h3>
+        <p class="text-muted text-small" data-i18n="feat_career_desc">Understand careers that suit your personality, skills, and interests through our RIASEC assessment.</p>
+      </div>
+
+      <div class="feature-card card stagger-2">
+        <div class="feature-icon">🏫</div>
+        <h3 data-i18n="feat_college_discovery">College Discovery</h3>
+        <p class="text-muted text-small" data-i18n="feat_college_desc">Find government and private colleges near your district with courses, fees, and distance info.</p>
+      </div>
+
+      <div class="feature-card card stagger-3">
+        <div class="feature-icon">🎓</div>
+        <h3 data-i18n="feat_scholarships">Scholarships</h3>
+        <p class="text-muted text-small" data-i18n="feat_scholarship_desc">Discover scholarships you actually qualify for based on your category, income, and education level.</p>
+      </div>
+
+      <div class="feature-card card stagger-4">
+        <div class="feature-icon">💰</div>
+        <h3 data-i18n="feat_smart_kharcha">Smart Kharcha</h3>
+        <p class="text-muted text-small" data-i18n="feat_kharcha_desc">Get a realistic breakdown of education costs — tuition, hostel, food, travel, and more.</p>
+      </div>
+
+      <div class="feature-card card stagger-5">
+        <div class="feature-icon">👩‍🏫</div>
+        <h3 data-i18n="feat_mitra_tai">Mitra Tai</h3>
+        <p class="text-muted text-small" data-i18n="feat_mitra_desc">Your AI career guide who understands you. Ask questions in Marathi, Hindi, or English.</p>
+      </div>
+
+      <div class="feature-card card stagger-5">
+        <div class="feature-icon">🗺️</div>
+        <h3 data-i18n="feat_roadmap">Career Roadmap</h3>
+        <p class="text-muted text-small" data-i18n="feat_roadmap_desc">A personalized action plan with immediate steps, scholarship deadlines, and long-term goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY CAREERMITRA ==================== -->
+<section class="section why-section animate-on-scroll" id="why">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="badge badge-paper mb-2">💡 WHY CAREERMITRA</span>
+      <h2 class="section-title" data-i18n="why_title">Built For Rural Students. By Those Who Understand.</h2>
+    </div>
+
+    <div class="why-grid grid-2">
+      <div class="why-item stagger-1">
+        <span class="why-icon">🗣️</span>
+        <div>
+          <h4 data-i18n="why_multi_lang">Multilingual</h4>
+          <p class="text-muted text-small" data-i18n="why_multi_desc">Full support for Marathi, Hindi, and English. Built for Maharashtra's diverse student community.</p>
+        </div>
+      </div>
+      <div class="why-item stagger-2">
+        <span class="why-icon">📍</span>
+        <div>
+          <h4 data-i18n="why_location">Location-Aware</h4>
+          <p class="text-muted text-small" data-i18n="why_location_desc">Recommendations based on your district. Find colleges and opportunities near you.</p>
+        </div>
+      </div>
+      <div class="why-item stagger-3">
+        <span class="why-icon">💵</span>
+        <div>
+          <h4 data-i18n="why_financial">Financially Aware</h4>
+          <p class="text-muted text-small" data-i18n="why_financial_desc">We understand budget constraints. Every recommendation considers your family income.</p>
+        </div>
+      </div>
+      <div class="why-item stagger-4">
+        <span class="why-icon">🎯</span>
+        <div>
+          <h4 data-i18n="why_action">Action-Oriented</h4>
+          <p class="text-muted text-small" data-i18n="why_action_desc">Not just information — clear next steps. Know exactly what to do and when to do it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="section final-cta-section" id="final-cta">
+  <div class="container text-center">
+    <div class="final-cta-card slide-up">
+      <h2 class="section-title" style="color: #fff;" data-i18n="final_cta_title">Ready to Start Your Career Journey?</h2>
+      <p style="color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto var(--sp-6);" data-i18n="final_cta_sub">Join thousands of Maharashtra students discovering their future with CareerMitra.</p>
+      <a href="/login" class="btn btn-lg ripple final-cta-btn" data-i18n="use_careermitra_now">🚀 Use CareerMitra Now</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

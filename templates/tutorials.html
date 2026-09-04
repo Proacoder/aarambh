@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="tutorials-hero page-content fade-in" style="min-height: 90vh; padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container slide-up" style="max-width: 1180px;">
+
+    <!-- Top Hero Banner -->
+    <div class="card glass-card p-4 mb-4 text-center slide-up" style="border-radius: 20px; border-top: 4px solid var(--gold);">
+      <div class="inline-flex align-center gap-2 badge badge-gold mb-2" style="font-size: 0.85rem; padding: 0.4rem 1.2rem;">
+        <span>📺</span> <span data-i18n="tutorials_badge">MAHARASHTRA ADMISSION & SCHOLARSHIP VIDEO GUIDES</span>
+      </div>
+      <h1 class="page-title mb-2" style="font-size: 2rem; font-weight: 800;" data-i18n="nav_tutorials">
+        फॉर्म भरणे आणि प्रवेश मार्गदर्शन व्हिडिओ
+      </h1>
+      <p class="page-subtitle text-muted mx-auto mb-0" style="font-size: 1.05rem; max-width: 680px;" data-i18n="tutorials_subtitle">
+        महाडीबीटी शिष्यवृत्ती, उत्पन्न दाखला, जात वैधता आणि डीटीई प्रवेशाचे सोप्या भाषेतील स्टेप-बाय-स्टेप व्हिडिओ.
+      </p>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="card glass-card p-3 mb-4 slide-up" style="border-radius: 16px;">
+      <div class="form-group mb-3">
+        <input type="text" id="tutorial-search" class="form-input" data-i18n-ph="tut_search_ph" placeholder="🔍 व्हिडिओ शोधा: उदा. MahaDBT, EBC, DTE, उत्पन्न दाखला, NEET, वसतिगृह..." style="padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.95rem;">
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex-center flex-wrap gap-2" id="tutorial-filters">
+        <button type="button" class="btn btn-primary btn-sm tut-filter-btn" data-filter="all" data-i18n="tut_filter_all">सर्व</button>
+        <button type="button" class="btn btn-outline btn-sm tut-filter-btn" data-filter="scholarships" data-i18n="tut_filter_scholarships">🎓 शिष्यवृत्ती</button>
+        <button type="button" class="btn btn-outline btn-sm tut-filter-btn" data-filter="admissions" data-i18n="tut_filter_admissions">🏫 प्रवेश प्रक्रिया</button>
+        <button type="button" class="btn btn-outline btn-sm tut-filter-btn" data-filter="exams" data-i18n="tut_filter_exams">📅 प्रवेश परीक्षा</button>
+        <button type="button" class="btn btn-outline btn-sm tut-filter-btn" data-filter="documents" data-i18n="tut_filter_documents">📋 कागदपत्रे</button>
+      </div>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="grid grid-2 md-grid-3 gap-4" id="tutorials-grid">
+      
+      <!-- Video 1: MahaDBT Portal Registration -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="scholarships">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/z1xGv20s_kY?rel=0" title="MahaDBT Online Registration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#e8f5e9; color:#2e7d32; font-size:0.7rem; font-weight:700;">🎓 MahaDBT</span>
+          <span class="text-xs text-muted">मराठी / Hindi</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">MahaDBT शिष्यवृत्ती नोंदणी पद्धत</h3>
+        <p class="text-xs text-muted mb-2">नवीन विद्यार्थ्यांसाठी महाडीबीटी पोर्टलवर प्रोफाईल तयार करणे आणि कागदपत्रे जोडण्याची संपूर्ण पद्धत.</p>
+        <a href="https://youtu.be/z1xGv20s_kY" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 2: EBC Scholarship -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="scholarships">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/l5t_7_jYf8c?rel=0" title="EBC Scholarship Form" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#e8f5e9; color:#2e7d32; font-size:0.7rem; font-weight:700;">🎓 EBC ५०% सूट</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">राजर्षी शाहू महाराज EBC फी माफी अर्ज</h3>
+        <p class="text-xs text-muted mb-2">ओपन व ईबीसी विद्यार्थ्यांसाठी ५०% ट्युशन फी परतावा कसा मिळवायचा याची सविस्तर माहिती.</p>
+        <a href="https://youtu.be/l5t_7_jYf8c" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 3: Dr. Panjabrao Deshmukh Hostel Allowance -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="scholarships">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/mKvhY4C7W14?rel=0" title="Hostel Allowance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#fff3e0; color:#e65100; font-size:0.7rem; font-weight:700;">🏠 ₹३०,००० वसतिगृह भत्ता</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">डॉ. पंजाबराव देशमुख वसतिगृह भत्ता अर्ज</h3>
+        <p class="text-xs text-muted mb-2">गावाबाहेर शिकणाऱ्या विद्यार्थ्यांसाठी वार्षिक ₹३०,००० थेट बँक खात्यात मिळवण्याची पद्धत.</p>
+        <a href="https://youtu.be/mKvhY4C7W14" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 4: Aaple Sarkar Income & Domicile -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="documents">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/Xq4yN4xRzT8?rel=0" title="Aaple Sarkar Income Certificate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#f3e5f5; color:#7b1fa2; font-size:0.7rem; font-weight:700;">📋 आपले सरकार</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">उत्पन्न व अधिवास दाखला ऑनलाईन कसा काढायचा?</h3>
+        <p class="text-xs text-muted mb-2">तहसीलदार कार्यालयात न जाता घरबसल्या आपले सरकार पोर्टलवरून अधिकृत प्रमाणपत्रे मिळवा.</p>
+        <a href="https://youtu.be/Xq4yN4xRzT8" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 5: Caste Validity Procedure -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="documents">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/J7x8V1aK9B0?rel=0" title="Caste Validity Certificate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#f3e5f5; color:#7b1fa2; font-size:0.7rem; font-weight:700;">📜 जात वैधता</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">जात वैधता (Caste Validity) प्रमाणपत्र प्रक्रिया</h3>
+        <p class="text-xs text-muted mb-2">पॉलिटेक्निक, इंजिनिअरिंग व मेडिकल प्रवेशासाठी जात पडताळणी समितीकडे ऑनलाईन अर्ज कसा करावा.</p>
+        <a href="https://youtu.be/J7x8V1aK9B0" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 6: DTE Polytechnic Admission Process -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="admissions">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/Qr-Unrc3Huc?rel=0" title="DTE Admission Process" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#e3f2fd; color:#1565c0; font-size:0.7rem; font-weight:700;">🏫 DTE महाराष्ट्र</span>
+          <span class="text-xs text-muted">मराठी / English</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">१०वी नंतर शासकीय पॉलिटेक्निक प्रवेश CAP</h3>
+        <p class="text-xs text-muted mb-2">डायरेक्टोरेट ऑफ टेक्निकल एज्युकेशन (DTE) अंतर्गत ३ वर्षांच्या इंजिनिअरिंग डिप्लोमा प्रवेशाचा संपूर्ण फॉर्म.</p>
+        <a href="https://youtu.be/Qr-Unrc3Huc" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 7: ITI Online Admission & Options -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="admissions">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/Y_4T8Kx19cA?rel=0" title="ITI Admission" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#e3f2fd; color:#1565c0; font-size:0.7rem; font-weight:700;">🔧 DVET ITI</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">महाराष्ट्र शासकीय ITI ऑनलाईन प्रवेश पद्धत</h3>
+        <p class="text-xs text-muted mb-2">इलेक्ट्रिशियन, फिटर, वेल्डर व कॉम्प्युटर ट्रेड्ससाठी कॉलेज पसंतीक्रम आणि मेरीट यादी कशी तपासावी.</p>
+        <a href="https://youtu.be/Y_4T8Kx19cA" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 8: MHT-CET Registration & Option Form -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="exams">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/h97gqJVLeEU?rel=0" title="MHT-CET Registration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#fbe9e7; color:#d84315; font-size:0.7rem; font-weight:700;">📅 State CET Cell</span>
+          <span class="text-xs text-muted">मराठी / English</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">MHT-CET इंजिनिअरिंग व फार्मसी प्रवेश फेरी</h3>
+        <p class="text-xs text-muted mb-2">राज्य सामाईक प्रवेश परीक्षा अर्ज, कागदपत्र पडताळणी (FC Center) आणि ऑप्शन फॉर्म भरण्याची पद्धत.</p>
+        <a href="https://youtu.be/h97gqJVLeEU" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 9: JEE Main Registration -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="exams">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/u6GHHUjJD9Y?rel=0" title="JEE Main Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#fbe9e7; color:#d84315; font-size:0.7rem; font-weight:700;">📅 NTA JEE</span>
+          <span class="text-xs text-muted">Hindi / English</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">JEE Main नोंदणी आणि COEP/VJTI प्रवेश</h3>
+        <p class="text-xs text-muted mb-2">राष्ट्रीय परीक्षा संस्था (NTA) द्वारे जेईई मेन फॉर्म भरणे आणि महाराष्ट्रातील टॉप कॉलेजसाठी आवश्यक कटऑफ.</p>
+        <a href="https://youtu.be/u6GHHUjJD9Y" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 10: NEET UG Application Form -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="exams">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/wVoGOivAkus?rel=0" title="NEET UG Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#fbe9e7; color:#d84315; font-size:0.7rem; font-weight:700;">📅 NEET UG</span>
+          <span class="text-xs text-muted">Hindi / English</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">NEET UG मेडिकल व आयुष प्रवेश फॉर्म</h3>
+        <p class="text-xs text-muted mb-2">एमबीबीएस, बीएएमएस आणि फिजिओथेरपी प्रवेशासाठी नीट परीक्षा फॉर्म आणि महाराष्ट्र राज्य कोट्याची माहिती.</p>
+        <a href="https://youtu.be/wVoGOivAkus" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 11: B.Sc Nursing Admission -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="admissions">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/fQszh3bY5cU?rel=0" title="B.Sc Nursing" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#e3f2fd; color:#1565c0; font-size:0.7rem; font-weight:700;">🏥 नर्सिंग प्रवेश</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">महाराष्ट्र बी.एस्सी नर्सिंग शासकीय प्रवेश</h3>
+        <p class="text-xs text-muted mb-2">सरकारी नर्सिंग महाविद्यालयात प्रवेश घेण्यासाठी पात्रता, कागदपत्रे आणि फी सवलतींची सविस्तर माहिती.</p>
+        <a href="https://youtu.be/fQszh3bY5cU" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+      <!-- Video 12: Police Bharti & MPSC Preparation -->
+      <div class="card p-3 tutorial-card glass-card hover-lift" data-category="exams">
+        <div class="video-wrapper mb-2" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; background:#000;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/3ZxFdJHurw0?rel=0" title="Police Bharti & MPSC" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="flex-between align-center mb-1">
+          <span class="badge" style="background:#fbe9e7; color:#d84315; font-size:0.7rem; font-weight:700;">👮 पोलीस भरती</span>
+          <span class="text-xs text-muted">मराठी</span>
+        </div>
+        <h3 class="mb-1 text-sm font-bold">महाराष्ट्र पोलीस भरती व सरळसेवा परीक्षा</h3>
+        <p class="text-xs text-muted mb-2">ग्रामीण भागातील विद्यार्थ्यांसाठी मैदानी चाचणी (Ground Test) आणि लेखी परीक्षेची तयारी कशी करावी.</p>
+        <a href="https://youtu.be/3ZxFdJHurw0" target="_blank" rel="noopener noreferrer" class="btn-link text-xs">YouTube वर पहा &rarr;</a>
+      </div>
+
+    </div>
+
+    <!-- Empty Filter Notice -->
+    <div id="tutorials-empty" class="card text-center p-5 hidden slide-up mt-4" style="border-radius:18px;">
+      <div style="font-size: 2.8rem; margin-bottom: 0.5rem;">🔍</div>
+      <h3>कोणताही व्हिडिओ आढळला नाही (No videos found)</h3>
+      <p class="text-muted text-small mb-3">कृपया शोध शब्द बदला किंवा 'All' फिल्टर निवडा.</p>
+      <button class="btn btn-outline btn-sm mx-auto" onclick="document.getElementById('tutorial-search').value=''; document.querySelector('.tut-filter-btn[data-filter=\'all\']').click();">Reset Filters</button>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.tut-filter-btn');
+  const cards = document.querySelectorAll('.tutorial-card');
+  const searchInput = document.getElementById('tutorial-search');
+  const emptyState = document.getElementById('tutorials-empty');
+
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const category = card.getAttribute('data-category');
+      const text = card.textContent.toLowerCase();
+
+      const matchesCat = (activeFilter === 'all' || category === activeFilter);
+      const matchesQuery = (!query || text.includes(query));
+
+      if (matchesCat && matchesQuery) {
+        card.style.display = 'block';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('btn-primary');
+        b.classList.add('btn-outline');
+      });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+
+      activeFilter = btn.getAttribute('data-filter') || 'all';
+      applyFilters();
+    });
+  });
+
+  searchInput?.addEventListener('input', applyFilters);
+});
+</script>
+{% endblock %}

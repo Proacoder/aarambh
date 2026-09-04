@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section exam-calendar fade-in">
+  <div class="container">
+    <div class="card text-center mb-4 slide-up">
+      <div class="greeting-avatar mb-2">📅</div>
+      <h1 class="page-title mb-1" data-i18n="exam_calendar_title">Exam & Deadline Calendar</h1>
+      <p class="page-subtitle" data-i18n="exam_calendar_subtitle">Important entrance exams and scholarship deadlines for your career path</p>
+    </div>
+
+    <div class="card mb-4">
+      <div class="flex gap-2 flex-wrap" id="exam-filter-btns">
+        <button class="btn btn-secondary btn-sm active" data-filter="all" data-i18n="filter_all">All Exams</button>
+        <button class="btn btn-secondary btn-sm" data-filter="10th" data-i18n="filter_10th">After 10th</button>
+        <button class="btn btn-secondary btn-sm" data-filter="12th" data-i18n="filter_12th">After 12th</button>
+        <button class="btn btn-secondary btn-sm" data-filter="diploma" data-i18n="filter_diploma">After Diploma</button>
+        <button class="btn btn-secondary btn-sm" data-filter="ug" data-i18n="filter_ug">After Graduation</button>
+      </div>
+    </div>
+
+    <div id="exam-timeline"></div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/exam_calendar.js"></script>
+{% endblock %}

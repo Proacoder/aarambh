@@ -1,0 +1,314 @@
+[
+  {
+    "id": "sch-ebc-01",
+    "name": "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna (EBC)",
+    "nameMr": "राजर्षी छत्रपती शाहू महाराज शिक्षण शुल्क शिष्यवृत्ती योजना (ईबीसी)",
+    "nameHi": "राजर्षि छत्रपति शाहू महाराज शिक्षण शुल्क छात्रवृत्ति योजना (ईबीसी)",
+    "provider": "Higher & Technical Education Department, Maharashtra",
+    "providerMr": "उच्च व तंत्रशिक्षण विभाग, महाराष्ट्र शासन",
+    "benefitType": "tuition",
+    "amount": "50% to 100% tuition & exam fee waiver for professional and non-professional higher education courses.",
+    "amountMr": "व्यावसायिक आणि बिगर-व्यावसायिक उच्च शिक्षणासाठी ५०% ते १००% ट्युशन फी आणि परीक्षा फी माफी.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "minMarks": 50,
+      "category": ["OPEN", "EBC", "SEBC"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Current Financial Year Income Certificate from Tahsildar (< ₹8 Lakhs)",
+      "Maharashtra State Domicile Certificate",
+      "CAP Allotment Letter & College Fee Receipt",
+      "Aadhaar Card linked with Bank Account (NPCI active)"
+    ],
+    "documentsMr": [
+      "तहसीलदारांचा चालू आर्थिक वर्षाचा उत्पन्नाचा दाखला (< ₹८ लाख)",
+      "महाराष्ट्र राज्याचे अधिवास (Domicile) प्रमाणपत्र",
+      "कॅप (CAP) वाटप पत्र आणि कॉलेज फी पावती",
+      "बँकेशी संलग्न आधार कार्ड (NPCI मॅपिंग सक्रिय)"
+    ]
+  },
+  {
+    "id": "sch-hostel-02",
+    "name": "Dr. Panjabrao Deshmukh Vasatigruh Nirvah Bhatta Yojna (Hostel Allowance)",
+    "nameMr": "डॉ. पंजाबराव देशमुख वसतिगृह निर्वाह भत्ता योजना",
+    "nameHi": "डॉ. पंजाबराव देशमुख छात्रावास निर्वाह भत्ता योजना",
+    "provider": "Higher & Technical Education Department, Maharashtra",
+    "providerMr": "उच्च व तंत्रशिक्षण विभाग, महाराष्ट्र शासन",
+    "benefitType": "hostel",
+    "amount": "Direct annual cash allowance of ₹30,000 (for MMRDA/Pune) or ₹20,000 (other regions) for living & food.",
+    "amountMr": "मुंबई/पुणे भागासाठी दरवर्षी ₹३०,००० आणि इतर जिल्ह्यांसाठी ₹२०,००० थेट बँक खात्यात भोजन व वसतिगृह भत्ता.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "minMarks": 50,
+      "category": ["OPEN", "EBC", "SEBC"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Father/Mother Small Landholder Certificate OR Income Certificate (< ₹8 Lakhs)",
+      "Registered Rent Agreement or Private Hostel Certificate",
+      "Distance Certificate (> 50 km from hometown)",
+      "Aadhaar Card & Bank Passbook"
+    ],
+    "documentsMr": [
+      "अल्पभूधारक शेतकरी दाखला किंवा उत्पन्नाचा दाखला (< ₹८ लाख)",
+      "भाडेकरार किंवा खाजगी वसतिगृह दाखला",
+      "मूळ गावापासून ५० किमी पेक्षा जास्त अंतराचा दाखला",
+      "आधार कार्ड व बँक पासबुक"
+    ]
+  },
+  {
+    "id": "sch-sc-03",
+    "name": "Government of India Post-Matric Scholarship for SC Students",
+    "nameMr": "अनुसूचित जाती (SC) विद्यार्थ्यांसाठी भारत सरकार मॅट्रिकोत्तर शिष्यवृत्ती",
+    "nameHi": "अनुसूचित जाति (SC) छात्रों के लिए भारत सरकार पोस्ट-मैट्रिक छात्रवृत्ति",
+    "provider": "Social Justice & Special Assistance Department",
+    "providerMr": "सामाजिक न्याय व विशेष सहाय्य विभाग",
+    "benefitType": "tuition",
+    "amount": "100% full tuition waiver, examination fee refund, plus monthly maintenance allowance up to ₹1,200/month.",
+    "amountMr": "१००% पूर्ण ट्युशन फी माफी, परीक्षा फी परतावा आणि दरमहा ₹१,२०० पर्यंत निर्वाह भत्ता.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "minMarks": 35,
+      "category": ["SC"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Original Caste Certificate issued by Competent Authority",
+      "Caste Validity Certificate (for degree/diploma professional courses)",
+      "Income Certificate (< ₹2.5 Lakhs)",
+      "SSC/HSC Marksheet & Leaving Certificate"
+    ],
+    "documentsMr": [
+      "सक्षम प्राधिकार्‍यांनी दिलेले मूळ जातीचे प्रमाणपत्र",
+      "जात वैधता (Caste Validity) प्रमाणपत्र",
+      "तहसीलदार उत्पन्नाचा दाखला (< ₹२.५ लाख)",
+      "१०वी/१२वी गुणपत्रिका आणि शाळा सोडल्याचा दाखला"
+    ]
+  },
+  {
+    "id": "sch-st-04",
+    "name": "Post-Matric Scholarship Scheme for Scheduled Tribe (ST) Students",
+    "nameMr": "अनुसूचित जमाती (ST) विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती योजना",
+    "nameHi": "अनुसूचित जनजाति (ST) छात्रों के लिए पोस्ट-मैट्रिक छात्रवृत्ति योजना",
+    "provider": "Tribal Development Department, Maharashtra",
+    "providerMr": "आदिवासी विकास विभाग, महाराष्ट्र शासन",
+    "benefitType": "tuition",
+    "amount": "100% compulsory college fee coverage, annual book bank grant, and monthly hostel maintenance support.",
+    "amountMr": "१००% अनिवार्य कॉलेज फी प्रतिपूर्ती, वार्षिक पुस्तक अनुदान आणि दरमहा वसतिगृह निर्वाह भत्ता.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "minMarks": 35,
+      "category": ["ST"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Tribe Certificate issued by Sub-Divisional Officer (SDO)",
+      "Tribe Validity Certificate issued by Scrutiny Committee",
+      "Tahsildar Income Certificate",
+      "Aadhaar Card linked Bank Account"
+    ],
+    "documentsMr": [
+      "उपविभागीय अधिकारी (SDO) यांनी दिलेला जमातीचा दाखला",
+      "जमात वैधता प्रमाणपत्र (Tribe Validity)",
+      "तहसीलदारांचा उत्पन्नाचा दाखला",
+      "आधार संलग्न बँक खाते पासबुक"
+    ]
+  },
+  {
+    "id": "sch-swadhar-05",
+    "name": "Dr. Babasaheb Ambedkar Swadhar Yojna (Social Welfare Hostel Grant)",
+    "nameMr": "डॉ. बाबासाहेब आंबेडकर स्वाधार योजना (वसतिगृह भत्ता)",
+    "nameHi": "डॉ. बाबासाहेब आंबेडकर स्वाधार योजना (छात्रावास अनुदान)",
+    "provider": "Social Justice & Special Assistance Department",
+    "providerMr": "सामाजिक न्याय व विशेष सहाय्य विभाग",
+    "benefitType": "hostel",
+    "amount": "₹51,000/yr (Tier-1 cities), ₹43,000/yr (District hubs), or ₹38,000/yr directly for lodging, food & books.",
+    "amountMr": "मुंबई/पुण्यासारख्या महानगरांसाठी दरवर्षी ₹५१,०००, जिल्हा मुख्यालयासाठी ₹४३,००० थेट बँक खात्यात भोजन, निवास व पुस्तकांसाठी.",
+    "officialUrl": "https://sjsa.maharashtra.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "minMarks": 50,
+      "category": ["SC", "NAV_BOUDDHA"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Caste Certificate & Caste Validity",
+      "Income Certificate (< ₹2.5 Lakhs)",
+      "Admission Fee Receipt & Bonafide Certificate",
+      "Proof of not securing seat in Government Hostel",
+      "Rent Agreement / Proof of Residence"
+    ],
+    "documentsMr": [
+      "जात प्रमाणपत्र आणि जात वैधता",
+      "तहसीलदार उत्पन्नाचा दाखला (< ₹२.५ लाख)",
+      "प्रवेश फी पावती व बोनाफाईड प्रमाणपत्र",
+      "शासकीय वसतिगृहात प्रवेश न मिळाल्याचे प्रमाणपत्र",
+      "भाडे पावती / स्थानिक रहिवासी पुरावा"
+    ]
+  },
+  {
+    "id": "sch-swayam-06",
+    "name": "Pandit Deendayal Upadhyay Swayam Yojna (ST Hostel & Meal DBT)",
+    "nameMr": "पंडित दीनदयाळ उपाध्याय स्वयं योजना (आदिवासी वसतिगृह DBT)",
+    "nameHi": "पंडित दीनदयाल उपाध्याय स्वयं योजना (आदिवासी छात्रावास DBT)",
+    "provider": "Tribal Development Department, Maharashtra",
+    "providerMr": "आदिवासी विकास विभाग, महाराष्ट्र शासन",
+    "benefitType": "hostel",
+    "amount": "Up to ₹60,000 per year directly credited for food, lodging, and stationery for ST students denied govt hostels.",
+    "amountMr": "शासकीय वसतिगृहात प्रवेश न मिळालेल्या ST विद्यार्थ्यांना भोजन, निवास आणि शैक्षणिक साहित्यासाठी दरवर्षी ₹६०,००० पर्यंत थेट DBT.",
+    "officialUrl": "https://swayam.mahaonline.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 250000,
+      "minMarks": 50,
+      "category": ["ST"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Scheduled Tribe Certificate & Tribe Validity",
+      "Income Certificate (< ₹2.5 Lakhs from Tahsildar)",
+      "Bonafide Certificate of higher education institution",
+      "Active Nationalized Bank Account linked to Aadhaar"
+    ],
+    "documentsMr": [
+      "अनुसूचित जमाती दाखला व वैधता प्रमाणपत्र",
+      "तहसीलदारांचा उत्पन्नाचा दाखला (< ₹२.५ लाख)",
+      "महाविद्यालयाचे बोनाफाईड प्रमाणपत्र",
+      "आधार संलग्न राष्ट्रीयकृत बँक खाते पासबुक"
+    ]
+  },
+  {
+    "id": "sch-obc-07",
+    "name": "Post-Matric Scholarship to VJNT, OBC, and SBC Students",
+    "nameMr": "विमुक्त जाती, भटक्या जमाती, इतर मागासप्रवर्ग व विशेष मागासप्रवर्ग मॅट्रिकोत्तर शिष्यवृत्ती",
+    "nameHi": "वीजेएनटी, ओबीसी और एसबीसी छात्रों के लिए पोस्ट-मैट्रिक छात्रवृत्ति",
+    "provider": "VJNT, OBC & SBC Welfare Department",
+    "providerMr": "इतर मागास बहुजन कल्याण विभाग",
+    "benefitType": "tuition",
+    "amount": "50% to 100% tuition fee reimbursement based on course type, plus full exam fee reimbursement.",
+    "amountMr": "अभ्यासक्रमाच्या प्रकारानुसार ५०% ते १००% ट्युशन फी प्रतिपूर्ती आणि पूर्ण परीक्षा फी माफी.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 150000,
+      "minMarks": 35,
+      "category": ["OBC", "VJNT", "SBC"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Caste Certificate (OBC/VJNT/SBC)",
+      "Non-Creamy Layer (NCL) Certificate valid for current FY",
+      "Income Certificate from Tahsildar (< ₹1.5 Lakhs)",
+      "Marksheet & Fee Receipt"
+    ],
+    "documentsMr": [
+      "जातीचे प्रमाणपत्र (OBC/VJNT/SBC)",
+      "चालू आर्थिक वर्षातील नॉन-क्रिमिलेअर (NCL) प्रमाणपत्र",
+      "तहसीलदारांचा उत्पन्नाचा दाखला (< ₹१.५ लाख)",
+      "गुणपत्रिका आणि कॉलेज फी पावती"
+    ]
+  },
+  {
+    "id": "sch-minority-08",
+    "name": "State Minority Scholarship for Higher & Professional Courses",
+    "nameMr": "अल्पसंख्याक विद्यार्थ्यांसाठी राज्य शासन शिष्यवृत्ती योजना",
+    "nameHi": "अल्पसंख्यक छात्रों के लिए राज्य सरकार छात्रवृत्ति योजना",
+    "provider": "Minority Development Department, Maharashtra",
+    "providerMr": "अल्पसंख्याक विकास विभाग, महाराष्ट्र शासन",
+    "benefitType": "tuition",
+    "amount": "Financial assistance of ₹25,000 or actual tuition fee (whichever is lower) for professional technical degrees.",
+    "amountMr": "व्यावसायिक तांत्रिक पदवी/डिप्लोमा अभ्यासक्रमांसाठी वार्षिक ₹२५,००० किंवा प्रत्यक्ष कॉलेज फी (जी कमी असेल ती) आर्थिक सहाय्य.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "12th",
+      "incomeLimit": 800000,
+      "minMarks": 50,
+      "category": ["MINORITY"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Minority Community Self-Declaration (Muslim, Buddhist, Christian, Jain, Sikh, Parsi)",
+      "Income Certificate (< ₹8 Lakhs from Tahsildar)",
+      "Domicile Certificate of Maharashtra",
+      "Previous Academic Marksheet (min 50%)"
+    ],
+    "documentsMr": [
+      "अल्पसंख्याक समाजाचे स्वयंघोषणापत्र (मुस्लिम, बौद्ध, ख्रिश्चन, जैन, शीख, पारशी)",
+      "तहसीलदार उत्पन्नाचा दाखला (< ₹८ लाख)",
+      "महाराष्ट्र अधिवास (Domicile) दाखला",
+      "मागील वर्षाची गुणपत्रिका (किमान ५०% गुण)"
+    ]
+  },
+  {
+    "id": "sch-pwd-09",
+    "name": "Post-Matric Scholarship for Persons with Disability (Divyang)",
+    "nameMr": "दिव्यांग (अपंग) विद्यार्थ्यांसाठी मॅट्रिकोत्तर शिष्यवृत्ती",
+    "nameHi": "दिव्यांग छात्रों के लिए पोस्ट-मैट्रिक छात्रवृत्ति",
+    "provider": "Divyang Welfare Department / Social Justice",
+    "providerMr": "दिव्यांग कल्याण विभाग / सामाजिक न्याय विभाग",
+    "benefitType": "stipend",
+    "amount": "Full maintenance allowance, specialized reader/transport allowance, and compulsory non-refundable fee refund.",
+    "amountMr": "पूर्ण मासिक निर्वाह भत्ता, वाचक व वाहतूक भत्ता आणि संपूर्ण शैक्षणिक शुल्क प्रतिपूर्ती.",
+    "officialUrl": "https://mahadbtmahait.gov.in",
+    "eligibility": {
+      "educationLevel": "10th",
+      "incomeLimit": 250000,
+      "minMarks": 35,
+      "category": ["OPEN", "SC", "ST", "OBC", "EBC", "PWD"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Civil Surgeon Disability Certificate (minimum 40% benchmark disability or UDID Card)",
+      "Income Certificate from Tahsildar",
+      "Aadhaar Card & Bank Passbook",
+      "Marksheet & Bonafide Certificate"
+    ],
+    "documentsMr": [
+      "जिल्हा शल्यचिकित्सकांचे किमान ४०% दिव्यांगत्व प्रमाणपत्र किंवा UDID कार्ड",
+      "तहसीलदारांचा उत्पन्नाचा दाखला",
+      "आधार कार्ड आणि बँक पासबुक",
+      "गुणपत्रिका आणि बोनाफाईड प्रमाणपत्र"
+    ]
+  },
+  {
+    "id": "sch-mahabharati-10",
+    "name": "BARTI / TRTI / SARTHI Competitive Exam Coaching Fellowships",
+    "nameMr": "बार्टी, टीआरटीआय व सारथी स्पर्धा परीक्षा प्रशिक्षण व विद्यावेतन",
+    "nameHi": "बार्टी, टीआरटीआई और सारथी प्रतियोगी परीक्षा कोचिंग फैलोशिप",
+    "provider": "Autonomous Institutes (BARTI / SARTHI / TRTI / MAHAJYOTI)",
+    "providerMr": "स्वायत्त संस्था (बार्टी / सारथी / टीआरटीआय / महाज्योती)",
+    "benefitType": "stipend",
+    "amount": "Free coaching for MPSC/UPSC/Banking, plus monthly stipend of ₹8,000 to ₹10,000 directly to bank accounts.",
+    "amountMr": "MPSC, बँकिंग व पोलीस भरतीसाठी मोफत प्रशिक्षण आणि दरमहा ₹८,००० ते ₹१०,००० थेट विद्यावेतन.",
+    "officialUrl": "https://barti.maharashtra.gov.in",
+    "eligibility": {
+      "educationLevel": "graduate",
+      "incomeLimit": 800000,
+      "minMarks": 50,
+      "category": ["SC", "ST", "OBC", "OPEN", "EBC", "VJNT", "SBC"],
+      "domicileRequired": true
+    },
+    "documents": [
+      "Degree Marksheet / Certificate",
+      "Respective Caste/EBC/SEBC Certificate",
+      "Income Certificate (< ₹8 Lakhs)",
+      "Entrance Common Test Registration / Admit Card"
+    ],
+    "documentsMr": [
+      "पदवी गुणपत्रिका व प्रमाणपत्र",
+      "संबंधित प्रवर्ग दाखला (SC/ST/OBC/Maratha/Kunbi)",
+      "तहसीलदार उत्पन्नाचा दाखला (< ₹८ लाख)",
+      "पात्रता परीक्षा अर्ज क्रमांक व प्रवेशपत्र"
+    ]
+  }
+]

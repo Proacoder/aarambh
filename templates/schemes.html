@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section schemes-page fade-in" style="min-height: 90vh; padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 1140px;">
+
+    <!-- Page Header Banner -->
+    <div class="card glass-card p-4 mb-4 slide-up flex-between align-center flex-wrap gap-3" style="border-left: 5px solid var(--gold); border-radius: 20px;">
+      <div>
+        <div class="inline-flex align-center gap-2 badge badge-gold mb-1">
+          <span>🎓</span> <span data-i18n="schemes_header_badge">MAHADBT • MAHARASHTRA STUDENT SCHEMES DIRECTORY</span>
+        </div>
+        <h1 class="page-title mb-1" style="font-size: 1.85rem; font-weight: 800;" data-i18n="schemes_main_title">
+          महाराष्ट्र शासन शिष्यवृत्ती व सवलत योजना
+        </h1>
+        <p class="page-subtitle text-muted mb-0" style="font-size: 1rem;" data-i18n="schemes_subtitle">
+          महाडीबीटी फी माफी, स्वाधार वसतिगृह भत्ता व शासकीय विद्यावेतन योजनांची संपूर्ण माहिती व अटी.
+        </p>
+      </div>
+
+      <div class="flex align-center gap-2">
+        <a href="/cost-calculator" class="btn btn-gold btn-sm ripple flex align-center gap-2">
+          <span>💰</span> <span data-i18n="schemes_calc_btn">Kharcha Calculator</span>
+        </a>
+        <a href="/documents" class="btn btn-outline btn-sm ripple flex align-center gap-2">
+          <span>📋</span> <span data-i18n="schemes_docs_btn">Doc Checklist</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls Card -->
+    <div class="card glass-card p-4 mb-4 slide-up" style="border-radius: 18px;">
+      
+      <!-- Top Row: Search Input -->
+      <div class="form-group mb-3">
+        <div class="search-input-wrap" style="position: relative;">
+          <input type="text" id="scheme-search-input" class="form-input" data-i18n-ph="schemes_search_ph" placeholder="🔍 शोधा: उदा. EBC, स्वाधार, वसतिगृह, OBC, अल्पसंख्याक, फी माफी..." style="padding: 0.85rem 1rem 0.85rem 2.8rem; font-size: 1rem; border-radius: 14px; border: 2px solid var(--border);">
+          <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.1rem; pointer-events: none;">🔍</span>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="mb-3">
+        <label class="text-xs font-bold text-muted uppercase block mb-2" data-i18n="schemes_filter_cat_label">प्रवर्ग:</label>
+        <div class="flex gap-2 flex-wrap" id="scheme-category-filters">
+          <button type="button" class="btn btn-primary btn-sm scheme-cat-btn" data-cat="all" data-i18n="cat_all">सर्व</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="OPEN" data-i18n="cat_open">OPEN / EBC / SEBC</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="SC" data-i18n="cat_sc">SC</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="ST" data-i18n="cat_st">ST</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="OBC" data-i18n="cat_obc">OBC / VJNT / SBC</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="MINORITY" data-i18n="cat_minority">Minority</button>
+          <button type="button" class="btn btn-outline btn-sm scheme-cat-btn" data-cat="PWD" data-i18n="cat_pwd">Divyang (PWD)</button>
+        </div>
+      </div>
+
+      <!-- Bottom Filters Row: Benefit Type & Income Limit -->
+      <div class="grid grid-2 md-grid-3 gap-3">
+        <div>
+          <label class="text-xs font-bold text-muted uppercase block mb-1" data-i18n="schemes_filter_type_label">लाभाचा प्रकार:</label>
+          <select id="scheme-type-filter" class="form-select" style="border-radius: 12px; padding: 0.65rem;">
+            <option value="all" data-i18n="schemes_type_all">सर्व प्रकार</option>
+            <option value="tuition" data-i18n="schemes_type_tuition">🎓 ट्युशन फी माफी</option>
+            <option value="hostel" data-i18n="schemes_type_hostel">🏠 वसतिगृह व भोजन भत्ता</option>
+            <option value="stipend" data-i18n="schemes_type_stipend">💵 विद्यावेतन व साहित्य भत्ता</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-muted uppercase block mb-1" data-i18n="schemes_filter_income_label">कौटुंबिक उत्पन्न मर्यादा:</label>
+          <select id="scheme-income-filter" class="form-select" style="border-radius: 12px; padding: 0.65rem;">
+            <option value="all" data-i18n="schemes_income_all">सर्व उत्पन्न स्तर</option>
+            <option value="150000" data-i18n="schemes_income_150">₹१.५ लाखांपर्यंत</option>
+            <option value="250000" data-i18n="schemes_income_250">₹२.५ लाखांपर्यंत</option>
+            <option value="800000" data-i18n="schemes_income_800">₹८.० लाखांपर्यंत (ईबीसी)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-muted uppercase block mb-1" data-i18n="schemes_filter_edu_label">शिक्षण स्तर:</label>
+          <select id="scheme-edu-filter" class="form-select" style="border-radius: 12px; padding: 0.65rem;">
+            <option value="all" data-i18n="schemes_edu_all">सर्व स्तर</option>
+            <option value="10th" data-i18n="schemes_edu_10th">१०वी नंतर (Diploma / ITI)</option>
+            <option value="12th" data-i18n="schemes_edu_12th">१२वी नंतर (Degree / CAP)</option>
+            <option value="graduate" data-i18n="schemes_edu_grad">पदवीधर (Graduate)</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Active Results Counter -->
+    <div class="flex-between align-center mb-3 px-1">
+      <span class="text-small font-weight-bold text-muted">
+        <span data-i18n="schemes_showing">Showing</span> <span id="schemes-count" style="color: var(--primary); font-weight:800;">10</span> <span data-i18n="schemes_count_label">Maharashtra Student Schemes</span>
+      </span>
+      <button id="btn-reset-filters" class="btn btn-link text-small p-0" style="color: var(--earth-brown); text-decoration: underline;" data-i18n="reset_filters">Reset Filters</button>
+    </div>
+
+    <!-- Schemes Cards Grid -->
+    <div class="flex-column gap-3" id="schemes-cards-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="schemes-empty-state" class="card text-center p-5 hidden slide-up" style="border-radius: 20px;">
+      <div style="font-size: 3rem; margin-bottom: 0.8rem;">🔍</div>
+      <h3 class="mb-1" data-i18n="schemes_no_match_title">कोणतीही योजना जुळली नाही</h3>
+      <p class="text-muted text-small mb-3" data-i18n="schemes_no_match_desc">कृपया तुमचे फिल्टर्स बदला किंवा शोध शब्द तपासा.</p>
+      <button class="btn btn-outline btn-sm mx-auto" onclick="document.getElementById('btn-reset-filters').click();">Reset All Filters</button>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let allSchemes = [];
+  let activeCat = 'all';
+
+  const grid = document.getElementById('schemes-cards-grid');
+  const countEl = document.getElementById('schemes-count');
+  const emptyState = document.getElementById('schemes-empty-state');
+  const searchInput = document.getElementById('scheme-search-input');
+  const typeFilter = document.getElementById('scheme-type-filter');
+  const incomeFilter = document.getElementById('scheme-income-filter');
+  const eduFilter = document.getElementById('scheme-edu-filter');
+  const resetBtn = document.getElementById('btn-reset-filters');
+  const catBtns = document.querySelectorAll('.scheme-cat-btn');
+
+  // Load schemes from API
+  fetch('/api/schemes')
+    .then(r => r.json())
+    .then(data => {
+      allSchemes = data || [];
+      renderSchemes();
+    })
+    .catch(err => {
+      console.warn('Failed to load schemes API:', err);
+    });
+
+  function getActiveLang() {
+    return (window.CareerMitra && window.CareerMitra.lang) || localStorage.getItem('cm-lang') || 'mr';
+  }
+
+  function filterSchemes() {
+    const lang = getActiveLang();
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const selectedType = typeFilter?.value || 'all';
+    const selectedIncome = incomeFilter?.value || 'all';
+    const selectedEdu = eduFilter?.value || 'all';
+
+    return allSchemes.filter(s => {
+      // 1. Category Filter
+      if (activeCat !== 'all') {
+        const cats = s.eligibility?.category || [];
+        if (!cats.includes(activeCat) && !cats.includes('OPEN') && activeCat !== 'OPEN') {
+          if (!cats.includes(activeCat)) return false;
+        } else if (activeCat === 'OPEN' && !cats.includes('OPEN') && !cats.includes('EBC')) {
+          return false;
+        }
+      }
+
+      // 2. Benefit Type Filter
+      if (selectedType !== 'all' && s.benefitType !== selectedType) {
+        return false;
+      }
+
+      // 3. Income Filter
+      if (selectedIncome !== 'all') {
+        const maxInc = Number(selectedIncome);
+        if (s.eligibility?.incomeLimit && s.eligibility.incomeLimit < maxInc) {
+          // Allowed
+        } else if (s.eligibility?.incomeLimit && s.eligibility.incomeLimit > maxInc && maxInc < 800000) {
+          return false;
+        }
+      }
+
+      // 4. Education Level Filter
+      if (selectedEdu !== 'all') {
+        const lvl = s.eligibility?.educationLevel;
+        if (lvl && lvl !== '10th' && selectedEdu === '10th') return false;
+      }
+
+      // 5. Search Query
+      if (query) {
+        const name = (s.name || '').toLowerCase();
+        const nameMr = (s.nameMr || '').toLowerCase();
+        const nameHi = (s.nameHi || '').toLowerCase();
+        const provider = (s.provider || '').toLowerCase();
+        const amount = (s.amount || '').toLowerCase();
+        const docs = (s.documents || []).join(' ').toLowerCase();
+
+        const match = name.includes(query) || nameMr.includes(query) || nameHi.includes(query) || provider.includes(query) || amount.includes(query) || docs.includes(query);
+        if (!match) return false;
+      }
+
+      return true;
+    });
+  }
+
+  function renderSchemes() {
+    if (!grid) return;
+    const filtered = filterSchemes();
+    const lang = getActiveLang();
+
+    if (countEl) countEl.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      if (emptyState) emptyState.classList.remove('hidden');
+      return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+
+    grid.innerHTML = filtered.map(s => {
+      const title = lang === 'mr' ? (s.nameMr || s.name) : (lang === 'hi' ? (s.nameHi || s.name) : s.name);
+      const provider = lang === 'mr' ? (s.providerMr || s.provider) : s.provider;
+      const amount = lang === 'mr' ? (s.amountMr || s.amount) : s.amount;
+      const docs = (lang === 'mr' && s.documentsMr) ? s.documentsMr : s.documents;
+
+      const t = (k, fb) => (window.CareerMitra && window.CareerMitra.hasTranslation(k)) ? window.CareerMitra.t(k) : fb;
+
+      const typeBadge = s.benefitType === 'tuition'
+        ? `<span class="badge" style="background:#e8f5e9; color:#2e7d32; font-weight:700;">${t('schemes_type_tuition', '🎓 ट्युशन फी माफी')}</span>`
+        : s.benefitType === 'hostel'
+        ? `<span class="badge" style="background:#fff3e0; color:#e65100; font-weight:700;">${t('schemes_type_hostel', '🏠 वसतिगृह व भोजन भत्ता')}</span>`
+        : `<span class="badge" style="background:#e8eaf6; color:#283593; font-weight:700;">${t('schemes_type_stipend', '💵 विद्यावेतन व साहित्य भत्ता')}</span>`;
+
+      const catsList = (s.eligibility?.category || []).join(', ');
+      const incomeLimitText = s.eligibility?.incomeLimit 
+        ? (lang === 'mr' ? `₹${s.eligibility.incomeLimit.toLocaleString('en-IN')} / वर्ष` : (lang === 'hi' ? `₹${s.eligibility.incomeLimit.toLocaleString('en-IN')} / वर्ष` : `₹${s.eligibility.incomeLimit.toLocaleString('en-IN')} / year`))
+        : (lang === 'mr' ? 'कोणतीही उत्पन्न मर्यादा नाही' : (lang === 'hi' ? 'कोई आय सीमा नहीं' : 'No income ceiling'));
+
+      const docsHtml = (docs || []).map(d => `<li class="text-xs text-muted mb-1">✓ ${d}</li>`).join('');
+
+      return `
+        <div class="card p-4 glass-card hover-lift slide-up" style="border-radius: 18px; border-left: 5px solid ${s.benefitType === 'tuition' ? '#2e7d32' : s.benefitType === 'hostel' ? '#e65100' : '#4338ca'};">
+          <div class="flex-between align-start flex-wrap gap-2 mb-2">
+            <div style="flex: 1; min-width: 280px;">
+              <div class="flex align-center gap-2 mb-1 flex-wrap">
+                ${typeBadge}
+                <span class="text-xs text-muted">🏛️ ${provider}</span>
+              </div>
+              <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--earth-brown); margin-bottom: 0.4rem;">${title}</h2>
+            </div>
+            <a href="${s.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm ripple" style="text-decoration:none; font-weight:700;">
+              <span>🌐 ${t('schemes_apply_portal', 'Apply on Portal')}</span> <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Benefit Amount Highlight -->
+          <div class="p-3 mb-3" style="background: rgba(217, 164, 65, 0.08); border-radius: 12px; border: 1px dashed rgba(217,164,65,0.4);">
+            <strong class="text-sm" style="color: var(--terracotta);">💰 ${t('schemes_benefit_lbl', 'Benefit:')}</strong>
+            <p class="text-small mb-0 mt-1" style="font-weight: 600;">${amount}</p>
+          </div>
+
+          <!-- Eligibility & Conditions Grid -->
+          <div class="grid grid-2 md-grid-4 gap-2 mb-3 p-3" style="background: var(--bg); border-radius: 12px; border: 1px solid var(--border);">
+            <div>
+              <span class="text-xs text-muted block">${t('schemes_col_cat', 'Category')}</span>
+              <strong class="text-xs font-bold" style="color: var(--primary);">${catsList}</strong>
+            </div>
+            <div>
+              <span class="text-xs text-muted block">${t('schemes_col_income', 'Max Income')}</span>
+              <strong class="text-xs font-bold">${incomeLimitText}</strong>
+            </div>
+            <div>
+              <span class="text-xs text-muted block">${t('schemes_col_marks', 'Min Marks')}</span>
+              <strong class="text-xs font-bold">${s.eligibility?.minMarks ? s.eligibility.minMarks + '%' : (lang === 'mr' ? 'उत्तीर्ण' : (lang === 'hi' ? 'उत्तीर्ण' : 'Pass'))}</strong>
+            </div>
+            <div>
+              <span class="text-xs text-muted block">${t('schemes_col_domicile', 'Domicile')}</span>
+              <strong class="text-xs font-bold" style="color: #2e7d32;">${t('schemes_domicile_val', '✓ Maharashtra Only')}</strong>
+            </div>
+          </div>
+
+          <!-- Required Documents Accordion -->
+          <details style="cursor: pointer;">
+            <summary class="text-xs font-bold text-muted hover-underline">📋 ${t('schemes_view_docs', 'Required Documents Checklist')} (${(docs || []).length})</summary>
+            <ul class="mt-2 pl-3 mb-0">
+              ${docsHtml}
+            </ul>
+          </details>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Filter Event Listeners
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => {
+        b.classList.remove('btn-primary');
+        b.classList.add('btn-outline');
+      });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+      activeCat = btn.getAttribute('data-cat') || 'all';
+      renderSchemes();
+    });
+  });
+
+  searchInput?.addEventListener('input', renderSchemes);
+  typeFilter?.addEventListener('change', renderSchemes);
+  incomeFilter?.addEventListener('change', renderSchemes);
+  eduFilter?.addEventListener('change', renderSchemes);
+
+  resetBtn?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    if (typeFilter) typeFilter.value = 'all';
+    if (incomeFilter) incomeFilter.value = 'all';
+    if (eduFilter) eduFilter.value = 'all';
+    activeCat = 'all';
+    catBtns.forEach(b => {
+      b.classList.remove('btn-primary');
+      b.classList.add('btn-outline');
+    });
+    catBtns[0]?.classList.remove('btn-outline');
+    catBtns[0]?.classList.add('btn-primary');
+    renderSchemes();
+  });
+
+  document.addEventListener('cm-lang-changed', renderSchemes);
+});
+</script>
+{% endblock %}

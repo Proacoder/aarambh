@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Student {
+  id              String   @id @default(cuid())
+  name            String?
+  educationLevel  String
+  percentage      Float?
+  district        String
+  state           String   @default("Maharashtra")
+  financialLevel  String?
+  willingToMove   Boolean  @default(false)
+
+  assessment      AssessmentResult?
+  recommendations Recommendation[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AssessmentResult {
+  id        String   @id @default(cuid())
+  studentId String   @unique
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  realistic     Float @default(0)
+  investigative Float @default(0)
+  artistic      Float @default(0)
+  social        Float @default(0)
+  enterprising  Float @default(0)
+  conventional  Float @default(0)
+
+  answers   Json?
+  createdAt DateTime @default(now())
+}
+
+model College {
+  id          String  @id @default(cuid())
+  name        String
+  district    String
+  state       String  @default("Maharashtra")
+  type        String
+  latitude    Float
+  longitude   Float
+  description String?
+
+  courses         CollegeCourse[]
+  recommendations Recommendation[]
+
+  createdAt DateTime @default(now())
+}
+
+model CollegeCourse {
+  id       String  @id @default(cuid())
+  name     String
+  collegeId String
+  college  College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+
+  eligibilityPercentage Float?
+  durationYears        Float?
+  approximateFees      Float?
+
+  @@index([collegeId])
+}
+
+model Scholarship {
+  id          String  @id @default(cuid())
+  name        String
+  provider    String
+  description String?
+  amount      String?
+  officialUrl String?
+
+  eligibility Json
+  documents   Json
+
+  createdAt DateTime @default(now())
+}
+
+model Recommendation {
+  id        String  @id @default(cuid())
+  studentId String
+  collegeId String?
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  college College? @relation(fields: [collegeId], references: [id], onDelete: SetNull)
+
+  category String
+  score    Float
+  reason   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([studentId])
+  @@index([collegeId])
+}

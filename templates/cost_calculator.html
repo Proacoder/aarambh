@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section cost-calculator fade-in">
+  <div class="container">
+    <!-- Header card -->
+    <div class="card text-center mb-4 slide-up">
+      <div class="greeting-avatar mb-2">💰</div>
+      <h1 class="page-title mb-1" data-i18n="kharcha_title">Kharcha Calculator</h1>
+      <p class="page-subtitle" data-i18n="kharcha_subtitle">Find out the real total cost of studying at any college</p>
+    </div>
+
+    <!-- College Selection -->
+    <div class="card mb-4" id="cost-input-section">
+      <h3 class="mb-3">📍 <span data-i18n="kharcha_select_details">Select Your Details</span></h3>
+      <div class="grid-2 gap-3 mb-3">
+        <div class="form-group">
+          <label data-i18n="kharcha_home_district">Your Home District</label>
+          <select id="cost-home-district" class="form-select">
+            <option value="Pune" selected>Pune</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Kolhapur">Kolhapur</option>
+            <option value="Chhatrapati Sambhajinagar">Chhatrapati Sambhajinagar</option>
+            <option value="Satara">Satara</option>
+            <option value="Solapur">Solapur</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Ahmednagar">Ahmednagar</option>
+            <option value="Ratnagiri">Ratnagiri</option>
+            <option value="Thane">Thane</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="kharcha_target_college">Target College</label>
+          <select id="cost-college" class="form-select">
+            <option value="clg-gp-pune" selected>Government Polytechnic, Pune</option>
+            <option value="clg-gp-nashik">Government Polytechnic, Nashik</option>
+            <option value="clg-coep-pune">College of Engineering Pune (COEP)</option>
+            <option value="clg-gp-kolhapur">Government Polytechnic, Kolhapur</option>
+            <option value="clg-gp-nagpur">Government Polytechnic, Nagpur</option>
+            <option value="clg-gp-sambhajinagar">Government Polytechnic, Chhatrapati Sambhajinagar</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2 gap-3 mb-3">
+        <div class="form-group">
+          <label data-i18n="kharcha_accom_type">Accommodation Type</label>
+          <select id="cost-accommodation" class="form-select">
+            <option value="govtHostel" selected>🏛️ <span data-i18n="kharcha_govt_hostel">Government Hostel</span></option>
+            <option value="privateHostel">🏢 <span data-i18n="kharcha_private_hostel">Private Hostel</span></option>
+            <option value="pgRoom">🏠 <span data-i18n="kharcha_pg_room">Paying Guest (PG)</span></option>
+            <option value="sharedFlat">👥 <span data-i18n="kharcha_shared_flat">Shared Flat</span></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="kharcha_food_pref">Food Preference</label>
+          <select id="cost-food" class="form-select">
+            <option value="collegeMess" selected>🍽️ <span data-i18n="kharcha_college_mess">College Mess</span></option>
+            <option value="selfCooking">🍳 <span data-i18n="kharcha_self_cooking">Self Cooking</span></option>
+            <option value="mixed">🥘 <span data-i18n="kharcha_mixed">Mixed</span></option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-2 gap-3 mb-4">
+        <div class="form-group">
+          <label data-i18n="kharcha_annual_income">Annual Family Income (₹)</label>
+          <input type="number" id="cost-income" class="form-input" placeholder="e.g. 150000" value="150000" data-i18n-ph="kharcha_ph_income">
+        </div>
+        <div class="form-group">
+          <label data-i18n="kharcha_category">Category</label>
+          <select id="cost-category" class="form-select">
+            <option value="OPEN" data-i18n="kharcha_open_gen">Open / General</option>
+            <option value="EBC">EBC</option>
+            <option value="OBC">OBC</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+          </select>
+        </div>
+      </div>
+      <button id="calculate-btn" class="btn btn-primary ripple" style="width:100%">🧮 <span data-i18n="kharcha_calculate_btn">Calculate Total Cost</span></button>
+    </div>
+
+    <!-- Results Section (hidden initially) -->
+    <div id="cost-results" class="hidden">
+      <!-- College + Distance Header -->
+      <div class="card mb-4 slide-up" id="cost-header-card">
+        <div class="flex-between flex-wrap gap-2">
+          <div>
+            <span class="badge badge-gold mb-1" id="cost-tier-badge"></span>
+            <h2 id="cost-college-name"></h2>
+            <p class="text-muted text-small" id="cost-route"></p>
+          </div>
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700;color:var(--primary)" id="cost-net-annual"></div>
+            <p class="text-small text-muted" data-i18n="kharcha_net_annual">Net Annual Cost</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown Bars -->
+      <div class="card mb-4" id="cost-breakdown-card">
+        <h3 class="mb-3">📊 <span data-i18n="kharcha_breakdown_title">Annual Cost Breakdown</span></h3>
+        <div id="cost-bars"></div>
+        <div class="mt-4" style="border-top:2px solid var(--primary);padding-top:1rem">
+          <div class="flex-between mb-2">
+            <span style="font-weight:600" data-i18n="kharcha_total_before">Total Before Scholarships</span>
+            <span style="font-weight:700" id="cost-gross"></span>
+          </div>
+          <div class="flex-between mb-2" style="color:var(--success)">
+            <span>🎓 <span data-i18n="kharcha_scholarship_deductions">Scholarship Deductions</span></span>
+            <span style="font-weight:700" id="cost-scholarship"></span>
+          </div>
+          <div class="flex-between" style="font-size:1.3rem;font-weight:700;color:var(--primary)">
+            <span>✅ <span data-i18n="kharcha_net_oop">Net Out-of-Pocket</span></span>
+            <span id="cost-net"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Family Impact Card -->
+      <div class="card mb-4" id="family-impact-card">
+        <h3 class="mb-3">👨👩👧 <span data-i18n="kharcha_family_impact">Family Budget Impact</span></h3>
+        <div class="grid-2 gap-3">
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700" id="cost-monthly"></div>
+            <p class="text-small text-muted" data-i18n="kharcha_monthly_cost">Monthly Cost</p>
+          </div>
+          <div class="text-center">
+            <div style="font-size:2rem;font-weight:700" id="cost-income-pct"></div>
+            <p class="text-small text-muted" data-i18n="kharcha_pct_income">% of Family Income</p>
+          </div>
+        </div>
+        <div id="affordability-msg" class="mt-3 text-center" style="padding:1rem;border-radius:8px"></div>
+      </div>
+
+      <!-- Matched Scholarships -->
+      <div class="card mb-4" id="cost-scholarships-card">
+        <h3 class="mb-3">🎓 <span data-i18n="kharcha_qualify_scholarships">Scholarships You Qualify For</span></h3>
+        <div id="cost-scholarship-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/cost_calculator.js?v=2.3.0"></script>
+{% endblock %}

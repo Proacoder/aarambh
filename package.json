@@ -1,0 +1,30 @@
+{
+  "name": "AARAMBH",
+  "version": "1.0.0",
+  "description": "CareerMitra - Rural Student Career Opportunity Navigator",
+  "main": "index.js",
+  "scripts": {
+    "test": "pnpm --filter api test",
+    "test:ai": "pnpm --filter api exec tsx ../../src/lib/ai-data/test-runner.ts",
+    "dev:api": "pnpm --filter api dev",
+    "seed": "pnpm --filter api db:seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proacoder/AARAMBH.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@11.25.0",
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "^2.21.0",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "turbo": "^2.10.12",
+    "typescript": "^7.0.2"
+  }
+}

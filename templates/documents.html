@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section documents fade-in" style="min-height: 90vh; padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 1040px;">
+
+    <!-- Top Hero Header -->
+    <div class="card glass-card text-center mb-4 p-4 slide-up" style="border-radius: 20px; border-top: 4px solid var(--primary);">
+      <div class="greeting-avatar mb-2" style="font-size: 3rem;">📋</div>
+      <h1 class="page-title mb-1" style="font-size: 1.85rem; font-weight: 800;" data-i18n="doc_tracker_title">
+        प्रवेश व शिष्यवृत्ती कागदपत्रे ट्रॅकर
+      </h1>
+      <p class="page-subtitle text-muted mb-3" style="font-size: 1rem;" data-i18n="doc_tracker_subtitle">
+        १०वी, १२वी, पदविका (Diploma) आणि महाडीबीटी शिष्यवृत्तीसाठी लागणाऱ्या मूळ कागदपत्रांची संपूर्ण यादी.
+      </p>
+
+      <!-- Readiness Progress Bar -->
+      <div class="mt-3 mx-auto" id="doc-progress-wrap" style="max-width: 540px;">
+        <div class="flex-between mb-1">
+          <span class="text-small font-bold" data-i18n="progress_label">तयार कागदपत्रे (Readiness):</span>
+          <span class="text-small font-bold" style="color: var(--primary);" id="doc-progress-text">0 / 0 (0%)</span>
+        </div>
+        <div class="progress-track" style="height: 10px; border-radius: 6px; background: var(--border-light);">
+          <div class="progress-fill" id="doc-progress-bar" style="width: 0%; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--gold), #2e7d32); transition: width 0.4s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex-center gap-2 mt-4 flex-wrap">
+        <button type="button" class="btn btn-outline btn-sm ripple" id="doc-print-btn">
+          <span>🖨️</span> <span data-i18n="doc_print_btn">प्रिंट / PDF चेकलिस्ट सेव्ह करा</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm ripple" id="doc-reset-btn">
+          <span>🔄</span> <span data-i18n="reset_progress_btn">चेकलिस्ट रीसेट करा</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Official Government Portals Row -->
+    <div class="card glass-card p-3 mb-4 slide-up" style="border-radius: 16px;">
+      <span class="text-xs font-bold text-muted uppercase block mb-2" data-i18n="doc_portals_title">शासकीय अधिकृत पोर्टल्स (Official Portals):</span>
+      <div class="grid grid-2 md-grid-4 gap-2">
+        <a href="https://aaplesarkar.mahaonline.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm text-left flex align-center gap-2" style="font-size:0.8rem; text-decoration:none;">
+          <span>🏛️</span> <div><strong>आपले सरकार</strong><br><span class="text-xs text-muted">उत्पन्न व अधिवास दाखला</span></div>
+        </a>
+        <a href="https://www.digilocker.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm text-left flex align-center gap-2" style="font-size:0.8rem; text-decoration:none;">
+          <span>📲</span> <div><strong>DigiLocker</strong><br><span class="text-xs text-muted">१०वी/१२वी डिजिटल गुणपत्रिका</span></div>
+        </a>
+        <a href="https://barti.maharashtra.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm text-left flex align-center gap-2" style="font-size:0.8rem; text-decoration:none;">
+          <span>📜</span> <div><strong>BARTI / CCVIS</strong><br><span class="text-xs text-muted">जात वैधता पडताळणी</span></div>
+        </a>
+        <a href="https://mahadbtmahait.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm text-left flex align-center gap-2" style="font-size:0.8rem; text-decoration:none;">
+          <span>🎓</span> <div><strong>MahaDBT</strong><br><span class="text-xs text-muted">महाडीबीटी शिष्यवृत्ती पोर्टल</span></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex gap-2 flex-wrap mb-4" id="doc-category-tabs">
+      <button type="button" class="btn btn-primary btn-sm doc-tab-btn active" data-cat="all" data-i18n="doc_tab_all">सर्व कागदपत्रे</button>
+      <button type="button" class="btn btn-outline btn-sm doc-tab-btn" data-cat="academic" data-i18n="doc_tab_academic">📚 शैक्षणिक कागदपत्रे</button>
+      <button type="button" class="btn btn-outline btn-sm doc-tab-btn" data-cat="identity" data-i18n="doc_tab_identity">🪪 ओळख व अधिवास</button>
+      <button type="button" class="btn btn-outline btn-sm doc-tab-btn" data-cat="financial" data-i18n="doc_tab_financial">💰 उत्पन्न व बँक</button>
+      <button type="button" class="btn btn-outline btn-sm doc-tab-btn" data-cat="reservation" data-i18n="doc_tab_reservation">📜 जात व आरक्षण</button>
+      <button type="button" class="btn btn-outline btn-sm doc-tab-btn" data-cat="hostel" data-i18n="doc_tab_hostel">🏠 वसतिगृह व इतर</button>
+    </div>
+
+    <!-- Document Checklist Container -->
+    <div id="doc-checklist" class="flex-column gap-3">
+      <!-- Injected via documents.js -->
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/documents.js?v=2.3.0"></script>
+{% endblock %}

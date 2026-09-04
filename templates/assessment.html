@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section assessment fade-in">
+  <div class="container">
+    <div class="assessment-header card text-center mb-4 slide-up">
+      <h1 class="page-title mb-1">🧭 <span data-i18n="assessment_title_text">Let's discover what you enjoy!</span></h1>
+      <p class="page-subtitle mb-2" data-i18n="assessment_sub">Rate how much each statement sounds like you.</p>
+      
+      <!-- Reassuring Encouragement Banner -->
+      <div class="encouragement-banner">
+        <span class="enc-icon">😊</span>
+        <span data-i18n="no_wrong_answer">इथे चुकीचं उत्तर नाही. जे तुला खरंच आवडतं ते निवड.</span>
+      </div>
+    </div>
+
+    <!-- Assessment Stepper Indicator -->
+    <div class="stepper-container mb-4 slide-up">
+      <div class="stepper-track-bg"></div>
+      <div class="stepper-track-progress" style="width: 66%;"></div>
+      <div class="step-node completed">
+        <div class="step-badge">✓</div>
+        <span class="step-label" data-i18n="step_1_label">1. Profile Details</span>
+      </div>
+      <div class="step-node active">
+        <div class="step-badge">2</div>
+        <span class="step-label" data-i18n="step_2_label">2. Aptitude Quiz</span>
+      </div>
+      <div class="step-node">
+        <div class="step-badge">3</div>
+        <span class="step-label" data-i18n="step_3_label">3. Career Roadmap</span>
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="quiz-progress-container card mb-4 slide-up stagger-1">
+      <div class="flex-between mb-2">
+        <span class="text-small text-muted" data-i18n="progress_label">Progress</span>
+        <span id="progress-text" class="text-bold text-small">Question 1 of 10</span>
+      </div>
+      <div class="quiz-progress-wrap">
+        <div id="progress-bar-fill" class="quiz-progress" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Question Card -->
+    <div id="question-container" class="quiz-container card slide-up stagger-2">
+      <h2 id="question-text" class="quiz-question" aria-live="polite" data-i18n="loading_text">Loading…</h2>
+
+      <div id="options-container" class="likert-scale mt-4" role="radiogroup" aria-label="Rating scale"></div>
+
+      <div class="likert-labels flex-between mt-2">
+        <span class="text-small text-muted" data-i18n="scale_low">Not like me</span>
+        <span class="text-small text-muted" data-i18n="scale_high">Very much like me</span>
+      </div>
+
+      <div class="quiz-actions flex-between mt-5">
+        <button id="btn-prev" class="btn btn-secondary" data-i18n="back_btn" disabled>Back</button>
+        <button id="btn-next" class="btn btn-primary btn-lg ripple" data-i18n="next_btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/assessment.js"></script>
+{% endblock %}

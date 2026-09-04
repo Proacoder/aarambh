@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section onboarding fade-in">
+  <div class="container">
+    <div class="onboarding-greeting card text-center mb-4 slide-up">
+      <div class="greeting-avatar mb-2">👋</div>
+      <h1 class="page-title mb-1" data-i18n="onboarding_title">नमस्कार! मी CareerMitra.</h1>
+      <p class="page-subtitle" data-i18n="onboarding_sub">चल, आधी तुझ्याबद्दल थोडं जाणून घेऊया. यामध्ये फक्त १ मिनिट लागेल.</p>
+    </div>
+
+    <!-- Onboarding Stepper Indicator -->
+    <div class="stepper-container mb-4 slide-up">
+      <div class="stepper-track-bg"></div>
+      <div class="stepper-track-progress" style="width: 33%;"></div>
+      <div class="step-node active">
+        <div class="step-badge">1</div>
+        <span class="step-label" data-i18n="step_1_label">1. Profile Details</span>
+      </div>
+      <div class="step-node">
+        <div class="step-badge">2</div>
+        <span class="step-label" data-i18n="step_2_label">2. Aptitude Quiz</span>
+      </div>
+      <div class="step-node">
+        <div class="step-badge">3</div>
+        <span class="step-label" data-i18n="step_3_label">3. Career Roadmap</span>
+      </div>
+    </div>
+
+    <div id="error-message" class="form-error card hidden" role="alert"></div>
+
+    <form id="onboarding-form" class="card onboarding-card-form" novalidate>
+      
+      <!-- Stage Selector Cards -->
+      <fieldset class="form-section stagger-1 animate-on-scroll border-0 p-0 mb-4">
+        <legend class="section-legend" data-i18n="field_class">Current Stage</legend>
+        
+        <div class="stage-selector-grid grid-2 md-grid-4 gap-3 mt-3">
+          <label class="stage-card ripple">
+            <input type="radio" name="class_level" value="10th" required checked>
+            <div class="stage-content">
+              <span class="stage-icon">📘</span>
+              <span class="stage-title" data-i18n="class_10_pass">Class 10 Pass</span>
+            </div>
+          </label>
+
+          <label class="stage-card ripple">
+            <input type="radio" name="class_level" value="12th">
+            <div class="stage-content">
+              <span class="stage-icon">📗</span>
+              <span class="stage-title" data-i18n="class_12_pass">Class 12 Pass</span>
+            </div>
+          </label>
+
+          <label class="stage-card ripple">
+            <input type="radio" name="class_level" value="diploma">
+            <div class="stage-content">
+              <span class="stage-icon">🔧</span>
+              <span class="stage-title" data-i18n="diploma">ITI / Diploma</span>
+            </div>
+          </label>
+
+          <label class="stage-card ripple">
+            <input type="radio" name="class_level" value="ug">
+            <div class="stage-content">
+              <span class="stage-icon">🎓</span>
+              <span class="stage-title" data-i18n="graduate">Graduate</span>
+            </div>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section stagger-2 animate-on-scroll">
+        <legend data-i18n="about_you">About You</legend>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="name" class="form-label" data-i18n="field_name">Your name</label>
+            <input type="text" id="name" name="name" class="form-input" value="{{ user.name if user and user.name and user.name != 'Guest Student' else '' }}" placeholder="उदा. राहुल पवार" data-i18n-ph="placeholder_name" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="age" class="form-label" data-i18n="field_age">Age</label>
+            <input type="number" id="age" name="age" class="form-input" min="10" max="30" placeholder="17" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="district" class="form-label" data-i18n="field_district">District</label>
+            <select id="district" name="district" class="form-select" required aria-required="true">
+              <option value="" disabled selected data-i18n="select_district">Select district</option>
+              {% for dist in districts %}
+              <option value="{{ dist }}">{{ dist }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="taluka" class="form-label" data-i18n="field_taluka">Taluka / City (optional)</label>
+            <input type="text" id="taluka" name="taluka" class="form-input" placeholder="उदा. बारामती" data-i18n-ph="placeholder_taluka">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section stagger-3 animate-on-scroll mt-4">
+        <legend data-i18n="academic_info">Academic information</legend>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="marks" class="form-label" data-i18n="field_marks">Last exam marks (%)</label>
+            <input type="number" id="marks" name="marks" class="form-input" min="0" max="100" placeholder="75" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="income" class="form-label" data-i18n="field_income">Family annual income (₹)</label>
+            <input type="number" id="income" name="income" class="form-input" min="0" placeholder="150000" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="category" class="form-label" data-i18n="field_category">Category</label>
+            <select id="category" name="category" class="form-select" required aria-required="true">
+              <option value="" disabled selected data-i18n="select_category">Select category</option>
+              <option value="General" data-i18n="gen_category">General</option>
+              <option value="OBC" data-i18n="obc_category">OBC</option>
+              <option value="SC" data-i18n="sc_category">SC</option>
+              <option value="ST" data-i18n="st_category">ST</option>
+              <option value="VJNT / NT" data-i18n="vjnt_category">VJNT / NT</option>
+              <option value="SBC" data-i18n="sbc_category">SBC</option>
+              <option value="EWS" data-i18n="ews_category">EWS</option>
+              <option value="Minority" data-i18n="minority_category">Minority</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="field_gender">Gender</label>
+            <select id="gender" name="gender" class="form-select">
+              <option value="" selected data-i18n="gender_prefer_not_say">Prefer not to say</option>
+              <option value="female" data-i18n="gender_female">Female</option>
+              <option value="male" data-i18n="gender_male">Male</option>
+              <option value="other" data-i18n="gender_other">Other</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-checkbox-label flex align-center gap-2">
+              <input type="checkbox" id="disability" name="disability" class="form-checkbox">
+              <span data-i18n="field_pwd">Person with disability (PWD)</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section stagger-4 animate-on-scroll mt-4">
+        <legend data-i18n="preferences">Your preferences</legend>
+        <div class="form-group">
+          <label class="form-label" data-i18n="field_language">Preferred language</label>
+          <div class="form-radio-group flex gap-4" role="radiogroup">
+            <label class="radio-chip"><input type="radio" name="language" value="mr" checked> मराठी</label>
+            <label class="radio-chip"><input type="radio" name="language" value="hi"> हिंदी</label>
+            <label class="radio-chip"><input type="radio" name="language" value="en"> English</label>
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <label class="form-label" data-i18n="field_mobility">How far are you willing to travel to study?</label>
+          <div class="form-radio-group flex flex-wrap gap-3" role="radiogroup">
+            <label class="radio-chip"><input type="radio" name="mobility" value="local" data-i18n="mobility_local"> Within my taluka</label>
+            <label class="radio-chip"><input type="radio" name="mobility" value="district" data-i18n="mobility_district" checked> Within my district</label>
+            <label class="radio-chip"><input type="radio" name="mobility" value="state" data-i18n="mobility_state"> Anywhere in Maharashtra</label>
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <label for="budget" class="form-label" data-i18n="field_budget">Yearly fees you can manage (₹)</label>
+          <input type="number" id="budget" name="budget" class="form-input" min="0" placeholder="50000" required aria-required="true">
+        </div>
+      </fieldset>
+
+      <div class="form-actions mt-5 text-center">
+        <button type="submit" class="btn btn-primary btn-lg ripple w-100-mobile" id="onboarding-submit" data-i18n="continue_btn">
+          Continue to Assessment ➔
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/onboarding.js"></script>
+{% endblock %}

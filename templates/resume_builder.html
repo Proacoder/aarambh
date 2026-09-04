@@ -1,0 +1,417 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section resume-builder-page fade-in" style="padding-top: 2rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 1200px;">
+
+    <!-- Header Banner -->
+    <div class="card glass-card p-4 mb-4 flex-between align-center flex-wrap gap-3 slide-up resume-header-card" style="border-left: 5px solid var(--indigo); border-radius: 16px;">
+      <div>
+        <div class="inline-flex align-center gap-2 badge badge-indigo mb-1">
+          <span>📄</span> <span data-i18n="resume_badge">RESUMEMITRA • ATS RESUME ARCHITECT</span>
+        </div>
+        <h1 class="page-title mb-1" style="font-size: 1.6rem;" data-i18n="resume_title">Single-Page Professional Resume Generator</h1>
+        <p class="text-muted text-small mb-0" data-i18n="resume_subtitle">Craft an ATS-optimized resume for ITI apprenticeships, polytechnic diplomas, and internships in Maharashtra.</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex align-center gap-2 flex-wrap">
+        <button id="btn-print-resume" type="button" class="btn btn-outline ripple flex align-center gap-2" style="border-radius: 12px; font-weight: 600;">
+          <span>🖨️</span> <span data-i18n="resume_print_btn">Print / Save PDF</span>
+        </button>
+        <button id="btn-export-resume-pdf" type="button" class="btn btn-primary ripple flex align-center gap-2" style="border-radius: 12px; font-weight: 600;">
+          <span id="pdf-btn-icon">📥</span> <span id="pdf-btn-text" data-i18n="resume_download_btn">Download A4 PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2-Column Split: Form Editor (Left) + Live Preview Sheet (Right) -->
+    <div class="grid grid-2 gap-4 resume-grid-container">
+      
+      <!-- Left Column: Interactive Form -->
+      <div class="card glass-card p-4 flex-column gap-3 resume-form-col" style="border-radius: 16px; max-height: 85vh; overflow-y: auto;">
+        <div class="flex-between align-center flex-wrap gap-2 mb-1">
+          <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">✏️ <span data-i18n="resume_candidate_details">Candidate Details</span></h3>
+          <div class="flex align-center gap-1">
+            <button type="button" id="btn-sample-iti" class="btn btn-text btn-xs text-indigo" style="font-size: 0.72rem; padding: 2px 6px;">⚡ ITI Preset</button>
+            <button type="button" id="btn-sample-poly" class="btn btn-text btn-xs text-indigo" style="font-size: 0.72rem; padding: 2px 6px;">💻 Diploma Preset</button>
+            <button type="button" id="btn-sample-agri" class="btn btn-text btn-xs text-indigo" style="font-size: 0.72rem; padding: 2px 6px;">🌾 Agri Preset</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_full_name">Full Name</label>
+          <input type="text" id="res-name" class="form-input" value="Rahul Ashok Pawar" placeholder="Rahul Pawar">
+        </div>
+
+        <div class="grid-2 gap-2">
+          <div class="form-group">
+            <label class="form-label" data-i18n="resume_email">Email</label>
+            <input type="email" id="res-email" class="form-input" value="rahul.pawar@example.com" placeholder="rahul@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="resume_phone">Phone</label>
+            <input type="text" id="res-phone" class="form-input" value="+91 98765 43210" placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="grid-2 gap-2">
+          <div class="form-group">
+            <label class="form-label" data-i18n="resume_location">District & State</label>
+            <input type="text" id="res-location" class="form-input" value="Pune, Maharashtra" placeholder="Pune, Maharashtra">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="resume_target_role">Target Role</label>
+            <input type="text" id="res-target" class="form-input" value="Junior Web Developer & IT Trainee" placeholder="Diploma Trainee / Apprentice">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_summary_label">Professional Summary (AI Suggested)</label>
+          <textarea id="res-summary" class="form-input" rows="3">Dedicated student with high analytical problem-solving skills from Pune district. Completed 10th with 82% and building foundational proficiency in Python, HTML/CSS, and hardware troubleshooting. Seeking junior apprenticeship.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_edu_label">Education (Degree / Institute / Marks / Year)</label>
+          <textarea id="res-education" class="form-input" rows="2">Secondary School Certificate (SSC 10th) | Z.P. High School Baramati | 82.4% (2025)</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_skills_label">Technical & Practical Skills (Comma separated)</label>
+          <input type="text" id="res-skills" class="form-input" value="Python, HTML5, CSS3, Hardware Maintenance, MS-CIT Certified, Marathi, Hindi, English">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_projects_label">Projects & Practical Lab Work</label>
+          <textarea id="res-projects" class="form-input" rows="3">1. Village Soil Moisture Drip Automation: Prototyped low-cost IoT irrigation circuit using Arduino and moisture sensors.
+2. Panchayati Raj Portal Helper: Built simple offline informational webpage for local Gram Panchayat schemes.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-i18n="resume_certs_label">Certifications & Co-Curricular</label>
+          <input type="text" id="res-certs" class="form-input" value="MS-CIT Computer Operations (Distinction), Maharashtra State Talent Search Ranker">
+        </div>
+
+        <div class="flex-between align-center pt-2">
+          <button type="button" id="btn-clear-resume" class="btn btn-text btn-xs text-muted">
+            🗑️ <span data-i18n="resume_reset_btn">Clear Form</span>
+          </button>
+          <span class="text-xs text-muted">✅ Auto-saved to browser session</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Live A4 Paper Sheet Preview -->
+      <div class="flex-column align-center resume-preview-col">
+        <div class="mb-2 text-xs text-muted font-bold flex-between w-full px-2">
+          <span>📄 <span data-i18n="resume_preview_badge">LIVE ATS-FRIENDLY A4 PREVIEW</span></span>
+          <span class="badge badge-green" style="font-size: 0.7rem; font-weight: 700;">🟢 ATS Score: 94/100</span>
+        </div>
+
+        <!-- Single Page Printable A4 Sheet -->
+        <div id="resume-paper" class="printable-resume" style="background: #ffffff; color: #111827; width: 100%; max-width: 540px; min-height: 740px; padding: 2.2rem 2.2rem; border-radius: 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.12); font-family: 'Inter', -apple-system, sans-serif; font-size: 11px; line-height: 1.45; border: 1px solid #e5e7eb; box-sizing: border-box;">
+          
+          <!-- Header -->
+          <div style="border-bottom: 2.5px solid #2563eb; padding-bottom: 0.75rem; margin-bottom: 0.85rem;">
+            <h2 id="prev-name" style="font-size: 20px; font-weight: 800; color: #1e3a8a; margin: 0 0 3px 0; letter-spacing: -0.02em;">Rahul Ashok Pawar</h2>
+            <div id="prev-target" style="font-weight: 700; color: #2563eb; font-size: 12px; margin-bottom: 5px;">Junior Web Developer & IT Trainee</div>
+            <div style="color: #4b5563; font-size: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+              <span id="prev-location">Pune, Maharashtra</span> •
+              <span id="prev-phone">+91 98765 43210</span> •
+              <span id="prev-email">rahul.pawar@example.com</span>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div style="margin-bottom: 0.85rem;">
+            <h4 style="font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1e3a8a; margin: 0 0 4px 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">Profile Summary</h4>
+            <p id="prev-summary" style="color: #374151; margin: 0; line-height: 1.42; font-size: 10.5px;">
+              Dedicated student with high analytical problem-solving skills from Pune district. Completed 10th with 82% and building foundational proficiency in Python, HTML/CSS, and hardware troubleshooting. Seeking junior apprenticeship.
+            </p>
+          </div>
+
+          <!-- Education -->
+          <div style="margin-bottom: 0.85rem;">
+            <h4 style="font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1e3a8a; margin: 0 0 4px 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">Education</h4>
+            <p id="prev-education" style="color: #374151; margin: 0; font-weight: 500; font-size: 10.5px; line-height: 1.42;">
+              Secondary School Certificate (SSC 10th) | Z.P. High School Baramati | 82.4% (2025)
+            </p>
+          </div>
+
+          <!-- Technical Skills -->
+          <div style="margin-bottom: 0.85rem;">
+            <h4 style="font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1e3a8a; margin: 0 0 4px 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">Technical & Practical Skills</h4>
+            <p id="prev-skills" style="color: #374151; margin: 0; font-size: 10.5px; line-height: 1.42;">
+              Python, HTML5, CSS3, Hardware Maintenance, MS-CIT Certified, Marathi, Hindi, English
+            </p>
+          </div>
+
+          <!-- Projects -->
+          <div style="margin-bottom: 0.85rem;">
+            <h4 style="font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1e3a8a; margin: 0 0 4px 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">Projects & Applied Labs</h4>
+            <div id="prev-projects" style="color: #374151; white-space: pre-line; line-height: 1.42; font-size: 10.5px;">
+              1. Village Soil Moisture Drip Automation: Prototyped low-cost IoT irrigation circuit using Arduino and moisture sensors.
+              2. Panchayati Raj Portal Helper: Built simple offline informational webpage for local Gram Panchayat schemes.
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div>
+            <h4 style="font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #1e3a8a; margin: 0 0 4px 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">Certifications & Achievements</h4>
+            <p id="prev-certs" style="color: #374151; margin: 0; font-size: 10.5px; line-height: 1.42;">
+              MS-CIT Computer Operations (Distinction), Maharashtra State Talent Search Ranker
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Print Styling for 1-Page A4 Output -->
+<style>
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .nav-bar,
+  .mobile-drawer,
+  .mobile-drawer-overlay,
+  .mobile-bottom-nav,
+  .site-footer,
+  .resume-header-card,
+  .resume-form-col,
+  .mb-2.text-xs,
+  #mitra-tai-floating-widget,
+  .pwa-install-banner,
+  .toast-container {
+    display: none !important;
+  }
+  .section.resume-builder-page {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .resume-grid-container {
+    display: block !important;
+  }
+  .resume-preview-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  #resume-paper {
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20mm 15mm !important;
+    margin: 0 auto !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const syncMap = [
+    { input: 'res-name', prev: 'prev-name' },
+    { input: 'res-email', prev: 'prev-email' },
+    { input: 'res-phone', prev: 'prev-phone' },
+    { input: 'res-location', prev: 'prev-location' },
+    { input: 'res-target', prev: 'prev-target' },
+    { input: 'res-summary', prev: 'prev-summary' },
+    { input: 'res-education', prev: 'prev-education' },
+    { input: 'res-skills', prev: 'prev-skills' },
+    { input: 'res-projects', prev: 'prev-projects' },
+    { input: 'res-certs', prev: 'prev-certs' }
+  ];
+
+  // 1. Live Input Sync
+  syncMap.forEach(item => {
+    const inEl = document.getElementById(item.input);
+    const prevEl = document.getElementById(item.prev);
+    if (inEl && prevEl) {
+      inEl.addEventListener('input', () => {
+        prevEl.textContent = inEl.value || ' ';
+      });
+    }
+  });
+
+  // 2. Auto-Populate from Active User / Session if present
+  fetch('/api/check-auth')
+    .then(r => r.json())
+    .then(auth => {
+      if (auth && auth.authenticated && auth.user) {
+        if (auth.user.name && auth.user.name !== 'Guest Student') {
+          const nameEl = document.getElementById('res-name');
+          if (nameEl && nameEl.value === 'Rahul Ashok Pawar') {
+            nameEl.value = auth.user.name;
+            document.getElementById('prev-name').textContent = auth.user.name;
+          }
+        }
+        if (auth.user.email) {
+          const emailEl = document.getElementById('res-email');
+          if (emailEl && emailEl.value === 'rahul.pawar@example.com') {
+            emailEl.value = auth.user.email;
+            document.getElementById('prev-email').textContent = auth.user.email;
+          }
+        }
+      }
+    })
+    .catch(() => {});
+
+  // 3. Sample Presets
+  const presets = {
+    iti: {
+      name: "Sachin Ramesh Shinde",
+      email: "sachin.shinde@example.com",
+      phone: "+91 94231 09876",
+      location: "Chhatrapati Sambhajinagar (Aurangabad), Maharashtra",
+      target: "Electrician Apprentice & Industrial Wiring Technician",
+      summary: "Motivated ITI Electrician candidate with practical experience in 3-phase motor wiring, panel assembly, and solar inverter installations. Seeking an apprenticeship in an industrial manufacturing setup.",
+      education: "Craftsmen Training Scheme (ITI Electrician) | Govt ITI Aurangabad | 84.5% (2025)\nSSC 10th Standard | Z.P. Vidyalaya | 78.2% (2023)",
+      skills: "Single & 3-Phase Industrial Wiring, PLC Basics, Multimeter Diagnostics, Solar PV Installation, Safety Protocols, MS-CIT",
+      projects: "1. Smart Home Energy Cutoff: Built relay-based overload protection circuit for farm tube-wells.\n2. Substation Visit Report: Completed 15-day industrial observational internship at MSEDCL 33kV sub-station.",
+      certs: "NCVT ITI Electrician Certificate (A Grade), MS-CIT Computer Operating System"
+    },
+    poly: {
+      name: "Neha Sanjay Patil",
+      email: "neha.patil@example.com",
+      phone: "+91 98220 12345",
+      location: "Kolhapur, Maharashtra",
+      target: "Diploma Trainee Engineer (Computer Engineering)",
+      summary: "Diligent final-year Polytechnic Diploma student specializing in Computer Engineering from Kolhapur. Proficient in web fundamentals, Python, and relational databases with a strong interest in software quality and automation.",
+      education: "Diploma in Computer Engineering | Government Polytechnic Kolhapur | 86.8% Aggregate (2025)\nSSC 10th Standard | New English School | 85.6% (2022)",
+      skills: "Python, C++, HTML5, CSS3, JavaScript, MySQL, Git & GitHub Basics, MS Office, Marathi, English",
+      projects: "1. Gramin College Notice Board: Developed lightweight mobile-friendly web dashboard for college announcements.\n2. Inventory Tracker for Agri-Cooperatives: Designed simple SQLite database application for tracking seed distributions.",
+      certs: "MSBTE State Level Project Competition (2nd Prize), Python for Beginners (Infosys Springboard)"
+    },
+    agri: {
+      name: "Akshay Vilas Deshmukh",
+      email: "akshay.deshmukh@example.com",
+      phone: "+91 91580 54321",
+      location: "Amravati, Vidarbha, Maharashtra",
+      target: "Agriculture Business Executive & Drone Survey Operator",
+      summary: "Dynamic agriculture diploma graduate with extensive hands-on expertise in soil health analysis, drip irrigation system design, and Kisan drone mapping across Vidarbha region.",
+      education: "Diploma in Agriculture (B.Sc Agri Allied) | Dr. PDKV Affiliated Institute Akola | 81.2% (2025)\nSSC 10th | Shivaji High School Amravati | 79.0% (2022)",
+      skills: "Drone Crop Health Scouting, Drip & Sprinkler Design, Organic Compost Production, Farmer Guidance, Hindi, Marathi",
+      projects: "1. Cotton Pest Early Warning System: Deployed yellow sticky traps and WhatsApp advisory for 40 local cotton farmers.\n2. Vermicompost Enterprise: Setup 4-bed organic fertilizer unit generating 500kg monthly yield.",
+      certs: "DGCA Certified Small Drone Pilot, Krishi Vigyan Kendra Soil Testing Certification"
+    }
+  };
+
+  function applyPreset(p) {
+    document.getElementById('res-name').value = p.name;
+    document.getElementById('prev-name').textContent = p.name;
+    document.getElementById('res-email').value = p.email;
+    document.getElementById('prev-email').textContent = p.email;
+    document.getElementById('res-phone').value = p.phone;
+    document.getElementById('prev-phone').textContent = p.phone;
+    document.getElementById('res-location').value = p.location;
+    document.getElementById('prev-location').textContent = p.location;
+    document.getElementById('res-target').value = p.target;
+    document.getElementById('prev-target').textContent = p.target;
+    document.getElementById('res-summary').value = p.summary;
+    document.getElementById('prev-summary').textContent = p.summary;
+    document.getElementById('res-education').value = p.education;
+    document.getElementById('prev-education').textContent = p.education;
+    document.getElementById('res-skills').value = p.skills;
+    document.getElementById('prev-skills').textContent = p.skills;
+    document.getElementById('res-projects').value = p.projects;
+    document.getElementById('prev-projects').textContent = p.projects;
+    document.getElementById('res-certs').value = p.certs;
+    document.getElementById('prev-certs').textContent = p.certs;
+
+    if (window.CareerMitra && window.CareerMitra.toast) {
+      window.CareerMitra.toast('Preset profile loaded successfully!', 'success');
+    }
+  }
+
+  document.getElementById('btn-sample-iti')?.addEventListener('click', () => applyPreset(presets.iti));
+  document.getElementById('btn-sample-poly')?.addEventListener('click', () => applyPreset(presets.poly));
+  document.getElementById('btn-sample-agri')?.addEventListener('click', () => applyPreset(presets.agri));
+
+  // Clear Form
+  document.getElementById('btn-clear-resume')?.addEventListener('click', () => {
+    if (confirm('सर्व माहिती पुसायची का? (Clear resume fields?)')) {
+      syncMap.forEach(item => {
+        const inEl = document.getElementById(item.input);
+        const prevEl = document.getElementById(item.prev);
+        if (inEl) inEl.value = '';
+        if (prevEl) prevEl.textContent = '';
+      });
+      if (window.CareerMitra && window.CareerMitra.toast) {
+        window.CareerMitra.toast('Resume cleared.', 'info');
+      }
+    }
+  });
+
+  // Dedicated Vector Print Button (Always 100% functional)
+  document.getElementById('btn-print-resume')?.addEventListener('click', () => {
+    window.print();
+  });
+
+  // Client-side PDF Download with Fallback & Toast Feedback
+  const exportBtn = document.getElementById('btn-export-resume-pdf');
+  const btnText = document.getElementById('pdf-btn-text');
+  const btnIcon = document.getElementById('pdf-btn-icon');
+
+  exportBtn?.addEventListener('click', async () => {
+    const element = document.getElementById('resume-paper');
+    if (!element) return;
+
+    // Set loading state
+    exportBtn.disabled = true;
+    if (btnText) btnText.textContent = 'Generating PDF...';
+    if (btnIcon) btnIcon.textContent = '⏳';
+
+    if (window.CareerMitra && window.CareerMitra.toast) {
+      window.CareerMitra.toast('Preparing your A4 resume PDF...', 'info');
+    }
+
+    try {
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin: [8, 8, 8, 8],
+          filename: (document.getElementById('res-name')?.value || 'AARAMBH_Resume').trim().replace(/\s+/g, '_') + '_Resume.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, logging: false },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        await html2pdf().set(opt).from(element).save();
+
+        if (window.CareerMitra && window.CareerMitra.toast) {
+          window.CareerMitra.toast('Resume downloaded successfully! 🎉', 'success');
+        }
+      } else {
+        // Graceful fallback to native high-res print
+        window.print();
+        if (window.CareerMitra && window.CareerMitra.toast) {
+          window.CareerMitra.toast('Opening Print dialog. Choose "Save as PDF"!', 'info');
+        }
+      }
+    } catch (err) {
+      console.error('PDF generation error:', err);
+      window.print();
+      if (window.CareerMitra && window.CareerMitra.toast) {
+        window.CareerMitra.toast('Print dialog opened as fallback.', 'info');
+      }
+    } finally {
+      exportBtn.disabled = false;
+      if (btnText) btnText.textContent = 'Download A4 PDF';
+      if (btnIcon) btnIcon.textContent = '📥';
+    }
+  });
+});
+</script>
+{% endblock %}
