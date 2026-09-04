@@ -84,6 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Handle OAuth error parameters from redirects
+  const urlParams = new URLSearchParams(window.location.search);
+  const authError = urlParams.get('error');
+  if (authError) {
+    let errorMsg = 'Google Login failed. Please check credentials or continue as Guest.';
+    if (authError === 'oauth_not_configured') {
+      errorMsg = 'Google OAuth is not configured on this server. Please continue as Guest.';
+    }
+    if (typeof CareerMitra !== 'undefined' && CareerMitra.toast) {
+      CareerMitra.toast(errorMsg, 'error');
+    }
+  }
+
   guestBtn.addEventListener('click', async () => {
     setLoading(guestBtn, true);
     try {

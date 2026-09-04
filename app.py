@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from flask import Flask, render_template, request, jsonify, session, send_from_directory, redirect, url_for, Response
 
@@ -25,6 +26,14 @@ app = Flask(
 )
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "careermitra-dev-secret-change-me")
 
+# Ensure proper protocol handling behind reverse proxies (Vercel / Render)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
+# Cookie settings for cross-origin OAuth callbacks
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
 oauth = OAuth(app)
 oauth.register(
     name='google',
@@ -35,8 +44,6 @@ oauth.register(
         'scope': 'openid email profile'
     }
 )
-
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.after_request
 def add_no_cache_headers(response):
@@ -78,11 +85,23 @@ def login_page():
     return render_template("login.html")
 
 @app.route("/login/google")
+@app.route("/auth/google")
 def login_google():
     next_url = request.args.get("next")
     if next_url:
         session["next_url"] = next_url
+
+    client_id = os.environ.get('GOOGLE_CLIENT_ID', '').strip()
+    client_secret = os.environ.get('GOOGLE_CLIENT_SECRET', '').strip()
+    if not client_id or not client_secret:
+        print("⚠️ Google OAuth credentials not configured in environment.")
+        return redirect("/login?error=oauth_not_configured")
+
     redirect_uri = url_for('auth_callback', _external=True)
+    if request.headers.get('X-Forwarded-Proto') == 'https' or request.is_secure or os.environ.get('VERCEL') or os.environ.get('RENDER'):
+        if redirect_uri.startswith('http://'):
+            redirect_uri = 'https://' + redirect_uri[7:]
+
     return oauth.google.authorize_redirect(redirect_uri)
 
 @app.route("/auth/callback")

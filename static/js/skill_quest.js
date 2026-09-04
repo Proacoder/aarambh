@@ -102,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (xp >= 450) return { rank: "Level 3 Pioneer", rankMr: "पातळी ३: पायनियर", next: 600, pct: Math.round((xp / 600) * 100) };
     if (xp >= 300) return { rank: "Level 2 Explorer", rankMr: "पातळी २: शोधक", next: 450, pct: Math.round((xp / 450) * 100) };
     if (xp >= 150) return { rank: "Level 1 Starter", rankMr: "पातळी १: आरंभ", next: 300, pct: Math.round((xp / 300) * 100) };
-    return { rank: "Novice", rankMr: "नवशिका (Novice)", next: 150, pct: 0 };
+    return { rank: "Novice", rankMr: "नवशिका", next: 150, pct: 0 };
   }
+
+  const t = (k, fb) => (window.CareerMitra && window.CareerMitra.hasTranslation && window.CareerMitra.hasTranslation(k)) ? window.CareerMitra.t(k) : fb;
 
   function getActiveLang() {
     return (window.CareerMitra && window.CareerMitra.lang) || localStorage.getItem('cm-lang') || 'mr';
