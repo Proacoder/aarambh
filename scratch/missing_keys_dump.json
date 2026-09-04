@@ -1,0 +1,602 @@
+{
+  "nav_colleges_map": [
+    "all_colleges.html",
+    "Colleges &amp; Rural Map"
+  ],
+  "nav_distribution": [
+    "all_colleges.html",
+    "Distribution &amp; Coverage"
+  ],
+  "nav_career_hubs": [
+    "all_colleges.html",
+    "Career Hubs"
+  ],
+  "nav_live_counter": [
+    "all_colleges.html",
+    "65+ Rural &amp; Urban Institutes"
+  ],
+  "sidebar_title_colleges": [
+    "all_colleges.html",
+    "Colleges &amp; Institutes"
+  ],
+  "sidebar_subtitle_colleges": [
+    "all_colleges.html",
+    "Subsidized, polytechnics, ITIs &amp; degree colleges"
+  ],
+  "sidebar_count_colleges": [
+    "all_colleges.html",
+    "0 colleges"
+  ],
+  "badge_all_mh": [
+    "all_colleges.html",
+    "All Maharashtra"
+  ],
+  "badge_rural": [
+    "all_colleges.html",
+    "Rural Only"
+  ],
+  "badge_tribal": [
+    "all_colleges.html",
+    "Tribal Belts"
+  ],
+  "badge_govt": [
+    "all_colleges.html",
+    "Govt Only"
+  ],
+  "badge_iti": [
+    "all_colleges.html",
+    "ITI"
+  ],
+  "badge_polytechnic": [
+    "all_colleges.html",
+    "Polytechnic"
+  ],
+  "filter_district": [
+    "all_colleges.html",
+    "District"
+  ],
+  "filter_institute_type": [
+    "all_colleges.html",
+    "Institute Type"
+  ],
+  "filter_category": [
+    "all_colleges.html",
+    "Category"
+  ],
+  "filter_min_qual": [
+    "all_colleges.html",
+    "Min Qualification"
+  ],
+  "filter_max_fee": [
+    "all_colleges.html",
+    "Max Annual Tuition"
+  ],
+  "filter_scheme": [
+    "all_colleges.html",
+    "Scholarship / Scheme"
+  ],
+  "btn_find_gps": [
+    "all_colleges.html",
+    "Find Colleges Near Me (GPS)"
+  ],
+  "btn_reset": [
+    "all_colleges.html",
+    "Reset"
+  ],
+  "region_all": [
+    "all_colleges.html",
+    "All Maharashtra"
+  ],
+  "region_rural": [
+    "all_colleges.html",
+    "Rural &amp; Tribal Belts"
+  ],
+  "region_vidarbha": [
+    "all_colleges.html",
+    "Vidarbha"
+  ],
+  "region_marathwada": [
+    "all_colleges.html",
+    "Marathwada"
+  ],
+  "region_khandesh": [
+    "all_colleges.html",
+    "North MH / Khandesh"
+  ],
+  "region_konkan": [
+    "all_colleges.html",
+    "Konkan Coast"
+  ],
+  "region_western": [
+    "all_colleges.html",
+    "Western MH"
+  ],
+  "map_dark": [
+    "all_colleges.html",
+    "Dark"
+  ],
+  "map_streets": [
+    "all_colleges.html",
+    "Streets"
+  ],
+  "map_satellite": [
+    "all_colleges.html",
+    "Satellite"
+  ],
+  "legend_govt": [
+    "all_colleges.html",
+    "Government (Subsidized)"
+  ],
+  "legend_aided": [
+    "all_colleges.html",
+    "Aided"
+  ],
+  "legend_private": [
+    "all_colleges.html",
+    "Private"
+  ],
+  "legend_location": [
+    "all_colleges.html",
+    "Your Location"
+  ],
+  "stat_colleges": [
+    "all_colleges.html",
+    "Colleges Plotted"
+  ],
+  "stat_rural": [
+    "all_colleges.html",
+    "Rural/Tribal"
+  ],
+  "dist_hero_title": [
+    "all_colleges.html",
+    "📊 Maharashtra College Distribution &amp; Rural Reach"
+  ],
+  "dist_hero_desc": [
+    "all_colleges.html",
+    "Detailed breakdown of higher education and technical institutions across rural talukas, tribal belts, and industrial centers with fee subsidy coverage."
+  ],
+  "btn_open_map": [
+    "all_colleges.html",
+    "Open Interactive Map"
+  ],
+  "kpi_institutions": [
+    "all_colleges.html",
+    "Institutions Documented"
+  ],
+  "kpi_rural": [
+    "all_colleges.html",
+    "Rural &amp; Tribal Talukas"
+  ],
+  "kpi_govt": [
+    "all_colleges.html",
+    "Govt &amp; Low-Fee (&lt;₹10k/yr)"
+  ],
+  "kpi_scheme": [
+    "all_colleges.html",
+    "MahaDBT Scheme Eligible"
+  ],
+  "chart_district_title": [
+    "all_colleges.html",
+    "District Coverage &amp; Rural Spread"
+  ],
+  "chart_count": [
+    "all_colleges.html",
+    "Count"
+  ],
+  "chart_stream_title": [
+    "all_colleges.html",
+    "Stream &amp; Category Distribution"
+  ],
+  "chart_share": [
+    "all_colleges.html",
+    "Share"
+  ],
+  "chart_type_title": [
+    "all_colleges.html",
+    "Government vs. Private vs. Aided"
+  ],
+  "chart_fee_title": [
+    "all_colleges.html",
+    "Annual Fee Brackets"
+  ],
+  "table_dir_title": [
+    "all_colleges.html",
+    "District Higher Education Directory"
+  ],
+  "table_dir_hint": [
+    "all_colleges.html",
+    "Click any district to explore on map"
+  ],
+  "th_district": [
+    "all_colleges.html",
+    "District"
+  ],
+  "th_region": [
+    "all_colleges.html",
+    "Region"
+  ],
+  "th_focus": [
+    "all_colleges.html",
+    "Rural / Tribal Focus"
+  ],
+  "th_colleges": [
+    "all_colleges.html",
+    "Colleges Tracked"
+  ],
+  "th_fee": [
+    "all_colleges.html",
+    "Lowest Fee"
+  ],
+  "th_streams": [
+    "all_colleges.html",
+    "Key Streams"
+  ],
+  "th_action": [
+    "all_colleges.html",
+    "Action"
+  ],
+  "hubs_title": [
+    "all_colleges.html",
+    "District Career Hubs"
+  ],
+  "hubs_subtitle": [
+    "all_colleges.html",
+    "Employment centers &amp; major economic sectors"
+  ],
+  "step_1_label": [
+    "assessment.html",
+    "1. Profile Details"
+  ],
+  "step_2_label": [
+    "assessment.html",
+    "2. Aptitude Quiz"
+  ],
+  "step_3_label": [
+    "assessment.html",
+    "3. Career Roadmap"
+  ],
+  "cv_badge": [
+    "careerverse.html",
+    "3D CAREERVERSE • GALAXY EXPLORER"
+  ],
+  "cv_title": [
+    "careerverse.html",
+    "The Interactive Career Cosmos"
+  ],
+  "cv_instructions": [
+    "careerverse.html",
+    "Drag to rotate • Scroll to zoom • Tap any glowing star to inspect qualifications & salaries"
+  ],
+  "cv_control_drag": [
+    "careerverse.html",
+    "🖱️ Left Drag: Orbit"
+  ],
+  "cv_control_zoom": [
+    "careerverse.html",
+    "🔍 Wheel: Zoom"
+  ],
+  "cv_command_center": [
+    "careerverse.html",
+    "Command Center &rarr;"
+  ],
+  "cv_filter_all": [
+    "careerverse.html",
+    "✨ All Constellations"
+  ],
+  "cv_filter_tech": [
+    "careerverse.html",
+    "💻 Tech & IT"
+  ],
+  "cv_filter_agri": [
+    "careerverse.html",
+    "🌾 Agri-Tech"
+  ],
+  "cv_filter_health": [
+    "careerverse.html",
+    "⚕️ Healthcare"
+  ],
+  "cv_filter_govt": [
+    "careerverse.html",
+    "🏛️ Public Service"
+  ],
+  "cv_entry_salary": [
+    "careerverse.html",
+    "Entry Salary:"
+  ],
+  "cv_qualification": [
+    "careerverse.html",
+    "Qualification:"
+  ],
+  "dna_badge": [
+    "career_dna.html",
+    "🧬 PSYCHOMETRIC DISCOVERY"
+  ],
+  "dna_title": [
+    "career_dna.html",
+    "Your Career DNA Signature"
+  ],
+  "dna_subtitle": [
+    "career_dna.html",
+    "An interactive multi-dimensional map of your natural thinking styles, vocational affinities, and practical problem-solving preferences."
+  ],
+  "dna_note": [
+    "career_dna.html",
+    "💡 Note: These scores are indicators of your current interests and strengths. You can develop new skills and affinities over time."
+  ],
+  "dna_radar_title": [
+    "career_dna.html",
+    "🕸️ Multi-Dimensional Affinity Radar"
+  ],
+  "dna_radar_sub": [
+    "career_dna.html",
+    "Visual balance across 6 core RIASEC dimensions."
+  ],
+  "dna_overall_match": [
+    "career_dna.html",
+    "Overall Match: 94% Alignment"
+  ],
+  "dna_primary_type": [
+    "career_dna.html",
+    "Primary: Realistic & Tech"
+  ],
+  "dna_archetype_badge": [
+    "career_dna.html",
+    "YOUR DOMINANT ARCHETYPE"
+  ],
+  "dna_precision": [
+    "career_dna.html",
+    "94% Precision"
+  ],
+  "dna_archetype_name": [
+    "career_dna.html",
+    "The Practical Innovator & Builder"
+  ],
+  "dna_archetype_desc": [
+    "career_dna.html",
+    "You feel most energized when working with real tools, logical systems, and tangible technology. You enjoy understanding how things work under the hood and solving real-world community challenges."
+  ],
+  "dna_dimension_title": [
+    "career_dna.html",
+    "Dimension Breakdown"
+  ],
+  "dna_dim_realistic": [
+    "career_dna.html",
+    "Realistic (Practical & Engineering)"
+  ],
+  "dna_dim_investigative": [
+    "career_dna.html",
+    "Investigative (Analysis & Scientific Logic)"
+  ],
+  "dna_dim_enterprising": [
+    "career_dna.html",
+    "Enterprising (Leadership & Commerce)"
+  ],
+  "dna_dim_social": [
+    "career_dna.html",
+    "Social (Teaching & Community Support)"
+  ],
+  "dna_cta_matches": [
+    "career_dna.html",
+    "Go to My Matches & Command Center &rarr;"
+  ],
+  "dna_cta_schemes": [
+    "career_dna.html",
+    "🎓 Govt Schemes"
+  ],
+  "dna_cta_calculator": [
+    "career_dna.html",
+    "💰 PathPocket Calculator"
+  ],
+  "doc_print_btn": [
+    "documents.html",
+    "प्रिंट / PDF चेकलिस्ट सेव्ह करा"
+  ],
+  "doc_portals_title": [
+    "documents.html",
+    "शासकीय अधिकृत पोर्टल्स (Official Portals):"
+  ],
+  "landing_h1_new": [
+    "index.html",
+    "Your Future Deserves a Clear Path."
+  ],
+  "use_now_cta": [
+    "index.html",
+    "Use CareerMitra Now"
+  ],
+  "explore_how": [
+    "index.html",
+    "Explore How It Works"
+  ],
+  "how_subtitle": [
+    "index.html",
+    "Six simple steps to discover your path and build your future."
+  ],
+  "journey_step1_title": [
+    "index.html",
+    "Tell Us About Yourself"
+  ],
+  "journey_step2_title": [
+    "index.html",
+    "Discover Your Strengths"
+  ],
+  "journey_step3_title": [
+    "index.html",
+    "Explore Career Options"
+  ],
+  "step3_d_new": [
+    "index.html",
+    "Get personalized career recommendations based on your interests."
+  ],
+  "journey_step4_title": [
+    "index.html",
+    "Find Colleges & Scholarships"
+  ],
+  "journey_step5_title": [
+    "index.html",
+    "Understand Your Costs"
+  ],
+  "step5_d": [
+    "index.html",
+    "Know exactly what education will cost — tuition, hostel, food, travel."
+  ],
+  "step6_d": [
+    "index.html",
+    "Your personal roadmap with step-by-step guidance from Mitra Tai."
+  ],
+  "features_title": [
+    "index.html",
+    "Everything You Need to Plan Your Career"
+  ],
+  "feat_career_discovery": [
+    "index.html",
+    "Career Discovery"
+  ],
+  "feat_career_desc": [
+    "index.html",
+    "Understand careers that suit your personality, skills, and interests through our RIASEC assessment."
+  ],
+  "feat_college_discovery": [
+    "index.html",
+    "College Discovery"
+  ],
+  "feat_college_desc": [
+    "index.html",
+    "Find government and private colleges near your district with courses, fees, and distance info."
+  ],
+  "feat_scholarships": [
+    "index.html",
+    "Scholarships"
+  ],
+  "feat_scholarship_desc": [
+    "index.html",
+    "Discover scholarships you actually qualify for based on your category, income, and education level."
+  ],
+  "feat_smart_kharcha": [
+    "index.html",
+    "Smart Kharcha"
+  ],
+  "feat_kharcha_desc": [
+    "index.html",
+    "Get a realistic breakdown of education costs — tuition, hostel, food, travel, and more."
+  ],
+  "feat_mitra_tai": [
+    "index.html",
+    "Mitra Tai"
+  ],
+  "feat_mitra_desc": [
+    "index.html",
+    "Your AI career guide who understands you. Ask questions in Marathi, Hindi, or English."
+  ],
+  "feat_roadmap": [
+    "index.html",
+    "Career Roadmap"
+  ],
+  "feat_roadmap_desc": [
+    "index.html",
+    "A personalized action plan with immediate steps, scholarship deadlines, and long-term goals."
+  ],
+  "why_title": [
+    "index.html",
+    "Built For Rural Students. By Those Who Understand."
+  ],
+  "why_multi_lang": [
+    "index.html",
+    "Multilingual"
+  ],
+  "why_multi_desc": [
+    "index.html",
+    "Full support for Marathi, Hindi, and English. Built for Maharashtra's diverse student community."
+  ],
+  "why_location": [
+    "index.html",
+    "Location-Aware"
+  ],
+  "why_location_desc": [
+    "index.html",
+    "Recommendations based on your district. Find colleges and opportunities near you."
+  ],
+  "why_financial": [
+    "index.html",
+    "Financially Aware"
+  ],
+  "why_financial_desc": [
+    "index.html",
+    "We understand budget constraints. Every recommendation considers your family income."
+  ],
+  "why_action": [
+    "index.html",
+    "Action-Oriented"
+  ],
+  "why_action_desc": [
+    "index.html",
+    "Not just information — clear next steps. Know exactly what to do and when to do it."
+  ],
+  "final_cta_title": [
+    "index.html",
+    "Ready to Start Your Career Journey?"
+  ],
+  "final_cta_sub": [
+    "index.html",
+    "Join thousands of Maharashtra students discovering their future with CareerMitra."
+  ],
+  "use_careermitra_now": [
+    "index.html",
+    "🚀 Use CareerMitra Now"
+  ],
+  "app_tagline": [
+    "login.html",
+    "Rural Student Career Opportunity Navigator for Maharashtra"
+  ],
+  "back_to_home": [
+    "login.html",
+    "← Back to Home"
+  ],
+  "schemes_header_badge": [
+    "schemes.html",
+    "MAHADBT • MAHARASHTRA STUDENT SCHEMES DIRECTORY"
+  ],
+  "schemes_main_title": [
+    "schemes.html",
+    "महाराष्ट्र शासन शिष्यवृत्ती व सवलत योजना"
+  ],
+  "schemes_subtitle": [
+    "schemes.html",
+    "महाडीबीटी फी माफी, स्वाधार वसतिगृह भत्ता व शासकीय विद्यावेतन योजनांची संपूर्ण माहिती व अटी."
+  ],
+  "schemes_calc_btn": [
+    "schemes.html",
+    "Kharcha Calculator"
+  ],
+  "schemes_docs_btn": [
+    "schemes.html",
+    "Doc Checklist"
+  ],
+  "schemes_showing": [
+    "schemes.html",
+    "Showing"
+  ],
+  "schemes_count_label": [
+    "schemes.html",
+    "Maharashtra Student Schemes"
+  ],
+  "reset_filters": [
+    "schemes.html",
+    "Reset Filters"
+  ],
+  "schemes_no_match_title": [
+    "schemes.html",
+    "कोणतीही योजना जुळली नाही"
+  ],
+  "schemes_no_match_desc": [
+    "schemes.html",
+    "कृपया तुमचे फिल्टर्स बदला किंवा शोध शब्द तपासा."
+  ],
+  "tutorials_badge": [
+    "tutorials.html",
+    "MAHARASHTRA ADMISSION & SCHOLARSHIP VIDEO GUIDES"
+  ],
+  "tutorials_subtitle": [
+    "tutorials.html",
+    "महाडीबीटी शिष्यवृत्ती, उत्पन्न दाखला, जात वैधता आणि डीटीई प्रवेशाचे सोप्या भाषेतील स्टेप-बाय-स्टेप व्हिडिओ."
+  ]
+}
