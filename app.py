@@ -7,14 +7,29 @@ import uuid
 import requests
 import math
 from pathlib import Path
+from dotenv import load_dotenv
+from authlib.integrations.flask_client import OAuth
 
-from flask import Flask, render_template, request, jsonify, session, send_from_directory
+from flask import Flask, render_template, request, jsonify, session, send_from_directory, redirect, url_for
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "careermitra-dev-secret-change-me")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "careermitra-dev-secret-change-me")
+
+oauth = OAuth(app)
+oauth.register(
+    name='google',
+    client_id=os.environ.get('GOOGLE_CLIENT_ID'),
+    client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={
+        'scope': 'openid email profile'
+    }
+)
 
 NODE_API_URL = "http://localhost:3000/api"
 
@@ -29,28 +44,41 @@ def landing():
 def login_page():
     return render_template("login.html")
 
-@app.route("/api/login", methods=["POST"])
-def api_login():
-    data = request.get_json(force=True) or {}
-    mode = data.get("mode", "guest")
-    email = data.get("email")
+@app.route("/login/google")
+def login_google():
+    redirect_uri = url_for('auth_callback', _external=True)
+    return oauth.google.authorize_redirect(redirect_uri)
 
-    if mode == "google":
+@app.route("/auth/callback")
+def auth_callback():
+    token = oauth.google.authorize_access_token()
+    user_info = token.get('userinfo')
+    if user_info:
+        # Create user session
         session["user"] = {
             "id": f"google_{uuid.uuid4().hex[:8]}",
-            "email": email or "student@gmail.com",
+            "email": user_info.get("email"),
+            "name": user_info.get("name"),
+            "picture": user_info.get("picture"),
             "mode": "google"
         }
         session["guest_mode"] = False
-    else:
+        return redirect(url_for("onboarding"))
+    return redirect(url_for("landing"))
+
+@app.route("/api/login", methods=["POST"])
+def api_login():
+    # Keep guest mode via API for fallback
+    data = request.get_json(force=True) or {}
+    mode = data.get("mode", "guest")
+    if mode == "guest":
         session["user"] = {
             "id": f"guest_{uuid.uuid4().hex[:8]}",
             "email": None,
             "mode": "guest"
         }
         session["guest_mode"] = True
-
-    return jsonify({"ok": True, "user": session["user"]})
+    return jsonify({"ok": True, "user": session.get("user")})
 
 FALLBACK_DISTRICTS = [
     "Mumbai", "Thane", "Pune", "Nashik", "Nagpur", "Kolhapur", 
