@@ -242,6 +242,10 @@ def resume_builder_page():
 def skill_quest_page():
     return render_template("skill_quest.html")
 
+@app.route("/tutorials")
+def tutorials_page():
+    return render_template("tutorials.html")
+
 @app.route("/career-compare")
 @app.route("/compare")
 def career_compare_page():
