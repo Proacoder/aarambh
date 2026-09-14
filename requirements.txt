@@ -3,3 +3,4 @@ flask-cors
 Authlib
 python-dotenv
 requests
+psycopg2-binary
