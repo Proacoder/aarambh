@@ -3,14 +3,18 @@
 {% block content %}
 <section class="section assessment fade-in">
   <div class="container">
-    <div class="assessment-header card text-center mb-4 slide-up">
-      <h1 class="page-title mb-1" data-i18n="assessment_title">🧭 Let's discover what you enjoy!</h1>
-      <p class="page-subtitle mb-2" data-i18n="assessment_sub">Rate how much each statement sounds like you.</p>
+    <div class="assessment-header card glass-card p-4 text-center mb-4 slide-up flex-center flex-column" style="border-radius: 20px; border-left: 4px solid var(--gold);">
+      <div id="mitra-assessment-avatar" class="mb-2" style="display: flex; justify-content: center;"></div>
+      <div class="inline-flex align-center gap-2 badge badge-gold mb-1">
+        <span>🧭</span> <span>MITRA GUIDED DISCOVERY</span>
+      </div>
+      <h1 class="page-title mb-1" style="font-size: 1.5rem;" data-i18n="assessment_title">Let's discover what you enjoy!</h1>
+      <p class="page-subtitle text-muted text-small mb-2" data-i18n="assessment_sub">Choose the problem-solving style that feels most natural to you.</p>
       
       <!-- Reassuring Encouragement Banner -->
-      <div class="encouragement-banner">
+      <div class="encouragement-banner p-2 px-3" style="background: rgba(217,164,65,0.1); border-radius: 999px; border: 1px solid rgba(217,164,65,0.3); font-size: 0.85rem;">
         <span class="enc-icon">😊</span>
-        <span data-i18n="no_wrong_answer">इथे चुकीचं उत्तर नाही. जे तुला खरंच आवडतं ते निवड.</span>
+        <span id="mitra-assessment-quote" data-i18n="no_wrong_answer">इथे चुकीचं उत्तर नाही. जे तुला खरंच आवडतं ते निवड.</span>
       </div>
     </div>
 

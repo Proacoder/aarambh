@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section parent-mode-page fade-in" style="min-height: 90vh; padding-top: 2.5rem; padding-bottom: 5rem;">
+  <div class="container" style="max-width: 920px;">
+
+    <!-- Parent Header Card -->
+    <div class="card glass-card text-center mb-5 p-5 slide-up" style="border-radius: 20px; border-left: 4px solid var(--terracotta);">
+      <div class="inline-flex align-center gap-2 badge badge-paper mb-2" style="font-size: 0.9rem;">
+        <span>👨‍👩‍👦</span> <span>पालक संवाद • FAMILY SAMVAD</span>
+      </div>
+      <h1 class="page-title mb-2" style="font-size: 2.2rem; font-weight: 800;">
+        आई-वडिलांसाठी करिअर आणि सुरक्षिततेचे मार्गदर्शन
+      </h1>
+      <p class="page-subtitle text-muted mx-auto mb-0" style="font-size: 1.05rem; max-width: 650px;">
+        आपल्या मुलाचे भविष्य सुरक्षित, स्वावलंबी आणि योग्य मार्गावर असावे यासाठी शासनाच्या योजना आणि वास्तववादी सल्ला.
+      </p>
+    </div>
+
+    <!-- FAQ Voice Accordions -->
+    <div class="flex-column gap-4">
+      
+      <!-- Card 1 -->
+      <div class="card glass-card p-4 slide-up hover-lift" style="border-radius: 16px;">
+        <div class="flex-between align-center mb-2 flex-wrap gap-2">
+          <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">
+            ❓ १०वी नंतर ३ वर्षांचा डिप्लोमा चांगला की ११वी-१२वी सायन्स?
+          </h3>
+          <button class="btn btn-sm btn-outline read-aloud-btn flex align-center gap-1" data-text="१०वी नंतर शासकीय पॉलिटेक्निकमधून ३ वर्षांचा डिप्लोमा केल्यास मुलाला प्रत्यक्ष प्रॅक्टिकल ज्ञान मिळते. त्यानंतर डायरेक्ट सेकंड इयर इंजिनिअरिंगला प्रवेश मिळतो, ज्यामुळे १२वीच्या कोचिंग क्लासचा खर्च वाचतो.">
+            <span>🔊</span> <span>ऐका (Listen)</span>
+          </button>
+        </div>
+        <p class="text-sm text-muted mb-0" style="line-height: 1.6;">
+          <strong>मित्र ताईंचा सल्ला:</strong> जर मुलाला प्रॅक्टिकल काम, मशिनरी किंवा कॉम्प्युटरमध्ये आवड असेल, तर शासकीय पॉलिटेक्निक डिप्लोमा हा अत्यंत सुरक्षित पर्याय आहे. १२वीच्या महागड्या खाजगी क्लासेसचा खर्च वाचतो आणि डिप्लोमा पूर्ण झाल्यावर थेट नोकरी किंवा डायरेक्ट सेकंड इयर बी.टेक.ला प्रवेश मिळतो.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card glass-card p-4 slide-up hover-lift" style="border-radius: 16px;">
+        <div class="flex-between align-center mb-2 flex-wrap gap-2">
+          <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">
+            ❓ मुलींसाठी शासकीय वसतिगृह (Hostel) सुरक्षित आहे का?
+          </h3>
+          <button class="btn btn-sm btn-outline read-aloud-btn flex align-center gap-1" data-text="महाराष्ट्र शासनाच्या समाज कल्याण आणि तंत्रशिक्षण विभागाची शासकीय वसतिगृहे पूर्णपणे मोफत आणि सुरक्षित असतात. तिथे २४ तास महिला सुरक्षा रक्षक आणि बायोमेट्रिक हजेरी असते.">
+            <span>🔊</span> <span>ऐका (Listen)</span>
+          </button>
+        </div>
+        <p class="text-sm text-muted mb-0" style="line-height: 1.6;">
+          <strong>मित्र ताईंचा सल्ला:</strong> शासनाची शासकीय वसतिगृहे (Social Welfare & DTE Hostels) अत्यंत सुरक्षित आहेत. येथे २४ तास सुरक्षा रक्षक, सीसीटीव्ही आणि महिला वार्डन असतात. तसेच जर सरकारी वसतिगृहात जागा नाही मिळाली, तर <em>स्वाधार योजनेतून</em> किंवा <em>डॉ. पंजाबराव देशमुख योजनेतून</em> दरमहा ₹३,००० वसतिगृह भत्ता थेट बँक खात्यात मिळतो.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card glass-card p-4 slide-up hover-lift" style="border-radius: 16px;">
+        <div class="flex-between align-center mb-2 flex-wrap gap-2">
+          <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">
+            ❓ आमची आर्थिक परिस्थिती बेताची आहे, आम्हाला फी माफी मिळेल का?
+          </h3>
+          <button class="btn btn-sm btn-outline read-aloud-btn flex align-center gap-1" data-text="होय, वार्षिक उत्पन्न ८ लाखांपेक्षा कमी असल्यास राजर्षी छत्रपती शाहू महाराज योजनेतून ५० टक्के फी माफी मिळते. अनुसूचित जाती आणि जमातीसाठी १०० टक्के फी शासनाकडून भरली जाते.">
+            <span>🔊</span> <span>ऐका (Listen)</span>
+          </button>
+        </div>
+        <p class="text-sm text-muted mb-0" style="line-height: 1.6;">
+          <strong>मित्र ताईंचा सल्ला:</strong> पैशांअभावी शिक्षण थांबू नये यासाठी महाराष्ट्र शासनाचे MahaDBT पोर्टल आहे. ओपन/EBC प्रवर्गासाठी <strong>५०% ट्युशन फी माफी</strong> आणि SC/ST/OBC प्रवर्गासाठी <strong>१००% फी माफी</strong> मिळते. फक्त तहसिलदारांचा उत्पन्नाचा दाखला आणि अधिवास (Domicile) प्रमाणपत्र तयार ठेवावे.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card glass-card p-4 slide-up hover-lift" style="border-radius: 16px;">
+        <div class="flex-between align-center mb-2 flex-wrap gap-2">
+          <h3 class="text-base font-bold mb-0" style="color: var(--earth-brown);">
+            ❓ ग्रामीण भागात राहूनही मुलाला चांगल्या पगाराची नोकरी मिळेल का?
+          </h3>
+          <button class="btn btn-sm btn-outline read-aloud-btn flex align-center gap-1" data-text="नक्कीच! कृषी-तंत्रज्ञान, सौर ऊर्जा मेंटेनन्स, शासकीय सेवा आणि आयटी रिमोट कामांमुळे गावाजवळच्या तालुक्यात आणि एमआयडीसीमध्ये चांगल्या संधी उपलब्ध आहेत.">
+            <span>🔊</span> <span>ऐका (Listen)</span>
+          </button>
+        </div>
+        <p class="text-sm text-muted mb-0" style="line-height: 1.6;">
+          <strong>मित्र ताईंचा सल्ला:</strong> आज केवळ मुंबई-पुण्याला जाण्याची गरज नाही. आपल्या जिल्ह्याजवळच्या MIDC (उदा. चाकण, रांजणगाव, औरंगाबाद, बुटीबोरी नागपूर) मध्ये तांत्रिक कुशल विद्यार्थ्यांची मोठी मागणी आहे. तसेच कृषी-सोलर तंत्रज्ञ आणि महसूल सेवेत स्थानिक रोजगार मिळतो.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Direct Helpline / Ask Mitra -->
+    <div class="text-center mt-5">
+      <a href="/career-aunty?prompt=%E0%A4%AE%E0%A4%BE%E0%A4%9D%E0%A5%8D%E0%A4%AF%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A4%95%E0%A4%BE%E0%A4%82%E0%A4%A8%E0%A4%BE%20%E0%A4%95%E0%A4%B0%E0%A4%BF%E0%A4%85%E0%A4%B0%E0%A4%AC%E0%A4%A6%E0%A5%8D%E0%A4%A1%E0%A4%B2%20%E0%A4%B8%E0%A4%BE%E0%A4%82%E0%A4%97%E0%A4%BE" class="btn btn-primary btn-lg ripple">
+        <span>👩‍🏫</span> <span>मित्रा ताईंशी पालकांचे संभाषण सुरू करा &rarr;</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const synth = window.speechSynthesis;
+  document.querySelectorAll('.read-aloud-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!synth) return;
+      synth.cancel();
+      const text = btn.dataset.text;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'mr-IN';
+      utter.rate = 0.95;
+      synth.speak(utter);
+    });
+  });
+});
+</script>
+{% endblock %}
