@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     if (data.category !== 'OPEN' || data.income <= 800000) {
       scholarship += tuition * 0.5; // 50% tuition off
-      matchedScholarships.append({ name: "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna", amount: `₹${(tuition*0.5).toLocaleString('en-IN')} (50% Tuition)` });
+      matchedScholarships.push({ name: "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna", amount: `₹${(tuition*0.5).toLocaleString('en-IN')} (50% Tuition)` });
     }
     if (data.category === 'SC' || data.category === 'ST') {
       scholarship += tuition * 0.5; // remaining 50%
@@ -167,7 +167,32 @@ document.addEventListener('DOMContentLoaded', async () => {
           body: JSON.stringify(payload)
         });
         if (res.ok) {
-          result = await res.json();
+          const apiRes = await res.json();
+          if (apiRes.totals) {
+            const colors = ["#4F7A45", "#D9A441", "#4F6FAF", "#8E5F7B", "#A87A5B", "#6B5744", "#3D2B1F", "#E0D5C8"];
+            let bidx = 0;
+            const bdown = [];
+            for (const [key, val] of Object.entries(apiRes.breakdown)) {
+               bdown.push({ label: val.label || key, amount: val.annual, color: colors[bidx % colors.length] });
+               bidx++;
+            }
+            result = {
+              netAnnual: apiRes.totals.netAnnual,
+              gross: apiRes.totals.grossAnnual,
+              scholarshipTotal: apiRes.totals.scholarshipDeduction,
+              monthly: apiRes.totals.netMonthly,
+              incomePct: apiRes.familyImpact.incomePercentage,
+              collegeName: apiRes.college.name,
+              route: `${apiRes.homeDistrict} to ${apiRes.college.district} (${apiRes.distanceKm} km)`,
+              tier: apiRes.costTier,
+              breakdown: bdown,
+              matchedScholarships: apiRes.matchedScholarships.length ? 
+                  apiRes.matchedScholarships.map(s => ({name: s.name, amount: s.benefit})) : 
+                  [{ name: "No specific schemes matched", amount: "" }]
+            };
+          } else {
+            result = apiRes;
+          }
         } else {
           result = calculateMock(payload);
         }

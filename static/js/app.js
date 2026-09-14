@@ -23,7 +23,7 @@ const CareerMitra = {
   },
 
   t(key, params = {}) {
-    let text = this.translations[key] || key;
+    let text = (this.translations && this.translations[key]) ? this.translations[key] : key;
     
     // Handle template strings like "{current} of {total}"
     for (const [param, value] of Object.entries(params)) {
@@ -32,24 +32,41 @@ const CareerMitra = {
     return text;
   },
 
+  hasTranslation(key) {
+    return Boolean(this.translations && this.translations[key]);
+  },
+
   applyTranslations() {
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
+      if (!this.hasTranslation(key)) return;
+      
+      const translated = this.t(key);
       
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         if (el.hasAttribute('placeholder')) {
-          el.placeholder = this.t(key);
+          el.placeholder = translated;
         } else {
-          el.value = this.t(key);
+          el.value = translated;
         }
       } else if (el.tagName === 'OPTION') {
-        el.textContent = this.t(key);
+        el.textContent = translated;
       } else {
-        // preserve child nodes if there's any rich content inside, but usually it's just text
-        // for simplicity, just replacing textContent. 
-        // If there's nested HTML, might need a more complex approach.
-        el.textContent = this.t(key);
+        const iconSpan = el.querySelector('span:first-child');
+        if (iconSpan && iconSpan.textContent.trim().length <= 4 && !iconSpan.hasAttribute('data-i18n')) {
+          const iconHTML = iconSpan.outerHTML;
+          el.innerHTML = `${iconHTML} ${translated}`;
+        } else {
+          el.textContent = translated;
+        }
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (this.hasTranslation(key)) {
+        el.placeholder = this.t(key);
       }
     });
   },

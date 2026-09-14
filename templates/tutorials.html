@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="tutorials-hero page-content">
+  <div class="container slide-up">
+    <div class="text-center mb-5">
+      <h1 class="page-title mb-2"><span class="tai-sparkle">📺</span> <span data-i18n="nav_tutorials">Form Filling Tutorials</span></h1>
+      <p class="page-subtitle" data-i18n="tutorials_subtitle">Step-by-step video guides for MahaDBT scholarships, admissions, and entrance exams.</p>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="flex-center flex-wrap gap-3 mb-4">
+      <button class="btn btn-primary btn-sm ripple" data-filter="all" data-i18n="tut_filter_all">All</button>
+      <button class="btn btn-outline btn-sm ripple" data-filter="admissions" data-i18n="tut_filter_admissions">Admissions</button>
+      <button class="btn btn-outline btn-sm ripple" data-filter="exams" data-i18n="tut_filter_exams">Entrance Exams</button>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="grid-3" id="tutorials-grid">
+      
+      <!-- Video Card 1 -->
+      <div class="card p-3 tutorial-card" data-category="admissions">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/Qr-Unrc3Huc?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">DTE Admission Process</h3>
+        <p class="text-small text-muted">Directorate of Technical Education admission form filling tutorial.</p>
+      </div>
+
+      <!-- Video Card 2 -->
+      <div class="card p-3 tutorial-card" data-category="exams">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/u6GHHUjJD9Y?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">JEE Main Registration Guide</h3>
+        <p class="text-small text-muted">Complete step-by-step process for JEE Main application form filling.</p>
+      </div>
+
+      <!-- Video Card 3 -->
+      <div class="card p-3 tutorial-card" data-category="exams">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/wVoGOivAkus?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">NEET UG Application Form</h3>
+        <p class="text-small text-muted">A detailed walkthrough for medical aspirants filling the NTA NEET form.</p>
+      </div>
+
+      <!-- Video Card 4 -->
+      <div class="card p-3 tutorial-card" data-category="exams">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/h97gqJVLeEU?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">MHT-CET Registration Guide</h3>
+        <p class="text-small text-muted">Document upload and registration process for MHT-CET engineering & pharmacy.</p>
+      </div>
+
+      <!-- Video Card 5 -->
+      <div class="card p-3 tutorial-card" data-category="admissions">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/fQszh3bY5cU?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">B.Sc Nursing Admission</h3>
+        <p class="text-small text-muted">Form filling and document requirements for B.Sc Nursing admissions.</p>
+      </div>
+
+      <!-- Video Card 6 -->
+      <div class="card p-3 tutorial-card" data-category="admissions">
+        <div class="video-wrapper mb-3" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube.com/embed/3ZxFdJHurw0?rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <h3 class="mb-1 text-md">MSBTE Diploma Registration</h3>
+        <p class="text-small text-muted">Polytechnic / Diploma engineering admission process under MSBTE.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.tutorials-hero .btn');
+  const cards = document.querySelectorAll('.tutorial-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button styles
+      filterBtns.forEach(b => {
+        b.classList.remove('btn-primary');
+        b.classList.add('btn-outline');
+      });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+
+      // Filter cards
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>
+{% endblock %}

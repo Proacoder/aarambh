@@ -22,77 +22,34 @@
     </svg>
   </div>
 
-  <div class="hero-inner">
-    <!-- Orbital Spinning Emblem -->
-    <div class="hero-emblem-cv">
-      <span class="ring"></span>
-      <span class="ring2"></span>
-      <img src="/static/img/careerverse-logo.png" alt="Career Verse — Aarambh emblem">
+  <div class="container hero-container">
+    <!-- Personalized Greeting for Returning Students -->
+    <div id="returning-user-banner" class="personalized-banner hidden slide-up">
+      <div class="banner-pill">
+        <span class="pill-wave">👋</span>
+        <span id="user-greeting-name" data-i18n="welcome_back">स्वागत आहे परत!</span>
+      </div>
+      <p class="banner-sub text-muted" data-i18n="banner_continue_sub">Ready to continue your personalized career journey?</p>
+      <div class="flex-center gap-3 mt-2">
+        <a href="/dashboard" class="btn btn-primary ripple" data-i18n="continue_journey">Continue My Journey</a>
+        <a href="/career-aunty" class="btn btn-gold ripple flex align-center gap-1">
+          <span>👩‍🏫</span> <span data-i18n="hero_cta_talk_mitra">Talk to Mitra Tai</span>
+        </a>
+      </div>
     </div>
 
     <span class="hero-eyebrow">
       <span class="dot"></span>Aarambh · Explore. Discover. Build.
     </span>
 
-    <h1>Your next <span class="accent">career</span></h1>
-    <p class="lead">Career Verse maps the path from curiosity to a career you're proud of — rooted in honest guidance, and reaching for the future you're aiming at. Now open for everyone.</p>
-
-    <!-- CTAs leading directly to login as requested -->
-    <div class="hero-ctas-cv">
-      <a href="/login" class="btn btn-primary btn-lg" style="box-shadow: 0 20px 40px -15px rgba(207,156,70,0.6);">
-        <span>✨ Use Career Verse</span>
-      </a>
-      <a href="#manual" class="btn btn-ghost btn-lg">
-        <span>📖 Read the Manual</span>
-      </a>
-      <a href="/careerverse" class="btn btn-ghost btn-lg" style="border-color: rgba(207,156,70,0.4); color: var(--gold-soft);">
-        <span>🌌 3D Universe</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="scroll-cue">
-    <span>SCROLL</span>
-    <span class="line"></span>
-  </div>
-</section>
-
-<!-- ========================================================================
-     2. ABOUT US SECTION
-     ======================================================================== -->
-<section id="about" style="padding: min(12vw, 100px) 0; background: var(--bg);">
-  <div class="wrap" style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
-    <div class="about-grid-cv">
-      <div class="about-copy-cv">
-        <span class="kicker">About Us</span>
-        <h2>We believe a career decision deserves more than a guess.</h2>
-        <p>Career Verse started as an open-source idea: career guidance shouldn't live in scattered PDFs, expensive counsellors, or one-size-fits-all quizzes. It should be a living, visual map — something you can return to, adjust and grow with.</p>
-        <p>The project is built by developers and educators who wanted a tool that respects a learner's time: clear steps, honest information, and no noise. Everything here is free to explore, and the code behind it is open for anyone to inspect, use, or improve.</p>
-        <div class="stat-row-cv">
-          <div class="stat"><b>4</b><span>Guided modules</span></div>
-          <div class="stat"><b>100%</b><span>Open source</span></div>
-          <div class="stat"><b>0₹</b><span>Cost to explore</span></div>
-        </div>
-      </div>
-
-      <!-- 3D Tilt Deck -->
-      <div class="tilt-deck">
-        <div class="tilt-card t1">
-          <div class="icon">◈</div>
-          <h4>Personalised guidance</h4>
-          <p>Recommendations shaped by your interests and strengths, not a generic list.</p>
-        </div>
-        <div class="tilt-card t2">
-          <div class="icon">⇲</div>
-          <h4>Clear roadmaps</h4>
-          <p>Every path is broken into stages, so the next move is always obvious.</p>
-        </div>
-        <div class="tilt-card t3">
-          <div class="icon">✦</div>
-          <h4>Built to be open</h4>
-          <p>Free, transparent, and improved in public on GitHub.</p>
-        </div>
-      </div>
+    <!-- Floating Career Track Icons Visual Composition -->
+    <div class="hero-icons-composition slide-up mt-5">
+      <div class="track-chip track-agri"><span class="chip-icon">🌾</span> <span data-i18n="track_agriculture">Agriculture</span></div>
+      <div class="track-chip track-tech"><span class="chip-icon">💻</span> <span data-i18n="track_technology">Technology</span></div>
+      <div class="track-chip track-health"><span class="chip-icon">⚕️</span> <span data-i18n="track_healthcare">Healthcare</span></div>
+      <div class="track-chip track-trades"><span class="chip-icon">🔧</span> <span data-i18n="track_trades">Skilled Trades</span></div>
+      <div class="track-chip track-govt"><span class="chip-icon">🏛️</span> <span data-i18n="track_govt">Govt Services</span></div>
+      <div class="track-chip track-edu"><span class="chip-icon">📚</span> <span data-i18n="track_education">Education</span></div>
     </div>
   </div>
 </section>
@@ -202,27 +159,20 @@
   </div>
 </section>
 
-<!-- ========================================================================
-     5. MANUAL & OPEN SOURCE REPO SECTION
-     ======================================================================== -->
-<section id="manual" style="padding: min(12vw, 100px) 0; background: var(--bg);">
-  <div class="wrap" style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
-    <div class="section-head" style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:end; margin-bottom:64px;">
-      <div>
-        <span class="kicker">Manual</span>
-        <h2>Set it up, understand it, run it yourself.</h2>
-      </div>
-      <p style="color:var(--ink-soft); font-size:1.02rem; line-height:1.7;">Career Verse is open source under the <strong>AARAMBH</strong> project. Below is everything you need to get a local copy running, plus where to go for help.</p>
+<!-- Winding Career Journey Path -->
+<section class="section career-journey slide-up animate-on-scroll">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="badge badge-paper mb-2" data-i18n="career_journey_badge">🌿 CAREER JOURNEY</span>
+      <h2 class="section-title" data-i18n="how_it_works">तुमचा करिअर प्रवास</h2>
     </div>
 
-    <div class="repo-panel-cv">
-      <div class="repo-copy-cv">
-        <span class="kicker">Get the source</span>
-        <h2>Clone it, read through the setup notes, or open an issue.</h2>
-        <p>The full codebase lives on GitHub. It's free to use, easy to fork, and open to contributions from anyone who wants to improve it.</p>
-        <div class="repo-ctas">
-          <a href="https://github.com/Proacoder/AARAMBH.git" target="_blank" rel="noopener" class="btn btn-white">View on GitHub</a>
-          <a href="https://github.com/Proacoder/AARAMBH.git" target="_blank" rel="noopener" class="btn btn-outline-white">Clone Repository</a>
+    <div class="journey-winding-path">
+      <div class="journey-node card stagger-1">
+        <div class="journey-badge-icon">🌱</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_discover">DISCOVER YOURSELF</h3>
+          <p class="text-muted" data-i18n="step1_d">Tell us what you enjoy, your district, and your background.</p>
         </div>
       </div>
       <div class="repo-visual" style="position:relative; perspective:1200px; display:flex; align-items:center; justify-content:center; padding:min(8vw, 40px);">
@@ -236,27 +186,43 @@ cd AARAMBH
 <span class="c3">npm install</span>
 <span class="c3">npm run dev</span>
 
-<span class="c1">// open the app</span>
-<span class="c2">http://localhost:3000</span></pre>
+      <div class="journey-node card stagger-2">
+        <div class="journey-badge-icon">🧠</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_strengths">UNDERSTAND YOUR STRENGTHS</h3>
+          <p class="text-muted" data-i18n="step2_d">8 quick questions. Discover your career personality.</p>
         </div>
       </div>
     </div>
 
-    <div class="manual-links-cv">
-      <div class="manual-link-card-cv">
-        <div class="icon">1</div>
-        <h5>Requirements</h5>
-        <p>Node.js 18+ and Python 3.9+. No paid services or API keys needed to run it locally.</p>
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-3">
+        <div class="journey-badge-icon">🏫</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_opportunities">DISCOVER OPPORTUNITIES</h3>
+          <p class="text-muted" data-i18n="step3_d">Find colleges and vocational courses near your district.</p>
+        </div>
       </div>
-      <div class="manual-link-card-cv">
-        <div class="icon">2</div>
-        <h5>Project structure</h5>
-        <p>Pages, components and content live in clearly named folders — check the repo's README for a full map.</p>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card stagger-4">
+        <div class="journey-badge-icon">💰</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_support">FIND SUPPORT</h3>
+          <p class="text-muted" data-i18n="step_support_d">Explore government scholarships you actually qualify for.</p>
+        </div>
       </div>
-      <div class="manual-link-card-cv">
-        <div class="icon">3</div>
-        <h5>Contributing</h5>
-        <p>Fork the repo, make your change, and open a pull request. Issues and ideas are always welcome.</p>
+
+      <div class="path-connector"></div>
+
+      <div class="journey-node card journey-node-hero stagger-5">
+        <div class="journey-badge-icon">🚀</div>
+        <div class="journey-info">
+          <h3 data-i18n="journey_build">BUILD YOUR FUTURE</h3>
+          <p class="text-muted" data-i18n="step4_d">Follow your personal roadmap with step-by-step guidance from Mitra Tai.</p>
+        </div>
       </div>
     </div>
   </div>

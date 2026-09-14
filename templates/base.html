@@ -49,178 +49,25 @@
   </style>
 </head>
 <body>
-
-  <!-- ========================================================================
-       FLOATING COSMIC PILL NAVBAR
-       ======================================================================== -->
-
-  <!-- ========================================================================
-       FLOATING COSMIC PILL NAVBAR
-       ======================================================================== -->
-  <header style="position:fixed; top:0; left:0; right:0; z-index:200; padding:16px 0;">
-    <div class="wrap" style="max-width: 1220px; margin: 0 auto; padding: 0 20px;">
-      <div class="navbar" style="padding: 8px 14px 8px 16px; display:flex; align-items:center; justify-content:space-between; gap:14px; background:rgba(8,10,30,0.88); backdrop-filter:blur(18px) saturate(160%); border:1px solid rgba(207,156,70,0.25); border-radius:999px; box-shadow:0 12px 30px -18px rgba(8,10,30,0.5);">
-        
-        <!-- Brand with Emblem -->
-        <a href="/" class="brand" style="display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:560; font-size:1.08rem; flex:none; color:#f7f2e2; text-decoration:none;">
-          <span class="mark brand-emblem-glow" style="width:40px; height:40px; border-radius:50%; position:relative; flex:none; overflow:hidden; border:1.5px solid var(--gold-soft);">
-            <img src="/static/img/careerverse-logo.png" alt="Career Verse emblem" style="width:100%; height:100%; object-fit:cover; object-position:50% 38%; display:block;">
-          </span>
-          <span>Career <span style="color:var(--gold);">Verse</span></span>
-        </a>
-        
-        <!-- Desktop Nav Links -->
-        <nav class="links desktop-only" style="display:flex; align-items:center; gap:20px; font-size:0.88rem; font-weight:600; color:rgba(247,242,226,0.78); flex-wrap:nowrap;">
-          <a href="/" data-i18n="nav_home">Home</a>
-          <a href="/#about">About</a>
-          <a href="/#roots">Our Roots</a>
-          <a href="/#how">How to Use</a>
-          <a href="/careerverse" style="color:var(--gold); font-weight:700;">🌌 Universe</a>
-          <a href="/dashboard" data-i18n="nav_dashboard">Matches</a>
-          <a href="/all-colleges">🏫 Colleges</a>
-          <a href="/roadmap" data-i18n="nav_roadmap">Roadmap</a>
-          <a href="/cost-calculator">💰 PathPocket</a>
-          <a href="/documents">📋 Docs</a>
-          <a href="/exam-calendar">📅 Exams</a>
-          <a href="/career-aunty" style="background: rgba(207,156,70,0.14); padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(207,156,70,0.3); color:#f7f2e2;">
-            <span>👩‍🏫</span> <span>मित्र ताई (AI)</span>
-          </a>
-        </nav>
-
-        <!-- Right CTAs & Language Switcher -->
-        <div class="nav-ctas" style="display:flex; align-items:center; gap:8px; flex:none;">
-          <!-- Language toggle -->
-          <div class="lang-toggle flex gap-1" role="group" aria-label="Language selection" style="background:rgba(247,242,226,0.08); padding:3px; border-radius:999px; border:1px solid rgba(207,156,70,0.2);">
-            <button class="lang-btn" data-lang="mr" style="padding:3px 8px; font-size:0.75rem; border-radius:999px; color:#f7f2e2;">मरा</button>
-            <button class="lang-btn" data-lang="hi" style="padding:3px 8px; font-size:0.75rem; border-radius:999px; color:#f7f2e2;">हिं</button>
-            <button class="lang-btn active" data-lang="en" style="padding:3px 8px; font-size:0.75rem; border-radius:999px; color:#080a1e; background:var(--gold-soft); font-weight:700;">EN</button>
-          </div>
-
-          <a href="/login" class="btn btn-primary btn-sm" style="padding: 8px 18px; font-size: 0.85rem;">
-            <span>✨ Use Now / Login</span>
-          </a>
-
-          <!-- Mobile Burger Button -->
-          <button class="burger mobile-only" id="burgerBtn" aria-label="Open menu">
-            <span></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Menu Fullscreen Overlay -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/" class="mob-link">Home</a>
-    <a href="/#about" class="mob-link">About</a>
-    <a href="/#roots" class="mob-link">Our Roots</a>
-    <a href="/#how" class="mob-link">How to Use</a>
-    <a href="/careerverse" class="mob-link" style="color:var(--gold);">🌌 3D Universe</a>
-    <a href="/dashboard" class="mob-link">Matches</a>
-    <a href="/all-colleges" class="mob-link">🏫 Colleges</a>
-    <a href="/roadmap" class="mob-link">Roadmap</a>
-    <a href="/cost-calculator" class="mob-link">PathPocket</a>
-    <a href="/documents" class="mob-link">📋 Docs</a>
-    <a href="/exam-calendar" class="mob-link">📅 Exams</a>
-    <a href="/career-aunty" class="mob-link" style="color:var(--gold-soft);">👩‍🏫 मित्र ताई (AI)</a>
-    <div class="mob-ctas">
-      <a href="/login" class="btn btn-primary btn-block">Use Now / Login</a>
-      <a href="/#manual" class="btn btn-ghost btn-block">Read Manual</a>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       GLOBAL MITRA SLIDE-OVER DRAWER
-       ======================================================================== -->
-  <button id="global-mitra-trigger" class="btn btn-primary ripple" aria-label="Open Mitra AI Chat" style="position:fixed; bottom:24px; right:24px; z-index:300; border-radius:50%; width:60px; height:60px; font-size:1.8rem; padding:0; box-shadow:0 10px 25px rgba(207,156,70,0.4); display:flex; align-items:center; justify-content:center; border:2px solid var(--gold-soft);">
-    👩‍🏫
-  </button>
-
-  <div id="mitra-slideover-overlay" class="slideover-overlay"></div>
-
-  <div id="mitra-global-slideover" class="mitra-slideover">
-    <div class="slideover-header p-3 flex-between align-center" style="border-bottom:1px solid var(--line); background:var(--surface);">
-      <div class="flex align-center gap-3">
-        <div id="slideover-mitra-avatar" style="width:44px; height:44px;"></div>
-        <div>
-          <h3 class="mb-0" style="font-size:1.1rem; font-weight:700;">Mitra Tai (मित्र ताई)</h3>
-          <div class="text-xs text-muted">AI Career Mentor</div>
-        </div>
-      </div>
-      <button id="close-mitra-slideover" class="btn btn-sm btn-outline" aria-label="Close Mitra AI Chat" style="border-radius:50%; width:32px; height:32px; padding:0; flex:none;">✕</button>
-    </div>
-    
-    <div class="slideover-quick-chips p-2 flex gap-1" style="overflow-x:auto; background:var(--bg-alt); border-bottom:1px solid var(--line);">
-      <button class="btn btn-secondary btn-sm slideover-quick-chip" style="white-space:nowrap; padding:4px 10px; font-size:0.75rem;" data-prompt="माझ्यासाठी कोणता मार्ग सर्वोत्तम आहे?">💡 Best Path</button>
-      <button class="btn btn-secondary btn-sm slideover-quick-chip" style="white-space:nowrap; padding:4px 10px; font-size:0.75rem;" data-prompt="मला कोणती शिष्यवृत्ती मिळेल?">🎓 Scholarships</button>
-      <button class="btn btn-secondary btn-sm slideover-quick-chip" style="white-space:nowrap; padding:4px 10px; font-size:0.75rem;" data-prompt="माझ्या जवळचे कॉलेज कोणते?">🏫 Colleges</button>
-    </div>
-
-    <div id="slideover-messages-stream" class="p-3 flex-column gap-3" style="flex:1; overflow-y:auto; background:var(--surface);">
-      <div class="chat-bubble bubble-tai fade-in text-xs" style="background:var(--bg-alt); padding:10px; border-radius:12px; border-top-left-radius:0;">
-        नमस्कार! मी मित्र ताई आहे. मी तुम्हाला करिअर आणि शिक्षणाबद्दल मदत करण्यासाठी येथे आहे. तुम्ही मला काहीही विचारू शकता!
-      </div>
-    </div>
-
-    <form id="slideover-chat-form" class="p-3 flex gap-2" style="border-top:1px solid var(--line); background:var(--surface);">
-      <button type="button" id="slideover-mic-btn" class="btn btn-outline p-0 flex-center" aria-label="Voice input" style="width:40px; height:40px; border-radius:50%; flex:none;">
-        <span style="font-size:1.2rem;">🎙️</span>
-      </button>
-      <input type="text" id="slideover-user-input" class="form-input text-small" placeholder="Ask Mitra Tai..." required style="flex:1; border-radius:20px; padding:0 16px;">
-      <button type="submit" class="btn btn-primary p-0 flex-center" aria-label="Send message" style="width:40px; height:40px; border-radius:50%; flex:none;">
-        <span style="font-size:1.2rem;">🚀</span>
-      </button>
-    </form>
-  </div>
-  
-  <main id="main-content" class="page-content-wrap" style="min-height: calc(100vh - 120px);">
-    <div class="container pt-3 pb-1" style="max-width: 1200px;">
-      <div id="mitra-top-page-guide"></div>
-    </div>
-    {% block content %}{% endblock %}
-  </main>
-  
-  <!-- ========================================================================
-       WARLI & COSMIC FOOTER
-       ======================================================================== -->
-  <footer style="border-top:1px solid rgba(207,156,70,0.2); padding:60px 0 34px; background:var(--navy-deep); color:rgba(247,242,226,0.85);">
-    <div class="wrap" style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
-      <div class="foot-grid" style="display:grid; grid-template-columns:1.4fr 0.8fr 0.8fr 0.8fr; gap:40px;">
-        <div class="foot-brand">
-          <a href="/" class="brand" style="display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-size:1.1rem; color:#f7f2e2; text-decoration:none;">
-            <span class="mark brand-emblem-glow" style="width:36px; height:36px; border-radius:50%; overflow:hidden; border:1px solid var(--gold-soft); display:inline-block;">
-              <img src="/static/img/careerverse-logo.png" alt="Career Verse emblem" style="width:100%; height:100%; object-fit:cover; object-position:50% 38%;">
-            </span>
-            <span>Career Verse</span>
-          </a>
-          <p style="color:rgba(247,242,226,0.55); font-size:0.88rem; margin-top:14px; line-height:1.6; max-width:280px;">An open-source career navigation ecosystem for Maharashtra's students, built to make every career step clearer.</p>
-        </div>
-        <div class="foot-col">
-          <h5 style="font-size:0.8rem; font-weight:800; color:var(--gold-soft); margin-bottom:16px; letter-spacing:0.5px;">EXPLORE</h5>
-          <a href="/" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Home</a>
-          <a href="/#about" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">About</a>
-          <a href="/#roots" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Our Roots</a>
-          <a href="/#how" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">How to Use</a>
-        </div>
-        <div class="foot-col">
-          <h5 style="font-size:0.8rem; font-weight:800; color:var(--gold-soft); margin-bottom:16px; letter-spacing:0.5px;">PROJECT</h5>
-          <a href="/#manual" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Manual</a>
-          <a href="https://github.com/Proacoder/AARAMBH.git" target="_blank" rel="noopener" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">GitHub Repo</a>
-          <a href="/guider" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Teacher Portal</a>
-          <a href="/kiosk" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Kiosk Mode</a>
-        </div>
-        <div class="foot-col">
-          <h5 style="font-size:0.8rem; font-weight:800; color:var(--gold-soft); margin-bottom:16px; letter-spacing:0.5px;">LEGAL</h5>
-          <a href="#" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">Privacy</a>
-          <a href="#" style="display:block; color:rgba(247,242,226,0.68); font-size:0.88rem; margin-bottom:10px; text-decoration:none;">MIT License</a>
-        </div>
-      </div>
-      <div class="foot-bottom" style="margin-top:50px; padding-top:24px; border-top:1px solid rgba(247,242,226,0.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.8rem; color:rgba(247,242,226,0.45);">
-        <span>© 2026 Career Verse · Aarambh. Built in the open.</span>
-        <span>Made with care for Maharashtra's next generation of builders.</span>
-      </div>
-    </div>
-  </footer>
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav mobile-only" aria-label="Mobile Bottom Navigation">
+    <a href="/" class="bottom-nav-item" id="bnav-home">
+      <span class="bnav-icon">🏠</span>
+      <span class="bnav-label" data-i18n="nav_home">Home</span>
+    </a>
+    <a href="/cost-calculator" class="bottom-nav-item" id="bnav-kharcha">
+      <span class="bnav-icon">💰</span>
+      <span class="bnav-label" data-i18n="nav_kharcha">Kharcha</span>
+    </a>
+    <a href="/dashboard" class="bottom-nav-item" id="bnav-matches">
+      <span class="bnav-icon">🎯</span>
+      <span class="bnav-label" data-i18n="nav_dashboard">Matches</span>
+    </a>
+    <a href="/career-aunty" class="bottom-nav-item bottom-nav-tai" id="bnav-tai">
+      <span class="bnav-icon">👩‍🏫</span>
+      <span class="bnav-label" data-i18n="nav_mitra_tai">Mitra Tai</span>
+    </a>
+  </nav>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

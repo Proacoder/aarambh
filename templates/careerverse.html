@@ -8,16 +8,16 @@
     <div class="card glass-card p-3 mb-3 flex-between align-center flex-wrap gap-2 slide-up" style="border-left: 4px solid var(--gold); border-radius: 14px;">
       <div>
         <div class="inline-flex align-center gap-2 badge badge-gold mb-1">
-          <span>🌌</span> <span>3D CAREERVERSE • GALAXY EXPLORER</span>
+          <span>🌌</span> <span data-i18n="cv_badge">3D CAREERVERSE • GALAXY EXPLORER</span>
         </div>
-        <h1 class="page-title mb-0" style="font-size: 1.4rem;">The Interactive Career Cosmos</h1>
-        <p class="text-muted text-small mb-0">Drag to rotate • Scroll to zoom • Tap any glowing star to inspect qualifications & salaries</p>
+        <h1 class="page-title mb-0" style="font-size: 1.4rem;" data-i18n="cv_title">The Interactive Career Cosmos</h1>
+        <p class="text-muted text-small mb-0" data-i18n="cv_instructions">Drag to rotate • Scroll to zoom • Tap any glowing star to inspect qualifications & salaries</p>
       </div>
 
       <div class="flex align-center gap-2 flex-wrap">
-        <span class="badge badge-paper">🖱️ Left Drag: Orbit</span>
-        <span class="badge badge-paper">🔍 Wheel: Zoom</span>
-        <a href="/dashboard" class="btn btn-secondary btn-sm">Command Center &rarr;</a>
+        <span class="badge badge-paper" data-i18n="cv_control_drag">🖱️ Left Drag: Orbit</span>
+        <span class="badge badge-paper" data-i18n="cv_control_zoom">🔍 Wheel: Zoom</span>
+        <a href="/dashboard" class="btn btn-secondary btn-sm" data-i18n="cv_command_center">Command Center &rarr;</a>
       </div>
     </div>
 
@@ -29,11 +29,11 @@
 
       <!-- Domain Filter Pills (HUD Overlay) -->
       <div class="galaxy-hud-filters" style="position: absolute; top: 1.25rem; left: 1.25rem; z-index: 10; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        <button class="btn btn-sm btn-gold galaxy-filter-btn active" data-constellation="all">✨ All Constellations</button>
-        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="tech" style="color: #60A5FA;">💻 Tech & IT</button>
-        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="agri" style="color: #34D399;">🌾 Agri-Tech</button>
-        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="health" style="color: #F87171;">⚕️ Healthcare</button>
-        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="govt" style="color: #FBBF24;">🏛️ Public Service</button>
+        <button class="btn btn-sm btn-gold galaxy-filter-btn active" data-constellation="all" data-i18n="cv_filter_all">✨ All Constellations</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="tech" style="color: #60A5FA;" data-i18n="cv_filter_tech">💻 Tech & IT</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="agri" style="color: #34D399;" data-i18n="cv_filter_agri">🌾 Agri-Tech</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="health" style="color: #F87171;" data-i18n="cv_filter_health">⚕️ Healthcare</button>
+        <button class="btn btn-sm btn-glass galaxy-filter-btn" data-constellation="govt" style="color: #FBBF24;" data-i18n="cv_filter_govt">🏛️ Public Service</button>
       </div>
 
       <!-- Selected Career Node Flyout Modal / HUD -->
@@ -47,20 +47,20 @@
 
         <div class="p-2 mb-3 text-xs" style="background: rgba(217,164,65,0.1); border-radius: 8px;">
           <div class="flex-between mb-1">
-            <span>Entry Salary:</span>
+            <span data-i18n="cv_entry_salary">Entry Salary:</span>
             <strong id="flyout-salary" class="text-green">₹3.5 - 6.0 LPA</strong>
           </div>
           <div class="flex-between">
-            <span>Qualification:</span>
+            <span data-i18n="cv_qualification">Qualification:</span>
             <strong id="flyout-education">Diploma / Degree</strong>
           </div>
         </div>
 
         <div class="flex gap-2">
-          <a id="flyout-mitra-link" href="/career-aunty" class="btn btn-primary btn-sm ripple flex-1 text-center">
+          <a id="flyout-mitra-link" href="/career-aunty" class="btn btn-primary btn-sm ripple flex-1 text-center" data-i18n="ask_mitra_tai_cta">
             Ask Mitra Tai &rarr;
           </a>
-          <a href="/roadmap" class="btn btn-secondary btn-sm flex-1 text-center">
+          <a href="/roadmap" class="btn btn-secondary btn-sm flex-1 text-center" data-i18n="view_roadmap">
             View Roadmap
           </a>
         </div>

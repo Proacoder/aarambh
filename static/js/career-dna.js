@@ -21,14 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const centerY = height / 2;
   const radius = Math.min(centerX, centerY) - 40;
 
-  const labels = [
-    'Realistic (R)',
-    'Investigative (I)',
-    'Artistic (A)',
-    'Social (S)',
-    'Enterprising (E)',
-    'Conventional (C)'
-  ];
+  function getLabels() {
+    const lang = (window.CareerMitra && window.CareerMitra.lang) || localStorage.getItem('cm-lang') || 'en';
+    if (lang === 'mr') {
+      return ['व्यावहारिक (R)', 'संशोधनात्मक (I)', 'कलात्मक (A)', 'सामाजिक (S)', 'उद्योगशील (E)', 'पारंपरिक (C)'];
+    } else if (lang === 'hi') {
+      return ['व्यावहारिक (R)', 'शोधपरक (I)', 'कलात्मक (A)', 'सामाजिक (S)', 'उद्यमी (E)', 'पारंपरिक (C)'];
+    }
+    return ['Realistic (R)', 'Investigative (I)', 'Artistic (A)', 'Social (S)', 'Enterprising (E)', 'Conventional (C)'];
+  }
 
   const targetValues = [0.94, 0.82, 0.52, 0.64, 0.70, 0.58];
   let progress = 0;
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawRadar(t) {
     ctx.clearRect(0, 0, width, height);
 
+    const labels = getLabels();
     const totalAxes = labels.length;
     const angleStep = (Math.PI * 2) / totalAxes;
 
@@ -135,4 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   animate();
+
+  document.addEventListener('cm-lang-changed', () => {
+    drawRadar(1);
+  });
 });

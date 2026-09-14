@@ -86,7 +86,7 @@
 
     <!-- Quick Action Cards Carousel / Grid -->
     <div class="quick-actions-container mb-4 slide-up stagger-1">
-      <p class="text-small text-muted text-center mb-2">⚡ Quick Questions for Mitra Tai:</p>
+      <p class="text-small text-muted text-center mb-2">⚡ <span data-i18n="quick_q_title">Quick Questions for Mitra Tai:</span></p>
       <div class="quick-actions-grid">
         <button class="quick-btn ripple" data-prompt="माझ्यासाठी कोणतं career योग्य आहे?">
           <span data-i18n="quick_q1">🎯 Which career is best for me?</span>
@@ -113,7 +113,7 @@
         <div class="chat-bubble bubble-tai fade-in">
           <div class="bubble-header flex align-center gap-2 mb-1">
             <img src="/static/img/mitra-tai.svg" class="bubble-avatar" alt="Tai">
-            <strong>मित्र ताई (Mitra Tai)</strong>
+            <strong data-i18n="mitra_tai_name">मित्र ताई (Mitra Tai)</strong>
           </div>
           <p id="tai-welcome-text" data-i18n="mitra_tai_greeting">
             नमस्कार! 😊 मी मित्र ताई. तुझ्या करिअरबद्दल काहीही विचार, मी तुला सोप्या भाषेत समजावून सांगीन.
@@ -123,7 +123,7 @@
 
       <!-- Voice Fallback Warning Banner (hidden by default) -->
       <div id="voice-fallback-notice" class="voice-fallback-alert hidden">
-        🎙️ Voice recognition isn't supported on this browser. Type your question below!
+        🎙️ <span data-i18n="voice_unsupported">Voice recognition isn't supported on this browser. Type your question below!</span>
       </div>
 
       <!-- Input Actions Area -->
@@ -133,10 +133,10 @@
         </button>
 
         <input type="text" id="user-input" class="form-input chat-input-field" 
-               placeholder="तुमचा प्रश्न इथे लिहा..." data-i18n="type_question_placeholder" autocomplete="off" required>
+               placeholder="तुमचा प्रश्न इथे लिहा..." data-i18n-ph="type_question_placeholder" autocomplete="off" required>
 
         <button type="submit" id="btn-send" class="btn btn-primary btn-send ripple">
-          <span>पाठवा</span>
+          <span data-i18n="btn_send_chat">पाठवा</span>
           <span class="send-icon">🚀</span>
         </button>
       </form>
