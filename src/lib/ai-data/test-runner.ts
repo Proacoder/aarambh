@@ -1,6 +1,6 @@
-import { StudentProfile } from './types';
-import { getMatchingData } from './dataMatcher';
-import { generateCareerPlan } from './geminiService';
+import type { StudentProfile, College, Scheme } from './types.ts';
+import { getMatchingData } from './dataMatcher.ts';
+import { generateCareerPlan } from './geminiService.ts';
 
 async function runTest() {
   console.log("=== CareerMitra AI Pipeline Test ===");
@@ -28,10 +28,10 @@ async function runTest() {
   const { matchedColleges, matchedSchemes } = getMatchingData(mockProfile);
 
   console.log(`Matched Colleges: ${matchedColleges.length}`);
-  matchedColleges.forEach(c => console.log(` - ${c.name} (${c.type})`));
+  matchedColleges.forEach((c: College) => console.log(` - ${c.name} (${c.type})`));
 
   console.log(`Matched Schemes: ${matchedSchemes.length}`);
-  matchedSchemes.forEach(s => console.log(` - ${s.title}`));
+  matchedSchemes.forEach((s: Scheme) => console.log(` - ${s.title}`));
 
   // 3. Pass to Gemini
   console.log("\nCalling Gemini 1.5 Flash API (Ensure GEMINI_API_KEY is set)...");

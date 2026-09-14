@@ -75,8 +75,10 @@ export function resolveDistrictName(districtName?: string | null): string | null
   }
 
   const lower = trimmed.toLowerCase();
-  if (ALIAS_MAP[lower] && MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]]) {
-    return MAHARASHTRA_DISTRICTS[ALIAS_MAP[lower]].name;
+  const aliasKey = ALIAS_MAP[lower];
+  if (aliasKey) {
+    const d = MAHARASHTRA_DISTRICTS[aliasKey];
+    if (d) return d.name;
   }
 
   const matchKey = Object.keys(MAHARASHTRA_DISTRICTS).find(
@@ -84,7 +86,8 @@ export function resolveDistrictName(districtName?: string | null): string | null
   );
 
   if (matchKey) {
-    return MAHARASHTRA_DISTRICTS[matchKey].name;
+    const d = MAHARASHTRA_DISTRICTS[matchKey];
+    if (d) return d.name;
   }
 
   return null;
@@ -95,9 +98,9 @@ export function resolveDistrictName(districtName?: string | null): string | null
  */
 export function getDistrictCoordinates(districtName?: string | null): GeoLocation {
   const resolved = resolveDistrictName(districtName);
-  if (resolved && MAHARASHTRA_DISTRICTS[resolved]) {
+  if (resolved) {
     const d = MAHARASHTRA_DISTRICTS[resolved];
-    return { latitude: d.latitude, longitude: d.longitude };
+    if (d) return { latitude: d.latitude, longitude: d.longitude };
   }
 
   if (!districtName) {
@@ -112,7 +115,7 @@ export function getDistrictCoordinates(districtName?: string | null): GeoLocatio
 
   if (matchKey) {
     const d = MAHARASHTRA_DISTRICTS[matchKey];
-    return { latitude: d.latitude, longitude: d.longitude };
+    if (d) return { latitude: d.latitude, longitude: d.longitude };
   }
 
   return { latitude: 19.7515, longitude: 75.7139 };

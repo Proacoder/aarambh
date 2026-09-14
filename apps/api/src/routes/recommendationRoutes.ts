@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import { generateStudentRecommendations } from "../services/recommendationService.ts";
 
-const router = Router();
+const router: RouterType = Router();
 
 /**
  * GET /api/recommendations/:studentId

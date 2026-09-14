@@ -1,9 +1,8 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import { generateStudentRecommendations } from "../services/recommendationService.ts";
 import { generateAICareerPlan } from "../services/aiActionPlanService.ts";
 
-const router = Router();
-
+const router: RouterType = Router();
 interface EntranceExamInfo {
   name: string;
   conductingBody: string;

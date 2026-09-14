@@ -1,8 +1,7 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import { MAHARASHTRA_DISTRICTS } from "../lib/geo.ts";
 
-const router = Router();
-
+const router: RouterType = Router();
 /**
  * GET /api/districts
  * Returns all 36 Maharashtra districts with coordinates for dropdowns and Leaflet maps.

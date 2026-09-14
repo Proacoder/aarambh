@@ -221,10 +221,6 @@ def api_guider_register_student():
         "registeredByTeacher": True
     }
     return jsonify({"ok": True, "studentId": student_id})
-=======
-        session["guest_mode"] = True
-    return jsonify({"ok": True, "user": session.get("user")})
->>>>>>> origin/nishad
 
 FALLBACK_DISTRICTS = [
     "Mumbai", "Thane", "Pune", "Nashik", "Nagpur", "Kolhapur", 

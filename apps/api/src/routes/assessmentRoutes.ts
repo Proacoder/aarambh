@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import { prisma } from "../lib/prisma.ts";
 import { generateStudentRecommendations } from "../services/recommendationService.ts";
 import { ValidationError } from "../lib/validation.ts";
 
-const router = Router();
+const router: RouterType = Router();
 
 export interface AssessmentQuestion {
   id: number;
@@ -239,7 +239,11 @@ router.post("/", async (req, res, next) => {
       }
 
       seenQuestionIds.add(q.id);
-      const sc = q.options[selectedOptionIndex].scores;
+      const selectedOpt = q.options[selectedOptionIndex];
+      if (!selectedOpt) {
+        throw new ValidationError(`Invalid selectedOptionIndex for questionId ${q.id}.`);
+      }
+      const sc = selectedOpt.scores;
       realistic += sc.realistic ?? 0;
       enterprising += sc.enterprising ?? 0;
       social += sc.social ?? 0;

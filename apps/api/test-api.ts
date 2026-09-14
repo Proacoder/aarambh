@@ -78,6 +78,9 @@ async function verifyAll() {
   }
 
   const topRec = recPayload.recommendations[0];
+  if (!topRec) {
+    throw new Error("No top recommendation found!");
+  }
   console.log(`\n   Top Recommendation Details:`);
   console.log(`   - College: ${topRec.collegeName} (${topRec.district})`);
   console.log(`   - Course: ${topRec.courseName}`);

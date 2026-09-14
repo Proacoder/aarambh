@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express, { Request, Response, NextFunction } from "express";
+import express, { type Request, type Response, type NextFunction, type Express } from "express";
 import cors from "cors";
 import { prisma } from "./lib/prisma.ts";
 
@@ -11,7 +11,7 @@ import scholarshipRoutes from "./routes/scholarshipRoutes.ts";
 import districtRoutes from "./routes/districtRoutes.ts";
 import actionPlanRoutes from "./routes/actionPlanRoutes.ts";
 
-const app = express();
+const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -21,7 +21,8 @@ app.use(express.json());
 // Request logging in development
 if (process.env.NODE_ENV !== "production") {
   app.use((req, _res, next) => {
-    console.log(`[${new Date().toISOString().split("T")[1].slice(0, 8)}] ${req.method} ${req.url}`);
+    const timeStr = new Date().toISOString().split("T")[1]?.slice(0, 8) ?? "";
+    console.log(`[${timeStr}] ${req.method} ${req.url}`);
     next();
   });
 }

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import { prisma } from "../lib/prisma.ts";
 import {
   ValidationError,
@@ -10,7 +10,7 @@ import {
   parseWillingToMove
 } from "../lib/validation.ts";
 
-const router = Router();
+const router: RouterType = Router();
 
 /**
  * POST /api/students

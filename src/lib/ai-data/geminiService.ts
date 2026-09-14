@@ -160,3 +160,5 @@ function getFallbackResponse(lang: string): MitraTaiResponse {
     warnings: ["This is a fallback response. Please verify deadlines manually on the MahaDBT portal."]
   };
 }
+
+export const generateCareerPlan = generateMitraTaiResponse;
